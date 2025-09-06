@@ -39,7 +39,32 @@ class SentimentScoringTool(HuggingFaceAPITool):
                     label = pred['label']
                     score = pred['score']
                     
-                    
+                    # Map labels to numerical values
+                    if 'star' in label.lower() or label.isdigit():
+                        # Extract number from label
+                        num_match = re.search(r'\d+', label)
+                        if num_match:
+                            star_value = int(num_match.group())
+                            total_score += star_value * score
+                    else:
+                        # Fallback sentiment mapping
+                        sentiment_mapping = {
+                            'very_negative': 1,
+                            'negative': 2,
+                            'neutral': 3,
+                            'positive': 4,
+                            'very_positive': 5
+                        }
+                        
+                        for sent_key, sent_value in sentiment_mapping.items():
+                            if sent_key in label.lower():
+                                total_score += sent_value * score
+                                break
+                
+                # Normalize score to 0-5 range
+                final_score = max(0, min(5, total_score))
+                return f"Score: {final_score:.1f}"
+            
             # Fallback based on sentiment if provided
             if sentiment:
                 sentiment_scores = {
