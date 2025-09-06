@@ -1,0 +1,61 @@
+INFO 2025-09-06 15:27:56,983 autoreload 33508 30536 Watching for file changes with StatReloader
+INFO 2025-09-06 15:31:06,472 autoreload 20500 2056 Watching for file changes with StatReloader
+INFO 2025-09-06 15:31:15,674 basehttp 20500 3076 "GET / HTTP/1.1" 302 0
+ERROR 2025-09-06 15:31:15,815 log 20500 3076 Internal Server Error: /dashboard/
+Traceback (most recent call last):
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: reviews_review
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\apps\dashboard\views.py", line 28, in dashboard_home
+    total_reviews = Review.objects.count()
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\models\query.py", line 604, in count
+    return self.query.get_count(using=self.db)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\models\sql\query.py", line 644, in get_count
+    return obj.get_aggregation(using, {"__count": Count("*")})["__count"]
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\models\sql\query.py", line 626, in get_aggregation
+    result = compiler.execute_sql(SINGLE)
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\models\sql\compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\backends\utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\backends\utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        sql, params, many=False, executor=self._execute
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\backends\utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\backends\utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\backends\utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "E:\IRWA-Project\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\backends\sqlite3\base.py", line 360, in execute
+    return super().execute(query, params)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: reviews_review
+ERROR 2025-09-06 15:31:15,821 basehttp 20500 3076 "GET /dashboard/ HTTP/1.1" 500 143837
