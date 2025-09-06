@@ -28,10 +28,34 @@ class SentimentScoringTool(HuggingFaceAPITool):
         """Generate sentiment score for the given text"""
         try:
             payload = {"inputs": text}
+
+            #loop to make api request until correct response is received
             result = self._make_api_request(payload)
-            
-            if isinstance(result, list) and len(result) > 0:
-                predictions = result[0]
+
+            count = 0
+            flag = False
+            while flag == False and count < 5:
+
+                result = self._make_api_request(payload)
+                if isinstance(result, list) and len(result) > 0:
+                    predictions = result[0]
+
+                check_score = 0
+                for pred in predictions:
+                        label = pred['label']
+                        score = pred['score']
+
+                        check_score = check_score + score
+                if 0.98 <= check_score <= 1.02:
+                    flag = True
+                else:
+                    flag = False     
+                count = count + 1
+
+            if flag == False:
+                logger.error(f"Sentiment scoring failed: API did not return valid scores after multiple attempts")
+                return "Score: 3.0"
+
                 
                 # Calculate weighted score based on predictions
                 total_score = 0
@@ -45,7 +69,7 @@ class SentimentScoringTool(HuggingFaceAPITool):
                         num_match = re.search(r'\d+', label)
                         if num_match:
                             star_value = int(num_match.group())
-                            total_score += star_value * score
+                            total_score = total_score + (star_value * score)
                     else:
                         # Fallback sentiment mapping
                         sentiment_mapping = {
@@ -58,9 +82,10 @@ class SentimentScoringTool(HuggingFaceAPITool):
                         
                         for sent_key, sent_value in sentiment_mapping.items():
                             if sent_key in label.lower():
-                                total_score += sent_value * score
+                                total_score = total_score + (sent_value * score)
                                 break
-                
+                #loop end
+
                 # Normalize score to 0-5 range
                 final_score = max(0, min(5, total_score))
                 return f"Score: {final_score:.1f}"
