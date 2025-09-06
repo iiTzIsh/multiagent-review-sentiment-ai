@@ -82,3 +82,75 @@ class SentimentScoringTool(HuggingFaceAPITool):
             return "Score: 3.0"
 
 
+
+class SentimentScorerAgent(BaseAgent):
+    """
+    Agent responsible for assigning numerical scores to reviews
+    """
+    
+    def __init__(self):
+        super().__init__(
+            name="Sentiment Scorer",
+            role="Review Scoring Specialist",
+            goal="Assign accurate numerical scores (0-5) to hotel reviews based on sentiment analysis",
+            backstory="""You are a data analyst specialized in converting qualitative feedback
+            into quantitative metrics. You have extensive experience in the hospitality industry
+            and understand how to translate customer emotions into meaningful numerical scores
+            that help hotel managers track satisfaction trends."""
+        )
+    
+    def setup_tools(self) -> List[BaseTool]:
+        """Setup tools for sentiment scoring"""
+        self.tools = [SentimentScoringTool()]
+        return self.tools
+    
+    def create_agent(self) -> Agent:
+        """Create the CrewAI agent for sentiment scoring"""
+        tools = self.setup_tools()
+        
+        self.agent = Agent(
+            role=self.role,
+            goal=self.goal,
+            backstory=self.backstory,
+            tools=tools,
+            verbose=True,
+            allow_delegation=False,
+            max_iter=3
+        )
+        
+        return self.agent
+    
+    def create_task(self, description: str, context: Dict[str, Any]) -> Task:
+        """Create a sentiment scoring task"""
+        review = context.get('review', {})
+        sentiment = context.get('sentiment', '')
+        review_text = review.get('text', description)
+        
+        task_description = f"""
+        Assign a numerical score from 0-5 to the following hotel review based on its sentiment and content.
+        
+        Review Text: "{review_text}"
+        Detected Sentiment: {sentiment}
+        
+        Scoring Guidelines:
+        - 0-1: Very negative (angry, disappointed, major issues)
+        - 1-2: Negative (unsatisfied, minor complaints)
+        - 2-3: Neutral (mixed feelings, average experience)
+        - 3-4: Positive (satisfied, good experience)
+        - 4-5: Very positive (delighted, exceptional experience)
+        
+        Consider:
+        - Severity of complaints or praise
+        - Specific mentions of hotel services
+        - Overall customer satisfaction level
+        - Language intensity and emotion
+        
+        Provide only the numerical score with one decimal place.
+        """
+        
+        return Task(
+            description=task_description,
+            agent=self.agent,
+            expected_output="Numerical score from 0.0 to 5.0"
+        )
+    
