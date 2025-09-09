@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Generate Report - Hotel Review Insight Platform{% endblock %}
+
+{% block page_icon %}fas fa-file-alt{% endblock %}
+{% block page_title %}Generate Report{% endblock %}
+
+{% block page_description %}
+<p class="text-muted mb-0">Create custom analytics reports</p>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Modern Card Header Styles for Report Page */
+    .card .card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        border: none !important;
+        color: white !important;
+        padding: 1rem 1.25rem !important;
+        border-radius: 12px 12px 0 0 !important;
+    }
+
+    /* Alternate modern header colors for variety */
+    .card:nth-child(3n+1) .card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important; /* Purple gradient */
+    }
+
+    .card:nth-child(3n+2) .card-header {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important; /* Pink to red gradient */
+    }
+
+    .card:nth-child(3n+3) .card-header {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important; /* Blue gradient */
+    }
+
+    /* Additional modern variations */
+    .card:nth-child(6n+4) .card-header {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%) !important; /* Green gradient */
+    }
+
+    .card:nth-child(6n+5) .card-header {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%) !important; /* Pink to yellow gradient */
+    }
+
+    .card:nth-child(6n+6) .card-header {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%) !important; /* Mint to pink gradient */
+    }
+
+    /* Ensure header text and elements are always white and visible */
+    .card .card-header *,
+    .card .card-header h1,
+    .card .card-header h2,
+    .card .card-header h3,
+    .card .card-header h4,
+    .card .card-header h5,
+    .card .card-header h6,
+    .card .card-header .card-title,
+    .card .card-header span,
+    .card .card-header p,
+    .card .card-header i,
+    .card .card-header .fas,
+    .card .card-header .far,
+    .card .card-header .fab {
+        color: white !important;
+    }
+
+    .card .card-header .btn-outline-secondary {
+        border-color: rgba(255, 255, 255, 0.3) !important;
+        color: white !important;
+    }
+
+    .card .card-header .btn-outline-secondary:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        border-color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    /* Make sure card bodies still have proper dark theme styling */
+    .card .card-body {
+        background: var(--bg-primary) !important;
+        color: var(--text-primary) !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-cog me-2"></i>Report Configuration
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="post" id="reportForm">
+                    {% csrf_token %}
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="reportType" class="form-label">Report Type</label>
+                            <select class="form-select" id="reportType" name="report_type" required>
+                                <option value="">Select report type</option>
+                                <option value="daily">Daily Summary</option>
+                                <option value="weekly">Weekly Analysis</option>
+                                <option value="monthly">Monthly Overview</option>
+                                <option value="custom">Custom Period</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label for="format" class="form-label">Output Format</label>
+                            <select class="form-select" id="format" name="format" required>
+                                <option value="pdf">PDF Document</option>
+                                <option value="excel">Excel Spreadsheet</option>
+                                <option value="json">JSON Data</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="dateFrom" class="form-label">From Date</label>
+                            <input type="date" class="form-control" id="dateFrom" name="date_from" required>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <label for="dateTo" class="form-label">To Date</label>
+                            <input type="date" class="form-control" id="dateTo" name="date_to" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="hotels" class="form-label">Hotels (Optional)</label>
+                        <select class="form-select" id="hotels" name="hotels" multiple>
+                            {% for hotel in hotels %}
+                                <option value="{{ hotel.id }}">{{ hotel.name }} - {{ hotel.location }}</option>
+                            {% endfor %}
+                        </select>
+                        <small class="text-muted">Leave empty to include all hotels</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Include Sections</label>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="summary" name="sections" value="summary" checked>
+                                    <label class="form-check-label" for="summary">Executive Summary</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="sentiment" name="sections" value="sentiment" checked>
+                                    <label class="form-check-label" for="sentiment">Sentiment Analysis</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="trends" name="sections" value="trends" checked>
+                                    <label class="form-check-label" for="trends">Trends Over Time</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="hotels_section" name="sections" value="hotels" checked>
+                                    <label class="form-check-label" for="hotels_section">Hotel Breakdown</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="recommendations" name="sections" value="recommendations" checked>
+                                    <label class="form-check-label" for="recommendations">AI Recommendations</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="raw_data" name="sections" value="raw_data">
+                                    <label class="form-check-label" for="raw_data">Raw Data Export</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-secondary" onclick="resetForm()">
+                            <i class="fas fa-undo me-1"></i>Reset
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-file-download me-1"></i>Generate Report
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-clock me-2"></i>Recent Reports
+                </h5>
+            </div>
+            <div class="card-body">
+                {% if recent_reports %}
+                    {% for report in recent_reports %}
+                    <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                        <div>
+                            <h6 class="mb-1">{{ report.title|truncatechars:20 }}</h6>
+                            <small class="text-muted">
+                                {{ report.report_type|title }} • {{ report.format|upper }}
+                            </small>
+                        </div>
+                        <div class="text-end">
+                            <small class="text-muted">{{ report.generated_at|timesince }} ago</small><br>
+                            <a href="#" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-download"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center text-muted py-3">
+                        <i class="fas fa-file-alt fa-2x mb-2"></i>
+                        <p class="mb-0">No reports generated yet</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6 class="card-title mb-0">Report Templates</h6>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-info btn-sm" onclick="loadTemplate('weekly')">
+                        <i class="fas fa-calendar-week me-1"></i>Weekly Template
+                    </button>
+                    <button class="btn btn-outline-info btn-sm" onclick="loadTemplate('monthly')">
+                        <i class="fas fa-calendar-alt me-1"></i>Monthly Template
+                    </button>
+                    <button class="btn btn-outline-info btn-sm" onclick="loadTemplate('custom')">
+                        <i class="fas fa-cogs me-1"></i>Custom Template
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Set default dates
+document.addEventListener('DOMContentLoaded', function() {
+    const today = new Date();
+    const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+    
+    document.getElementById('dateFrom').value = weekAgo.toISOString().split('T')[0];
+    document.getElementById('dateTo').value = today.toISOString().split('T')[0];
+});
+
+function resetForm() {
+    document.getElementById('reportForm').reset();
+    // Reset default dates
+    const today = new Date();
+    const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+    
+    document.getElementById('dateFrom').value = weekAgo.toISOString().split('T')[0];
+    document.getElementById('dateTo').value = today.toISOString().split('T')[0];
+}
+
+function loadTemplate(type) {
+    const form = document.getElementById('reportForm');
+    
+    if (type === 'weekly') {
+        form.report_type.value = 'weekly';
+        form.format.value = 'pdf';
+        // Set to last week
+        const today = new Date();
+        const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+        form.date_from.value = weekAgo.toISOString().split('T')[0];
+        form.date_to.value = today.toISOString().split('T')[0];
+    } else if (type === 'monthly') {
+        form.report_type.value = 'monthly';
+        form.format.value = 'excel';
+        // Set to last month
+        const today = new Date();
+        const monthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+        form.date_from.value = monthAgo.toISOString().split('T')[0];
+        form.date_to.value = today.toISOString().split('T')[0];
+    } else if (type === 'custom') {
+        form.report_type.value = 'custom';
+        form.format.value = 'json';
+    }
+}
+
+// Form submission
+document.getElementById('reportForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Generating...';
+    submitBtn.disabled = true;
+    
+    // Simulate report generation
+    setTimeout(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        alert('Report generation started! You will receive a download link shortly.');
+    }, 3000);
+});
+</script>
+{% endblock %}

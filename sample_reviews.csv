@@ -1,0 +1,6 @@
+text,title,rating,reviewer_name,reviewer_location,hotel_name,source,date_posted
+"Excellent service and beautiful rooms. The staff was very friendly and helpful throughout our stay.","Great Hotel Experience",5,John Smith,"New York, NY",Grand Palace Hotel,TripAdvisor,2025-08-15
+"Good location but the room was quite small for the price. Overall decent experience.",Average Stay,3,Mary Johnson,"Los Angeles, CA",City Business Inn,Booking.com,2025-08-20
+"Outstanding hotel with amazing amenities. The spa was incredible and breakfast was fantastic!","Perfect Vacation",5,David Wilson,"Chicago, IL",Coastal Resort,Expedia,2025-08-25
+"Poor service and dirty rooms. Would not recommend this place to anyone.","Disappointing",1,Sarah Davis,"Miami, FL",Airport Express,TripAdvisor,2025-08-28
+"Average hotel, nothing special but acceptable for the price. Good for business travel.",Business Trip,3,Mike Brown,"Denver, CO",Mountain Lodge,Hotels.com,2025-09-01

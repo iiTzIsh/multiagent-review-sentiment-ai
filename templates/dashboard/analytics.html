@@ -1,0 +1,544 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Analytics Dashboard - Hotel Review Analytics{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/analytics.css' %}">
+<style>
+    /* Modern Card Header Styles for Analytics Page */
+    .card .card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        border: none !important;
+        color: white !important;
+        padding: 1rem 1.25rem !important;
+        border-radius: 12px 12px 0 0 !important;
+    }
+
+    /* Alternate modern header colors for variety */
+    .card:nth-child(3n+1) .card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important; /* Purple gradient */
+    }
+
+    .card:nth-child(3n+2) .card-header {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important; /* Pink to red gradient */
+    }
+
+    .card:nth-child(3n+3) .card-header {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important; /* Blue gradient */
+    }
+
+    /* Additional modern variations */
+    .card:nth-child(6n+4) .card-header {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%) !important; /* Green gradient */
+    }
+
+    .card:nth-child(6n+5) .card-header {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%) !important; /* Pink to yellow gradient */
+    }
+
+    .card:nth-child(6n+6) .card-header {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%) !important; /* Mint to pink gradient */
+    }
+
+    /* Ensure header text and elements are always white and visible */
+    .card .card-header *,
+    .card .card-header h1,
+    .card .card-header h2,
+    .card .card-header h3,
+    .card .card-header h4,
+    .card .card-header h5,
+    .card .card-header h6,
+    .card .card-header .card-title,
+    .card .card-header span,
+    .card .card-header p,
+    .card .card-header i,
+    .card .card-header .fas,
+    .card .card-header .far,
+    .card .card-header .fab {
+        color: white !important;
+    }
+
+    .card .card-header .btn-outline-secondary {
+        border-color: rgba(255, 255, 255, 0.3) !important;
+        color: white !important;
+    }
+
+    .card .card-header .btn-outline-secondary:hover {
+        background-color: rgba(255, 255, 255, 0.1) !important;
+        border-color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    /* Make sure card bodies still have proper dark theme styling */
+    .card .card-body {
+        background: var(--bg-primary) !important;
+        color: var(--text-primary) !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-chart-line"></i> Analytics Dashboard</h2>
+                <div class="btn-group">
+                    <select class="form-select" id="dateRangeSelect" onchange="changeTimeRange()">
+                        <option value="7" {% if date_range.days == 7 %}selected{% endif %}>Last 7 Days</option>
+                        <option value="30" {% if date_range.days == 30 %}selected{% endif %}>Last 30 Days</option>
+                        <option value="90" {% if date_range.days == 90 %}selected{% endif %}>Last 3 Months</option>
+                        <option value="365" {% if date_range.days == 365 %}selected{% endif %}>Last Year</option>
+                    </select>
+                    <a href="{% url 'dashboard:generate_report' %}" class="btn btn-primary">
+                        <i class="fas fa-file-alt"></i> Generate Report
+                    </a>
+                </div>
+            </div>
+
+            <!-- Overview Cards -->
+            <div class="row mb-4">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card stat-card bg-primary text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="card-subtitle mb-0">Total Reviews</h6>
+                                    <h2 class="card-title mb-0">{{ statistics.total_reviews|default:0 }}</h2>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                            </div>
+                            <small class="opacity-75">
+                                <i class="fas fa-calendar"></i> 
+                                {{ date_range.start|date:"M j" }} - {{ date_range.end|date:"M j" }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card stat-card bg-success text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="card-subtitle mb-0">Processed</h6>
+                                    <h2 class="card-title mb-0">{{ statistics.processed_reviews|default:0 }}</h2>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                            <small class="opacity-75">
+                                {{ statistics.processing_rate|floatformat:1 }}% Processing Rate
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card stat-card bg-info text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="card-subtitle mb-0">Average Score</h6>
+                                    <h2 class="card-title mb-0">{{ statistics.average_score|default:0 }}/5</h2>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                            <small class="opacity-75">
+                                {% if statistics.average_score >= 4 %}
+                                <i class="fas fa-arrow-up"></i> Excellent Rating
+                                {% elif statistics.average_score >= 3 %}
+                                <i class="fas fa-minus"></i> Good Rating
+                                {% else %}
+                                <i class="fas fa-arrow-down"></i> Needs Improvement
+                                {% endif %}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card stat-card bg-warning text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h6 class="card-subtitle mb-0">Active Hotels</h6>
+                                    <h2 class="card-title mb-0">{{ top_hotels|length|default:0 }}</h2>
+                                </div>
+                                <div class="stat-icon">
+                                    <i class="fas fa-hotel"></i>
+                                </div>
+                            </div>
+                            <small class="opacity-75">
+                                With Recent Reviews
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="row mb-4">
+                <!-- Sentiment Distribution -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-smile"></i> Sentiment Distribution
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="sentimentChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Score Distribution -->
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-chart-bar"></i> Score Distribution
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="scoreChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trends and Hotels Row -->
+            <div class="row mb-4">
+                <!-- Daily Trends -->
+                <div class="col-lg-8 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-chart-line"></i> Daily Review Trends
+                            </h5>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-secondary active" onclick="toggleTrendView('count')">
+                                    Volume
+                                </button>
+                                <button class="btn btn-outline-secondary" onclick="toggleTrendView('score')">
+                                    Score
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="trendsChart" width="400" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Hotels -->
+                <div class="col-lg-4 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-trophy"></i> Top Hotels
+                            </h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="list-group list-group-flush">
+                                {% for hotel in top_hotels %}
+                                <div class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">{{ hotel.name|truncatechars:25 }}</h6>
+                                        <small class="text-muted">
+                                            <i class="fas fa-map-marker-alt"></i> {{ hotel.city|default:"Location N/A" }}
+                                        </small>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="badge bg-primary rounded-pill">
+                                            {{ hotel.review_count }} reviews
+                                        </span>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <div class="list-group-item text-center text-muted py-4">
+                                    <i class="fas fa-hotel fa-2x mb-2"></i>
+                                    <p class="mb-0">No hotel data available</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Analysis -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-microscope"></i> Detailed Analysis
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h6>Sentiment Breakdown</h6>
+                                    {% for item in sentiment_chart.labels %}
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span>
+                                            <span class="badge bg-{% if item == 'Positive' %}success{% elif item == 'Negative' %}danger{% else %}warning{% endif %}">
+                                                {{ item }}
+                                            </span>
+                                        </span>
+                                        <span>{{ forloop.counter }} reviews</span>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="col-md-4">
+                                    <h6>Score Ranges</h6>
+                                    {% for score_item in score_distribution %}
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span>{{ score_item.label }} stars</span>
+                                        <span>{{ score_item.count }} reviews</span>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="col-md-4">
+                                    <h6>Performance Metrics</h6>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span>Processing Rate</span>
+                                        <span class="text-success">{{ statistics.processing_rate|floatformat:1 }}%</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span>Average Processing Time</span>
+                                        <span class="text-info">~2.3s</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span>Data Quality Score</span>
+                                        <span class="text-warning">87%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Export Modal -->
+<div class="modal fade" id="exportModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Export Analytics Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="exportForm">
+                    <div class="mb-3">
+                        <label for="exportFormat" class="form-label">Export Format</label>
+                        <select class="form-select" id="exportFormat">
+                            <option value="csv">CSV (Comma Separated)</option>
+                            <option value="excel">Excel Spreadsheet</option>
+                            <option value="json">JSON Data</option>
+                            <option value="pdf">PDF Report</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="exportDateRange" class="form-label">Date Range</label>
+                        <select class="form-select" id="exportDateRange">
+                            <option value="current">Current Period ({{ date_range.days }} days)</option>
+                            <option value="7">Last 7 Days</option>
+                            <option value="30">Last 30 Days</option>
+                            <option value="90">Last 3 Months</option>
+                            <option value="365">Last Year</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="includeCharts" checked>
+                            <label class="form-check-label" for="includeCharts">
+                                Include Charts and Visualizations
+                            </label>
+                        </div>
+                        
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="includeRawData">
+                            <label class="form-check-label" for="includeRawData">
+                                Include Raw Review Data
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="performExport()">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<!-- Chart data as JSON -->
+{{ sentiment_chart|json_script:"sentiment-data" }}
+{{ score_distribution|json_script:"score-data" }}
+{{ daily_trends|json_script:"trends-data" }}
+{{ hotel_performance|json_script:"hotel-data" }}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Get chart data from JSON scripts
+const sentimentData = JSON.parse(document.getElementById('sentiment-data').textContent);
+const scoreData = JSON.parse(document.getElementById('score-data').textContent);
+const trendsData = JSON.parse(document.getElementById('trends-data').textContent);
+const hotelData = JSON.parse(document.getElementById('hotel-data').textContent);
+
+// Initialize charts when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    initializeAnalyticsCharts();
+});
+
+function initializeAnalyticsCharts() {
+    // Sentiment Distribution Chart
+    const sentimentCtx = document.getElementById('sentimentChart');
+    if (sentimentCtx && sentimentData) {
+        new Chart(sentimentCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Positive', 'Negative', 'Neutral'],
+                datasets: [{
+                    data: [
+                        sentimentData.positive || 0,
+                        sentimentData.negative || 0,
+                        sentimentData.neutral || 0
+                    ],
+                    backgroundColor: ['#28a745', '#dc3545', '#ffc107'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Score Distribution Chart
+    const scoreCtx = document.getElementById('scoreChart');
+    if (scoreCtx && scoreData) {
+        new Chart(scoreCtx, {
+            type: 'bar',
+            data: {
+                labels: ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'],
+                datasets: [{
+                    label: 'Reviews',
+                    data: scoreData.map(item => item.count || 0),
+                    backgroundColor: ['#dc3545', '#fd7e14', '#ffc107', '#20c997', '#28a745'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // Trends Chart
+    const trendsCtx = document.getElementById('trendsChart');
+    if (trendsCtx && trendsData) {
+        new Chart(trendsCtx, {
+            type: 'line',
+            data: {
+                labels: trendsData.map(item => item.date),
+                datasets: [{
+                    label: 'Average Score',
+                    data: trendsData.map(item => item.avg_score),
+                    borderColor: '#0d6efd',
+                    backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 5
+                    }
+                }
+            }
+        });
+    }
+
+    // Hotel Performance Chart
+    const hotelCtx = document.getElementById('hotelChart');
+    if (hotelCtx && hotelData) {
+        new Chart(hotelCtx, {
+            type: 'horizontalBar',
+            data: {
+                labels: hotelData.map(item => item.name),
+                datasets: [{
+                    label: 'Average Score',
+                    data: hotelData.map(item => item.avg_score),
+                    backgroundColor: '#17a2b8',
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 5
+                    }
+                }
+            }
+        });
+    }
+}
+</script>
+{% endblock %}
