@@ -179,3 +179,45 @@ class SentimentScorerAgent(BaseAgent):
             expected_output="Numerical score from 0.0 to 5.0"
         )
     
+
+    def score_review(self, review_text: str, sentiment: str = None) -> Dict[str, Any]:
+        """
+        Score a single review and return structured result
+        """
+        try:
+            result = self.execute_task(
+                f"Score review: {review_text}",
+                {'review': {'text': review_text}, 'sentiment': sentiment}
+            )
+            
+            # Parse the numerical score
+            score = parse_agent_response(result, 'score')
+            
+            return {
+                'score': score,
+                'sentiment': sentiment,
+                'raw_result': result
+            }
+            
+        except Exception as e:
+            logger.error(f"Review scoring failed: {str(e)}")
+            return {
+                'score': 3.0,
+                'sentiment': sentiment or 'neutral',
+                'raw_result': str(e)
+            }
+    
+    def batch_score(self, reviews_with_sentiment: List[Dict]) -> List[Dict[str, Any]]:
+        """
+        Score multiple reviews efficiently
+        """
+        results = []
+        for review_data in reviews_with_sentiment:
+            review_text = review_data.get('text', '')
+            sentiment = review_data.get('sentiment', '')
+            
+            result = self.score_review(review_text, sentiment)
+            results.append(result)
+        
+        return results
+   
