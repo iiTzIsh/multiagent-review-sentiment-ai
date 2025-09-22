@@ -365,72 +365,84 @@ div {
     line-height: var(--line-height-relaxed);
 }
 
-/* Statistics Cards */
+/* Statistics Cards - Flat Design */
 .metric-card {
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-tertiary) 100%);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--border-radius-xl);
-    padding: 2rem 1.5rem;
-    text-align: center;
-    transition: var(--transition);
+    background: var(--bg-primary);
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    padding: 1.5rem 1.5rem;
+    text-align: left;
+    transition: none;
     position: relative;
     overflow: hidden;
+    box-shadow: none;
+    transform: none;
 }
 
 .metric-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+    display: none;
 }
 
 .metric-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-xl);
-    border-color: var(--primary-color);
+    transform: none;
+    box-shadow: none;
+    border: none;
+    outline: none;
 }
 
 .metric-card.bg-primary {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    background: #2563eb;
     color: var(--text-inverse);
-    border-color: var(--primary-dark);
+    border: none;
+    outline: none;
 }
 
 .metric-card.bg-primary::before {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    display: none;
 }
 
 .metric-card.bg-success {
-    background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+    background: #10b981;
     color: var(--text-inverse);
-    border-color: #059669;
+    border: none;
+    outline: none;
 }
 
 .metric-card.bg-success::before {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    display: none;
 }
 
 .metric-card.bg-warning {
-    background: linear-gradient(135deg, var(--warning-color) 0%, #d97706 100%);
+    background: #f59e0b;
     color: var(--text-inverse);
-    border-color: #d97706;
+    border: none;
+    outline: none;
 }
 
 .metric-card.bg-warning::before {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    display: none;
 }
 
 .metric-card.bg-info {
-    background: linear-gradient(135deg, var(--info-color) 0%, #0891b2 100%);
+    background: #06b6d4;
     color: var(--text-inverse);
-    border-color: #0891b2;
+    border: none;
+    outline: none;
 }
 
 .metric-card.bg-info::before {
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    display: none;
+}
+
+.metric-card.bg-danger {
+    background: var(--danger-color) !important;
+    color: var(--text-inverse);
+    border-color: var(--danger-color) !important;
+}
+
+.metric-card.bg-danger::before {
+    display: none !important;
 }
 
 .metric-value {
@@ -446,6 +458,13 @@ div {
     opacity: 0.9;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+}
+
+/* Icon positioning adjustment only */
+.metric-card .d-flex > div:last-child {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
 }
 
 /* Button System */
@@ -1539,39 +1558,39 @@ small.text-muted {
     color: var(--text-muted) !important;
 }
 
-/* Modern Card Header Styles - Apply to all cards */
+/* Modern Card Header Styles - Professional Dark Blue Theme */
 .card .card-header {
-    background: var(--gradient-purple) !important;
+    background: #1e3a8a !important;
     border: none !important;
     color: white !important;
     padding: 1rem 1.25rem !important;
     border-radius: 12px 12px 0 0 !important;
 }
 
-/* Alternate modern header colors for variety */
+/* Alternate header colors in professional blues and teals */
 .card:nth-child(3n+1) .card-header {
-    background: var(--gradient-purple) !important; /* Purple gradient */
+    background: #1e3a8a !important; /* Professional dark blue */
 }
 
 .card:nth-child(3n+2) .card-header {
-    background: var(--gradient-pink-red) !important; /* Pink to red gradient */
+    background: #0f766e !important; /* Teal green */
 }
 
 .card:nth-child(3n+3) .card-header {
-    background: var(--gradient-blue) !important; /* Blue gradient */
+    background: #1e40af !important; /* Royal blue */
 }
 
-/* Additional modern variations */
+/* Additional professional variations */
 .card:nth-child(6n+4) .card-header {
-    background: var(--gradient-green) !important; /* Green gradient */
+    background: #0369a1 !important; /* Sky blue */
 }
 
 .card:nth-child(6n+5) .card-header {
-    background: var(--gradient-pink-yellow) !important; /* Pink to yellow gradient */
+    background: #115e59 !important; /* Dark teal */
 }
 
 .card:nth-child(6n+6) .card-header {
-    background: var(--gradient-mint-pink) !important; /* Mint to pink gradient */
+    background: #1d4ed8 !important; /* Bright blue */
 }
 
 /* Ensure header text and elements are always white and visible */
@@ -1611,4 +1630,47 @@ small.text-muted {
 /* Override any remaining Bootstrap text utilities */
 .text-dark, .text-body {
     color: var(--text-primary) !important;
+}
+
+/* FLAT DESIGN OVERRIDE - Remove Double Border/Outline Effect */
+.metric-card {
+    background: var(--bg-primary) !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+.metric-card:hover,
+.metric-card:focus,
+.metric-card:active {
+    transform: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+.metric-card.bg-primary {
+    background: #2563eb !important;
+    border: none !important;
+    outline: none !important;
+}
+
+.metric-card.bg-success {
+    background: #10b981 !important;
+    border: none !important;
+    outline: none !important;
+}
+
+.metric-card.bg-warning {
+    background: #f59e0b !important;
+    border: none !important;
+    outline: none !important;
+}
+
+.metric-card.bg-info {
+    background: #06b6d4 !important;
+    border: none !important;
+    outline: none !important;
 }

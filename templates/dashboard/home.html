@@ -459,43 +459,61 @@ function initializeHomeCharts() {
     }
 
     // Score Distribution Chart
-    // Score Distribution Chart
     const scoreCtx = document.getElementById('scoreChart');
-    if (scoreCtx && scoreData) {
-        const scoreLabels = ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'];
-        const scoreCounts = scoreData && scoreData.length > 0 ? scoreData : [0, 0, 0, 0, 0];
-
-        new Chart(scoreCtx, {
-            type: 'bar',
-            data: {
-                labels: scoreLabels,
-                datasets: [{
-                    label: 'Number of Reviews',
-                    data: scoreCounts,
-                    backgroundColor: ['#dc3545', '#fd7e14', '#ffc107', '#20c997', '#28a745'],
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+    if (scoreCtx) {
+        console.log('Score data received:', scoreData);
+        
+        if (scoreData && Array.isArray(scoreData) && scoreData.some(val => val > 0)) {
+            const scoreLabels = ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'];
+            
+            new Chart(scoreCtx, {
+                type: 'bar',
+                data: {
+                    labels: scoreLabels,
+                    datasets: [{
+                        label: 'Number of Reviews',
+                        data: scoreData,
+                        backgroundColor: ['#dc3545', '#fd7e14', '#ffc107', '#20c997', '#28a745'],
+                        borderRadius: 4,
+                        borderWidth: 0
+                    }]
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 1
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1,
+                                color: '#9ca3af'
+                            },
+                            grid: {
+                                color: 'rgba(156, 163, 175, 0.2)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#9ca3af'
+                            },
+                            grid: {
+                                display: false
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        } else {
+            // Show placeholder when no data
+            scoreCtx.parentNode.innerHTML = '<div class="text-center text-muted p-4"><i class="fas fa-chart-bar fa-3x mb-2"></i><br>No score data available<br><small>Upload and process some reviews to see score distribution</small></div>';
+        }
     } else {
-        scoreCtx.parentNode.innerHTML = '<div class="text-center text-muted p-4"><i class="fas fa-chart-bar fa-3x mb-2"></i><br>No score data available</div>';
+        console.error('Score chart canvas not found');
     }
 }
 

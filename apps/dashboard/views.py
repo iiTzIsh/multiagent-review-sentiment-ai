@@ -38,14 +38,14 @@ def dashboard_home(request):
         count=Count('sentiment')
     )
     
-    # Score distribution
-    score_ranges = [
-        ('0-1', Review.objects.filter(ai_score__lt=1).count()),
-        ('1-2', Review.objects.filter(ai_score__gte=1, ai_score__lt=2).count()),
-        ('2-3', Review.objects.filter(ai_score__gte=2, ai_score__lt=3).count()),
-        ('3-4', Review.objects.filter(ai_score__gte=3, ai_score__lt=4).count()),
-        ('4-5', Review.objects.filter(ai_score__gte=4).count()),
-    ]
+    # Score distribution - updated for chart compatibility
+    score_data = []
+    for i in range(1, 6):  # 1 to 5 stars
+        # Try AI score first, then fallback to original rating
+        ai_count = Review.objects.filter(ai_score__gte=i-0.5, ai_score__lt=i+0.5).count()
+        original_count = Review.objects.filter(original_rating=i, ai_score__isnull=True).count()
+        total_count = ai_count + original_count
+        score_data.append(total_count)
     
     context = {
         'total_reviews': total_reviews,
@@ -55,7 +55,7 @@ def dashboard_home(request):
         'recent_reviews': recent_reviews,
         'recent_batches': recent_batches,
         'sentiment_data': list(sentiment_data),
-        'score_ranges': score_ranges,
+        'score_data': score_data,
         'page_title': 'Dashboard',
     }
     
