@@ -185,3 +185,56 @@ INFO 2025-09-22 16:07:18,240 basehttp 33600 15512 "GET /dashboard/reviews/ HTTP/
 INFO 2025-09-22 16:07:18,253 basehttp 33600 15512 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
 INFO 2025-09-22 16:07:24,942 autoreload 33600 26656 E:\IRWA\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
 INFO 2025-09-22 16:07:25,575 autoreload 28368 20176 Watching for file changes with StatReloader
+INFO 2025-09-22 16:12:27,917 autoreload 4444 13924 Watching for file changes with StatReloader
+INFO 2025-09-22 16:12:29,665 basehttp 4444 36212 "GET / HTTP/1.1" 302 0
+INFO 2025-09-22 16:12:29,727 basehttp 4444 36212 "GET /dashboard/ HTTP/1.1" 200 45206
+INFO 2025-09-22 16:12:29,756 basehttp 4444 36212 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:13:14,075 basehttp 4444 36212 "GET /dashboard/ HTTP/1.1" 200 44045
+INFO 2025-09-22 16:13:28,029 basehttp 4444 33976 "GET /dashboard/ HTTP/1.1" 200 44127
+INFO 2025-09-22 16:13:33,009 basehttp 4444 17116 "GET /dashboard/ HTTP/1.1" 200 45206
+INFO 2025-09-22 16:14:30,660 basehttp 4444 17116 "GET /dashboard/ HTTP/1.1" 200 44098
+INFO 2025-09-22 16:14:30,672 basehttp 4444 17116 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:14:47,045 basehttp 4444 17116 "GET /dashboard/ HTTP/1.1" 200 44339
+INFO 2025-09-22 16:17:10,948 basehttp 4444 17116 "GET /dashboard/ HTTP/1.1" 200 44063
+INFO 2025-09-22 16:17:10,957 basehttp 4444 17116 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:20:52,416 basehttp 4444 17116 "GET /dashboard/ HTTP/1.1" 200 44062
+INFO 2025-09-22 16:20:52,426 basehttp 4444 17116 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:21:10,289 basehttp 4444 17116 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+WARNING 2025-09-22 16:27:03,315 log 4444 920 Not Found: /api/reviews/1ef8573d-4d5c-4d85-b6b3-1b0d73fec211/reprocess/
+WARNING 2025-09-22 16:27:03,316 basehttp 4444 920 "POST /api/reviews/1ef8573d-4d5c-4d85-b6b3-1b0d73fec211/reprocess/ HTTP/1.1" 404 6013
+INFO 2025-09-22 16:27:10,938 basehttp 4444 920 "GET /dashboard/analytics/ HTTP/1.1" 200 31369
+WARNING 2025-09-22 16:27:10,957 basehttp 4444 920 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 16:28:04,369 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59613
+INFO 2025-09-22 16:28:04,385 basehttp 4444 24600 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:28:06,406 basehttp 4444 24600 "GET /dashboard/ HTTP/1.1" 200 44063
+INFO 2025-09-22 16:28:10,818 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59613
+INFO 2025-09-22 16:29:05,087 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59613
+INFO 2025-09-22 16:29:08,392 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59613
+INFO 2025-09-22 16:29:10,112 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59613
+INFO 2025-09-22 16:32:14,863 basehttp 4444 24600 "GET /dashboard/ HTTP/1.1" 200 44054
+INFO 2025-09-22 16:32:14,878 basehttp 4444 24600 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:32:16,563 basehttp 4444 24600 "GET /dashboard/ HTTP/1.1" 200 44054
+INFO 2025-09-22 16:32:17,848 basehttp 4444 24600 "GET /dashboard/reviews/ HTTP/1.1" 200 159405
+INFO 2025-09-22 16:32:19,179 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59594
+INFO 2025-09-22 16:32:22,633 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59594
+INFO 2025-09-22 16:34:03,112 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59594
+INFO 2025-09-22 16:34:05,406 basehttp 4444 24600 "GET /dashboard/analytics/ HTTP/1.1" 200 31369
+WARNING 2025-09-22 16:34:05,427 basehttp 4444 24600 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 16:34:07,155 basehttp 4444 31528 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 16:34:08,518 basehttp 4444 31528 "GET /dashboard/ HTTP/1.1" 200 44071
+INFO 2025-09-22 16:34:11,373 basehttp 4444 31528 "GET /dashboard/upload/ HTTP/1.1" 200 59621
+INFO 2025-09-22 16:36:36,392 basehttp 4444 13816 "GET /dashboard/ HTTP/1.1" 200 44071
+INFO 2025-09-22 16:36:36,412 basehttp 4444 13816 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:36:37,632 basehttp 4444 13816 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 16:36:39,236 basehttp 4444 13816 "GET /dashboard/upload/ HTTP/1.1" 200 59611
+INFO 2025-09-22 16:36:43,966 basehttp 4444 13816 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 16:36:53,847 basehttp 4444 13816 "GET /dashboard/upload/ HTTP/1.1" 200 59611
+INFO 2025-09-22 17:24:05,538 basehttp 4444 12048 "GET /dashboard/ HTTP/1.1" 200 44072
+INFO 2025-09-22 17:24:05,555 basehttp 4444 12048 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 17:25:54,048 basehttp 4444 19640 "GET /dashboard/upload/ HTTP/1.1" 200 59613
+INFO 2025-09-22 17:26:27,903 basehttp 4444 19640 "GET /dashboard/ HTTP/1.1" 200 44073
+INFO 2025-09-22 17:28:01,920 basehttp 4444 19640 "GET /dashboard/upload/ HTTP/1.1" 200 59302
+INFO 2025-09-22 17:28:19,967 basehttp 4444 19640 "GET /dashboard/ HTTP/1.1" 200 44073
+INFO 2025-09-22 17:28:21,333 basehttp 4444 19640 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 17:28:22,605 basehttp 4444 19640 "GET /dashboard/upload/ HTTP/1.1" 200 59302
+INFO 2025-09-22 17:28:32,233 basehttp 4444 19640 "GET /dashboard/ HTTP/1.1" 200 44073
