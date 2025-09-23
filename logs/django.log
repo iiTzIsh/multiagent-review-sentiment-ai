@@ -393,3 +393,7 @@ INFO 2025-09-22 18:13:40,368 basehttp 41964 25148 "GET /dashboard/ HTTP/1.1" 200
 INFO 2025-09-22 18:14:33,258 basehttp 41964 25148 "GET /dashboard/analytics/ HTTP/1.1" 200 76788
 INFO 2025-09-22 18:14:33,269 basehttp 41964 25148 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
 WARNING 2025-09-22 18:14:33,273 basehttp 41964 25148 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-23 22:51:07,493 autoreload 27840 26984 Watching for file changes with StatReloader
+INFO 2025-09-23 22:51:10,937 basehttp 27840 1924 "GET / HTTP/1.1" 302 0
+INFO 2025-09-23 22:51:11,023 basehttp 27840 1924 "GET /dashboard/ HTTP/1.1" 200 44825
+INFO 2025-09-23 22:51:11,232 basehttp 27840 1924 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37280
