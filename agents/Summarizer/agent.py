@@ -160,3 +160,46 @@ class SummaryAgent(BaseAgent):
             agent=self.agent,
             expected_output="Structured summary with pros, cons, themes, and recommendations"
         )
+    
+    def generate_summary(self, reviews: List[Dict]) -> Dict[str, Any]:
+        """
+        Generate comprehensive summary of reviews
+        """
+        try:
+            result = self.execute_task(
+                "Generate comprehensive review summary",
+                {'reviews': reviews}
+            )
+            
+            # Analyze sentiment distribution
+            sentiment_counts = Counter(review.get('sentiment', 'neutral') for review in reviews)
+            
+            # Calculate average score
+            scores = [review.get('score', 3.0) for review in reviews if isinstance(review.get('score'), (int, float))]
+            avg_score = sum(scores) / len(scores) if scores else 3.0
+            
+            # Extract common themes
+            review_texts = [review.get('text', '') for review in reviews]
+            
+            return {
+                'summary_text': result,
+                'total_reviews': len(reviews),
+                'sentiment_distribution': dict(sentiment_counts),
+                'average_score': round(avg_score, 1),
+                'score_range': {
+                    'min': min(scores) if scores else 0,
+                    'max': max(scores) if scores else 5
+                },
+                'key_insights': self._extract_insights(reviews),
+                'recommendations': self._generate_recommendations(reviews)
+            }
+            
+        except Exception as e:
+            logger.error(f"Summary generation failed: {str(e)}")
+            return {
+                'summary_text': 'Unable to generate summary',
+                'total_reviews': len(reviews),
+                'sentiment_distribution': {'neutral': len(reviews)},
+                'average_score': 3.0,
+                'error': str(e)
+            }
