@@ -203,3 +203,32 @@ class SummaryAgent(BaseAgent):
                 'average_score': 3.0,
                 'error': str(e)
             }
+        
+    def _extract_insights(self, reviews: List[Dict]) -> List[str]:
+        """Extract key insights from reviews"""
+        insights = []
+        
+        # Sentiment-based insights
+        positive_count = sum(1 for r in reviews if r.get('sentiment') == 'positive')
+        negative_count = sum(1 for r in reviews if r.get('sentiment') == 'negative')
+        
+        total = len(reviews)
+        if total > 0:
+            pos_percent = (positive_count / total) * 100
+            neg_percent = (negative_count / total) * 100
+            
+            insights.append(f"{pos_percent:.1f}% of reviews are positive")
+            insights.append(f"{neg_percent:.1f}% of reviews are negative")
+        
+        # Score-based insights
+        scores = [r.get('score', 3.0) for r in reviews if isinstance(r.get('score'), (int, float))]
+        if scores:
+            avg_score = sum(scores) / len(scores)
+            if avg_score >= 4.0:
+                insights.append("Overall customer satisfaction is high")
+            elif avg_score <= 2.0:
+                insights.append("Customer satisfaction needs improvement")
+            else:
+                insights.append("Customer satisfaction is moderate")
+        
+        return insights
