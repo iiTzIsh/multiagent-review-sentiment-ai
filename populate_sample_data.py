@@ -6,6 +6,7 @@ import os
 import django
 import sys
 from datetime import datetime, timedelta
+from django.utils import timezone
 import random
 
 # Add the project directory to Python path
@@ -112,7 +113,7 @@ def create_sample_data():
             sentiment=sentiment,
             ai_score=score,
             processed=True,
-            created_at=datetime.now() - timedelta(days=random.randint(0, 30))
+            created_at=timezone.now() - timedelta(days=random.randint(0, 30))
         )
         reviews_created += 1
     
@@ -121,7 +122,7 @@ def create_sample_data():
     # Create sentiment trends
     for hotel in hotels[:2]:  # Just for first 2 hotels
         for i in range(7):  # Last 7 days
-            date = datetime.now().date() - timedelta(days=i)
+            date = timezone.now().date() - timedelta(days=i)
             trend, created = SentimentTrend.objects.get_or_create(
                 hotel=hotel,
                 date=date,
@@ -141,8 +142,8 @@ def create_sample_data():
         title="Weekly Summary",
         defaults={
             "report_type": "weekly",
-            "date_from": datetime.now() - timedelta(days=7),
-            "date_to": datetime.now(),
+            "date_from": timezone.now() - timedelta(days=7),
+            "date_to": timezone.now(),
             "generated_by": user,
             "data": {
                 "summary": "Hotel reviews show positive trend",

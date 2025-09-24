@@ -105,14 +105,14 @@ class ReviewProcessingOrchestrator:
             workflow_start = datetime.now()
             
             # Step 1: Sentiment Classification
-            logger.info(f"🔍 Step 1: Classifying sentiment for review {review_id or 'unknown'}")
+            logger.info(f"[STEP 1] Classifying sentiment for review {review_id or 'unknown'}")
             classification_result = self.classifier_agent.classify_review(review_text)
             
             sentiment = classification_result.get('sentiment', 'neutral')
             classification_confidence = classification_result.get('confidence', 0.5)
             
             # Step 2: Score Generation
-            logger.info(f"📊 Step 2: Generating score for {sentiment} sentiment")
+            logger.info(f"[STEP 2] Generating score for {sentiment} sentiment")
             scoring_result = self.scorer_agent.score_review(review_text, sentiment)
             
             score = scoring_result.get('score', 3.0)
@@ -148,7 +148,7 @@ class ReviewProcessingOrchestrator:
             self.workflow_stats['successful_workflows'] += 1
             self.workflow_stats['last_run'] = workflow_end.isoformat()
             
-            logger.info(f"✅ Single review workflow completed in {processing_time:.2f}s")
+            logger.info(f"[COMPLETED] Single review workflow completed in {processing_time:.2f}s")
             return final_result
             
         except Exception as e:

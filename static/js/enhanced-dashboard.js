@@ -126,9 +126,11 @@ function handleProcessReviews() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            showToast('Reviews processing started successfully!', 'success', 'Processing Started');
-            // Poll for status updates
-            pollProcessingStatus();
+            showToast('Reviews processing completed successfully!', 'success', 'Processing Complete');
+            // Reload page after a short delay to show updated statistics
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         } else {
             showToast(data.message || 'Failed to start processing', 'error', 'Processing Error');
         }

@@ -247,10 +247,14 @@ class ProcessReviewsAPIView(APIView):
         try:
             from agents.orchestrator import ReviewProcessingOrchestrator
             
-            data = json.loads(request.body)
+            # Parse request body, handle empty body case
+            try:
+                data = json.loads(request.body) if request.body else {}
+            except json.JSONDecodeError:
+                data = {}
             
-            # Get reviews to process
-            if data.get('process_all'):
+            # Get reviews to process (default to processing all unprocessed reviews)
+            if data.get('process_all', True):  # Default to True when no data provided
                 reviews = Review.objects.filter(processed=False)
             else:
                 review_ids = data.get('review_ids', [])
