@@ -11324,3 +11324,67 @@ INFO 2025-09-24 18:17:22,818 basehttp 27908 39776 "POST /api/v1/process/ HTTP/1.
 INFO 2025-09-24 18:17:24,848 basehttp 27908 39776 "GET /dashboard/ HTTP/1.1" 200 42800
 INFO 2025-09-24 18:17:39,001 autoreload 27908 11684 E:\IRWA\multiagent-review-sentiment-ai\agents\orchestrator.py changed, reloading.
 INFO 2025-09-24 18:17:40,104 autoreload 19808 27132 Watching for file changes with StatReloader
+INFO 2025-09-24 21:23:56,182 autoreload 28356 11816 Watching for file changes with StatReloader
+INFO 2025-09-24 21:24:02,223 basehttp 28356 31904 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 21:24:02,248 basehttp 28356 31904 "GET /dashboard/ HTTP/1.1" 200 42824
+INFO 2025-09-24 21:24:02,273 basehttp 28356 31904 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-09-24 21:24:04,691 basehttp 28356 31904 "GET /dashboard/ HTTP/1.1" 200 42824
+INFO 2025-09-24 21:24:54,620 basehttp 28356 31904 "GET /dashboard/ HTTP/1.1" 200 42824
+INFO 2025-09-24 21:25:04,688 basehttp 28356 31904 "POST /api/v1/process/ HTTP/1.1" 200 52
+INFO 2025-09-24 21:25:23,488 basehttp 28356 31904 "GET /dashboard/upload/ HTTP/1.1" 200 60999
+INFO 2025-09-24 21:25:29,240 basehttp 28356 31904 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 21:25:32,829 basehttp 28356 31904 "GET /dashboard/ HTTP/1.1" 200 42810
+INFO 2025-09-24 21:25:34,912 orchestrator 28356 31904 [OK] Classifier Agent initialized
+INFO 2025-09-24 21:25:34,913 orchestrator 28356 31904 [OK] Scorer Agent initialized
+INFO 2025-09-24 21:25:34,915 orchestrator 28356 31904 [OK] Summarizer Agent initialized
+INFO 2025-09-24 21:25:34,915 orchestrator 28356 31904 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 21:25:34,916 views 28356 31904 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 21:25:34,919 orchestrator 28356 31904 [STEP 1] Classifying sentiment for review 6961bc89-f052-45e2-b8b9-766e7bbb090d
+INFO 2025-09-24 21:25:34,920 orchestrator 28356 31904 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 21:25:34,921 orchestrator 28356 31904 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 21:25:34,923 orchestrator 28356 31904 [STEP 1] Classifying sentiment for review 93ad6700-1342-4639-ab31-c7fa5750ceba
+INFO 2025-09-24 21:25:34,924 orchestrator 28356 31904 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 21:25:34,924 orchestrator 28356 31904 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 21:25:34,927 orchestrator 28356 31904 [STEP 1] Classifying sentiment for review add6bdd2-ed9b-408a-83aa-1fc0bd3d2c60
+INFO 2025-09-24 21:25:34,928 orchestrator 28356 31904 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 21:25:34,928 orchestrator 28356 31904 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 21:25:34,931 orchestrator 28356 31904 [STEP 1] Classifying sentiment for review ff70c75f-9a36-46cd-a4e4-eb84c7231097
+INFO 2025-09-24 21:25:34,932 orchestrator 28356 31904 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 21:25:34,933 orchestrator 28356 31904 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 21:25:34,936 orchestrator 28356 31904 [STEP 1] Classifying sentiment for review f1de5a2d-a914-49ea-aefb-d481d8c07d7d
+INFO 2025-09-24 21:25:34,937 orchestrator 28356 31904 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 21:25:34,937 orchestrator 28356 31904 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 21:25:34,942 basehttp 28356 31904 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 21:25:36,974 basehttp 28356 31904 "GET /dashboard/ HTTP/1.1" 200 42813
+INFO 2025-09-24 21:25:53,590 autoreload 17392 12620 Watching for file changes with StatReloader
+INFO 2025-09-24 21:25:55,875 basehttp 17392 27824 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 21:25:55,898 basehttp 17392 27824 "GET /dashboard/ HTTP/1.1" 200 42813
+INFO 2025-09-24 21:25:58,932 basehttp 17392 27824 "GET /dashboard/reviews/ HTTP/1.1" 200 161932
+INFO 2025-09-24 21:26:01,007 basehttp 17392 27824 "GET /dashboard/ HTTP/1.1" 200 42813
+INFO 2025-09-24 21:26:09,919 basehttp 17392 27824 "GET /dashboard/upload/ HTTP/1.1" 200 60988
+INFO 2025-09-24 21:26:15,674 basehttp 17392 27824 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 21:26:19,126 basehttp 17392 27824 "GET /dashboard/reviews/ HTTP/1.1" 200 160035
+INFO 2025-09-24 21:26:22,535 basehttp 17392 27824 "GET /dashboard/ HTTP/1.1" 200 42799
+INFO 2025-09-24 21:26:32,471 orchestrator 17392 27824 [OK] Classifier Agent initialized
+INFO 2025-09-24 21:26:32,473 orchestrator 17392 27824 [OK] Scorer Agent initialized
+INFO 2025-09-24 21:26:32,476 orchestrator 17392 27824 [OK] Summarizer Agent initialized
+INFO 2025-09-24 21:26:32,476 orchestrator 17392 27824 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 21:26:32,477 views 17392 27824 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 21:26:32,483 orchestrator 17392 27824 [STEP 1] Classifying sentiment for review 096c3481-efac-4679-a78c-026199710bf5
+INFO 2025-09-24 21:26:32,484 orchestrator 17392 27824 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 21:26:32,484 orchestrator 17392 27824 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 21:26:32,489 orchestrator 17392 27824 [STEP 1] Classifying sentiment for review feb5537e-3472-40da-8108-0d91e01ea440
+INFO 2025-09-24 21:26:32,490 orchestrator 17392 27824 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 21:26:32,490 orchestrator 17392 27824 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 21:26:32,494 orchestrator 17392 27824 [STEP 1] Classifying sentiment for review 1a43a2b5-b7d9-4f89-8129-fab4125c9aba
+INFO 2025-09-24 21:26:32,495 orchestrator 17392 27824 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 21:26:32,496 orchestrator 17392 27824 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 21:26:32,500 orchestrator 17392 27824 [STEP 1] Classifying sentiment for review 2440bd45-f7b4-4553-b52f-5c1e77438f02
+INFO 2025-09-24 21:26:32,501 orchestrator 17392 27824 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 21:26:32,502 orchestrator 17392 27824 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 21:26:32,505 orchestrator 17392 27824 [STEP 1] Classifying sentiment for review 89b23726-e154-4f0a-b867-5a2df74adb1c
+INFO 2025-09-24 21:26:32,506 orchestrator 17392 27824 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 21:26:32,507 orchestrator 17392 27824 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 21:26:32,516 basehttp 17392 27824 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 21:26:34,547 basehttp 17392 27824 "GET /dashboard/ HTTP/1.1" 200 42802
+INFO 2025-09-24 21:26:36,229 basehttp 17392 27824 "GET /dashboard/reviews/ HTTP/1.1" 200 161933
