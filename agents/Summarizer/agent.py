@@ -232,3 +232,31 @@ class SummaryAgent(BaseAgent):
                 insights.append("Customer satisfaction is moderate")
         
         return insights
+    
+
+    def _generate_recommendations(self, reviews: List[Dict]) -> List[str]:
+        """Generate actionable recommendations"""
+        recommendations = []
+        
+        # Analyze negative reviews for improvement areas
+        negative_reviews = [r for r in reviews if r.get('sentiment') == 'negative']
+        
+        if len(negative_reviews) > len(reviews) * 0.3:  # More than 30% negative
+            recommendations.append("Focus on addressing customer complaints")
+            recommendations.append("Implement staff training programs")
+        
+        # Score-based recommendations
+        scores = [r.get('score', 3.0) for r in reviews if isinstance(r.get('score'), (int, float))]
+        if scores:
+            avg_score = sum(scores) / len(scores)
+            if avg_score < 3.0:
+                recommendations.append("Urgent action needed to improve service quality")
+            elif avg_score < 4.0:
+                recommendations.append("Consider service enhancement initiatives")
+        
+        # General recommendations
+        recommendations.extend([
+            "Monitor review trends regularly",
+            "Respond to negative reviews promptly",
+            "Leverage positive feedback for marketing"
+        ])
