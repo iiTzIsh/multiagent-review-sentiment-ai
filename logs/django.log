@@ -11250,3 +11250,77 @@ INFO 2025-09-24 17:52:57,206 basehttp 24240 22672 "GET /dashboard/ HTTP/1.1" 200
 INFO 2025-09-24 17:53:20,456 basehttp 24240 22672 "GET /dashboard/reviews/ HTTP/1.1" 200 161680
 INFO 2025-09-24 17:53:25,242 basehttp 24240 22672 "GET /dashboard/analytics/ HTTP/1.1" 200 76735
 WARNING 2025-09-24 17:53:25,255 basehttp 24240 22672 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-24 17:59:31,686 autoreload 24240 11068 E:\IRWA\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
+INFO 2025-09-24 17:59:31,804 autoreload 5280 35320 E:\IRWA\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
+INFO 2025-09-24 17:59:32,340 autoreload 37264 5212 Watching for file changes with StatReloader
+INFO 2025-09-24 17:59:32,392 autoreload 11352 528 Watching for file changes with StatReloader
+INFO 2025-09-24 17:59:35,537 autoreload 37264 5212 E:\IRWA\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
+INFO 2025-09-24 17:59:35,562 autoreload 11352 528 E:\IRWA\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
+INFO 2025-09-24 17:59:36,119 autoreload 2668 4924 Watching for file changes with StatReloader
+INFO 2025-09-24 17:59:36,139 autoreload 31992 9952 Watching for file changes with StatReloader
+INFO 2025-09-24 17:59:39,185 autoreload 31992 9952 E:\IRWA\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
+INFO 2025-09-24 17:59:39,192 autoreload 2668 4924 E:\IRWA\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
+INFO 2025-09-24 17:59:39,739 autoreload 12272 3740 Watching for file changes with StatReloader
+
+INFO 2025-09-24 18:10:11,309 basehttp 12272 27368 "GET /dashboard/ HTTP/1.1" 200 42819
+INFO 2025-09-24 18:10:11,324 basehttp 12272 27368 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-09-24 18:10:49,037 autoreload 29608 13140 Watching for file changes with StatReloader
+INFO 2025-09-24 18:10:51,101 basehttp 29608 12376 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 18:10:51,125 basehttp 29608 12376 "GET /dashboard/ HTTP/1.1" 200 42819
+INFO 2025-09-24 18:10:56,756 basehttp 29608 12376 "GET /dashboard/ HTTP/1.1" 200 42819
+INFO 2025-09-24 18:10:59,181 basehttp 29608 12376 "GET /dashboard/upload/ HTTP/1.1" 200 60994
+INFO 2025-09-24 18:11:05,180 basehttp 29608 12376 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 18:11:08,807 basehttp 29608 12376 "GET /dashboard/ HTTP/1.1" 200 42806
+WARNING 2025-09-24 18:11:32,464 log 29608 36460 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 18:11:32,466 basehttp 29608 36460 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 18:11:59,672 views 29608 12376 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 18:11:59,677 orchestrator 29608 12376 [STEP 1] Classifying sentiment for review 7b7eb3f7-6e0d-4ea8-877c-7e56229f1908
+INFO 2025-09-24 18:11:59,678 orchestrator 29608 12376 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 18:11:59,678 orchestrator 29608 12376 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 18:11:59,682 orchestrator 29608 12376 [STEP 1] Classifying sentiment for review 4868f54c-3404-4bf5-864f-6b0bbb767c21
+INFO 2025-09-24 18:11:59,683 orchestrator 29608 12376 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 18:11:59,683 orchestrator 29608 12376 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 18:11:59,688 orchestrator 29608 12376 [STEP 1] Classifying sentiment for review ef2ae129-27d8-42bb-b13d-20828f96de61
+INFO 2025-09-24 18:11:59,689 orchestrator 29608 12376 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 18:11:59,690 orchestrator 29608 12376 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 18:11:59,693 orchestrator 29608 12376 [STEP 1] Classifying sentiment for review ff48d86f-10d5-4743-9565-e1e8989a8f8e
+INFO 2025-09-24 18:11:59,695 orchestrator 29608 12376 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 18:11:59,695 orchestrator 29608 12376 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 18:11:59,699 orchestrator 29608 12376 [STEP 1] Classifying sentiment for review 4e1c2b7c-b7e4-4816-8222-4371ec0530ea
+INFO 2025-09-24 18:11:59,701 orchestrator 29608 12376 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 18:11:59,702 orchestrator 29608 12376 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 18:11:59,711 basehttp 29608 12376 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 18:12:01,740 basehttp 29608 12376 "GET /dashboard/ HTTP/1.1" 200 42809
+INFO 2025-09-24 18:14:20,212 autoreload 29608 13140 E:\IRWA\multiagent-review-sentiment-ai\agents\orchestrator.py changed, reloading.
+INFO 2025-09-24 18:14:21,384 autoreload 27908 11684 Watching for file changes with StatReloader
+INFO 2025-09-24 18:16:29,302 basehttp 27908 39776 "GET /dashboard/ HTTP/1.1" 200 42810
+INFO 2025-09-24 18:16:29,314 basehttp 27908 39776 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-24 18:16:38,003 autoreload 10756 35852 Watching for file changes with StatReloader
+INFO 2025-09-24 18:17:04,308 basehttp 27908 39776 "GET /dashboard/ HTTP/1.1" 200 42810
+INFO 2025-09-24 18:17:06,200 basehttp 27908 39776 "GET /dashboard/upload/ HTTP/1.1" 200 60985
+INFO 2025-09-24 18:17:10,432 basehttp 27908 39776 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 18:17:12,714 basehttp 27908 39776 "GET /dashboard/ HTTP/1.1" 200 42797
+INFO 2025-09-24 18:17:22,770 orchestrator 27908 39776 [OK] Classifier Agent initialized
+INFO 2025-09-24 18:17:22,773 orchestrator 27908 39776 [OK] Scorer Agent initialized
+INFO 2025-09-24 18:17:22,776 orchestrator 27908 39776 [OK] Summarizer Agent initialized
+INFO 2025-09-24 18:17:22,776 orchestrator 27908 39776 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 18:17:22,777 views 27908 39776 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 18:17:22,783 orchestrator 27908 39776 [STEP 1] Classifying sentiment for review e8044023-b7ae-4282-973a-88cd2a3690ee
+INFO 2025-09-24 18:17:22,784 orchestrator 27908 39776 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 18:17:22,785 orchestrator 27908 39776 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 18:17:22,790 orchestrator 27908 39776 [STEP 1] Classifying sentiment for review 186f6e5c-b24f-49fa-b26b-9ab9b05e833c
+INFO 2025-09-24 18:17:22,791 orchestrator 27908 39776 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 18:17:22,792 orchestrator 27908 39776 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 18:17:22,796 orchestrator 27908 39776 [STEP 1] Classifying sentiment for review 94163ef1-9268-49e2-bd3b-ccedfabc0404
+INFO 2025-09-24 18:17:22,797 orchestrator 27908 39776 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 18:17:22,797 orchestrator 27908 39776 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 18:17:22,802 orchestrator 27908 39776 [STEP 1] Classifying sentiment for review e246fc5b-0880-47dc-bca7-edea17e16b07
+INFO 2025-09-24 18:17:22,803 orchestrator 27908 39776 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 18:17:22,803 orchestrator 27908 39776 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 18:17:22,807 orchestrator 27908 39776 [STEP 1] Classifying sentiment for review 5d59338f-b0a6-4e77-aa5c-f48eb6da0dfc
+INFO 2025-09-24 18:17:22,808 orchestrator 27908 39776 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 18:17:22,809 orchestrator 27908 39776 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 18:17:22,818 basehttp 27908 39776 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 18:17:24,848 basehttp 27908 39776 "GET /dashboard/ HTTP/1.1" 200 42800
+INFO 2025-09-24 18:17:39,001 autoreload 27908 11684 E:\IRWA\multiagent-review-sentiment-ai\agents\orchestrator.py changed, reloading.
+INFO 2025-09-24 18:17:40,104 autoreload 19808 27132 Watching for file changes with StatReloader

@@ -74,17 +74,17 @@ class ReviewProcessingOrchestrator:
         try:
             # Step 1: Initialize Classifier Agent
             self.classifier_agent = ReviewClassifierAgent()
-            logger.info("✅ Classifier Agent initialized")
+            logger.info("[OK] Classifier Agent initialized")
             
             # Step 2: Initialize Scorer Agent
             self.scorer_agent = ReviewScorerAgent()
-            logger.info("✅ Scorer Agent initialized")
+            logger.info("[OK] Scorer Agent initialized")
             
             # Step 3: Initialize Summarizer Agent
             self.summarizer_agent = ReviewSummarizerAgent()
-            logger.info("✅ Summarizer Agent initialized")
+            logger.info("[OK] Summarizer Agent initialized")
             
-            logger.info("🎯 All three agents successfully initialized")
+            logger.info("[COMPLETE] All three agents successfully initialized")
             
         except Exception as e:
             logger.error(f"Agent initialization failed: {str(e)}")
@@ -263,7 +263,7 @@ class ReviewProcessingOrchestrator:
             self.workflow_stats['successful_workflows'] += 1
             self.workflow_stats['last_run'] = workflow_end.isoformat()
             
-            logger.info(f"✅ Batch workflow completed: {len(reviews)} reviews in {total_processing_time:.2f}s")
+            logger.info(f"[COMPLETE] Batch workflow completed: {len(reviews)} reviews in {total_processing_time:.2f}s")
             return batch_report
             
         except Exception as e:

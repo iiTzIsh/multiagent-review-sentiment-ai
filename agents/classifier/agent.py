@@ -1,13 +1,3 @@
-"""
-Review Classifier Agent - CrewAI Implementation
-Classifies hotel reviews as positive, negative, or neutral using HuggingFace models
-
-AGENT ROLE: Sentiment Analysis Expert
-- Well-defined role: Analyze customer reviews and classify sentiment
-- Clear responsibility: Transform text into sentiment categories (positive/negative/neutral)
-- Communication: Uses CrewAI framework for task execution and tool integration
-"""
-
 import json
 import logging
 import re
@@ -20,14 +10,7 @@ logger = logging.getLogger('agents.classifier')
 
 
 class SentimentClassificationTool(BaseTool):
-    """
-    HuggingFace Sentiment Classification Tool
-    
-    PURPOSE: Connects CrewAI agent to HuggingFace RoBERTa model
-    MODEL: cardiffnlp/twitter-roberta-base-sentiment-latest
-    OUTPUT: Sentiment classification with confidence score
-    """
-    
+       
     name: str = "sentiment_classifier"
     description: str = "Classify text sentiment as positive, negative, or neutral using HuggingFace RoBERTa model"
     
