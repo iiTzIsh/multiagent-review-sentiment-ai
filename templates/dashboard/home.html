@@ -7,7 +7,7 @@
 {% block page_title %}Dashboard Overview{% endblock %}
 
 {% block page_description %}
-<p class="page-description">Multi-agent review analysis and insights dashboard</p>
+<p class="page-description">Multi agent review analysis and insights dashboard</p>
 {% endblock %}
 
 {% block extra_css %}
@@ -361,13 +361,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeHomeCharts();
     initializeProgressBars();
     
-    // Add event listener for process reviews button
-    const processBtn = document.getElementById('process-reviews-btn');
-    if (processBtn) {
-        processBtn.addEventListener('click', function() {
-            processReviews();
-        });
-    }
+    // Note: Process reviews button event listener is handled by enhanced-dashboard.js
+    // No need to set up duplicate event listener here
 });
 
 function initializeProgressBars() {
@@ -492,63 +487,7 @@ function initializeHomeCharts() {
     }
 }
 
-// Process reviews function with AJAX
-function processReviews() {
-    if (confirm('This will process all unprocessed reviews with AI analysis. This may take several minutes. Continue?')) {
-        const btn = document.getElementById('process-reviews-btn');
-        const originalText = btn.innerHTML;
-        
-        // Show loading state
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Processing...';
-        btn.disabled = true;
-        
-        // Make AJAX request to process reviews
-        fetch('{% url "dashboard:process_reviews" %}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken'),
-            },
-            body: JSON.stringify({
-                'batch_size': 50
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            
-            if (data.success) {
-                alert(`Processing completed! Processed ${data.processed_count} reviews.`);
-                // Reload page to show updated statistics
-                location.reload();
-            } else {
-                alert(`Processing failed: ${data.error}`);
-            }
-        })
-        .catch(error => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            alert('An error occurred while processing reviews.');
-            console.error('Error:', error);
-        });
-    }
-}
-
-// Helper function to get CSRF token
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
+// Note: processReviews() function is implemented in enhanced-dashboard.js
+// It uses the correct API endpoint /api/v1/process/ instead of dashboard endpoint
 </script>
 {% endblock %}

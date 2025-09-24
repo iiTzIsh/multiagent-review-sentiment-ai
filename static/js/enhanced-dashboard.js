@@ -116,7 +116,7 @@ function handleProcessReviews() {
     // Show loading overlay
     showLoadingOverlay('Processing reviews with AI agents...');
     
-    fetch('/api/process-reviews/', {
+    fetch('/api/v1/process/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -126,9 +126,11 @@ function handleProcessReviews() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            showToast('Reviews processing started successfully!', 'success', 'Processing Started');
-            // Poll for status updates
-            pollProcessingStatus();
+            showToast('Reviews processing completed successfully!', 'success', 'Processing Complete');
+            // Reload page after a short delay to show updated statistics
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
         } else {
             showToast(data.message || 'Failed to start processing', 'error', 'Processing Error');
         }
@@ -188,7 +190,7 @@ function handleGlobalSearch(query) {
     modal.show();
     
     // Perform search
-    fetch(`/api/search/?q=${encodeURIComponent(query)}`)
+    fetch(`/api/v1/search/?q=${encodeURIComponent(query)}`)
     .then(response => response.json())
     .then(data => {
         if (data.success) {

@@ -561,7 +561,7 @@ def process_reviews_ajax(request):
         
         # Run the processing command
         try:
-            call_command('process_reviews', batch_size=batch_size, stdout=out)
+            call_command('process_with_crewai', batch_size=batch_size, stdout=out)
             
             # Get count after processing
             unprocessed_after = Review.objects.filter(
