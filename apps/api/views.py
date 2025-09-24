@@ -235,11 +235,18 @@ class AnalyticsViewSet(viewsets.ViewSet):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ProcessReviewsAPIView(APIView):
-    """API endpoint for processing reviews with AI agents"""
+    """
+    API endpoint for processing reviews with proper three-agent pipeline
+    
+    REPLACED: Rule-based simulation with real agent orchestrator
+    NOW USES: ReviewProcessingOrchestrator with Classifier → Scorer workflow
+    """
     
     def post(self, request):
-        """Process reviews using the multi-agent pipeline"""
+        """Process reviews using the proper multi-agent orchestrator"""
         try:
+            from agents.orchestrator import ReviewProcessingOrchestrator
+            
             data = json.loads(request.body)
             
             # Get reviews to process
@@ -257,7 +264,7 @@ class ProcessReviewsAPIView(APIView):
             
             # Create agent task
             task = AgentTask.objects.create(
-                agent_name='Multi-Agent Pipeline',
+                agent_name='ReviewProcessingOrchestrator',
                 task_type='batch_processing',
                 status='pending',
                 input_data={
@@ -266,38 +273,63 @@ class ProcessReviewsAPIView(APIView):
                 }
             )
             
-            # In production, this would trigger Celery task
-            # For now, simulate processing
+            # Initialize proper agent orchestrator
+            orchestrator = ReviewProcessingOrchestrator()
+            logger.info(f"Using {orchestrator.name} to process {reviews.count()} reviews")
+            
             task.status = 'running'
             task.save()
             
-            # Simulate some processing
+            # Process reviews using proper agent pipeline
             processed_count = 0
-            for review in reviews[:10]:  # Process first 10 for demo
-                # Simulate AI processing
-                if not review.sentiment or review.sentiment == 'neutral':
-                    # Simple rule-based classification for demo
-                    text_lower = review.text.lower()
-                    if any(word in text_lower for word in ['great', 'excellent', 'amazing', 'perfect', 'love']):
-                        review.sentiment = 'positive'
-                        review.ai_score = 4.2
-                    elif any(word in text_lower for word in ['terrible', 'awful', 'horrible', 'worst', 'hate']):
-                        review.sentiment = 'negative'
-                        review.ai_score = 1.8
-                    else:
-                        review.sentiment = 'neutral'
-                        review.ai_score = 3.0
-                    
-                    review.processed = True
-                    review.confidence_score = 0.85
-                    review.save()
-                    processed_count += 1
+            agent_results = []
             
-            # Complete task
+            # Limit batch size for performance (can be adjusted)
+            batch_size = min(20, reviews.count())
+            reviews_to_process = reviews[:batch_size]
+            
+            for review in reviews_to_process:
+                try:
+                    # Use orchestrator to process each review through agent pipeline
+                    result = orchestrator.process_single_review(
+                        review_text=review.text,
+                        review_id=str(review.id)
+                    )
+                    
+                    # Update review with agent results
+                    analysis = result['analysis']
+                    
+                    review.sentiment = analysis['sentiment']
+                    review.ai_score = analysis['score']
+                    review.confidence_score = analysis['overall_confidence']
+                    review.processed = True
+                    review.save()
+                    
+                    agent_results.append({
+                        'review_id': str(review.id),
+                        'sentiment': analysis['sentiment'],
+                        'score': analysis['score'],
+                        'confidence': analysis['overall_confidence']
+                    })
+                    
+                    processed_count += 1
+                    
+                except Exception as e:
+                    logger.error(f"Failed to process review {review.id}: {str(e)}")
+                    # Continue with other reviews
+                    continue
+            
+            # Get orchestrator performance stats
+            orchestrator_status = orchestrator.get_orchestrator_status()
+            
+            # Complete task with detailed results
             task.status = 'completed'
             task.output_data = {
                 'processed_count': processed_count,
-                'success': True
+                'success': True,
+                'agent_results': agent_results[:5],  # First 5 results for debugging
+                'orchestrator_stats': orchestrator_status['workflow_statistics'],
+                'method': 'AI Agent Pipeline'
             }
             task.save()
             
@@ -305,14 +337,30 @@ class ProcessReviewsAPIView(APIView):
                 'success': True,
                 'task_id': str(task.id),
                 'processed_count': processed_count,
-                'message': f'Successfully processed {processed_count} reviews'
+                'total_available': reviews.count(),
+                'batch_processed': batch_size,
+                'agent_used': orchestrator.name,
+                'processing_method': 'Three-Agent Pipeline (Classifier → Scorer)',
+                'message': f'Successfully processed {processed_count}/{batch_size} reviews using AI agents',
+                'orchestrator_performance': {
+                    'total_processed': orchestrator_status['workflow_statistics']['total_processed'],
+                    'success_rate': orchestrator_status['workflow_statistics']['successful_workflows']
+                }
             })
             
         except Exception as e:
-            logger.error(f"Review processing failed: {str(e)}")
+            logger.error(f"AI agent processing failed: {str(e)}")
+            
+            # Update task status
+            if 'task' in locals():
+                task.status = 'failed'
+                task.output_data = {'error': str(e)}
+                task.save()
+            
             return JsonResponse({
                 'success': False,
-                'error': str(e)
+                'error': f"AI agent processing failed: {str(e)}",
+                'fallback': 'Consider using rule-based backup processing'
             }, status=500)
 
 
@@ -433,16 +481,23 @@ class SearchAPIView(APIView):
 
 
 class SummaryAPIView(APIView):
-    """API endpoint for generating summaries"""
+    """
+    API endpoint for generating summaries using proper Summarizer Agent
+    
+    REPLACED: Rule-based summarization logic with proper AI agent
+    NOW USES: ReviewSummarizerAgent for intelligent analysis and insights
+    """
     
     def get(self, request):
-        """Get summary for specified criteria"""
+        """Get summary for specified criteria using Summarizer Agent"""
         try:
+            from agents.summarizer.agent import ReviewSummarizerAgent
+            
             hotel_id = request.GET.get('hotel')
             days = int(request.GET.get('days', 30))
             
             # Get reviews
-            reviews = Review.objects.all()
+            reviews = Review.objects.all() 
             if hotel_id:
                 reviews = reviews.filter(hotel_id=hotel_id)
             
@@ -451,49 +506,71 @@ class SummaryAPIView(APIView):
             start_date = datetime.now() - timedelta(days=days)
             reviews = reviews.filter(created_at__gte=start_date)
             
-            # Calculate summary statistics
-            total_reviews = reviews.count()
-            avg_score = reviews.aggregate(avg=Avg('ai_score'))['avg'] or 0
+            # Convert Django queryset to agent-compatible format
+            reviews_data = []
+            for review in reviews:
+                reviews_data.append({
+                    'text': review.text,
+                    'sentiment': review.sentiment or 'neutral',
+                    'score': review.ai_score or 3.0,
+                    'hotel': review.hotel.name if review.hotel else 'Unknown',
+                    'date': review.created_at.isoformat()
+                })
             
-            sentiment_dist = reviews.values('sentiment').annotate(
-                count=Count('sentiment')
-            )
+            if not reviews_data:
+                return Response({
+                    'summary': {
+                        'text': f"No reviews found for the specified criteria over the last {days} days.",
+                        'total_reviews': 0,
+                        'average_score': 0,
+                        'sentiment_distribution': [],
+                        'date_range': {
+                            'start': start_date.date(),
+                            'end': datetime.now().date()
+                        }
+                    },
+                    'insights': {},
+                    'agent_used': 'None (no data)'
+                })
             
-            # Generate summary (simplified)
-            summary_text = f"Analysis of {total_reviews} reviews over the last {days} days. "
+            # Use proper Summarizer Agent instead of rule-based logic
+            summarizer = ReviewSummarizerAgent()
+            logger.info(f"Using {summarizer.name} to analyze {len(reviews_data)} reviews")
             
-            if avg_score >= 4.0:
-                summary_text += "Overall customer satisfaction is high. "
-            elif avg_score <= 2.0:
-                summary_text += "Customer satisfaction needs improvement. "
-            else:
-                summary_text += "Customer satisfaction is moderate. "
+            summary_result = summarizer.summarize_reviews(reviews_data, include_insights=True)
             
-            # Top positive and negative themes (simplified)
-            positive_reviews = reviews.filter(sentiment='positive')[:5]
-            negative_reviews = reviews.filter(sentiment='negative')[:5]
-            
+            # Format response in API-compatible structure
             return Response({
                 'summary': {
-                    'text': summary_text,
-                    'total_reviews': total_reviews,
-                    'average_score': round(avg_score, 2),
-                    'sentiment_distribution': list(sentiment_dist),
+                    'text': summary_result['summary_text'],
+                    'total_reviews': summary_result['total_reviews'],
+                    'average_score': summary_result['summary_data'].get('average_score', 0),
+                    'sentiment_distribution': [
+                        {'sentiment': k, 'count': v} 
+                        for k, v in summary_result['summary_data'].get('sentiment_distribution', {}).items()
+                    ],
                     'date_range': {
                         'start': start_date.date(),
                         'end': datetime.now().date()
                     }
                 },
                 'insights': {
-                    'positive_themes': [r.text[:100] + '...' for r in positive_reviews],
-                    'negative_themes': [r.text[:100] + '...' for r in negative_reviews],
+                    'sentiment_percentages': summary_result['summary_data'].get('sentiment_percentages', {}),
+                    'score_range': summary_result['summary_data'].get('score_range', [0, 5]),
+                    'generated_by': summary_result['generated_by']
+                },
+                'agent_used': summary_result['generated_by'],
+                'processing_info': {
+                    'method': 'AI Agent Analysis',
+                    'replaced': 'Rule-based summarization'
                 }
             })
             
         except Exception as e:
-            logger.error(f"Summary generation failed: {str(e)}")
+            logger.error(f"AI-powered summary generation failed: {str(e)}")
             return Response({
-                'error': str(e)
+                'error': f"Summary generation failed: {str(e)}",
+                'fallback': 'Consider using rule-based backup'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 

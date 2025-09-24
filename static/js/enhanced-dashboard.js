@@ -116,7 +116,7 @@ function handleProcessReviews() {
     // Show loading overlay
     showLoadingOverlay('Processing reviews with AI agents...');
     
-    fetch('/api/process-reviews/', {
+    fetch('/api/v1/process/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ function handleGlobalSearch(query) {
     modal.show();
     
     // Perform search
-    fetch(`/api/search/?q=${encodeURIComponent(query)}`)
+    fetch(`/api/v1/search/?q=${encodeURIComponent(query)}`)
     .then(response => response.json())
     .then(data => {
         if (data.success) {

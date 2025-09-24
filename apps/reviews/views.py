@@ -1,10 +1,16 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
+# Reviews views are implemented in the dashboard appfrom django.shortcuts import render, get_object_or_404
+
+# This app only provides the models for review data storagefrom django.http import JsonResponse
+
 from django.views.decorators.http import require_http_methods
-from .models import Review, Hotel, ReviewBatch
 
-# Create your views here.
+# The actual review functionality can be found in:from .models import Review, Hotel, ReviewBatch
 
+# - apps/dashboard/views.py - review management functions
+
+# - templates/dashboard/ - review templates# Create your views here.
+
+# - apps/api/views.py - review API endpoints
 def review_list(request):
     """List all reviews"""
     return render(request, 'reviews/list.html', {'reviews': []})
