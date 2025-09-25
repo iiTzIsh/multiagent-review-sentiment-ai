@@ -25,18 +25,18 @@ class SentimentScoringTool(BaseTool):
     
     def _run(self, text: str, sentiment: str = None) -> str:
         try:
-            # Step 1: Try HuggingFace API call (commented for demo - requires API token)
 
+            #env update ?
             headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
             payload = {"inputs": text}
             response = requests.post(self._api_url, headers=headers, json=payload)
             
             if response.status_code == 200:
                 result = response.json()
-                # Model returns sentiment scores, convert to 0-5 scale
+                # Model return
                 scores = result[0] if isinstance(result, list) else result
                 
-                # Extract scores for different sentiment labels
+                
                 positive_score = 0
                 negative_score = 0
                 
@@ -46,13 +46,13 @@ class SentimentScoringTool(BaseTool):
                     elif 'NEGATIVE' in item['label'] or '1' in item['label'] or '2' in item['label']:
                         negative_score += item['score']
                 
-                # Convert to 0-5 scale
+
                 final_score = (positive_score * 5.0) + (negative_score * 1.0)
                 final_score = max(0.0, min(5.0, final_score))
                 
                 return f"Score: {final_score:.1f}"
             
-            # Step 2: Fallback rule-based scoring for demo (when API not available)
+            # Fallback for  API unavailable)
             text_lower = text.lower()
             
             # Enhanced scoring indicators with HuggingFace-like weights
@@ -149,8 +149,7 @@ class ReviewScorerAgent:
     
     def __init__(self):
         """
-        Initialize the Review Scorer Agent
-        
+        Initialize the Review Scorer Agent    
         AGENT DEFINITION (Meeting Marking Rubric):
         - Role: Well-defined scoring specialist
         - Goal: Clear numerical scoring objective
