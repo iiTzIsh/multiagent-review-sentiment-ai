@@ -241,10 +241,7 @@ class ReviewScorerAgent:
         return results
 
 
-
 # DEMONSTRATION AND USAGE EXAMPLE
-
-
 
 def demo_scorer_agent():
     
