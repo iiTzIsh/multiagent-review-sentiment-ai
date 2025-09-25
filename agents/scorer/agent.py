@@ -14,13 +14,13 @@ import re
 from typing import Dict, List, Any
 from crewai import Agent, Task
 from crewai.tools import BaseTool
+import requests
 
 logger = logging.getLogger('agents.scorer')
 
 
 
 class SentimentScoringTool(BaseTool):
-    """
     Sentiment Scoring Tool for CrewAI
     
     PURPOSE: Converts sentiment analysis results into numerical scores (0-5)
@@ -84,7 +84,7 @@ class SentimentScoringTool(BaseTool):
             return f"Score: {final_score:.1f}"
             
         except Exception as e:
-            logger.error(f"Sentiment scoring failed: {str(e)}")
+            logger.error(f"HuggingFace sentiment scoring failed: {str(e)}")
             return "Score: 3.0"
 
 
@@ -265,6 +265,7 @@ def demo_scorer_agent():
     
     This shows how the sentiment scorer works:
     1. Create agent instance (CrewAI structure)
+
     2. Process sample reviews with different sentiments
     3. Show results
     
@@ -279,7 +280,7 @@ def demo_scorer_agent():
     print(f"✅ Created agent: {scorer.name}")
     print(f"   Role: {scorer.role}")
     print(f"   Scoring method: Rule-based sentiment-to-score conversion")
-    
+
     # Step 2: Test with sample reviews
     sample_reviews = [
         {"text": "Amazing service! The staff was incredibly helpful and the room was perfect.", "sentiment": "positive"},
@@ -288,11 +289,13 @@ def demo_scorer_agent():
     ]
     
     print("\n=== Processing Reviews with Sentiment Scoring ===")
+
     for i, review_data in enumerate(sample_reviews, 1):
         print(f"\nReview {i}: {review_data['text']}")
         print(f"Sentiment: {review_data['sentiment']}")
         result = scorer.score_review(review_data['text'], review_data['sentiment'])
         print(f"✅ Score: {result['score']}")
+
     
     # Step 3: Batch processing demo
     print("\n=== Batch Processing Demo ===")
@@ -302,9 +305,11 @@ def demo_scorer_agent():
     
     print("\n=== Demo Complete ===")
     print("✅ Agent structure: CrewAI framework")
+
     print("✅ Scoring method: Rule-based sentiment-to-score conversion") 
     print("✅ Functionality: Working numerical scoring")
     print("\nNOTE: For full CrewAI crew functionality, set OPENAI_API_KEY environment variable")
+
 
 
 if __name__ == "__main__":
