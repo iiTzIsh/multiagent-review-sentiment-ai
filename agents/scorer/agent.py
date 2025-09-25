@@ -131,31 +131,9 @@ class SentimentScoringTool(BaseTool):
 
 
 class ReviewScorerAgent:
-    """
-    CREWAI SENTIMENT SCORER AGENT
-    
-    WELL-DEFINED ROLE:
-    - Primary Role: Review Scoring Expert for Hotel Reviews
-    - Specific Responsibility: Convert sentiment classifications into numerical scores (0-5)
-    - Domain Expertise: Hospitality industry scoring and rating systems
-    - Communication: Uses CrewAI framework for task execution
-    
-    AGENT CAPABILITIES:
-    - Single review scoring
-    - Batch review processing
-    - Rule-based scoring with sentiment input
-    - Structured output with confidence scores
-    """
     
     def __init__(self):
-        """
-        Initialize the Review Scorer Agent    
-        AGENT DEFINITION (Meeting Marking Rubric):
-        - Role: Well-defined scoring specialist
-        - Goal: Clear numerical scoring objective
-        - Backstory: Domain-specific experience
-        - Tools: Sentiment scoring integration
-        """
+        
         # Agent Identity
         self.name = "ReviewScorer"
         self.role = "Review Scoring Specialist"
@@ -166,22 +144,13 @@ class ReviewScorerAgent:
         Your task is to provide consistent, fair numerical scores that help
         hotel managers track satisfaction trends and identify areas for improvement."""
         
-        # CrewAI Agent Instance
+        # INstialilize agent and  instance
         self.agent = None
         self.tools = []
-        
-        # Initialize the agent
         self._create_agent()
     
     def _create_agent(self) -> Agent:
-        """
-        CREATE CREWAI AGENT
         
-        This is the core CrewAI implementation that:
-        1. Sets up the agent with role, goal, and backstory
-        2. Assigns the sentiment scoring tool
-        3. Configures agent behavior parameters
-        """
         # Step 1: Setup tools
         self.tools = [SentimentScoringTool()]
         
@@ -191,23 +160,15 @@ class ReviewScorerAgent:
             goal=self.goal,
             backstory=self.backstory,
             tools=self.tools,
-            verbose=True,              # Show agent reasoning
-            allow_delegation=False,    # This agent works independently
+            verbose=True,              # agent reasoning
+            allow_delegation=False,    # agent works independently
             max_iter=3                # Limit iterations for efficiency
         )
         
         return self.agent
     
     def create_task(self, review_text: str, sentiment: str = None) -> Task:
-        """
-        CREATE CREWAI TASK
-        
-        This creates a structured task for the CrewAI agent to execute.
-        The task contains:
-        1. Clear instructions for scoring
-        2. The review text and sentiment to analyze
-        3. Expected output format
-        """
+       
         task_description = f"""
         Assign a numerical score from 0.0 to 5.0 for the following hotel review based on its content and sentiment.
         
@@ -238,18 +199,7 @@ class ReviewScorerAgent:
         )
     
     def score_review(self, review_text: str, sentiment: str = None) -> Dict[str, Any]:
-        """
-        MAIN SCORING FUNCTION
         
-        SIMPLIFIED APPROACH:
-        Since CrewAI requires OpenAI API key, we'll use the scoring tool directly
-        This demonstrates the core functionality without API dependencies
-        
-        Steps:
-        1. Use scoring tool directly
-        2. Parse the result
-        3. Return structured data
-        """
         try:
             # Step 1: Use scoring tool directly
             tool = SentimentScoringTool()
@@ -279,12 +229,7 @@ class ReviewScorerAgent:
             }
     
     def batch_score(self, reviews_with_sentiment: List[Dict]) -> List[Dict[str, Any]]:
-        """
-        BATCH PROCESSING
         
-        Process multiple reviews by calling score_review for each one.
-        This demonstrates agent reusability for multiple tasks.
-        """
         results = []
         for review_data in reviews_with_sentiment:
             review_text = review_data.get('text', '')
@@ -301,17 +246,7 @@ class ReviewScorerAgent:
 # =============================================================================
 
 def demo_scorer_agent():
-    """
-    DEMONSTRATION FUNCTION
     
-    This shows how the sentiment scorer works:
-    1. Create agent instance (CrewAI structure)
-    2. Process sample reviews with HuggingFace model integration
-    3. Show results
-    
-    NOTE: Full CrewAI functionality requires OpenAI API key
-    This demo shows the HuggingFace scoring logic working directly
-    """
     print("=== CrewAI Sentiment Scorer Demo ===")
     print("(Using HuggingFace BERT model - fallback to enhanced rules)")
     
