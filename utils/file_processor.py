@@ -7,6 +7,7 @@ import pandas as pd
 import logging
 from typing import Dict, List, Any
 from django.core.files.uploadedfile import UploadedFile
+from django.utils import timezone
 from apps.reviews.models import Review, Hotel, ReviewSource, ReviewBatch
 from datetime import datetime
 import uuid
@@ -31,7 +32,7 @@ class ReviewFileProcessor:
         try:
             # Update batch status
             batch.status = 'processing'
-            batch.processing_started = datetime.now()
+            batch.processing_started = timezone.now()
             batch.save()
             
             # Read file based on extension
@@ -78,7 +79,7 @@ class ReviewFileProcessor:
             
             # Complete batch processing
             batch.status = 'completed'
-            batch.processing_completed = datetime.now()
+            batch.processing_completed = timezone.now()
             batch.save()
             
             return {
@@ -131,7 +132,15 @@ class ReviewFileProcessor:
         date_posted = row.get('date_posted')
         if pd.notna(date_posted):
             try:
-                data['date_posted'] = pd.to_datetime(date_posted)
+                parsed_date = pd.to_datetime(date_posted)
+                # Convert pandas Timestamp to Python datetime
+                if hasattr(parsed_date, 'to_pydatetime'):
+                    parsed_date = parsed_date.to_pydatetime()
+                # Make timezone-aware if naive
+                if parsed_date.tzinfo is None:
+                    data['date_posted'] = timezone.make_aware(parsed_date)
+                else:
+                    data['date_posted'] = parsed_date
             except:
                 data['date_posted'] = None
         else:

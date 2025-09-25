@@ -1,0 +1,786 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Reviews - Hotel Review Analytics{% endblock %}
+
+{% block page_icon %}<i class="fas fa-comments me-2"></i>{% endblock %}
+{% block page_title %}Reviews Management{% endblock %}
+
+{% block page_description %}
+<p class="text mb-0">Browse, filter, and analyze hotel reviews with AI-powered insights</p>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.review-card {
+    transition: none;
+    border-left: 4px solid transparent;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.review-card.positive {
+    border-left-color: #28a745;
+}
+
+.review-card.negative {
+    border-left-color: #dc3545;
+}
+
+.review-card.neutral {
+    border-left-color: #ffc107;
+}
+
+/* Modern Header Colors */
+.review-card .card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    padding: 1rem 1.25rem;
+}
+
+/* Alternate modern header colors for variety */
+.review-card:nth-child(3n+1) .card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+}
+
+.review-card:nth-child(3n+2) .card-header {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); /* Pink to red gradient */
+}
+
+.review-card:nth-child(3n+3) .card-header {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); /* Blue gradient */
+}
+
+/* Additional modern variations */
+.review-card:nth-child(6n+4) .card-header {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); /* Green gradient */
+}
+
+.review-card:nth-child(6n+5) .card-header {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); /* Pink to yellow gradient */
+}
+
+.review-card:nth-child(6n+6) .card-header {
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); /* Mint to pink gradient */
+}
+
+/* Ensure header text is always white and visible */
+.review-card .card-header * {
+    color: white !important;
+}
+
+.review-card .card-header .form-check-label {
+    color: white !important;
+    font-weight: 600;
+}
+
+.review-card .card-header .btn-outline-secondary {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.review-card .card-header .btn-outline-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.filter-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.filter-card .form-select,
+.filter-card .form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.filter-card .form-select option {
+    background-color: #495057;
+    color: white;
+}
+
+.filter-card .form-label {
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+.stats-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+}
+
+/* REVIEWS PAGE TEXT VISIBILITY OVERRIDES */
+/* Ensure all review content is clearly visible */
+.review-card * {
+    color: var(--text-primary) !important;
+}
+
+.review-card .text-muted {
+    color: var(--text-muted) !important;
+}
+
+.review-card .card-text {
+    color: var(--text-primary) !important;
+}
+
+.review-card .form-check-label {
+    color: var(--text-primary) !important;
+}
+
+.review-card .reviewer-info {
+    color: var(--text-muted) !important;
+}
+
+.review-card .card-footer {
+    color: var(--text-muted) !important;
+}
+
+.review-card .card-footer * {
+    color: var(--text-muted) !important;
+}
+
+/* Override Bootstrap text utilities specifically for reviews */
+.review-card .text-decoration-none {
+    color: var(--text-primary) !important;
+}
+
+.review-card small {
+    color: var(--text-muted) !important;
+}
+
+/* Dropdown menu text */
+.dropdown-menu .dropdown-item {
+    color: var(--text-primary) !important;
+}
+
+/* Badge text ensure visibility */
+.badge {
+    color: white !important;
+}
+
+.sentiment-badge {
+    color: white !important;
+}
+
+.score-badge {
+    color: var(--text-primary) !important;
+}
+
+/* Processing status text */
+.processing-status * {
+    color: inherit !important;
+}
+
+.processing-status .badge {
+    color: white !important;
+}
+
+.processing-status .text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Enhanced Pagination Styling */
+.pagination {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 0.5rem;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pagination .page-link {
+    background-color: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: var(--text-primary) !important;
+    margin: 0 3px;
+    border-radius: 6px !important;
+    padding: 0.5rem 0.75rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+}
+
+.pagination .page-link:hover {
+    background-color: rgba(59, 130, 246, 0.7) !important;
+    border-color: #3b82f6 !important;
+    color: white !important;
+    transform: translateY(-1px);
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+    color: white !important;
+    font-weight: 600;
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    color: var(--text-muted) !important;
+    opacity: 0.5;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- CSRF Token for AJAX requests -->
+{% csrf_token %}
+
+<!-- Statistics Overview -->
+<div class="row g-4 mb-4">
+    <div class="col-md-3">
+        <div class="metric-card bg-primary text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="metric-value">{{ total_reviews|default:0 }}</div>
+                    <div class="metric-label">Total Reviews</div>
+                </div>
+                <div class="opacity-75">
+                    <i class="fas fa-comments fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="metric-card bg-success text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="metric-value">{{ positive_reviews|default:0 }}</div>
+                    <div class="metric-label">Positive</div>
+                </div>
+                <div class="opacity-75">
+                    <i class="fas fa-thumbs-up fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="metric-card bg-danger text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="metric-value">{{ negative_reviews|default:0 }}</div>
+                    <div class="metric-label">Negative</div>
+                </div>
+                <div class="opacity-75">
+                    <i class="fas fa-thumbs-down fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-3">
+        <div class="metric-card bg-info text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="metric-value">{{ average_score|default:0|floatformat:1 }}</div>
+                    <div class="metric-label">Avg Score</div>
+                </div>
+                <div class="opacity-75">
+                    <i class="fas fa-star fa-2x"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="btn-group">
+                <a href="{% url 'dashboard:upload_reviews' %}" class="btn btn-primary">
+                    <i class="fas fa-upload me-1"></i>Upload Reviews
+                </a>
+                <button class="btn btn-outline-secondary" onclick="processSelectedReviews()">
+                    <i class="fas fa-cogs me-1"></i>Process Selected
+                </button>
+                <button class="btn btn-outline-info" onclick="exportReviews()">
+                    <i class="fas fa-download me-1"></i>Export
+                </button>
+            </div>
+        </div>
+
+            <!-- Filter Panel -->
+            <div class="card filter-card mb-4">
+                <div class="card-header bg-transparent border-0">
+                    <h5 class="card-title mb-0 text-white">
+                        <i class="fas fa-filter me-2"></i>Filter Reviews
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="GET" class="row g-3">
+                        <div class="col-md-3">
+                            <label for="hotel" class="form-label">Hotel</label>
+                            <select name="hotel" id="hotel" class="form-select">
+                                <option value="">All Hotels</option>
+                                {% for hotel in hotels %}
+                                <option value="{{ hotel.id }}" {% if hotel.id|stringformat:"s" == current_hotel %}selected{% endif %}>
+                                    {{ hotel.name }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <label for="sentiment" class="form-label">Sentiment</label>
+                            <select name="sentiment" id="sentiment" class="form-select">
+                                <option value="all">All Sentiments</option>
+                                {% for value, label in sentiment_choices %}
+                                <option value="{{ value }}" {% if value == current_sentiment %}selected{% endif %}>
+                                    {{ label }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <label for="search" class="form-label">Search</label>
+                            <input type="text" name="search" id="search" class="form-control" 
+                                   placeholder="Search reviews, titles, reviewers..." 
+                                   value="{{ search_query }}">
+                        </div>
+                        
+                        <div class="col-md-2">
+                            <label class="form-label">&nbsp;</label>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-outline-primary">
+                                    <i class="fas fa-search"></i> Filter
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Results Summary -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <!-- Message removed -->
+                </div>
+                <div class="col-md-6 text-end">
+                    <div class="btn-group btn-group-sm">
+                        <input type="checkbox" class="btn-check" id="selectAll">
+                        <label class="btn btn-outline-secondary" for="selectAll">Select All</label>
+                        
+                        <button class="btn btn-outline-info" onclick="exportSelected()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews List -->
+            <div class="row">
+                {% for review in reviews %}
+                <div class="col-lg-6 col-xl-4 mb-4">
+                    <div class="card review-card h-100" data-review-id="{{ review.id }}">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <div class="form-check">
+                                <input class="form-check-input review-checkbox" type="checkbox" 
+                                       value="{{ review.id }}" id="review-{{ review.id }}">
+                                <label class="form-check-label fw-bold" for="review-{{ review.id }}">
+                                    {{ review.title|default:"Untitled Review"|truncatechars:30 }}
+                                </label>
+                            </div>
+                            
+                            <div class="dropdown">
+                                <button class="btn btn-sm btn-outline-secondary" type="button" 
+                                        data-bs-toggle="dropdown">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{% url 'dashboard:review_detail' review.id %}">
+                                        <i class="fas fa-eye"></i> View Details
+                                    </a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="reprocessReview('{{ review.id }}')">
+                                        <i class="fas fa-redo"></i> Reprocess
+                                    </a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item text-danger" href="#" onclick="deleteReview('{{ review.id }}')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <!-- Hotel Info -->
+                            <div class="mb-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-hotel"></i> 
+                                    <span class="text-decoration-none">
+                                        {{ review.hotel.name }}
+                                    </span>
+                                    {% if review.hotel.location %} - {{ review.hotel.location }}{% endif %}
+                                </small>
+                            </div>
+
+                            <!-- Review Text -->
+                            <p class="card-text review-text">
+                                {{ review.text|truncatechars:150 }}
+                            </p>
+
+                            <!-- Reviewer Info -->
+                            {% if review.reviewer_name %}
+                            <div class="reviewer-info mb-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-user"></i> {{ review.reviewer_name }}
+                                    {% if review.reviewer_location %}
+                                        from {{ review.reviewer_location }}
+                                    {% endif %}
+                                </small>
+                            </div>
+                            {% endif %}
+
+                            <!-- Sentiment and Score -->
+                            <div class="row g-2 mb-3">
+                                <div class="col-6">
+                                    {% if review.sentiment %}
+                                    <span class="badge sentiment-badge sentiment-{{ review.sentiment }}">
+                                        {% if review.sentiment == 'positive' %}
+                                            <i class="fas fa-smile"></i> Positive
+                                        {% elif review.sentiment == 'negative' %}
+                                            <i class="fas fa-frown"></i> Negative
+                                        {% else %}
+                                            <i class="fas fa-meh"></i> Neutral
+                                        {% endif %}
+                                    </span>
+                                    {% else %}
+                                    <span class="badge bg-secondary">
+                                        <i class="fas fa-question"></i> Unprocessed
+                                    </span>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="col-6 text-end">
+                                    {% if review.ai_score %}
+                                    <span class="score-badge">
+                                        <i class="fas fa-star"></i> {{ review.ai_score|floatformat:1 }}/5.0
+                                    </span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- Processing Status -->
+                            <div class="processing-status">
+                                {% if review.processed %}
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="badge bg-success">
+                                        <i class="fas fa-check"></i> Processed
+                                    </span>
+                                    {% if review.confidence_score %}
+                                    <small class="text-muted">
+                                        Confidence: {{ review.confidence_score|floatformat:2 }}
+                                    </small>
+                                    {% endif %}
+                                </div>
+                                {% else %}
+                                <span class="badge bg-warning">
+                                    <i class="fas fa-clock"></i> Pending Processing
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="row g-2 text-muted">
+                                <div class="col">
+                                    <small>
+                                        <i class="fas fa-calendar"></i>
+                                        Posted: {{ review.date_posted|default:review.created_at|date:"M j, Y" }}
+                                    </small>
+                                </div>
+                                <div class="col text-end">
+                                    {% if review.original_rating %}
+                                    <small>
+                                        <i class="fas fa-star text-warning"></i>
+                                        {{ review.original_rating }}/5
+                                    </small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body text-center py-5">
+                            <i class="fas fa-comments fa-3x text-muted mb-3"></i>
+                            <h4 class="text-muted">No reviews found</h4>
+                            <p class="text-muted">Try adjusting your search filters or upload some review data.</p>
+                            <a href="{% url 'dashboard:upload_reviews' %}" class="btn btn-primary">
+                                <i class="fas fa-upload"></i> Upload Reviews
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if page_obj.has_other_pages %}
+            <nav aria-label="Reviews pagination" class="mt-4">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1{% if request.GET.hotel %}&hotel={{ request.GET.hotel }}{% endif %}{% if request.GET.sentiment %}&sentiment={{ request.GET.sentiment }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                            <i class="fas fa-angle-double-left"></i> First
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.hotel %}&hotel={{ request.GET.hotel }}{% endif %}{% if request.GET.sentiment %}&sentiment={{ request.GET.sentiment }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                            <i class="fas fa-angle-left"></i> Previous
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    {% for page_num in page_obj.paginator.page_range %}
+                    {% if page_num == page_obj.number %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ page_num }}</span>
+                    </li>
+                    {% elif page_num > page_obj.number|add:'-3' and page_num < page_obj.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_num }}{% if request.GET.hotel %}&hotel={{ request.GET.hotel }}{% endif %}{% if request.GET.sentiment %}&sentiment={{ request.GET.sentiment }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                            {{ page_num }}
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.hotel %}&hotel={{ request.GET.hotel }}{% endif %}{% if request.GET.sentiment %}&sentiment={{ request.GET.sentiment }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                            Next <i class="fas fa-angle-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.hotel %}&hotel={{ request.GET.hotel }}{% endif %}{% if request.GET.sentiment %}&sentiment={{ request.GET.sentiment }}{% endif %}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                            Last <i class="fas fa-angle-double-right"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Processing Modal -->
+<div class="modal fade" id="processingModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Processing Reviews</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex align-items-center">
+                    <div class="spinner-border spinner-border-sm me-3" role="status"></div>
+                    <span>Processing selected reviews with AI agents...</span>
+                </div>
+                <div class="progress mt-3">
+                    <div class="progress-bar" id="processingProgress" role="progressbar" style="width: 0%"></div>
+                </div>
+                <small class="text-muted" id="processingStatus">Initializing...</small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Toast notification function
+function showToast(type, message) {
+    // Create toast if not exists
+    let toastContainer = document.querySelector('.toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.className = 'toast-container position-fixed top-0 end-0 p-3';
+        toastContainer.style.zIndex = '1055';
+        document.body.appendChild(toastContainer);
+    }
+
+    const toastId = 'toast-' + Date.now();
+    const toastHTML = `
+        <div id="${toastId}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <i class="fas fa-${type === 'error' ? 'exclamation-circle text-danger' : type === 'success' ? 'check-circle text-success' : 'info-circle text-primary'} me-2"></i>
+                <strong class="me-auto">${type === 'success' ? 'Success' : type === 'error' ? 'Error' : 'Info'}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                ${message}
+            </div>
+        </div>
+    `;
+
+    toastContainer.insertAdjacentHTML('beforeend', toastHTML);
+    const toast = new bootstrap.Toast(document.getElementById(toastId));
+    toast.show();
+
+    // Remove toast element after it's hidden
+    document.getElementById(toastId).addEventListener('hidden.bs.toast', function() {
+        this.remove();
+    });
+}
+
+// Initialize reviews management
+$(document).ready(function() {
+    // Select all checkbox functionality
+    $('#selectAll').change(function() {
+        $('.review-checkbox').prop('checked', this.checked);
+        updateSelectedCount();
+    });
+    
+    // Individual checkbox change
+    $('.review-checkbox').change(function() {
+        updateSelectedCount();
+        
+        // Update select all checkbox
+        const totalCheckboxes = $('.review-checkbox').length;
+        const checkedCheckboxes = $('.review-checkbox:checked').length;
+        
+        $('#selectAll').prop('indeterminate', checkedCheckboxes > 0 && checkedCheckboxes < totalCheckboxes);
+        $('#selectAll').prop('checked', checkedCheckboxes === totalCheckboxes);
+    });
+});
+
+function updateSelectedCount() {
+    const selectedCount = $('.review-checkbox:checked').length;
+    // Update UI elements that show selected count
+    $('.selected-count').text(selectedCount);
+}
+
+function processSelectedReviews() {
+    const selectedIds = $('.review-checkbox:checked').map(function() {
+        return this.value;
+    }).get();
+    
+    if (selectedIds.length === 0) {
+        alert('Please select at least one review to process.');
+        return;
+    }
+    
+    $('#processingModal').modal('show');
+    
+    // Send AJAX request to process reviews
+    $.ajax({
+        url: '{% url "api:process_reviews" %}',
+        method: 'POST',
+        data: JSON.stringify({
+            review_ids: selectedIds
+        }),
+        contentType: 'application/json',
+        headers: {
+            'X-CSRFToken': $('[name=csrfmiddlewaretoken]').val()
+        },
+        success: function(response) {
+            $('#processingModal').modal('hide');
+            if (response.success) {
+                showToast('success', `Successfully processed ${response.processed_count} reviews`);
+                location.reload(); // Refresh to show updated data
+            } else {
+                showToast('error', response.error || 'Processing failed');
+            }
+        },
+        error: function() {
+            $('#processingModal').modal('hide');
+            showToast('error', 'Processing request failed');
+        }
+    });
+}
+
+function reprocessReview(reviewId) {
+    if (confirm('Are you sure you want to reprocess this review?')) {
+        $.ajax({
+            url: `/api/reviews/${reviewId}/reprocess/`,
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': $('[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(response) {
+                if (response.success) {
+                    showToast('success', 'Review queued for reprocessing');
+                } else {
+                    showToast('error', response.error || 'Reprocessing failed');
+                }
+            },
+            error: function() {
+                showToast('error', 'Reprocessing request failed');
+            }
+        });
+    }
+}
+
+function deleteReview(reviewId) {
+    if (confirm('Are you sure you want to delete this review? This action cannot be undone.')) {
+        $.ajax({
+            url: `/api/reviews/${reviewId}/`,
+            method: 'DELETE',
+            headers: {
+                'X-CSRFToken': $('[name=csrfmiddlewaretoken]').val()
+            },
+            success: function(response) {
+                showToast('success', 'Review deleted successfully');
+                $(`[data-review-id="${reviewId}"]`).parent().remove();
+            },
+            error: function() {
+                showToast('error', 'Delete request failed');
+            }
+        });
+    }
+}
+
+function exportSelected() {
+    const selectedIds = $('.review-checkbox:checked').map(function() {
+        return this.value;
+    }).get();
+    
+    if (selectedIds.length === 0) {
+        alert('Please select at least one review to export.');
+        return;
+    }
+    
+    // Create form and submit for download
+    const form = $('<form>', {
+        method: 'POST',
+        action: '{% url "api:export" %}',
+        target: '_blank'
+    });
+    
+    form.append($('<input>', {
+        type: 'hidden',
+        name: 'csrfmiddlewaretoken',
+        value: $('[name=csrfmiddlewaretoken]').val()
+    }));
+    
+    form.append($('<input>', {
+        type: 'hidden',
+        name: 'review_ids',
+        value: selectedIds.join(',')
+    }));
+    
+    form.append($('<input>', {
+        type: 'hidden',
+        name: 'format',
+        value: 'csv'
+    }));
+    
+    $('body').append(form);
+    form.submit();
+    form.remove();
+}
+</script>
+{% endblock %}

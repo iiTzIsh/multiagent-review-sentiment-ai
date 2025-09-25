@@ -7,7 +7,7 @@
 {% block page_title %}Dashboard Overview{% endblock %}
 
 {% block page_description %}
-<p class="page-description">Multi-agent review analysis and insights dashboard</p>
+<p class="page-description">Multi agent review analysis and insights dashboard</p>
 {% endblock %}
 
 {% block extra_css %}
@@ -272,31 +272,6 @@
                 {% endif %}
             </div>
         </div>
-        
-        <!-- Quick Actions -->
-        <div class="card mt-3">
-            <div class="card-header">
-                <h5 class="card-title mb-0">
-                    <i class="fas fa-bolt me-2"></i>Quick Actions
-                </h5>
-            </div>
-            <div class="card-body">
-                <div class="d-grid gap-2">
-                    <a href="{% url 'dashboard:upload_reviews' %}" class="btn btn-outline-primary">
-                        <i class="fas fa-upload me-1"></i>Upload Reviews
-                    </a>
-                    <a href="{% url 'dashboard:analytics' %}" class="btn btn-outline-info">
-                        <i class="fas fa-chart-line me-1"></i>View Analytics
-                    </a>
-                    <a href="{% url 'dashboard:generate_report' %}" class="btn btn-outline-success">
-                        <i class="fas fa-file-alt me-1"></i>Generate Report
-                    </a>
-                    <button class="btn btn-outline-warning" onclick="processAllReviews()">
-                        <i class="fas fa-cogs me-1"></i>Process All Reviews
-                    </button>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -386,13 +361,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeHomeCharts();
     initializeProgressBars();
     
-    // Add event listener for process reviews button
-    const processBtn = document.getElementById('process-reviews-btn');
-    if (processBtn) {
-        processBtn.addEventListener('click', function() {
-            processReviews();
-        });
-    }
+    // Note: Process reviews button event listener is handled by enhanced-dashboard.js
+    // No need to set up duplicate event listener here
 });
 
 function initializeProgressBars() {
@@ -459,103 +429,65 @@ function initializeHomeCharts() {
     }
 
     // Score Distribution Chart
-    // Score Distribution Chart
     const scoreCtx = document.getElementById('scoreChart');
-    if (scoreCtx && scoreData) {
-        const scoreLabels = ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'];
-        const scoreCounts = scoreData && scoreData.length > 0 ? scoreData : [0, 0, 0, 0, 0];
-
-        new Chart(scoreCtx, {
-            type: 'bar',
-            data: {
-                labels: scoreLabels,
-                datasets: [{
-                    label: 'Number of Reviews',
-                    data: scoreCounts,
-                    backgroundColor: ['#dc3545', '#fd7e14', '#ffc107', '#20c997', '#28a745'],
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
+    if (scoreCtx) {
+        console.log('Score data received:', scoreData);
+        
+        if (scoreData && Array.isArray(scoreData) && scoreData.some(val => val > 0)) {
+            const scoreLabels = ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'];
+            
+            new Chart(scoreCtx, {
+                type: 'bar',
+                data: {
+                    labels: scoreLabels,
+                    datasets: [{
+                        label: 'Number of Reviews',
+                        data: scoreData,
+                        backgroundColor: ['#dc3545', '#fd7e14', '#ffc107', '#20c997', '#28a745'],
+                        borderRadius: 4,
+                        borderWidth: 0
+                    }]
                 },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 1
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1,
+                                color: '#9ca3af'
+                            },
+                            grid: {
+                                color: 'rgba(156, 163, 175, 0.2)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#9ca3af'
+                            },
+                            grid: {
+                                display: false
+                            }
                         }
                     }
                 }
-            }
-        });
-    } else {
-        scoreCtx.parentNode.innerHTML = '<div class="text-center text-muted p-4"><i class="fas fa-chart-bar fa-3x mb-2"></i><br>No score data available</div>';
-    }
-}
-
-// Process reviews function with AJAX
-function processReviews() {
-    if (confirm('This will process all unprocessed reviews with AI analysis. This may take several minutes. Continue?')) {
-        const btn = document.getElementById('process-reviews-btn');
-        const originalText = btn.innerHTML;
-        
-        // Show loading state
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Processing...';
-        btn.disabled = true;
-        
-        // Make AJAX request to process reviews
-        fetch('{% url "dashboard:process_reviews" %}', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken'),
-            },
-            body: JSON.stringify({
-                'batch_size': 50
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            
-            if (data.success) {
-                alert(`Processing completed! Processed ${data.processed_count} reviews.`);
-                // Reload page to show updated statistics
-                location.reload();
-            } else {
-                alert(`Processing failed: ${data.error}`);
-            }
-        })
-        .catch(error => {
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            alert('An error occurred while processing reviews.');
-            console.error('Error:', error);
-        });
-    }
-}
-
-// Helper function to get CSRF token
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
+            });
+        } else {
+            // Show placeholder when no data
+            scoreCtx.parentNode.innerHTML = '<div class="text-center text-muted p-4"><i class="fas fa-chart-bar fa-3x mb-2"></i><br>No score data available<br><small>Upload and process some reviews to see score distribution</small></div>';
         }
+    } else {
+        console.error('Score chart canvas not found');
     }
-    return cookieValue;
 }
+
+// Note: processReviews() function is implemented in enhanced-dashboard.js
+// It uses the correct API endpoint /api/v1/process/ instead of dashboard endpoint
 </script>
 {% endblock %}

@@ -1,0 +1,751 @@
+INFO 2025-09-22 15:14:47,586 autoreload 25256 37224 Watching for file changes with StatReloader
+INFO 2025-09-22 15:14:52,074 basehttp 25256 40876 "GET / HTTP/1.1" 302 0
+INFO 2025-09-22 15:14:52,102 basehttp 25256 40876 "GET /dashboard/ HTTP/1.1" 200 42784
+INFO 2025-09-22 15:14:56,735 basehttp 25256 40876 "GET /dashboard/upload/ HTTP/1.1" 200 56123
+INFO 2025-09-22 15:15:01,492 basehttp 25256 40876 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-22 15:15:04,754 basehttp 25256 40876 "GET /dashboard/upload/ HTTP/1.1" 200 57857
+INFO 2025-09-22 15:15:06,497 basehttp 25256 40876 "GET /dashboard/ HTTP/1.1" 200 43584
+WARNING 2025-09-22 15:15:10,295 log 25256 40876 Not Found: /api/process-reviews/
+WARNING 2025-09-22 15:15:10,295 basehttp 25256 40876 "POST /api/process-reviews/ HTTP/1.1" 404 5896
+INFO 2025-09-22 15:15:11,167 basehttp 25256 40876 "POST /dashboard/process-reviews/ HTTP/1.1" 200 129
+INFO 2025-09-22 15:15:12,068 basehttp 25256 40876 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:17:50,989 autoreload 37064 10528 Watching for file changes with StatReloader
+INFO 2025-09-22 15:17:53,406 basehttp 37064 36800 "GET / HTTP/1.1" 302 0
+INFO 2025-09-22 15:17:53,431 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:18:24,409 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:18:31,880 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:18:44,758 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:19:25,775 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:20:13,734 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:20:36,039 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:20:37,774 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:21:11,240 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:21:15,640 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:21:23,304 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:22:53,600 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:23:03,854 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:23:58,854 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43552
+INFO 2025-09-22 15:27:46,886 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43553
+INFO 2025-09-22 15:28:46,509 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43564
+INFO 2025-09-22 15:28:46,549 basehttp 37064 36800 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37165
+INFO 2025-09-22 15:28:56,542 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43564
+INFO 2025-09-22 15:28:56,550 basehttp 37064 36800 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:29:00,822 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43564
+INFO 2025-09-22 15:29:00,833 basehttp 37064 36800 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:29:03,746 basehttp 37064 36800 "GET /dashboard/reviews/ HTTP/1.1" 200 128552
+INFO 2025-09-22 15:29:03,755 basehttp 37064 36800 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:29:05,161 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 43564
+INFO 2025-09-22 15:29:06,629 basehttp 37064 36800 "GET /dashboard/upload/ HTTP/1.1" 200 57869
+INFO 2025-09-22 15:29:06,637 basehttp 37064 36800 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:29:11,353 basehttp 37064 36800 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-22 15:29:13,476 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 44364
+INFO 2025-09-22 15:29:13,485 basehttp 37064 36800 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:29:18,879 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 44364
+INFO 2025-09-22 15:29:18,887 basehttp 37064 36800 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:29:23,317 basehttp 37064 36800 "GET /dashboard/reviews/ HTTP/1.1" 200 158053
+INFO 2025-09-22 15:29:23,327 basehttp 37064 36800 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:29:26,105 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 44364
+WARNING 2025-09-22 15:29:28,064 log 37064 36800 Not Found: /api/process-reviews/
+WARNING 2025-09-22 15:29:28,064 basehttp 37064 36800 "POST /api/process-reviews/ HTTP/1.1" 404 5896
+INFO 2025-09-22 15:29:29,056 basehttp 37064 36800 "POST /dashboard/process-reviews/ HTTP/1.1" 200 129
+INFO 2025-09-22 15:29:30,081 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 44331
+INFO 2025-09-22 15:29:30,091 basehttp 37064 36800 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:29:33,127 basehttp 37064 36800 "GET /dashboard/reviews/ HTTP/1.1" 200 159958
+INFO 2025-09-22 15:29:50,698 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 44331
+INFO 2025-09-22 15:29:50,708 basehttp 37064 36800 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:29:55,883 basehttp 37064 36800 "GET /dashboard/upload/ HTTP/1.1" 200 59603
+INFO 2025-09-22 15:29:57,920 basehttp 37064 36800 "GET /dashboard/ HTTP/1.1" 200 44331
+INFO 2025-09-22 15:29:57,930 basehttp 37064 36800 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:34:52,984 autoreload 13672 14044 Watching for file changes with StatReloader
+INFO 2025-09-22 15:35:25,186 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44331
+INFO 2025-09-22 15:35:25,200 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:37:26,270 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44331
+INFO 2025-09-22 15:37:26,306 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37117
+INFO 2025-09-22 15:37:42,097 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159958
+INFO 2025-09-22 15:37:42,107 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:37:48,758 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44331
+INFO 2025-09-22 15:37:48,768 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:38:48,746 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44331
+INFO 2025-09-22 15:38:48,756 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37062
+INFO 2025-09-22 15:39:24,822 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44332
+INFO 2025-09-22 15:39:24,834 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37117
+INFO 2025-09-22 15:39:44,571 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44332
+INFO 2025-09-22 15:39:44,582 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37062
+INFO 2025-09-22 15:40:38,114 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44332
+INFO 2025-09-22 15:40:38,127 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37046
+INFO 2025-09-22 15:41:54,350 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44319
+INFO 2025-09-22 15:41:54,359 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 36988
+INFO 2025-09-22 15:42:12,780 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44319
+INFO 2025-09-22 15:42:12,790 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37046
+INFO 2025-09-22 15:42:51,647 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159958
+INFO 2025-09-22 15:42:51,655 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:43:12,832 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44330
+INFO 2025-09-22 15:43:12,841 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:43:22,391 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159958
+INFO 2025-09-22 15:43:22,399 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:43:26,702 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44330
+INFO 2025-09-22 15:43:29,511 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159958
+INFO 2025-09-22 15:43:29,520 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:43:34,470 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44330
+INFO 2025-09-22 15:43:36,542 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159958
+INFO 2025-09-22 15:43:44,657 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44330
+INFO 2025-09-22 15:43:44,666 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:44:20,095 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159958
+INFO 2025-09-22 15:44:20,106 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:45:07,472 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44331
+INFO 2025-09-22 15:45:07,484 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:45:11,518 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159958
+INFO 2025-09-22 15:45:19,096 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44331
+INFO 2025-09-22 15:45:22,488 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159958
+INFO 2025-09-22 15:46:45,202 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159680
+INFO 2025-09-22 15:46:45,214 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37280
+INFO 2025-09-22 15:46:48,634 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44331
+INFO 2025-09-22 15:46:48,644 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:46:50,368 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159680
+INFO 2025-09-22 15:47:07,236 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44331
+INFO 2025-09-22 15:47:07,246 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:47:10,480 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159680
+INFO 2025-09-22 15:49:15,284 basehttp 13672 18660 "GET /dashboard/ HTTP/1.1" 200 44331
+INFO 2025-09-22 15:49:15,294 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:49:17,252 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159680
+INFO 2025-09-22 15:49:34,481 basehttp 13672 18660 "GET /dashboard/reviews/?hotel=5&sentiment=all&search= HTTP/1.1" 200 34764
+INFO 2025-09-22 15:49:34,491 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:49:38,455 basehttp 13672 18660 "GET /dashboard/reviews/?hotel=&sentiment=all&search= HTTP/1.1" 200 34756
+INFO 2025-09-22 15:49:44,850 basehttp 13672 18660 "GET /dashboard/reviews/?hotel=&sentiment=all&search= HTTP/1.1" 200 34756
+INFO 2025-09-22 15:49:48,076 basehttp 13672 18660 "GET /dashboard/reviews/?hotel=&sentiment=all&search= HTTP/1.1" 200 34756
+INFO 2025-09-22 15:49:50,738 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159680
+INFO 2025-09-22 15:50:00,216 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159680
+INFO 2025-09-22 15:50:00,225 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:50:29,196 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159680
+INFO 2025-09-22 15:50:29,206 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:51:03,372 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159536
+INFO 2025-09-22 15:51:03,381 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:52:47,526 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159451
+INFO 2025-09-22 15:52:47,538 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:52:54,236 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159400
+INFO 2025-09-22 15:53:03,765 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159400
+INFO 2025-09-22 15:54:55,825 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159432
+INFO 2025-09-22 15:54:55,837 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37280
+INFO 2025-09-22 15:55:05,871 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159230
+INFO 2025-09-22 15:55:05,882 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:55:16,292 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159536
+INFO 2025-09-22 15:55:16,302 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:56:30,390 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159496
+INFO 2025-09-22 15:56:30,401 basehttp 13672 18660 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:56:36,088 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 15:56:43,547 basehttp 13672 18660 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 15:56:55,639 autoreload 36364 17696 Watching for file changes with StatReloader
+INFO 2025-09-22 15:56:58,352 basehttp 36364 40176 "GET / HTTP/1.1" 302 0
+INFO 2025-09-22 15:56:58,378 basehttp 36364 40176 "GET /dashboard/ HTTP/1.1" 200 44332
+INFO 2025-09-22 15:56:58,404 basehttp 36364 40176 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:57:00,010 basehttp 36364 40176 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 15:57:41,453 basehttp 36364 40176 "GET /dashboard/ HTTP/1.1" 200 44332
+INFO 2025-09-22 15:57:41,467 basehttp 36364 40176 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:57:43,774 basehttp 36364 40176 "GET /dashboard/reviews/ HTTP/1.1" 200 159621
+INFO 2025-09-22 15:57:55,320 basehttp 36364 40176 "GET /dashboard/ HTTP/1.1" 200 44332
+INFO 2025-09-22 15:58:06,129 basehttp 36364 40176 "GET /dashboard/ HTTP/1.1" 200 44332
+INFO 2025-09-22 15:58:16,199 basehttp 36364 40176 "GET /dashboard/ HTTP/1.1" 200 44332
+INFO 2025-09-22 15:58:16,249 basehttp 36364 40176 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 36597
+INFO 2025-09-22 15:58:36,367 basehttp 36364 40176 "GET /dashboard/ HTTP/1.1" 200 44332
+INFO 2025-09-22 15:58:36,376 basehttp 36364 40176 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37280
+INFO 2025-09-22 15:58:41,114 basehttp 36364 40176 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 15:58:41,127 basehttp 36364 40176 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 15:59:15,661 basehttp 36364 40176 "GET /dashboard/reviews/ HTTP/1.1" 200 159154
+INFO 2025-09-22 15:59:15,671 basehttp 36364 40176 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:00:04,213 basehttp 36364 40176 "GET /dashboard/reviews/ HTTP/1.1" 200 158939
+INFO 2025-09-22 16:00:04,226 basehttp 36364 40176 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:00:14,169 basehttp 36364 40176 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 16:00:14,180 basehttp 36364 40176 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:00:36,277 basehttp 36364 40176 "GET /dashboard/ HTTP/1.1" 200 44332
+INFO 2025-09-22 16:00:36,290 basehttp 36364 40176 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:00:38,642 basehttp 36364 40176 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 16:00:40,210 basehttp 36364 40176 "GET /dashboard/analytics/ HTTP/1.1" 200 31369
+WARNING 2025-09-22 16:00:40,228 basehttp 36364 40176 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 16:00:48,748 basehttp 36364 6668 "GET /dashboard/analytics/ HTTP/1.1" 200 31369
+WARNING 2025-09-22 16:00:48,759 basehttp 36364 6668 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 16:00:49,750 basehttp 36364 14188 "GET /dashboard/reports/generate/ HTTP/1.1" 200 19686
+INFO 2025-09-22 16:00:51,489 basehttp 36364 14188 "GET /dashboard/upload/ HTTP/1.1" 200 59604
+INFO 2025-09-22 16:00:51,504 basehttp 36364 14188 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:00:54,056 basehttp 36364 14188 "GET /dashboard/ HTTP/1.1" 200 44332
+INFO 2025-09-22 16:03:25,786 basehttp 36364 14188 "GET /dashboard/ HTTP/1.1" 200 44332
+INFO 2025-09-22 16:03:25,798 basehttp 36364 14188 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:03:43,768 basehttp 36364 14188 "GET /dashboard/reviews/ HTTP/1.1" 200 164791
+INFO 2025-09-22 16:04:11,979 basehttp 36364 14188 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 16:04:11,988 basehttp 36364 14188 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:04:37,852 basehttp 36364 35748 "GET /dashboard/ HTTP/1.1" 200 44332
+INFO 2025-09-22 16:05:27,175 autoreload 36364 17696 E:\IRWA\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
+INFO 2025-09-22 16:05:27,806 autoreload 33208 27772 Watching for file changes with StatReloader
+INFO 2025-09-22 16:05:44,747 autoreload 33208 27772 E:\IRWA\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
+INFO 2025-09-22 16:05:45,362 autoreload 33600 26656 Watching for file changes with StatReloader
+INFO 2025-09-22 16:06:14,241 basehttp 33600 15512 "GET /dashboard/ HTTP/1.1" 200 45206
+INFO 2025-09-22 16:06:14,250 basehttp 33600 15512 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:06:52,394 basehttp 33600 15512 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 16:06:58,593 basehttp 33600 15512 "GET /dashboard/ HTTP/1.1" 200 45206
+INFO 2025-09-22 16:07:18,240 basehttp 33600 15512 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 16:07:18,253 basehttp 33600 15512 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:07:24,942 autoreload 33600 26656 E:\IRWA\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
+INFO 2025-09-22 16:07:25,575 autoreload 28368 20176 Watching for file changes with StatReloader
+INFO 2025-09-22 16:12:27,917 autoreload 4444 13924 Watching for file changes with StatReloader
+INFO 2025-09-22 16:12:29,665 basehttp 4444 36212 "GET / HTTP/1.1" 302 0
+INFO 2025-09-22 16:12:29,727 basehttp 4444 36212 "GET /dashboard/ HTTP/1.1" 200 45206
+INFO 2025-09-22 16:12:29,756 basehttp 4444 36212 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:13:14,075 basehttp 4444 36212 "GET /dashboard/ HTTP/1.1" 200 44045
+INFO 2025-09-22 16:13:28,029 basehttp 4444 33976 "GET /dashboard/ HTTP/1.1" 200 44127
+INFO 2025-09-22 16:13:33,009 basehttp 4444 17116 "GET /dashboard/ HTTP/1.1" 200 45206
+INFO 2025-09-22 16:14:30,660 basehttp 4444 17116 "GET /dashboard/ HTTP/1.1" 200 44098
+INFO 2025-09-22 16:14:30,672 basehttp 4444 17116 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:14:47,045 basehttp 4444 17116 "GET /dashboard/ HTTP/1.1" 200 44339
+INFO 2025-09-22 16:17:10,948 basehttp 4444 17116 "GET /dashboard/ HTTP/1.1" 200 44063
+INFO 2025-09-22 16:17:10,957 basehttp 4444 17116 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:20:52,416 basehttp 4444 17116 "GET /dashboard/ HTTP/1.1" 200 44062
+INFO 2025-09-22 16:20:52,426 basehttp 4444 17116 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:21:10,289 basehttp 4444 17116 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+WARNING 2025-09-22 16:27:03,315 log 4444 920 Not Found: /api/reviews/1ef8573d-4d5c-4d85-b6b3-1b0d73fec211/reprocess/
+WARNING 2025-09-22 16:27:03,316 basehttp 4444 920 "POST /api/reviews/1ef8573d-4d5c-4d85-b6b3-1b0d73fec211/reprocess/ HTTP/1.1" 404 6013
+INFO 2025-09-22 16:27:10,938 basehttp 4444 920 "GET /dashboard/analytics/ HTTP/1.1" 200 31369
+WARNING 2025-09-22 16:27:10,957 basehttp 4444 920 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 16:28:04,369 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59613
+INFO 2025-09-22 16:28:04,385 basehttp 4444 24600 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:28:06,406 basehttp 4444 24600 "GET /dashboard/ HTTP/1.1" 200 44063
+INFO 2025-09-22 16:28:10,818 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59613
+INFO 2025-09-22 16:29:05,087 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59613
+INFO 2025-09-22 16:29:08,392 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59613
+INFO 2025-09-22 16:29:10,112 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59613
+INFO 2025-09-22 16:32:14,863 basehttp 4444 24600 "GET /dashboard/ HTTP/1.1" 200 44054
+INFO 2025-09-22 16:32:14,878 basehttp 4444 24600 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:32:16,563 basehttp 4444 24600 "GET /dashboard/ HTTP/1.1" 200 44054
+INFO 2025-09-22 16:32:17,848 basehttp 4444 24600 "GET /dashboard/reviews/ HTTP/1.1" 200 159405
+INFO 2025-09-22 16:32:19,179 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59594
+INFO 2025-09-22 16:32:22,633 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59594
+INFO 2025-09-22 16:34:03,112 basehttp 4444 24600 "GET /dashboard/upload/ HTTP/1.1" 200 59594
+INFO 2025-09-22 16:34:05,406 basehttp 4444 24600 "GET /dashboard/analytics/ HTTP/1.1" 200 31369
+WARNING 2025-09-22 16:34:05,427 basehttp 4444 24600 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 16:34:07,155 basehttp 4444 31528 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 16:34:08,518 basehttp 4444 31528 "GET /dashboard/ HTTP/1.1" 200 44071
+INFO 2025-09-22 16:34:11,373 basehttp 4444 31528 "GET /dashboard/upload/ HTTP/1.1" 200 59621
+INFO 2025-09-22 16:36:36,392 basehttp 4444 13816 "GET /dashboard/ HTTP/1.1" 200 44071
+INFO 2025-09-22 16:36:36,412 basehttp 4444 13816 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 16:36:37,632 basehttp 4444 13816 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 16:36:39,236 basehttp 4444 13816 "GET /dashboard/upload/ HTTP/1.1" 200 59611
+INFO 2025-09-22 16:36:43,966 basehttp 4444 13816 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 16:36:53,847 basehttp 4444 13816 "GET /dashboard/upload/ HTTP/1.1" 200 59611
+INFO 2025-09-22 17:24:05,538 basehttp 4444 12048 "GET /dashboard/ HTTP/1.1" 200 44072
+INFO 2025-09-22 17:24:05,555 basehttp 4444 12048 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 17:25:54,048 basehttp 4444 19640 "GET /dashboard/upload/ HTTP/1.1" 200 59613
+INFO 2025-09-22 17:26:27,903 basehttp 4444 19640 "GET /dashboard/ HTTP/1.1" 200 44073
+INFO 2025-09-22 17:28:01,920 basehttp 4444 19640 "GET /dashboard/upload/ HTTP/1.1" 200 59302
+INFO 2025-09-22 17:28:19,967 basehttp 4444 19640 "GET /dashboard/ HTTP/1.1" 200 44073
+INFO 2025-09-22 17:28:21,333 basehttp 4444 19640 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 17:28:22,605 basehttp 4444 19640 "GET /dashboard/upload/ HTTP/1.1" 200 59302
+INFO 2025-09-22 17:28:32,233 basehttp 4444 19640 "GET /dashboard/ HTTP/1.1" 200 44073
+INFO 2025-09-22 17:29:25,407 autoreload 41964 8836 Watching for file changes with StatReloader
+INFO 2025-09-22 17:29:27,162 basehttp 41964 24984 "GET / HTTP/1.1" 302 0
+INFO 2025-09-22 17:29:27,188 basehttp 41964 24984 "GET /dashboard/ HTTP/1.1" 200 44061
+INFO 2025-09-22 17:29:32,906 basehttp 41964 24984 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 17:29:40,471 basehttp 41964 24984 "GET /dashboard/analytics/ HTTP/1.1" 200 31369
+WARNING 2025-09-22 17:29:40,488 basehttp 41964 24984 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:29:48,287 basehttp 41964 41604 "GET /dashboard/reports/generate/ HTTP/1.1" 200 19686
+INFO 2025-09-22 17:29:49,725 basehttp 41964 41604 "GET /dashboard/analytics/ HTTP/1.1" 200 31369
+WARNING 2025-09-22 17:29:49,740 basehttp 41964 41604 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:29:50,983 basehttp 41964 20696 "GET /dashboard/ HTTP/1.1" 200 44061
+INFO 2025-09-22 17:29:54,711 basehttp 41964 20696 "GET /dashboard/upload/ HTTP/1.1" 200 59290
+INFO 2025-09-22 17:29:59,463 basehttp 41964 20696 "GET /dashboard/analytics/ HTTP/1.1" 200 31369
+WARNING 2025-09-22 17:29:59,481 basehttp 41964 20696 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:30:02,072 basehttp 41964 31324 "GET /dashboard/ HTTP/1.1" 200 44061
+INFO 2025-09-22 17:30:03,732 basehttp 41964 31324 "GET /dashboard/reports/generate/ HTTP/1.1" 200 19686
+INFO 2025-09-22 17:30:06,489 basehttp 41964 31324 "GET /dashboard/ HTTP/1.1" 200 44061
+INFO 2025-09-22 17:30:19,548 basehttp 41964 31324 "GET /dashboard/analytics/ HTTP/1.1" 200 31369
+WARNING 2025-09-22 17:30:19,563 basehttp 41964 31324 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:30:20,986 basehttp 41964 32968 "GET /dashboard/reports/generate/ HTTP/1.1" 200 19686
+INFO 2025-09-22 17:30:23,611 basehttp 41964 32968 "GET /dashboard/ HTTP/1.1" 200 44072
+INFO 2025-09-22 17:33:35,369 basehttp 41964 32968 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 17:33:35,389 basehttp 41964 32968 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 17:33:42,035 basehttp 41964 32968 "GET /dashboard/analytics/ HTTP/1.1" 200 40338
+WARNING 2025-09-22 17:33:42,050 basehttp 41964 32968 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:33:45,838 basehttp 41964 41460 "GET /dashboard/reports/generate/ HTTP/1.1" 200 28635
+INFO 2025-09-22 17:33:56,178 basehttp 41964 41460 "GET /dashboard/upload/ HTTP/1.1" 200 59302
+INFO 2025-09-22 17:33:59,092 basehttp 41964 41460 "GET /dashboard/reports/generate/ HTTP/1.1" 200 28635
+INFO 2025-09-22 17:34:03,046 basehttp 41964 41460 "GET /dashboard/ HTTP/1.1" 200 44073
+INFO 2025-09-22 17:34:06,722 basehttp 41964 41460 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 17:34:09,541 basehttp 41964 41460 "GET /dashboard/analytics/ HTTP/1.1" 200 40338
+WARNING 2025-09-22 17:34:09,557 basehttp 41964 29508 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:34:48,810 basehttp 41964 41460 "GET /dashboard/ HTTP/1.1" 200 44073
+INFO 2025-09-22 17:34:50,516 basehttp 41964 41460 "GET /dashboard/reports/generate/ HTTP/1.1" 200 28635
+INFO 2025-09-22 17:34:59,246 basehttp 41964 41460 "GET /dashboard/upload/ HTTP/1.1" 200 59302
+INFO 2025-09-22 17:35:08,392 basehttp 41964 41460 "GET /dashboard/analytics/ HTTP/1.1" 200 40338
+WARNING 2025-09-22 17:35:08,411 basehttp 41964 41460 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:40:54,107 basehttp 41964 23180 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 17:40:56,034 basehttp 41964 23180 "GET /dashboard/ HTTP/1.1" 200 44074
+INFO 2025-09-22 17:41:01,206 basehttp 41964 23180 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 17:41:04,615 basehttp 41964 23180 "GET /dashboard/analytics/ HTTP/1.1" 200 40338
+WARNING 2025-09-22 17:41:04,630 basehttp 41964 23180 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:41:06,203 basehttp 41964 9224 "GET /dashboard/upload/ HTTP/1.1" 200 59303
+INFO 2025-09-22 17:41:12,872 basehttp 41964 9224 "GET /dashboard/reports/generate/ HTTP/1.1" 200 28635
+INFO 2025-09-22 17:41:18,372 basehttp 41964 9224 "GET /dashboard/analytics/ HTTP/1.1" 200 40338
+WARNING 2025-09-22 17:41:18,387 basehttp 41964 9224 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:41:23,153 basehttp 41964 18828 "GET /dashboard/ HTTP/1.1" 200 44074
+INFO 2025-09-22 17:42:45,355 basehttp 41964 18828 "GET /dashboard/analytics/ HTTP/1.1" 200 40338
+WARNING 2025-09-22 17:42:45,377 basehttp 41964 18828 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:49:30,684 basehttp 41964 34976 "GET /dashboard/analytics/ HTTP/1.1" 200 90338
+INFO 2025-09-22 17:49:30,700 basehttp 41964 34976 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+WARNING 2025-09-22 17:49:30,700 basehttp 41964 7152 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:50:32,947 basehttp 41964 27296 "GET /dashboard/ HTTP/1.1" 200 44073
+INFO 2025-09-22 17:50:54,078 basehttp 41964 27296 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 17:51:01,024 basehttp 41964 27296 "GET /dashboard/upload/ HTTP/1.1" 200 59302
+INFO 2025-09-22 17:51:12,139 basehttp 41964 27296 "GET /dashboard/analytics/ HTTP/1.1" 200 86238
+WARNING 2025-09-22 17:51:12,157 basehttp 41964 27296 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:51:39,586 basehttp 41964 19344 "GET /dashboard/ HTTP/1.1" 200 44073
+INFO 2025-09-22 17:51:49,414 basehttp 41964 19344 "GET /dashboard/reports/generate/ HTTP/1.1" 200 28635
+INFO 2025-09-22 17:51:50,850 basehttp 41964 19344 "GET /dashboard/upload/ HTTP/1.1" 200 59302
+INFO 2025-09-22 17:51:53,019 basehttp 41964 19344 "GET /dashboard/analytics/ HTTP/1.1" 200 86238
+WARNING 2025-09-22 17:51:53,034 basehttp 41964 19344 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:52:01,661 basehttp 41964 32516 "GET /dashboard/ HTTP/1.1" 200 44074
+INFO 2025-09-22 17:52:23,754 basehttp 41964 41664 "GET /dashboard/upload/ HTTP/1.1" 200 59303
+INFO 2025-09-22 17:52:24,836 basehttp 41964 41664 "GET /dashboard/analytics/ HTTP/1.1" 200 86238
+WARNING 2025-09-22 17:52:24,851 basehttp 41964 41664 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:52:36,404 basehttp 41964 22560 "GET /dashboard/ HTTP/1.1" 200 44074
+INFO 2025-09-22 17:52:41,778 basehttp 41964 22560 "GET /dashboard/upload/ HTTP/1.1" 200 59303
+INFO 2025-09-22 17:53:05,901 basehttp 41964 22560 "GET /dashboard/analytics/ HTTP/1.1" 200 84254
+WARNING 2025-09-22 17:53:05,920 basehttp 41964 22560 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:54:51,084 basehttp 41964 34328 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 17:54:52,648 basehttp 41964 34328 "GET /dashboard/analytics/ HTTP/1.1" 200 84254
+WARNING 2025-09-22 17:54:52,665 basehttp 41964 39692 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:57:07,805 basehttp 41964 34328 "GET /dashboard/analytics/ HTTP/1.1" 200 80246
+WARNING 2025-09-22 17:57:07,819 basehttp 41964 34328 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:57:22,146 basehttp 41964 3744 "GET /dashboard/analytics/ HTTP/1.1" 200 80246
+WARNING 2025-09-22 17:57:22,157 basehttp 41964 3744 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:57:30,073 basehttp 41964 11180 "GET /dashboard/analytics/ HTTP/1.1" 200 80246
+WARNING 2025-09-22 17:57:30,089 basehttp 41964 33732 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:57:35,389 basehttp 41964 11180 "GET /dashboard/analytics/ HTTP/1.1" 200 80246
+WARNING 2025-09-22 17:57:35,408 basehttp 41964 11180 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:58:26,552 basehttp 41964 38232 "GET /dashboard/analytics/ HTTP/1.1" 200 80246
+WARNING 2025-09-22 17:58:26,565 basehttp 41964 38232 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 17:59:23,180 basehttp 41964 27492 "GET /dashboard/analytics/ HTTP/1.1" 200 80246
+WARNING 2025-09-22 17:59:23,192 basehttp 41964 27492 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:00:14,876 basehttp 41964 3936 "GET /dashboard/analytics/ HTTP/1.1" 200 78384
+WARNING 2025-09-22 18:00:14,888 basehttp 41964 3936 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:01:26,876 basehttp 41964 6152 "GET /dashboard/reviews/ HTTP/1.1" 200 159422
+INFO 2025-09-22 18:01:26,895 basehttp 41964 6152 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-22 18:01:28,605 basehttp 41964 6152 "GET /dashboard/analytics/ HTTP/1.1" 200 78384
+WARNING 2025-09-22 18:01:28,623 basehttp 41964 6152 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:02:07,622 basehttp 41964 16428 "GET /dashboard/analytics/ HTTP/1.1" 200 78643
+WARNING 2025-09-22 18:02:07,635 basehttp 41964 16428 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:02:46,757 basehttp 41964 32576 "GET /dashboard/analytics/ HTTP/1.1" 200 78524
+WARNING 2025-09-22 18:02:46,771 basehttp 41964 32576 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:03:10,176 basehttp 41964 13208 "GET /dashboard/upload/ HTTP/1.1" 200 59303
+INFO 2025-09-22 18:03:14,995 basehttp 41964 13208 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-22 18:03:18,012 basehttp 41964 13208 "GET /dashboard/ HTTP/1.1" 200 44874
+WARNING 2025-09-22 18:03:20,746 log 41964 13208 Not Found: /api/process-reviews/
+WARNING 2025-09-22 18:03:20,747 basehttp 41964 13208 "POST /api/process-reviews/ HTTP/1.1" 404 5896
+INFO 2025-09-22 18:03:21,679 basehttp 41964 13208 "POST /dashboard/process-reviews/ HTTP/1.1" 200 129
+INFO 2025-09-22 18:03:22,799 basehttp 41964 13208 "GET /dashboard/ HTTP/1.1" 200 44841
+INFO 2025-09-22 18:03:25,313 basehttp 41964 13208 "GET /dashboard/analytics/ HTTP/1.1" 200 78524
+WARNING 2025-09-22 18:03:25,326 basehttp 41964 13208 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:03:28,149 basehttp 41964 39852 "GET /dashboard/reviews/ HTTP/1.1" 200 160597
+INFO 2025-09-22 18:03:34,346 basehttp 41964 39852 "GET /dashboard/reports/generate/ HTTP/1.1" 200 28635
+INFO 2025-09-22 18:03:35,728 basehttp 41964 39852 "GET /dashboard/upload/ HTTP/1.1" 200 61037
+INFO 2025-09-22 18:03:38,018 basehttp 41964 39852 "GET /dashboard/ HTTP/1.1" 200 44841
+INFO 2025-09-22 18:03:42,579 basehttp 41964 39852 "GET /dashboard/reviews/ HTTP/1.1" 200 160597
+INFO 2025-09-22 18:03:47,639 basehttp 41964 39852 "GET /dashboard/reviews/?page=2 HTTP/1.1" 200 66382
+INFO 2025-09-22 18:05:27,696 basehttp 41964 39852 "GET /dashboard/reviews/?page=2 HTTP/1.1" 200 67618
+INFO 2025-09-22 18:05:30,271 basehttp 41964 39852 "GET /dashboard/reviews/?page=1 HTTP/1.1" 200 161833
+INFO 2025-09-22 18:05:34,368 basehttp 41964 39852 "GET /dashboard/reviews/?page=2 HTTP/1.1" 200 67618
+INFO 2025-09-22 18:05:41,772 basehttp 41964 39852 "GET /dashboard/reviews/?page=1 HTTP/1.1" 200 161833
+INFO 2025-09-22 18:06:43,034 basehttp 41964 39852 "GET /dashboard/reviews/?page=1 HTTP/1.1" 200 161760
+INFO 2025-09-22 18:07:29,675 basehttp 41964 39852 "GET /dashboard/reviews/?page=1 HTTP/1.1" 200 161760
+INFO 2025-09-22 18:07:32,521 basehttp 41964 39852 "GET /dashboard/reviews/?page=1 HTTP/1.1" 200 161760
+INFO 2025-09-22 18:07:35,200 basehttp 41964 39852 "GET /dashboard/reviews/?page=2 HTTP/1.1" 200 67545
+INFO 2025-09-22 18:07:39,268 basehttp 41964 39852 "GET /dashboard/reviews/?page=1 HTTP/1.1" 200 161760
+INFO 2025-09-22 18:07:45,929 basehttp 41964 39852 "GET /dashboard/analytics/ HTTP/1.1" 200 78524
+WARNING 2025-09-22 18:07:45,943 basehttp 41964 39852 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:07:49,372 basehttp 41964 23960 "GET /dashboard/ HTTP/1.1" 200 44841
+INFO 2025-09-22 18:07:56,009 basehttp 41964 23960 "GET /dashboard/reviews/ HTTP/1.1" 200 161760
+INFO 2025-09-22 18:08:00,893 basehttp 41964 23960 "GET /dashboard/analytics/ HTTP/1.1" 200 78524
+WARNING 2025-09-22 18:08:00,907 basehttp 41964 23960 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:08:07,951 basehttp 41964 13376 "GET /dashboard/analytics/ HTTP/1.1" 200 78524
+WARNING 2025-09-22 18:08:07,962 basehttp 41964 13376 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:08:14,407 basehttp 41964 21420 "GET /dashboard/analytics/ HTTP/1.1" 200 78524
+WARNING 2025-09-22 18:08:14,418 basehttp 41964 21420 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:08:21,720 basehttp 41964 29336 "GET /dashboard/analytics/ HTTP/1.1" 200 78524
+WARNING 2025-09-22 18:08:21,731 basehttp 41964 29336 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:09:53,844 basehttp 41964 24148 "GET /dashboard/analytics/ HTTP/1.1" 200 76788
+WARNING 2025-09-22 18:09:53,856 basehttp 41964 24148 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:09:58,841 basehttp 41964 15100 "GET /dashboard/analytics/ HTTP/1.1" 200 76788
+WARNING 2025-09-22 18:09:58,852 basehttp 41964 40656 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+WARNING 2025-09-22 18:10:16,092 log 41964 15100 Not Found: /api/process-reviews/
+WARNING 2025-09-22 18:10:16,093 basehttp 41964 15100 "POST /api/process-reviews/ HTTP/1.1" 404 5896
+INFO 2025-09-22 18:10:25,458 basehttp 41964 15100 "GET /dashboard/ HTTP/1.1" 200 44841
+INFO 2025-09-22 18:10:27,477 basehttp 41964 15100 "GET /dashboard/reviews/ HTTP/1.1" 200 161760
+INFO 2025-09-22 18:10:31,261 basehttp 41964 15100 "GET /dashboard/analytics/ HTTP/1.1" 200 76788
+WARNING 2025-09-22 18:10:31,274 basehttp 41964 15100 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:11:00,199 basehttp 41964 10756 "GET /dashboard/ HTTP/1.1" 200 44841
+INFO 2025-09-22 18:11:03,212 basehttp 41964 10756 "GET /dashboard/reviews/ HTTP/1.1" 200 161760
+INFO 2025-09-22 18:11:08,959 basehttp 41964 10756 "GET /dashboard/analytics/ HTTP/1.1" 200 76788
+WARNING 2025-09-22 18:11:08,971 basehttp 41964 10756 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:11:14,457 basehttp 41964 31220 "GET /dashboard/upload/ HTTP/1.1" 200 61037
+INFO 2025-09-22 18:11:18,551 basehttp 41964 31220 "GET /dashboard/reports/generate/ HTTP/1.1" 200 28635
+INFO 2025-09-22 18:11:32,536 basehttp 41964 31220 "GET /dashboard/analytics/ HTTP/1.1" 200 76788
+WARNING 2025-09-22 18:11:32,546 basehttp 41964 31220 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-22 18:12:09,174 basehttp 41964 25148 "GET /dashboard/ HTTP/1.1" 200 44841
+INFO 2025-09-22 18:12:13,275 basehttp 41964 25148 "GET /dashboard/reviews/ HTTP/1.1" 200 161760
+INFO 2025-09-22 18:12:27,761 basehttp 41964 25148 "GET /dashboard/upload/ HTTP/1.1" 200 61037
+INFO 2025-09-22 18:13:40,368 basehttp 41964 25148 "GET /dashboard/ HTTP/1.1" 200 44842
+INFO 2025-09-22 18:14:33,258 basehttp 41964 25148 "GET /dashboard/analytics/ HTTP/1.1" 200 76788
+INFO 2025-09-22 18:14:33,269 basehttp 41964 25148 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+WARNING 2025-09-22 18:14:33,273 basehttp 41964 25148 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-23 22:51:07,493 autoreload 27840 26984 Watching for file changes with StatReloader
+INFO 2025-09-23 22:51:10,937 basehttp 27840 1924 "GET / HTTP/1.1" 302 0
+INFO 2025-09-23 22:51:11,023 basehttp 27840 1924 "GET /dashboard/ HTTP/1.1" 200 44825
+INFO 2025-09-23 22:51:11,232 basehttp 27840 1924 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37280
+INFO 2025-09-23 22:54:04,229 basehttp 27840 1924 "GET /dashboard/ HTTP/1.1" 200 44825
+INFO 2025-09-23 22:54:04,276 basehttp 27840 1924 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-23 22:54:05,453 basehttp 27840 1924 "GET /dashboard/ HTTP/1.1" 200 44825
+INFO 2025-09-24 00:47:56,544 autoreload 16504 2516 Watching for file changes with StatReloader
+INFO 2025-09-24 00:48:03,363 basehttp 16504 14584 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 00:48:03,529 basehttp 16504 14584 "GET /dashboard/ HTTP/1.1" 200 44825
+INFO 2025-09-24 00:48:03,657 basehttp 16504 14584 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-24 22:00:38,220 autoreload 15768 5620 Watching for file changes with StatReloader
+INFO 2025-09-24 22:00:41,700 basehttp 15768 30968 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:00:41,742 basehttp 15768 30968 "GET /dashboard/ HTTP/1.1" 200 42811
+INFO 2025-09-24 22:00:41,823 basehttp 15768 30968 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 200 12660
+INFO 2025-09-24 22:00:47,526 basehttp 15768 30968 "GET /dashboard/reviews/ HTTP/1.1" 200 161680
+INFO 2025-09-24 22:00:47,540 basehttp 15768 30968 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-09-24 22:00:50,240 basehttp 15768 30968 "GET /dashboard/ HTTP/1.1" 200 42811
+INFO 2025-09-24 22:00:54,657 basehttp 15768 30968 "GET /dashboard/upload/ HTTP/1.1" 200 60986
+INFO 2025-09-24 22:00:54,671 basehttp 15768 30968 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-09-24 22:01:00,366 basehttp 15768 30968 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 22:01:02,700 basehttp 15768 30968 "GET /dashboard/ HTTP/1.1" 200 42798
+INFO 2025-09-24 22:01:02,709 basehttp 15768 30968 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+ERROR 2025-09-24 22:01:16,237 views 15768 30968 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:01:16,238 log 15768 30968 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:01:16,239 basehttp 15768 30968 "POST /api/v1/process/ HTTP/1.1" 500 153
+WARNING 2025-09-24 22:01:21,313 log 15768 30968 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:01:21,313 basehttp 15768 30968 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:04:47,048 autoreload 13016 41700 Watching for file changes with StatReloader
+INFO 2025-09-24 22:04:48,764 basehttp 13016 12660 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:04:48,790 basehttp 13016 12660 "GET /dashboard/ HTTP/1.1" 200 42797
+INFO 2025-09-24 22:04:48,826 basehttp 13016 12660 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+ERROR 2025-09-24 22:04:59,795 views 13016 12660 AI agent processing failed: '(' was never closed (agent.py, line 60)
+ERROR 2025-09-24 22:04:59,796 log 13016 12660 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:04:59,797 basehttp 13016 12660 "POST /api/v1/process/ HTTP/1.1" 500 158
+WARNING 2025-09-24 22:05:01,975 log 13016 12660 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:05:01,976 basehttp 13016 12660 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:08:59,566 autoreload 41928 26400 Watching for file changes with StatReloader
+INFO 2025-09-24 22:09:11,041 autoreload 8720 888 Watching for file changes with StatReloader
+INFO 2025-09-24 22:09:13,033 basehttp 8720 22156 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:09:13,063 basehttp 8720 22156 "GET /dashboard/ HTTP/1.1" 200 42809
+INFO 2025-09-24 22:09:13,088 basehttp 8720 22156 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+ERROR 2025-09-24 22:09:22,259 views 8720 22156 AI agent processing failed: cannot import name 'ReviewScorerAgent' from 'agents.scorer.agent' (E:\IRWA\multiagent-review-sentiment-ai\agents\scorer\agent.py)
+ERROR 2025-09-24 22:09:22,259 log 8720 22156 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:09:22,260 basehttp 8720 22156 "POST /api/v1/process/ HTTP/1.1" 500 252
+WARNING 2025-09-24 22:09:24,704 log 8720 22156 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:09:24,704 basehttp 8720 22156 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:11:09,502 basehttp 8720 22156 "GET /dashboard/ HTTP/1.1" 200 42798
+INFO 2025-09-24 22:11:09,521 basehttp 8720 22156 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+WARNING 2025-09-24 22:11:09,525 log 8720 22156 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:11:09,525 basehttp 8720 22156 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+ERROR 2025-09-24 22:11:11,641 views 8720 22156 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:11:11,641 log 8720 22156 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:11:11,642 basehttp 8720 22156 "POST /api/v1/process/ HTTP/1.1" 500 153
+ERROR 2025-09-24 22:11:13,003 views 8720 22156 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:11:13,004 log 8720 22156 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:11:13,005 basehttp 8720 22156 "POST /api/v1/process/ HTTP/1.1" 500 153
+INFO 2025-09-24 22:11:18,696 autoreload 16456 11308 Watching for file changes with StatReloader
+INFO 2025-09-24 22:11:20,851 basehttp 16456 22148 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:11:20,879 basehttp 16456 22148 "GET /dashboard/ HTTP/1.1" 200 42798
+ERROR 2025-09-24 22:11:30,345 views 16456 22148 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:11:30,346 log 16456 22148 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:11:30,347 basehttp 16456 22148 "POST /api/v1/process/ HTTP/1.1" 500 153
+INFO 2025-09-24 22:12:40,194 autoreload 16456 11308 E:\IRWA\multiagent-review-sentiment-ai\agents\scorer\agent.py changed, reloading.
+INFO 2025-09-24 22:12:41,324 autoreload 23544 33656 Watching for file changes with StatReloader
+INFO 2025-09-24 22:18:21,164 basehttp 23544 19304 "GET /dashboard/ HTTP/1.1" 200 42809
+INFO 2025-09-24 22:18:21,175 basehttp 23544 19304 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-09-24 22:18:25,411 autoreload 11424 41844 Watching for file changes with StatReloader
+INFO 2025-09-24 22:18:27,394 basehttp 11424 35516 "GET /dashboard/ HTTP/1.1" 200 42809
+ERROR 2025-09-24 22:18:34,698 views 11424 35516 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:18:34,699 log 11424 35516 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:18:34,700 basehttp 11424 35516 "POST /api/v1/process/ HTTP/1.1" 500 153
+WARNING 2025-09-24 22:18:37,422 log 11424 35516 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:18:37,423 basehttp 11424 35516 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:21:55,908 autoreload 11424 41844 E:\IRWA\multiagent-review-sentiment-ai\agents\scorer\agent.py changed, reloading.
+INFO 2025-09-24 22:21:57,133 autoreload 16852 28664 Watching for file changes with StatReloader
+INFO 2025-09-24 22:22:11,814 autoreload 16372 34188 Watching for file changes with StatReloader
+INFO 2025-09-24 22:22:13,612 basehttp 16372 40680 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:22:13,641 basehttp 16372 40680 "GET /dashboard/ HTTP/1.1" 200 42811
+INFO 2025-09-24 22:22:13,671 basehttp 16372 40680 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+ERROR 2025-09-24 22:22:22,994 views 16372 40680 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:22:22,995 log 16372 40680 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:22:22,996 basehttp 16372 40680 "POST /api/v1/process/ HTTP/1.1" 500 153
+WARNING 2025-09-24 22:22:26,170 log 16372 40680 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:22:26,170 basehttp 16372 40680 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:25:40,614 basehttp 16372 40680 "GET /dashboard/ HTTP/1.1" 200 42811
+INFO 2025-09-24 22:25:40,629 basehttp 16372 40680 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+WARNING 2025-09-24 22:25:40,635 log 16372 40680 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:25:40,635 basehttp 16372 40680 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+ERROR 2025-09-24 22:25:41,771 views 16372 40680 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:25:41,772 log 16372 40680 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:25:41,773 basehttp 16372 40680 "POST /api/v1/process/ HTTP/1.1" 500 153
+ERROR 2025-09-24 22:25:43,081 views 16372 40680 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:25:43,081 log 16372 40680 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:25:43,082 basehttp 16372 40680 "POST /api/v1/process/ HTTP/1.1" 500 153
+ERROR 2025-09-24 22:25:43,745 views 16372 40680 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:25:43,746 log 16372 40680 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:25:43,747 basehttp 16372 40680 "POST /api/v1/process/ HTTP/1.1" 500 153
+INFO 2025-09-24 22:26:24,524 autoreload 16372 34188 E:\IRWA\multiagent-review-sentiment-ai\agents\scorer\agent.py changed, reloading.
+INFO 2025-09-24 22:26:25,634 autoreload 4232 23176 Watching for file changes with StatReloader
+INFO 2025-09-24 22:41:27,679 basehttp 4232 13532 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:41:27,704 basehttp 4232 13532 "GET /dashboard/ HTTP/1.1" 200 42812
+INFO 2025-09-24 22:41:27,799 basehttp 4232 37668 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 200 12660
+INFO 2025-09-24 22:41:27,800 basehttp 4232 13532 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37280
+WARNING 2025-09-24 22:41:28,614 log 4232 13532 Not Found: /favicon.ico
+WARNING 2025-09-24 22:41:28,615 basehttp 4232 13532 "GET /favicon.ico HTTP/1.1" 404 3322
+ERROR 2025-09-24 22:41:37,489 views 4232 13532 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:41:37,490 log 4232 13532 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:41:37,490 basehttp 4232 13532 "POST /api/v1/process/ HTTP/1.1" 500 153
+INFO 2025-09-24 22:47:54,709 basehttp 4232 41456 "GET /dashboard/ HTTP/1.1" 200 42812
+INFO 2025-09-24 22:47:54,728 basehttp 4232 41456 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+WARNING 2025-09-24 22:47:54,737 log 4232 41456 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:47:54,738 basehttp 4232 41456 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+ERROR 2025-09-24 22:47:56,540 views 4232 41456 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:47:56,541 log 4232 41456 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:47:56,542 basehttp 4232 41456 "POST /api/v1/process/ HTTP/1.1" 500 153
+INFO 2025-09-24 22:48:02,712 autoreload 26604 39312 Watching for file changes with StatReloader
+INFO 2025-09-24 22:48:04,857 basehttp 26604 10536 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:48:04,887 basehttp 26604 10536 "GET /dashboard/ HTTP/1.1" 200 42812
+ERROR 2025-09-24 22:48:14,009 views 26604 10536 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:48:14,010 log 26604 10536 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:48:14,011 basehttp 26604 10536 "POST /api/v1/process/ HTTP/1.1" 500 153
+WARNING 2025-09-24 22:48:16,945 log 26604 10536 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:48:16,946 basehttp 26604 10536 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:48:25,115 autoreload 20612 25208 Watching for file changes with StatReloader
+INFO 2025-09-24 22:48:28,222 basehttp 26604 10536 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:48:28,236 basehttp 26604 10536 "GET /dashboard/ HTTP/1.1" 200 42812
+ERROR 2025-09-24 22:48:30,112 views 26604 10536 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:48:30,112 log 26604 10536 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:48:30,112 basehttp 26604 10536 "POST /api/v1/process/ HTTP/1.1" 500 153
+ERROR 2025-09-24 22:48:54,348 views 26604 40880 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:48:54,349 log 26604 40880 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:48:54,349 basehttp 26604 40880 "POST /api/v1/process/ HTTP/1.1" 500 153
+INFO 2025-09-24 22:54:06,015 orchestrator 26604 12692 [OK] Classifier Agent initialized
+INFO 2025-09-24 22:54:06,016 orchestrator 26604 12692 [OK] Scorer Agent initialized
+INFO 2025-09-24 22:54:06,018 orchestrator 26604 12692 [OK] Summarizer Agent initialized
+INFO 2025-09-24 22:54:06,018 orchestrator 26604 12692 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 22:54:06,019 views 26604 12692 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 22:54:06,023 orchestrator 26604 12692 [STEP 1] Classifying sentiment for review 2be50478-2d88-46af-835a-adbc1958fbde
+INFO 2025-09-24 22:54:06,023 orchestrator 26604 12692 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:54:06,026 orchestrator 26604 12692 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:54:06,028 orchestrator 26604 12692 [STEP 1] Classifying sentiment for review 31eebcf8-2261-4ef6-a8bf-b3abd4628203
+INFO 2025-09-24 22:54:06,029 orchestrator 26604 12692 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:54:06,029 orchestrator 26604 12692 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:54:06,033 orchestrator 26604 12692 [STEP 1] Classifying sentiment for review 51b2362e-dc00-4841-9579-760dabc90bf8
+INFO 2025-09-24 22:54:06,034 orchestrator 26604 12692 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 22:54:06,034 orchestrator 26604 12692 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:54:06,037 orchestrator 26604 12692 [STEP 1] Classifying sentiment for review e91f55b7-83fd-4bf0-9d5d-b4c7dcd3904f
+INFO 2025-09-24 22:54:06,037 orchestrator 26604 12692 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:54:06,038 orchestrator 26604 12692 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:54:06,040 orchestrator 26604 12692 [STEP 1] Classifying sentiment for review 5175b2b9-523d-4544-b75c-194ff9e9a9d3
+INFO 2025-09-24 22:54:06,041 orchestrator 26604 12692 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:54:06,042 orchestrator 26604 12692 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:54:06,047 basehttp 26604 12692 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 22:54:45,060 autoreload 15112 25084 Watching for file changes with StatReloader
+INFO 2025-09-24 22:54:46,769 basehttp 26604 7460 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:54:46,802 basehttp 26604 7460 "GET /dashboard/ HTTP/1.1" 200 42815
+INFO 2025-09-24 22:54:46,898 basehttp 26604 7460 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37280
+INFO 2025-09-24 22:54:47,197 basehttp 26604 7460 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 200 12660
+WARNING 2025-09-24 22:54:47,728 log 26604 7460 Not Found: /favicon.ico
+WARNING 2025-09-24 22:54:47,729 basehttp 26604 7460 "GET /favicon.ico HTTP/1.1" 404 3322
+INFO 2025-09-24 22:54:50,681 basehttp 26604 7460 "GET /dashboard/upload/ HTTP/1.1" 200 60990
+INFO 2025-09-24 22:54:55,807 basehttp 26604 5424 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 22:54:59,779 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42801
+INFO 2025-09-24 22:55:02,577 orchestrator 26604 5424 [OK] Classifier Agent initialized
+INFO 2025-09-24 22:55:02,579 orchestrator 26604 5424 [OK] Scorer Agent initialized
+INFO 2025-09-24 22:55:02,581 orchestrator 26604 5424 [OK] Summarizer Agent initialized
+INFO 2025-09-24 22:55:02,582 orchestrator 26604 5424 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 22:55:02,582 views 26604 5424 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 22:55:02,587 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 544af0eb-89ec-4acd-9b81-ad5bc477f16d
+INFO 2025-09-24 22:55:02,588 orchestrator 26604 5424 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:55:02,589 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:02,593 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 70e3d94b-3cf4-4fec-b40c-ddc52f1c5363
+INFO 2025-09-24 22:55:02,594 orchestrator 26604 5424 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:55:02,594 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:02,599 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 192cf029-65ce-4207-beaa-749d654eb1b1
+INFO 2025-09-24 22:55:02,600 orchestrator 26604 5424 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 22:55:02,601 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:02,605 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 52c39db2-1712-4b0f-97a9-a2d604bf41ef
+INFO 2025-09-24 22:55:02,606 orchestrator 26604 5424 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:55:02,607 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:02,610 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review aee2938e-b79a-4037-b563-1f48e85b2541
+INFO 2025-09-24 22:55:02,611 orchestrator 26604 5424 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:55:02,612 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:02,620 basehttp 26604 5424 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 22:55:04,642 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42805
+INFO 2025-09-24 22:55:09,109 basehttp 26604 5424 "GET /dashboard/upload/ HTTP/1.1" 200 60981
+INFO 2025-09-24 22:55:15,421 basehttp 26604 5424 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 22:55:17,331 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42791
+INFO 2025-09-24 22:55:21,365 basehttp 26604 5424 "GET /dashboard/upload/ HTTP/1.1" 200 60970
+INFO 2025-09-24 22:55:23,086 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42791
+INFO 2025-09-24 22:55:24,575 orchestrator 26604 5424 [OK] Classifier Agent initialized
+INFO 2025-09-24 22:55:24,577 orchestrator 26604 5424 [OK] Scorer Agent initialized
+INFO 2025-09-24 22:55:24,580 orchestrator 26604 5424 [OK] Summarizer Agent initialized
+INFO 2025-09-24 22:55:24,580 orchestrator 26604 5424 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 22:55:24,581 views 26604 5424 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 22:55:24,586 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review ee96c380-c711-4855-b45a-7fa2d5f224df
+INFO 2025-09-24 22:55:24,586 orchestrator 26604 5424 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:55:24,587 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:24,591 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 1074de97-2525-4469-b802-2ee6970a6063
+INFO 2025-09-24 22:55:24,592 orchestrator 26604 5424 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:55:24,593 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:24,597 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 1428907b-18f6-470a-b63e-3f26ce644f72
+INFO 2025-09-24 22:55:24,598 orchestrator 26604 5424 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 22:55:24,598 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:24,602 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review f03770d3-50bc-4e9a-bbc8-5a7d3cb5da11
+INFO 2025-09-24 22:55:24,603 orchestrator 26604 5424 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:55:24,604 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:24,609 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 575e041d-fa38-426b-b1b0-91ede21b99ee
+INFO 2025-09-24 22:55:24,610 orchestrator 26604 5424 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:55:24,610 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:24,619 basehttp 26604 5424 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 22:55:26,650 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42794
+WARNING 2025-09-24 22:55:27,273 log 26604 5424 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:55:27,274 basehttp 26604 5424 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:55:32,792 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42794
+INFO 2025-09-24 22:55:34,101 basehttp 26604 5424 "GET /dashboard/reviews/ HTTP/1.1" 200 161933
+INFO 2025-09-24 22:55:37,105 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42794
+INFO 2025-09-24 22:55:41,432 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42794
+INFO 2025-09-24 22:55:44,138 basehttp 26604 5424 "GET /dashboard/reviews/ HTTP/1.1" 200 161933
+INFO 2025-09-24 22:55:49,210 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42794
+INFO 2025-09-24 22:55:50,865 basehttp 26604 5424 "GET /dashboard/reviews/ HTTP/1.1" 200 161933
+INFO 2025-09-24 22:55:52,628 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42794
+INFO 2025-09-24 22:55:53,778 basehttp 26604 5424 "GET /dashboard/upload/ HTTP/1.1" 200 60970
+INFO 2025-09-24 22:55:58,368 basehttp 26604 5424 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 22:56:00,383 basehttp 26604 5424 "GET /dashboard/reviews/ HTTP/1.1" 200 160036
+INFO 2025-09-24 22:56:02,806 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42779
+INFO 2025-09-24 22:56:05,358 orchestrator 26604 5424 [OK] Classifier Agent initialized
+INFO 2025-09-24 22:56:05,361 orchestrator 26604 5424 [OK] Scorer Agent initialized
+INFO 2025-09-24 22:56:05,364 orchestrator 26604 5424 [OK] Summarizer Agent initialized
+INFO 2025-09-24 22:56:05,365 orchestrator 26604 5424 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 22:56:05,365 views 26604 5424 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 22:56:05,370 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review a171dcea-4387-4e7f-ac15-18e4c14b023e
+INFO 2025-09-24 22:56:05,371 orchestrator 26604 5424 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:56:05,371 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:56:05,375 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 4cc50fe2-9a9d-4269-a84d-01fcc49f8b48
+INFO 2025-09-24 22:56:05,376 orchestrator 26604 5424 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:56:05,377 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:56:05,381 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review a0f67227-c5f9-4eed-ab47-d72d182b825b
+INFO 2025-09-24 22:56:05,382 orchestrator 26604 5424 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 22:56:05,383 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:56:05,386 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 6aafaa49-d6b7-440d-aacb-1d7cb3fa16b8
+INFO 2025-09-24 22:56:05,387 orchestrator 26604 5424 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:56:05,388 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:56:05,391 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 5d1b3819-eca1-4c8c-888f-b4a74d4f8afc
+INFO 2025-09-24 22:56:05,392 orchestrator 26604 5424 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:56:05,393 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:56:05,400 basehttp 26604 5424 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 22:56:07,421 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42782
+INFO 2025-09-24 22:56:10,331 basehttp 26604 5424 "GET /dashboard/reviews/ HTTP/1.1" 200 161933
+INFO 2025-09-24 22:56:14,288 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42782
+INFO 2025-09-24 22:56:18,053 basehttp 26604 5424 "GET /dashboard/reviews/ HTTP/1.1" 200 161933
+INFO 2025-09-24 22:56:44,688 autoreload 26604 39312 E:\IRWA\multiagent-review-sentiment-ai\agents\scorer\agent.py changed, reloading.
+INFO 2025-09-24 22:56:46,145 autoreload 33648 12748 Watching for file changes with StatReloader
+INFO 2025-09-24 22:57:10,322 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42781
+INFO 2025-09-24 22:57:24,479 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42782
+INFO 2025-09-24 22:57:40,646 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42782
+WARNING 2025-09-24 22:57:42,160 log 15112 7120 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:57:42,161 basehttp 15112 7120 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:57:43,465 basehttp 15112 7120 "GET /dashboard/upload/ HTTP/1.1" 200 60958
+WARNING 2025-09-24 22:57:43,484 log 15112 7120 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:57:43,485 basehttp 15112 7120 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:57:48,483 basehttp 15112 7120 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 22:57:58,143 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42768
+WARNING 2025-09-24 22:57:58,161 log 15112 7120 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:57:58,162 basehttp 15112 7120 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:58:12,550 orchestrator 15112 7120 [OK] Classifier Agent initialized
+INFO 2025-09-24 22:58:12,552 orchestrator 15112 7120 [OK] Scorer Agent initialized
+INFO 2025-09-24 22:58:12,557 orchestrator 15112 7120 [OK] Summarizer Agent initialized
+INFO 2025-09-24 22:58:12,557 orchestrator 15112 7120 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 22:58:12,558 views 15112 7120 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 22:58:12,564 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review db37bd2b-7a41-4da1-aea2-204a6b3dc271
+INFO 2025-09-24 22:58:12,565 orchestrator 15112 7120 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:58:12,566 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:12,570 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review de75bdec-4e66-4242-9b7b-b0b5ba345edd
+INFO 2025-09-24 22:58:12,571 orchestrator 15112 7120 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:58:12,572 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:12,576 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review 6f0e0e16-33a2-4d24-b4c4-8df177373d11
+INFO 2025-09-24 22:58:12,577 orchestrator 15112 7120 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 22:58:12,578 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:12,582 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review 296e2230-a473-4312-95db-fe3750ad3930
+INFO 2025-09-24 22:58:12,583 orchestrator 15112 7120 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:58:12,584 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:12,588 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review 33b179af-49de-4e77-9f4f-8f7fa42a0148
+INFO 2025-09-24 22:58:12,589 orchestrator 15112 7120 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:58:12,590 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:12,599 basehttp 15112 7120 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 22:58:14,637 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42772
+WARNING 2025-09-24 22:58:14,653 log 15112 7120 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:58:14,653 basehttp 15112 7120 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:58:36,107 autoreload 28944 14752 Watching for file changes with StatReloader
+INFO 2025-09-24 22:58:39,117 basehttp 15112 7120 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:58:39,129 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42772
+INFO 2025-09-24 22:58:43,028 basehttp 15112 7120 "GET /dashboard/upload/ HTTP/1.1" 200 60948
+INFO 2025-09-24 22:58:47,832 basehttp 15112 7120 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 22:58:49,194 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42767
+INFO 2025-09-24 22:58:50,552 basehttp 15112 7120 "GET /dashboard/reviews/ HTTP/1.1" 200 160078
+INFO 2025-09-24 22:58:53,075 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42767
+INFO 2025-09-24 22:58:55,951 orchestrator 15112 7120 [OK] Classifier Agent initialized
+INFO 2025-09-24 22:58:55,954 orchestrator 15112 7120 [OK] Scorer Agent initialized
+INFO 2025-09-24 22:58:55,957 orchestrator 15112 7120 [OK] Summarizer Agent initialized
+INFO 2025-09-24 22:58:55,958 orchestrator 15112 7120 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 22:58:55,959 views 15112 7120 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 22:58:55,964 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review 94f08349-5e98-4d40-a98a-b560fa86dbb8
+INFO 2025-09-24 22:58:55,965 orchestrator 15112 7120 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:58:55,966 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:55,970 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review ab11b58c-8633-411c-b54f-6b3d27b13f64
+INFO 2025-09-24 22:58:55,970 orchestrator 15112 7120 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:58:55,971 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:55,975 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review c9841884-9987-4361-8e7c-07f8ca943d0f
+INFO 2025-09-24 22:58:55,976 orchestrator 15112 7120 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 22:58:55,978 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:55,981 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review d4ed2477-a847-4f9e-b8cd-3e955cac491c
+INFO 2025-09-24 22:58:55,982 orchestrator 15112 7120 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:58:55,982 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:55,986 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review 6ccb8def-5dd8-438b-be51-d010f76b6425
+INFO 2025-09-24 22:58:55,987 orchestrator 15112 7120 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:58:55,988 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:55,997 basehttp 15112 7120 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 22:58:58,024 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42770
+INFO 2025-09-24 22:59:00,857 basehttp 15112 7120 "GET /dashboard/reviews/ HTTP/1.1" 200 161975
+INFO 2025-09-24 23:18:24,051 autoreload 29148 17652 Watching for file changes with StatReloader
+INFO 2025-09-24 23:18:36,685 basehttp 29148 22372 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 23:18:36,778 basehttp 29148 22372 "GET /dashboard/ HTTP/1.1" 200 42776
+INFO 2025-09-24 23:18:36,863 basehttp 29148 22372 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37280
+INFO 2025-09-24 23:18:36,864 basehttp 29148 24712 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 200 12660
+INFO 2025-09-24 23:18:41,034 basehttp 29148 24712 "GET /dashboard/ HTTP/1.1" 200 42776
+INFO 2025-09-24 23:18:43,108 basehttp 29148 24712 "GET /dashboard/reviews/ HTTP/1.1" 200 161975
+INFO 2025-09-24 23:18:45,726 basehttp 29148 24712 "GET /dashboard/upload/ HTTP/1.1" 200 60952
+INFO 2025-09-24 23:18:49,904 basehttp 29148 24712 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 23:18:51,364 basehttp 29148 24712 "GET /dashboard/ HTTP/1.1" 200 42772
+INFO 2025-09-24 23:19:36,677 orchestrator 29148 24712 [OK] Classifier Agent initialized
+INFO 2025-09-24 23:19:36,680 orchestrator 29148 24712 [OK] Scorer Agent initialized
+INFO 2025-09-24 23:19:36,683 orchestrator 29148 24712 [OK] Summarizer Agent initialized
+INFO 2025-09-24 23:19:36,683 orchestrator 29148 24712 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 23:19:36,684 views 29148 24712 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 23:19:36,690 orchestrator 29148 24712 [STEP 1] Classifying sentiment for review 581a0c7b-d754-4cc1-9bdb-1644b55bc8f9
+INFO 2025-09-24 23:19:36,691 orchestrator 29148 24712 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 23:19:36,692 orchestrator 29148 24712 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 23:19:36,696 orchestrator 29148 24712 [STEP 1] Classifying sentiment for review 16d4c987-92ec-4643-9c3f-720767cf1e7b
+INFO 2025-09-24 23:19:36,697 orchestrator 29148 24712 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 23:19:36,698 orchestrator 29148 24712 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 23:19:36,702 orchestrator 29148 24712 [STEP 1] Classifying sentiment for review e9b64135-314b-430f-946a-87fb08050262
+INFO 2025-09-24 23:19:36,703 orchestrator 29148 24712 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 23:19:36,703 orchestrator 29148 24712 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 23:19:36,707 orchestrator 29148 24712 [STEP 1] Classifying sentiment for review 41ef6baa-9435-48b4-a745-7c13d106c54d
+INFO 2025-09-24 23:19:36,708 orchestrator 29148 24712 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 23:19:36,709 orchestrator 29148 24712 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 23:19:36,712 orchestrator 29148 24712 [STEP 1] Classifying sentiment for review a1ef0af5-3734-4a65-811b-3a386f140ebc
+INFO 2025-09-24 23:19:36,713 orchestrator 29148 24712 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 23:19:36,713 orchestrator 29148 24712 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 23:19:36,720 basehttp 29148 24712 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 23:19:38,748 basehttp 29148 24712 "GET /dashboard/ HTTP/1.1" 200 42775
+INFO 2025-09-24 23:19:38,762 basehttp 29148 24712 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-24 23:19:38,762 basehttp 29148 22372 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-09-24 23:19:43,919 basehttp 29148 22372 "GET /dashboard/reviews/ HTTP/1.1" 200 161975
