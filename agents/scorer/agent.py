@@ -241,13 +241,14 @@ class ReviewScorerAgent:
         return results
 
 
-# =============================================================================
+
 # DEMONSTRATION AND USAGE EXAMPLE
-# =============================================================================
+
+
 
 def demo_scorer_agent():
     
-    print("=== CrewAI Sentiment Scorer Demo ===")
+    print("=== Sentiment Scorer Demo ===")
     print("(Using HuggingFace BERT model - fallback to enhanced rules)")
     
     # Step 1: Create agent
