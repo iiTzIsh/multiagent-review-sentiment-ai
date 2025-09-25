@@ -404,13 +404,348 @@ INFO 2025-09-24 00:47:56,544 autoreload 16504 2516 Watching for file changes wit
 INFO 2025-09-24 00:48:03,363 basehttp 16504 14584 "GET / HTTP/1.1" 302 0
 INFO 2025-09-24 00:48:03,529 basehttp 16504 14584 "GET /dashboard/ HTTP/1.1" 200 44825
 INFO 2025-09-24 00:48:03,657 basehttp 16504 14584 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
-INFO 2025-09-24 14:18:13,352 autoreload 10808 34236 Watching for file changes with StatReloader
-INFO 2025-09-24 14:18:24,659 basehttp 10808 1912 "GET / HTTP/1.1" 302 0
-INFO 2025-09-24 14:18:24,957 basehttp 10808 1912 "GET /dashboard/ HTTP/1.1" 200 44828
-INFO 2025-09-24 14:18:25,076 basehttp 10808 1912 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
-INFO 2025-09-24 14:18:43,378 basehttp 10808 1912 "GET /dashboard/reviews/ HTTP/1.1" 200 161760
-INFO 2025-09-24 14:18:45,013 basehttp 10808 1912 "GET /dashboard/analytics/ HTTP/1.1" 200 76788
-WARNING 2025-09-24 14:18:45,125 basehttp 10808 1912 "GET /static/css/analytics.css HTTP/1.1" 404 1978
-INFO 2025-09-24 14:18:46,613 basehttp 10808 30508 "GET /dashboard/upload/ HTTP/1.1" 200 61024
-INFO 2025-09-24 14:18:51,825 basehttp 10808 30508 "GET /dashboard/reports/generate/ HTTP/1.1" 200 28635
-INFO 2025-09-24 14:19:00,673 basehttp 10808 30508 "GET /dashboard/upload/ HTTP/1.1" 200 61024
+INFO 2025-09-24 22:00:38,220 autoreload 15768 5620 Watching for file changes with StatReloader
+INFO 2025-09-24 22:00:41,700 basehttp 15768 30968 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:00:41,742 basehttp 15768 30968 "GET /dashboard/ HTTP/1.1" 200 42811
+INFO 2025-09-24 22:00:41,823 basehttp 15768 30968 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 200 12660
+INFO 2025-09-24 22:00:47,526 basehttp 15768 30968 "GET /dashboard/reviews/ HTTP/1.1" 200 161680
+INFO 2025-09-24 22:00:47,540 basehttp 15768 30968 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-09-24 22:00:50,240 basehttp 15768 30968 "GET /dashboard/ HTTP/1.1" 200 42811
+INFO 2025-09-24 22:00:54,657 basehttp 15768 30968 "GET /dashboard/upload/ HTTP/1.1" 200 60986
+INFO 2025-09-24 22:00:54,671 basehttp 15768 30968 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-09-24 22:01:00,366 basehttp 15768 30968 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 22:01:02,700 basehttp 15768 30968 "GET /dashboard/ HTTP/1.1" 200 42798
+INFO 2025-09-24 22:01:02,709 basehttp 15768 30968 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+ERROR 2025-09-24 22:01:16,237 views 15768 30968 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:01:16,238 log 15768 30968 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:01:16,239 basehttp 15768 30968 "POST /api/v1/process/ HTTP/1.1" 500 153
+WARNING 2025-09-24 22:01:21,313 log 15768 30968 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:01:21,313 basehttp 15768 30968 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:04:47,048 autoreload 13016 41700 Watching for file changes with StatReloader
+INFO 2025-09-24 22:04:48,764 basehttp 13016 12660 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:04:48,790 basehttp 13016 12660 "GET /dashboard/ HTTP/1.1" 200 42797
+INFO 2025-09-24 22:04:48,826 basehttp 13016 12660 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+ERROR 2025-09-24 22:04:59,795 views 13016 12660 AI agent processing failed: '(' was never closed (agent.py, line 60)
+ERROR 2025-09-24 22:04:59,796 log 13016 12660 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:04:59,797 basehttp 13016 12660 "POST /api/v1/process/ HTTP/1.1" 500 158
+WARNING 2025-09-24 22:05:01,975 log 13016 12660 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:05:01,976 basehttp 13016 12660 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:08:59,566 autoreload 41928 26400 Watching for file changes with StatReloader
+INFO 2025-09-24 22:09:11,041 autoreload 8720 888 Watching for file changes with StatReloader
+INFO 2025-09-24 22:09:13,033 basehttp 8720 22156 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:09:13,063 basehttp 8720 22156 "GET /dashboard/ HTTP/1.1" 200 42809
+INFO 2025-09-24 22:09:13,088 basehttp 8720 22156 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+ERROR 2025-09-24 22:09:22,259 views 8720 22156 AI agent processing failed: cannot import name 'ReviewScorerAgent' from 'agents.scorer.agent' (E:\IRWA\multiagent-review-sentiment-ai\agents\scorer\agent.py)
+ERROR 2025-09-24 22:09:22,259 log 8720 22156 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:09:22,260 basehttp 8720 22156 "POST /api/v1/process/ HTTP/1.1" 500 252
+WARNING 2025-09-24 22:09:24,704 log 8720 22156 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:09:24,704 basehttp 8720 22156 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:11:09,502 basehttp 8720 22156 "GET /dashboard/ HTTP/1.1" 200 42798
+INFO 2025-09-24 22:11:09,521 basehttp 8720 22156 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+WARNING 2025-09-24 22:11:09,525 log 8720 22156 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:11:09,525 basehttp 8720 22156 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+ERROR 2025-09-24 22:11:11,641 views 8720 22156 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:11:11,641 log 8720 22156 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:11:11,642 basehttp 8720 22156 "POST /api/v1/process/ HTTP/1.1" 500 153
+ERROR 2025-09-24 22:11:13,003 views 8720 22156 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:11:13,004 log 8720 22156 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:11:13,005 basehttp 8720 22156 "POST /api/v1/process/ HTTP/1.1" 500 153
+INFO 2025-09-24 22:11:18,696 autoreload 16456 11308 Watching for file changes with StatReloader
+INFO 2025-09-24 22:11:20,851 basehttp 16456 22148 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:11:20,879 basehttp 16456 22148 "GET /dashboard/ HTTP/1.1" 200 42798
+ERROR 2025-09-24 22:11:30,345 views 16456 22148 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:11:30,346 log 16456 22148 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:11:30,347 basehttp 16456 22148 "POST /api/v1/process/ HTTP/1.1" 500 153
+INFO 2025-09-24 22:12:40,194 autoreload 16456 11308 E:\IRWA\multiagent-review-sentiment-ai\agents\scorer\agent.py changed, reloading.
+INFO 2025-09-24 22:12:41,324 autoreload 23544 33656 Watching for file changes with StatReloader
+INFO 2025-09-24 22:18:21,164 basehttp 23544 19304 "GET /dashboard/ HTTP/1.1" 200 42809
+INFO 2025-09-24 22:18:21,175 basehttp 23544 19304 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-09-24 22:18:25,411 autoreload 11424 41844 Watching for file changes with StatReloader
+INFO 2025-09-24 22:18:27,394 basehttp 11424 35516 "GET /dashboard/ HTTP/1.1" 200 42809
+ERROR 2025-09-24 22:18:34,698 views 11424 35516 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:18:34,699 log 11424 35516 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:18:34,700 basehttp 11424 35516 "POST /api/v1/process/ HTTP/1.1" 500 153
+WARNING 2025-09-24 22:18:37,422 log 11424 35516 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:18:37,423 basehttp 11424 35516 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:21:55,908 autoreload 11424 41844 E:\IRWA\multiagent-review-sentiment-ai\agents\scorer\agent.py changed, reloading.
+INFO 2025-09-24 22:21:57,133 autoreload 16852 28664 Watching for file changes with StatReloader
+INFO 2025-09-24 22:22:11,814 autoreload 16372 34188 Watching for file changes with StatReloader
+INFO 2025-09-24 22:22:13,612 basehttp 16372 40680 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:22:13,641 basehttp 16372 40680 "GET /dashboard/ HTTP/1.1" 200 42811
+INFO 2025-09-24 22:22:13,671 basehttp 16372 40680 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+ERROR 2025-09-24 22:22:22,994 views 16372 40680 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:22:22,995 log 16372 40680 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:22:22,996 basehttp 16372 40680 "POST /api/v1/process/ HTTP/1.1" 500 153
+WARNING 2025-09-24 22:22:26,170 log 16372 40680 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:22:26,170 basehttp 16372 40680 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:25:40,614 basehttp 16372 40680 "GET /dashboard/ HTTP/1.1" 200 42811
+INFO 2025-09-24 22:25:40,629 basehttp 16372 40680 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+WARNING 2025-09-24 22:25:40,635 log 16372 40680 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:25:40,635 basehttp 16372 40680 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+ERROR 2025-09-24 22:25:41,771 views 16372 40680 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:25:41,772 log 16372 40680 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:25:41,773 basehttp 16372 40680 "POST /api/v1/process/ HTTP/1.1" 500 153
+ERROR 2025-09-24 22:25:43,081 views 16372 40680 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:25:43,081 log 16372 40680 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:25:43,082 basehttp 16372 40680 "POST /api/v1/process/ HTTP/1.1" 500 153
+ERROR 2025-09-24 22:25:43,745 views 16372 40680 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:25:43,746 log 16372 40680 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:25:43,747 basehttp 16372 40680 "POST /api/v1/process/ HTTP/1.1" 500 153
+INFO 2025-09-24 22:26:24,524 autoreload 16372 34188 E:\IRWA\multiagent-review-sentiment-ai\agents\scorer\agent.py changed, reloading.
+INFO 2025-09-24 22:26:25,634 autoreload 4232 23176 Watching for file changes with StatReloader
+INFO 2025-09-24 22:41:27,679 basehttp 4232 13532 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:41:27,704 basehttp 4232 13532 "GET /dashboard/ HTTP/1.1" 200 42812
+INFO 2025-09-24 22:41:27,799 basehttp 4232 37668 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 200 12660
+INFO 2025-09-24 22:41:27,800 basehttp 4232 13532 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37280
+WARNING 2025-09-24 22:41:28,614 log 4232 13532 Not Found: /favicon.ico
+WARNING 2025-09-24 22:41:28,615 basehttp 4232 13532 "GET /favicon.ico HTTP/1.1" 404 3322
+ERROR 2025-09-24 22:41:37,489 views 4232 13532 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:41:37,490 log 4232 13532 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:41:37,490 basehttp 4232 13532 "POST /api/v1/process/ HTTP/1.1" 500 153
+INFO 2025-09-24 22:47:54,709 basehttp 4232 41456 "GET /dashboard/ HTTP/1.1" 200 42812
+INFO 2025-09-24 22:47:54,728 basehttp 4232 41456 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+WARNING 2025-09-24 22:47:54,737 log 4232 41456 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:47:54,738 basehttp 4232 41456 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+ERROR 2025-09-24 22:47:56,540 views 4232 41456 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:47:56,541 log 4232 41456 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:47:56,542 basehttp 4232 41456 "POST /api/v1/process/ HTTP/1.1" 500 153
+INFO 2025-09-24 22:48:02,712 autoreload 26604 39312 Watching for file changes with StatReloader
+INFO 2025-09-24 22:48:04,857 basehttp 26604 10536 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:48:04,887 basehttp 26604 10536 "GET /dashboard/ HTTP/1.1" 200 42812
+ERROR 2025-09-24 22:48:14,009 views 26604 10536 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:48:14,010 log 26604 10536 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:48:14,011 basehttp 26604 10536 "POST /api/v1/process/ HTTP/1.1" 500 153
+WARNING 2025-09-24 22:48:16,945 log 26604 10536 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:48:16,946 basehttp 26604 10536 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:48:25,115 autoreload 20612 25208 Watching for file changes with StatReloader
+INFO 2025-09-24 22:48:28,222 basehttp 26604 10536 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:48:28,236 basehttp 26604 10536 "GET /dashboard/ HTTP/1.1" 200 42812
+ERROR 2025-09-24 22:48:30,112 views 26604 10536 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:48:30,112 log 26604 10536 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:48:30,112 basehttp 26604 10536 "POST /api/v1/process/ HTTP/1.1" 500 153
+ERROR 2025-09-24 22:48:54,348 views 26604 40880 AI agent processing failed: No module named 'agents.base_agent'
+ERROR 2025-09-24 22:48:54,349 log 26604 40880 Internal Server Error: /api/v1/process/
+ERROR 2025-09-24 22:48:54,349 basehttp 26604 40880 "POST /api/v1/process/ HTTP/1.1" 500 153
+INFO 2025-09-24 22:54:06,015 orchestrator 26604 12692 [OK] Classifier Agent initialized
+INFO 2025-09-24 22:54:06,016 orchestrator 26604 12692 [OK] Scorer Agent initialized
+INFO 2025-09-24 22:54:06,018 orchestrator 26604 12692 [OK] Summarizer Agent initialized
+INFO 2025-09-24 22:54:06,018 orchestrator 26604 12692 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 22:54:06,019 views 26604 12692 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 22:54:06,023 orchestrator 26604 12692 [STEP 1] Classifying sentiment for review 2be50478-2d88-46af-835a-adbc1958fbde
+INFO 2025-09-24 22:54:06,023 orchestrator 26604 12692 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:54:06,026 orchestrator 26604 12692 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:54:06,028 orchestrator 26604 12692 [STEP 1] Classifying sentiment for review 31eebcf8-2261-4ef6-a8bf-b3abd4628203
+INFO 2025-09-24 22:54:06,029 orchestrator 26604 12692 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:54:06,029 orchestrator 26604 12692 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:54:06,033 orchestrator 26604 12692 [STEP 1] Classifying sentiment for review 51b2362e-dc00-4841-9579-760dabc90bf8
+INFO 2025-09-24 22:54:06,034 orchestrator 26604 12692 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 22:54:06,034 orchestrator 26604 12692 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:54:06,037 orchestrator 26604 12692 [STEP 1] Classifying sentiment for review e91f55b7-83fd-4bf0-9d5d-b4c7dcd3904f
+INFO 2025-09-24 22:54:06,037 orchestrator 26604 12692 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:54:06,038 orchestrator 26604 12692 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:54:06,040 orchestrator 26604 12692 [STEP 1] Classifying sentiment for review 5175b2b9-523d-4544-b75c-194ff9e9a9d3
+INFO 2025-09-24 22:54:06,041 orchestrator 26604 12692 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:54:06,042 orchestrator 26604 12692 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:54:06,047 basehttp 26604 12692 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 22:54:45,060 autoreload 15112 25084 Watching for file changes with StatReloader
+INFO 2025-09-24 22:54:46,769 basehttp 26604 7460 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:54:46,802 basehttp 26604 7460 "GET /dashboard/ HTTP/1.1" 200 42815
+INFO 2025-09-24 22:54:46,898 basehttp 26604 7460 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37280
+INFO 2025-09-24 22:54:47,197 basehttp 26604 7460 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 200 12660
+WARNING 2025-09-24 22:54:47,728 log 26604 7460 Not Found: /favicon.ico
+WARNING 2025-09-24 22:54:47,729 basehttp 26604 7460 "GET /favicon.ico HTTP/1.1" 404 3322
+INFO 2025-09-24 22:54:50,681 basehttp 26604 7460 "GET /dashboard/upload/ HTTP/1.1" 200 60990
+INFO 2025-09-24 22:54:55,807 basehttp 26604 5424 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 22:54:59,779 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42801
+INFO 2025-09-24 22:55:02,577 orchestrator 26604 5424 [OK] Classifier Agent initialized
+INFO 2025-09-24 22:55:02,579 orchestrator 26604 5424 [OK] Scorer Agent initialized
+INFO 2025-09-24 22:55:02,581 orchestrator 26604 5424 [OK] Summarizer Agent initialized
+INFO 2025-09-24 22:55:02,582 orchestrator 26604 5424 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 22:55:02,582 views 26604 5424 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 22:55:02,587 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 544af0eb-89ec-4acd-9b81-ad5bc477f16d
+INFO 2025-09-24 22:55:02,588 orchestrator 26604 5424 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:55:02,589 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:02,593 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 70e3d94b-3cf4-4fec-b40c-ddc52f1c5363
+INFO 2025-09-24 22:55:02,594 orchestrator 26604 5424 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:55:02,594 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:02,599 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 192cf029-65ce-4207-beaa-749d654eb1b1
+INFO 2025-09-24 22:55:02,600 orchestrator 26604 5424 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 22:55:02,601 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:02,605 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 52c39db2-1712-4b0f-97a9-a2d604bf41ef
+INFO 2025-09-24 22:55:02,606 orchestrator 26604 5424 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:55:02,607 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:02,610 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review aee2938e-b79a-4037-b563-1f48e85b2541
+INFO 2025-09-24 22:55:02,611 orchestrator 26604 5424 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:55:02,612 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:02,620 basehttp 26604 5424 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 22:55:04,642 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42805
+INFO 2025-09-24 22:55:09,109 basehttp 26604 5424 "GET /dashboard/upload/ HTTP/1.1" 200 60981
+INFO 2025-09-24 22:55:15,421 basehttp 26604 5424 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 22:55:17,331 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42791
+INFO 2025-09-24 22:55:21,365 basehttp 26604 5424 "GET /dashboard/upload/ HTTP/1.1" 200 60970
+INFO 2025-09-24 22:55:23,086 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42791
+INFO 2025-09-24 22:55:24,575 orchestrator 26604 5424 [OK] Classifier Agent initialized
+INFO 2025-09-24 22:55:24,577 orchestrator 26604 5424 [OK] Scorer Agent initialized
+INFO 2025-09-24 22:55:24,580 orchestrator 26604 5424 [OK] Summarizer Agent initialized
+INFO 2025-09-24 22:55:24,580 orchestrator 26604 5424 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 22:55:24,581 views 26604 5424 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 22:55:24,586 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review ee96c380-c711-4855-b45a-7fa2d5f224df
+INFO 2025-09-24 22:55:24,586 orchestrator 26604 5424 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:55:24,587 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:24,591 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 1074de97-2525-4469-b802-2ee6970a6063
+INFO 2025-09-24 22:55:24,592 orchestrator 26604 5424 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:55:24,593 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:24,597 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 1428907b-18f6-470a-b63e-3f26ce644f72
+INFO 2025-09-24 22:55:24,598 orchestrator 26604 5424 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 22:55:24,598 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:24,602 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review f03770d3-50bc-4e9a-bbc8-5a7d3cb5da11
+INFO 2025-09-24 22:55:24,603 orchestrator 26604 5424 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:55:24,604 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:24,609 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 575e041d-fa38-426b-b1b0-91ede21b99ee
+INFO 2025-09-24 22:55:24,610 orchestrator 26604 5424 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:55:24,610 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:55:24,619 basehttp 26604 5424 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 22:55:26,650 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42794
+WARNING 2025-09-24 22:55:27,273 log 26604 5424 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:55:27,274 basehttp 26604 5424 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:55:32,792 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42794
+INFO 2025-09-24 22:55:34,101 basehttp 26604 5424 "GET /dashboard/reviews/ HTTP/1.1" 200 161933
+INFO 2025-09-24 22:55:37,105 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42794
+INFO 2025-09-24 22:55:41,432 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42794
+INFO 2025-09-24 22:55:44,138 basehttp 26604 5424 "GET /dashboard/reviews/ HTTP/1.1" 200 161933
+INFO 2025-09-24 22:55:49,210 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42794
+INFO 2025-09-24 22:55:50,865 basehttp 26604 5424 "GET /dashboard/reviews/ HTTP/1.1" 200 161933
+INFO 2025-09-24 22:55:52,628 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42794
+INFO 2025-09-24 22:55:53,778 basehttp 26604 5424 "GET /dashboard/upload/ HTTP/1.1" 200 60970
+INFO 2025-09-24 22:55:58,368 basehttp 26604 5424 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 22:56:00,383 basehttp 26604 5424 "GET /dashboard/reviews/ HTTP/1.1" 200 160036
+INFO 2025-09-24 22:56:02,806 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42779
+INFO 2025-09-24 22:56:05,358 orchestrator 26604 5424 [OK] Classifier Agent initialized
+INFO 2025-09-24 22:56:05,361 orchestrator 26604 5424 [OK] Scorer Agent initialized
+INFO 2025-09-24 22:56:05,364 orchestrator 26604 5424 [OK] Summarizer Agent initialized
+INFO 2025-09-24 22:56:05,365 orchestrator 26604 5424 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 22:56:05,365 views 26604 5424 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 22:56:05,370 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review a171dcea-4387-4e7f-ac15-18e4c14b023e
+INFO 2025-09-24 22:56:05,371 orchestrator 26604 5424 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:56:05,371 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:56:05,375 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 4cc50fe2-9a9d-4269-a84d-01fcc49f8b48
+INFO 2025-09-24 22:56:05,376 orchestrator 26604 5424 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:56:05,377 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:56:05,381 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review a0f67227-c5f9-4eed-ab47-d72d182b825b
+INFO 2025-09-24 22:56:05,382 orchestrator 26604 5424 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 22:56:05,383 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:56:05,386 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 6aafaa49-d6b7-440d-aacb-1d7cb3fa16b8
+INFO 2025-09-24 22:56:05,387 orchestrator 26604 5424 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:56:05,388 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:56:05,391 orchestrator 26604 5424 [STEP 1] Classifying sentiment for review 5d1b3819-eca1-4c8c-888f-b4a74d4f8afc
+INFO 2025-09-24 22:56:05,392 orchestrator 26604 5424 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:56:05,393 orchestrator 26604 5424 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:56:05,400 basehttp 26604 5424 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 22:56:07,421 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42782
+INFO 2025-09-24 22:56:10,331 basehttp 26604 5424 "GET /dashboard/reviews/ HTTP/1.1" 200 161933
+INFO 2025-09-24 22:56:14,288 basehttp 26604 5424 "GET /dashboard/ HTTP/1.1" 200 42782
+INFO 2025-09-24 22:56:18,053 basehttp 26604 5424 "GET /dashboard/reviews/ HTTP/1.1" 200 161933
+INFO 2025-09-24 22:56:44,688 autoreload 26604 39312 E:\IRWA\multiagent-review-sentiment-ai\agents\scorer\agent.py changed, reloading.
+INFO 2025-09-24 22:56:46,145 autoreload 33648 12748 Watching for file changes with StatReloader
+INFO 2025-09-24 22:57:10,322 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42781
+INFO 2025-09-24 22:57:24,479 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42782
+INFO 2025-09-24 22:57:40,646 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42782
+WARNING 2025-09-24 22:57:42,160 log 15112 7120 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:57:42,161 basehttp 15112 7120 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:57:43,465 basehttp 15112 7120 "GET /dashboard/upload/ HTTP/1.1" 200 60958
+WARNING 2025-09-24 22:57:43,484 log 15112 7120 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:57:43,485 basehttp 15112 7120 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:57:48,483 basehttp 15112 7120 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 22:57:58,143 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42768
+WARNING 2025-09-24 22:57:58,161 log 15112 7120 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:57:58,162 basehttp 15112 7120 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:58:12,550 orchestrator 15112 7120 [OK] Classifier Agent initialized
+INFO 2025-09-24 22:58:12,552 orchestrator 15112 7120 [OK] Scorer Agent initialized
+INFO 2025-09-24 22:58:12,557 orchestrator 15112 7120 [OK] Summarizer Agent initialized
+INFO 2025-09-24 22:58:12,557 orchestrator 15112 7120 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 22:58:12,558 views 15112 7120 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 22:58:12,564 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review db37bd2b-7a41-4da1-aea2-204a6b3dc271
+INFO 2025-09-24 22:58:12,565 orchestrator 15112 7120 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:58:12,566 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:12,570 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review de75bdec-4e66-4242-9b7b-b0b5ba345edd
+INFO 2025-09-24 22:58:12,571 orchestrator 15112 7120 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:58:12,572 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:12,576 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review 6f0e0e16-33a2-4d24-b4c4-8df177373d11
+INFO 2025-09-24 22:58:12,577 orchestrator 15112 7120 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 22:58:12,578 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:12,582 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review 296e2230-a473-4312-95db-fe3750ad3930
+INFO 2025-09-24 22:58:12,583 orchestrator 15112 7120 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:58:12,584 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:12,588 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review 33b179af-49de-4e77-9f4f-8f7fa42a0148
+INFO 2025-09-24 22:58:12,589 orchestrator 15112 7120 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:58:12,590 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:12,599 basehttp 15112 7120 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 22:58:14,637 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42772
+WARNING 2025-09-24 22:58:14,653 log 15112 7120 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-24 22:58:14,653 basehttp 15112 7120 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-24 22:58:36,107 autoreload 28944 14752 Watching for file changes with StatReloader
+INFO 2025-09-24 22:58:39,117 basehttp 15112 7120 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 22:58:39,129 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42772
+INFO 2025-09-24 22:58:43,028 basehttp 15112 7120 "GET /dashboard/upload/ HTTP/1.1" 200 60948
+INFO 2025-09-24 22:58:47,832 basehttp 15112 7120 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 22:58:49,194 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42767
+INFO 2025-09-24 22:58:50,552 basehttp 15112 7120 "GET /dashboard/reviews/ HTTP/1.1" 200 160078
+INFO 2025-09-24 22:58:53,075 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42767
+INFO 2025-09-24 22:58:55,951 orchestrator 15112 7120 [OK] Classifier Agent initialized
+INFO 2025-09-24 22:58:55,954 orchestrator 15112 7120 [OK] Scorer Agent initialized
+INFO 2025-09-24 22:58:55,957 orchestrator 15112 7120 [OK] Summarizer Agent initialized
+INFO 2025-09-24 22:58:55,958 orchestrator 15112 7120 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 22:58:55,959 views 15112 7120 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 22:58:55,964 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review 94f08349-5e98-4d40-a98a-b560fa86dbb8
+INFO 2025-09-24 22:58:55,965 orchestrator 15112 7120 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:58:55,966 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:55,970 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review ab11b58c-8633-411c-b54f-6b3d27b13f64
+INFO 2025-09-24 22:58:55,970 orchestrator 15112 7120 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:58:55,971 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:55,975 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review c9841884-9987-4361-8e7c-07f8ca943d0f
+INFO 2025-09-24 22:58:55,976 orchestrator 15112 7120 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 22:58:55,978 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:55,981 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review d4ed2477-a847-4f9e-b8cd-3e955cac491c
+INFO 2025-09-24 22:58:55,982 orchestrator 15112 7120 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 22:58:55,982 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:55,986 orchestrator 15112 7120 [STEP 1] Classifying sentiment for review 6ccb8def-5dd8-438b-be51-d010f76b6425
+INFO 2025-09-24 22:58:55,987 orchestrator 15112 7120 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 22:58:55,988 orchestrator 15112 7120 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 22:58:55,997 basehttp 15112 7120 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 22:58:58,024 basehttp 15112 7120 "GET /dashboard/ HTTP/1.1" 200 42770
+INFO 2025-09-24 22:59:00,857 basehttp 15112 7120 "GET /dashboard/reviews/ HTTP/1.1" 200 161975
+INFO 2025-09-24 23:18:24,051 autoreload 29148 17652 Watching for file changes with StatReloader
+INFO 2025-09-24 23:18:36,685 basehttp 29148 22372 "GET / HTTP/1.1" 302 0
+INFO 2025-09-24 23:18:36,778 basehttp 29148 22372 "GET /dashboard/ HTTP/1.1" 200 42776
+INFO 2025-09-24 23:18:36,863 basehttp 29148 22372 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37280
+INFO 2025-09-24 23:18:36,864 basehttp 29148 24712 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 200 12660
+INFO 2025-09-24 23:18:41,034 basehttp 29148 24712 "GET /dashboard/ HTTP/1.1" 200 42776
+INFO 2025-09-24 23:18:43,108 basehttp 29148 24712 "GET /dashboard/reviews/ HTTP/1.1" 200 161975
+INFO 2025-09-24 23:18:45,726 basehttp 29148 24712 "GET /dashboard/upload/ HTTP/1.1" 200 60952
+INFO 2025-09-24 23:18:49,904 basehttp 29148 24712 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-24 23:18:51,364 basehttp 29148 24712 "GET /dashboard/ HTTP/1.1" 200 42772
+INFO 2025-09-24 23:19:36,677 orchestrator 29148 24712 [OK] Classifier Agent initialized
+INFO 2025-09-24 23:19:36,680 orchestrator 29148 24712 [OK] Scorer Agent initialized
+INFO 2025-09-24 23:19:36,683 orchestrator 29148 24712 [OK] Summarizer Agent initialized
+INFO 2025-09-24 23:19:36,683 orchestrator 29148 24712 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-24 23:19:36,684 views 29148 24712 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-24 23:19:36,690 orchestrator 29148 24712 [STEP 1] Classifying sentiment for review 581a0c7b-d754-4cc1-9bdb-1644b55bc8f9
+INFO 2025-09-24 23:19:36,691 orchestrator 29148 24712 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 23:19:36,692 orchestrator 29148 24712 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 23:19:36,696 orchestrator 29148 24712 [STEP 1] Classifying sentiment for review 16d4c987-92ec-4643-9c3f-720767cf1e7b
+INFO 2025-09-24 23:19:36,697 orchestrator 29148 24712 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 23:19:36,698 orchestrator 29148 24712 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 23:19:36,702 orchestrator 29148 24712 [STEP 1] Classifying sentiment for review e9b64135-314b-430f-946a-87fb08050262
+INFO 2025-09-24 23:19:36,703 orchestrator 29148 24712 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-24 23:19:36,703 orchestrator 29148 24712 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 23:19:36,707 orchestrator 29148 24712 [STEP 1] Classifying sentiment for review 41ef6baa-9435-48b4-a745-7c13d106c54d
+INFO 2025-09-24 23:19:36,708 orchestrator 29148 24712 [STEP 2] Generating score for neutral sentiment
+INFO 2025-09-24 23:19:36,709 orchestrator 29148 24712 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 23:19:36,712 orchestrator 29148 24712 [STEP 1] Classifying sentiment for review a1ef0af5-3734-4a65-811b-3a386f140ebc
+INFO 2025-09-24 23:19:36,713 orchestrator 29148 24712 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-24 23:19:36,713 orchestrator 29148 24712 [COMPLETED] Single review workflow completed in 0.00s
+INFO 2025-09-24 23:19:36,720 basehttp 29148 24712 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-24 23:19:38,748 basehttp 29148 24712 "GET /dashboard/ HTTP/1.1" 200 42775
+INFO 2025-09-24 23:19:38,762 basehttp 29148 24712 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-24 23:19:38,762 basehttp 29148 22372 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-09-24 23:19:43,919 basehttp 29148 22372 "GET /dashboard/reviews/ HTTP/1.1" 200 161975

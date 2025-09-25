@@ -18,7 +18,7 @@ from datetime import datetime, timedelta
 
 from apps.reviews.models import Review, Hotel, ReviewBatch, AgentTask
 from apps.analytics.models import AnalyticsReport, SentimentTrend
-from utils.file_processing import process_reviews_file
+from utils.file_processor import ReviewFileProcessor
 
 logger = logging.getLogger(__name__)
 
@@ -369,11 +369,10 @@ def upload_reviews(request):
             batch.save()
             
             # Use file processing utility
-            result = process_reviews_file(file, batch)
+            processor = ReviewFileProcessor()
+            result = processor.process_file(file, batch)
             
-            batch.total_reviews = result['total']
-            batch.processed_reviews = result['processed']
-            batch.failed_reviews = result['failed']
+            # The ReviewFileProcessor updates batch internally, so we don't need to set these
             batch.status = 'completed'
             batch.completed_at = timezone.now()
             batch.save()
