@@ -24,110 +24,151 @@ class SentimentScoringTool(BaseTool):
         self._api_url = f"https://api-inference.huggingface.co/models/{self._model_name}"
     
     def _run(self, text: str, sentiment: str = None) -> str:
-        try:
-
-            #env update ?
-            headers = {"Authorization": f"Bearer {HUGGINGFACE_API_KEY}"}
-            payload = {"inputs": text}
-            response = requests.post(self._api_url, headers=headers, json=payload)
+        """
+        CORE FUNCTION: Score review using HuggingFace BERT sentiment model
+        Uses real AI for accurate 1-5 scoring based on sentiment analysis
+        """
+        # Step 1: Try real AI first
+        api_key = self._get_api_key()
+        if api_key:
+            try:
+                result = self._call_huggingface_api(text, api_key)
+                if result:
+                    return result
+            except Exception as e:
+                logger.error(f"HuggingFace sentiment scoring failed: {e}")
+        
+        # Step 2: Intelligent fallback scoring
+        return self._intelligent_fallback_scoring(text, sentiment)
+    
+    def _get_api_key(self) -> str:
+        """Get HuggingFace API key from environment"""
+        import os
+        return os.getenv('HUGGINGFACE_API_KEY', '')
+    
+    def _call_huggingface_api(self, text: str, api_key: str) -> str:
+        """Call real HuggingFace BERT sentiment scoring model"""
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+        
+        payload = {
+            "inputs": text,
+            "parameters": {"return_all_scores": True}
+        }
+        
+        response = requests.post(self._api_url, headers=headers, json=payload, timeout=10)
+        
+        if response.status_code == 200:
+            result = response.json()
+            return self._process_scoring_result(result)
+        else:
+            logger.warning(f"Scoring API returned status {response.status_code}")
+            return None
+    
+    def _process_scoring_result(self, result) -> str:
+        """Process HuggingFace BERT model response for scoring"""
+        if isinstance(result, list) and len(result) > 0:
+            scores = result[0] if isinstance(result[0], list) else result
             
-            if response.status_code == 200:
-                result = response.json()
-                # Model return
-                scores = result[0] if isinstance(result, list) else result
+            # Calculate weighted score based on sentiment probabilities
+            total_score = 0.0
+            for item in scores:
+                label = item['label']
+                probability = item['score']
                 
-                
-                positive_score = 0
-                negative_score = 0
-                
-                for item in scores:
-                    if 'POSITIVE' in item['label'] or '5' in item['label'] or '4' in item['label']:
-                        positive_score += item['score']
-                    elif 'NEGATIVE' in item['label'] or '1' in item['label'] or '2' in item['label']:
-                        negative_score += item['score']
-                
-
-                final_score = (positive_score * 5.0) + (negative_score * 1.0)
-                final_score = max(0.0, min(5.0, final_score))
-                
-                return f"Score: {final_score:.1f}"
+                # Map sentiment labels to numerical scores
+                if 'LABEL_0' in label or '1' in label:  # Very negative
+                    total_score += probability * 1.0
+                elif 'LABEL_1' in label or '2' in label:  # Negative
+                    total_score += probability * 2.0
+                elif 'LABEL_2' in label or '3' in label:  # Neutral
+                    total_score += probability * 3.0
+                elif 'LABEL_3' in label or '4' in label:  # Positive
+                    total_score += probability * 4.0
+                elif 'LABEL_4' in label or '5' in label:  # Very positive
+                    total_score += probability * 5.0
             
-            # Fallback for  API unavailable)
-            text_lower = text.lower()
-            
-            # Enhanced scoring indicators with HuggingFace-like weights
-            positive_indicators = {
-                # Very strong positive (5.0 score indicators)
-                'excellent': 5.0, 'amazing': 5.0, 'perfect': 5.0, 'outstanding': 5.0,
-                'exceptional': 5.0, 'incredible': 5.0, 'phenomenal': 5.0,
-                
-                # Strong positive (4.0 score indicators)
-                'wonderful': 4.0, 'great': 4.0, 'fantastic': 4.0, 'superb': 4.0,
-                'brilliant': 4.0, 'awesome': 4.0, 'beautiful': 4.0,
-                
-                # Moderate positive (3.5 score indicators)
-                'good': 3.5, 'nice': 3.5, 'pleasant': 3.5, 'comfortable': 3.5,
-                'helpful': 3.5, 'friendly': 3.5, 'recommend': 3.5,
-                
-                # Light positive (3.0 score indicators)
-                'clean': 3.0, 'decent': 3.0, 'satisfactory': 3.0, 'adequate': 3.0
-            }
-            
-            negative_indicators = {
-                # Very strong negative (1.0 score indicators)
-                'terrible': 1.0, 'horrible': 1.0, 'awful': 1.0, 'disgusting': 1.0,
-                'appalling': 1.0, 'unacceptable': 1.0, 'worst': 1.0,
-                
-                # Strong negative (2.0 score indicators)
-                'bad': 2.0, 'poor': 2.0, 'dirty': 2.0, 'rude': 2.0,
-                'disappointed': 2.0, 'unsatisfied': 2.0,
-                
-                # Moderate negative (2.5 score indicators)
-                'disappointing': 2.5, 'uncomfortable': 2.5, 'noisy': 2.5,
-                'overpriced': 2.5, 'expensive': 2.5
-            }
-            
-            # Find strongest indicators
-            max_positive = 0
-            max_negative = 5.0
-            
-            for word, score in positive_indicators.items():
-                if word in text_lower:
-                    max_positive = max(max_positive, score)
-            
-            for word, score in negative_indicators.items():
-                if word in text_lower:
-                    max_negative = min(max_negative, score)
-            
-            # Determine final score based on strongest indicators
-            if max_positive > 0 and max_negative < 5.0:
-                # Both positive and negative found, average with positive bias
-                final_score = (max_positive + max_negative) / 2
-            elif max_positive > 0:
-                # Only positive found
-                final_score = max_positive
-            elif max_negative < 5.0:
-                # Only negative found
-                final_score = max_negative
-            else:
-                # No strong indicators, neutral
-                final_score = 3.0
-            
-            # Apply sentiment boost if provided
-            if sentiment:
-                if sentiment.lower() == 'positive' and final_score < 3.5:
-                    final_score = min(4.0, final_score + 0.5)
-                elif sentiment.lower() == 'negative' and final_score > 2.5:
-                    final_score = max(2.0, final_score - 0.5)
-            
-            # Ensure score is in valid range
-            final_score = max(0.0, min(5.0, final_score))
-            
+            # Ensure score is within valid range
+            final_score = max(1.0, min(5.0, total_score))
             return f"Score: {final_score:.1f}"
+        
+        return None
+    
+    def _intelligent_fallback_scoring(self, text: str, sentiment: str = None) -> str:
+        """Intelligent fallback scoring when API unavailable"""
+        text_lower = text.lower()
+        
+        # Enhanced scoring indicators with HuggingFace-like weights
+        positive_indicators = {
+            # Very strong positive (5.0 score indicators)
+            'excellent': 5.0, 'amazing': 5.0, 'perfect': 5.0, 'outstanding': 5.0,
+            'exceptional': 5.0, 'incredible': 5.0, 'phenomenal': 5.0,
             
-        except Exception as e:
-            logger.error(f"HuggingFace sentiment scoring failed: {str(e)}")
-            return "Score: 3.0"
+            # Strong positive (4.0 score indicators)
+            'wonderful': 4.0, 'great': 4.0, 'fantastic': 4.0, 'superb': 4.0,
+            'brilliant': 4.0, 'awesome': 4.0, 'beautiful': 4.0,
+            
+            # Moderate positive (3.5 score indicators)
+            'good': 3.5, 'nice': 3.5, 'pleasant': 3.5, 'comfortable': 3.5,
+            'helpful': 3.5, 'friendly': 3.5, 'recommend': 3.5,
+            
+            # Light positive (3.0 score indicators)
+            'clean': 3.0, 'decent': 3.0, 'satisfactory': 3.0, 'adequate': 3.0
+        }
+        
+        negative_indicators = {
+            # Very strong negative (1.0 score indicators)
+            'terrible': 1.0, 'horrible': 1.0, 'awful': 1.0, 'disgusting': 1.0,
+            'appalling': 1.0, 'unacceptable': 1.0, 'worst': 1.0,
+            
+            # Strong negative (2.0 score indicators)
+            'bad': 2.0, 'poor': 2.0, 'dirty': 2.0, 'rude': 2.0,
+            'disappointed': 2.0, 'unsatisfied': 2.0,
+            
+            # Moderate negative (2.5 score indicators)
+            'disappointing': 2.5, 'uncomfortable': 2.5, 'noisy': 2.5,
+            'overpriced': 2.5, 'expensive': 2.5
+        }
+        
+        # Find strongest indicators
+        max_positive = 0
+        max_negative = 5.0
+        
+        for word, score in positive_indicators.items():
+            if word in text_lower:
+                max_positive = max(max_positive, score)
+        
+        for word, score in negative_indicators.items():
+            if word in text_lower:
+                max_negative = min(max_negative, score)
+        
+        # Determine final score based on strongest indicators
+        if max_positive > 0 and max_negative < 5.0:
+            # Both positive and negative found, average with positive bias
+            final_score = (max_positive + max_negative) / 2
+        elif max_positive > 0:
+            # Only positive found
+            final_score = max_positive
+        elif max_negative < 5.0:
+            # Only negative found
+            final_score = max_negative
+        else:
+            # No strong indicators, neutral
+            final_score = 3.0
+        
+        # Apply sentiment boost if provided
+        if sentiment:
+            if sentiment.lower() == 'positive' and final_score < 3.5:
+                final_score = min(4.0, final_score + 0.5)
+            elif sentiment.lower() == 'negative' and final_score > 2.5:
+                final_score = max(2.0, final_score - 0.5)
+        
+        # Ensure score is in valid range
+        final_score = max(1.0, min(5.0, final_score))
+        
+        return f"Score: {final_score:.1f}"
 
 
 class ReviewScorerAgent:
@@ -240,56 +281,3 @@ class ReviewScorerAgent:
         
         return results
 
-
-# =============================================================================
-# DEMONSTRATION AND USAGE EXAMPLE
-# =============================================================================
-
-def demo_scorer_agent():
-    
-    print("=== CrewAI Sentiment Scorer Demo ===")
-    print("(Using HuggingFace BERT model - fallback to enhanced rules)")
-    
-    # Step 1: Create agent
-    scorer = ReviewScorerAgent()
-    print(f"✅ Created agent: {scorer.name}")
-    print(f"   Role: {scorer.role}")
-    print(f"   Model: nlptown/bert-base-multilingual-uncased-sentiment")
-    print(f"   Scoring method: HuggingFace API + enhanced rule-based fallback")
-    
-    # Step 2: Test with sample reviews
-    sample_reviews = [
-        {"text": "Amazing service! The staff was incredibly helpful and the room was perfect.", "sentiment": "positive"},
-        {"text": "Terrible experience. The room was dirty and the staff was rude.", "sentiment": "negative"},
-        {"text": "The hotel was okay. Nothing special but not bad either.", "sentiment": "neutral"}
-    ]
-    
-    print("\n=== Processing Reviews with HuggingFace Scoring ===")
-    for i, review_data in enumerate(sample_reviews, 1):
-        print(f"\nReview {i}: {review_data['text']}")
-        print(f"Sentiment: {review_data['sentiment']}")
-        result = scorer.score_review(review_data['text'], review_data['sentiment'])
-        print(f"✅ Score: {result['score']}")
-        if result['score'] != 3.0:
-            print(f"✅ Successfully scored using enhanced algorithm!")
-        else:
-            print(f"⚠️  Using neutral fallback (may need API access)")
-    
-    # Step 3: Batch processing demo
-    print("\n=== Batch Processing Demo ===")
-    batch_results = scorer.batch_score(sample_reviews)
-    for i, result in enumerate(batch_results, 1):
-        print(f"Review {i}: {result['score']:.1f} (sentiment: {result['sentiment']})")
-    
-    print("\n=== Demo Complete ===")
-    print("✅ Agent structure: CrewAI framework")
-    print("✅ AI Model: HuggingFace BERT (nlptown/bert-base-multilingual-uncased-sentiment)") 
-    print("✅ Functionality: Working numerical scoring with enhanced algorithm")
-    print("✅ Fallback: Enhanced rule-based scoring when API unavailable")
-    print("\nNOTE: For full CrewAI crew functionality, set OPENAI_API_KEY environment variable")
-    print("NOTE: For HuggingFace API access, set HUGGINGFACE_API_KEY environment variable")
-
-
-if __name__ == "__main__":
-    demo_scorer_agent()
-   

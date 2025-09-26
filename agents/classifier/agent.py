@@ -16,90 +16,93 @@ class SentimentClassificationTool(BaseTool):
     
     def __init__(self):
         super().__init__()
+
         # Initialize model configuration
         self._model_name = "cardiffnlp/twitter-roberta-base-sentiment-latest"
-        # Note: In production, API key should be in Django settings
         self._api_url = f"https://api-inference.huggingface.co/models/{self._model_name}"
     
     def _run(self, text: str) -> str:
-        """
-        CORE FUNCTION: Process review text through sentiment analysis
+
+        api_key = self._get_api_key()
+        if api_key:
+            try:
+                # Call HuggingFace RoBERTa model
+                result = self._call_huggingface_api(text, api_key)
+                if result:
+                    return result
+            except Exception as e:
+                logger.warning(f"HuggingFace API failed: {e}")
         
-        For demonstration purposes, this uses rule-based sentiment analysis
-        In production, this would connect to HuggingFace API with proper authentication
+        # Minimal fallback 
+        return self._minimal_fallback(text)
+    
+    def _get_api_key(self) -> str:
+        import os
+        return os.getenv('HUGGINGFACE_API_KEY', '')
+    
+    def _call_huggingface_api(self, text: str, api_key: str) -> str:
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
         
-        Steps:
-        1. Analyze text for sentiment indicators
-        2. Calculate confidence based on keyword strength
-        3. Return formatted result
-        """
-        try:
-            # Step 1: Rule-based sentiment analysis for demo
-            text_lower = text.lower()
+        payload = {
+            "inputs": text,
+            "parameters": {"return_all_scores": True}
+        }
+        
+        response = requests.post(self._api_url, headers=headers, json=payload, timeout=10)
+        
+        if response.status_code == 200:
+            result = response.json()
+            return self._process_ai_result(result)
+        else:
+            logger.warning(f"API returned status {response.status_code}")
+            return None
+    
+    def _process_ai_result(self, result) -> str:
+        # Process HuggingFace AI model response
+        if isinstance(result, list) and len(result) > 0:
+            scores = result[0] if isinstance(result[0], list) else result
             
-            # Positive indicators
-            positive_words = [
-                'amazing', 'excellent', 'perfect', 'wonderful', 'great', 'fantastic',
-                'helpful', 'beautiful', 'clean', 'comfortable', 'recommend', 'love',
-                'best', 'outstanding', 'superb', 'brilliant', 'awesome', 'incredible'
-            ]
+            # Parse AI model labels
+            sentiment_scores = {}
+            for item in scores:
+                label = item['label'].lower()
+                score = item['score']
+                
+                # Handle different label formats
+                if 'positive' in label or label == 'label_2':
+                    sentiment_scores['positive'] = score
+                elif 'negative' in label or label == 'label_0':
+                    sentiment_scores['negative'] = score
+                elif 'neutral' in label or label == 'label_1':
+                    sentiment_scores['neutral'] = score
             
-            # Negative indicators  
-            negative_words = [
-                'terrible', 'horrible', 'awful', 'bad', 'dirty', 'rude', 'worst',
-                'disgusting', 'disappointed', 'poor', 'unacceptable', 'nasty',
-                'broken', 'smelly', 'noisy', 'crowded', 'expensive', 'overpriced'
-            ]
-            
-            # Step 2: Count sentiment indicators
-            positive_count = sum(1 for word in positive_words if word in text_lower)
-            negative_count = sum(1 for word in negative_words if word in text_lower)
-            
-            # Step 3: Determine sentiment and confidence
-            if positive_count > negative_count:
-                sentiment = 'positive'
-                confidence = min(0.9, 0.6 + (positive_count * 0.1))
-            elif negative_count > positive_count:
-                sentiment = 'negative'
-                confidence = min(0.9, 0.6 + (negative_count * 0.1))
-            else:
-                sentiment = 'neutral'
-                confidence = 0.5
-            
-            return f"Sentiment: {sentiment}, Confidence: {confidence:.2f}"
-            
-        except Exception as e:
-            logger.error(f"Sentiment classification failed: {str(e)}")
+            # Return best sentiment with AI confidence
+            if sentiment_scores:
+                best_sentiment = max(sentiment_scores.items(), key=lambda x: x[1])
+                return f"Sentiment: {best_sentiment[0]}, Confidence: {best_sentiment[1]:.2f}"
+        
+        return None
+    
+    def _minimal_fallback(self, text: str) -> str:
+        # minimal fallback - only when AI completely fails
+        text_lower = text.lower()
+        
+        # Only 2 strongest indicators each
+        if any(word in text_lower for word in ['excellent', 'incredible']):
+            return "Sentiment: positive, Confidence: 0.70"
+        elif any(word in text_lower for word in ['terrible', 'awful']):
+            return "Sentiment: negative, Confidence: 0.70"
+        else:
             return "Sentiment: neutral, Confidence: 0.50"
 
 
 class ReviewClassifierAgent:
-    """
-    CREWAI SENTIMENT CLASSIFIER AGENT
-    
-    WELL-DEFINED ROLE:
-    - Primary Role: Sentiment Analysis Expert for Hotel Reviews
-    - Specific Responsibility: Classify customer reviews as positive, negative, or neutral
-    - Domain Expertise: Hospitality industry customer feedback analysis
-    - Communication: Uses CrewAI framework for task execution
-    
-    AGENT CAPABILITIES:
-    - Single review classification
-    - Batch review processing
-    - HuggingFace RoBERTa model integration
-    - Structured output with confidence scores
-    """
     
     def __init__(self):
-        """
-        Initialize the Sentiment Classifier Agent
-        
-        AGENT DEFINITION (Meeting Marking Rubric):
-        - Role: Well-defined sentiment analysis expert
-        - Goal: Clear classification objective
-        - Backstory: Domain-specific experience
-        - Tools: HuggingFace integration
-        """
+
         # Agent Identity
         self.name = "ReviewClassifier"
         self.role = "Sentiment Analysis Expert"
@@ -116,16 +119,10 @@ class ReviewClassifierAgent:
         # Initialize the agent
         self._create_agent()
     
+
     def _create_agent(self) -> Agent:
-        """
-        CREATE CREWAI AGENT
-        
-        This is the core CrewAI implementation that:
-        1. Sets up the agent with role, goal, and backstory
-        2. Assigns the HuggingFace sentiment tool
-        3. Configures agent behavior parameters
-        """
-        # Step 1: Setup tools
+
+        # Setup tools
         self.tools = [SentimentClassificationTool()]
         
         # Step 2: Create CrewAI Agent
@@ -141,16 +138,9 @@ class ReviewClassifierAgent:
         
         return self.agent
     
+
     def create_task(self, review_text: str) -> Task:
-        """
-        CREATE CREWAI TASK
-        
-        This creates a structured task for the CrewAI agent to execute.
-        The task contains:
-        1. Clear instructions for sentiment analysis
-        2. The review text to analyze
-        3. Expected output format
-        """
+
         task_description = f"""
         Analyze the sentiment of the following hotel review and classify it as positive, negative, or neutral.
         
@@ -173,35 +163,24 @@ class ReviewClassifierAgent:
         )
     
     def classify_review(self, review_text: str) -> Dict[str, Any]:
-        """
-        MAIN CLASSIFICATION FUNCTION
-        
-        SIMPLIFIED APPROACH:
-        Since CrewAI requires OpenAI API key, we'll use the HuggingFace tool directly
-        This demonstrates the core functionality without API dependencies
-        
-        Steps:
-        1. Use HuggingFace tool directly
-        2. Parse the result
-        3. Return structured data
-        """
+
         try:
-            # Step 1: Use HuggingFace tool directly
+            # created HuggingFace tool
             tool = SentimentClassificationTool()
             result = tool._run(review_text)
             
-            # Step 2: Parse result from tool output
+            # Parse result from tool output
             result_text = result.lower()
             
             # Extract sentiment
-            sentiment = 'neutral'  # default
+            sentiment = 'neutral' 
             if 'positive' in result_text:
                 sentiment = 'positive'
             elif 'negative' in result_text:
                 sentiment = 'negative'
             
             # Extract confidence
-            confidence = 0.5  # default
+            confidence = 0.5  
             conf_match = re.search(r'confidence:\s*(\d+\.?\d*)', result_text)
             if conf_match:
                 confidence = float(conf_match.group(1))
@@ -220,75 +199,12 @@ class ReviewClassifierAgent:
                 'raw_result': str(e)
             }
     
+    # BATCH PROCESSING
     def batch_classify(self, reviews: List[str]) -> List[Dict[str, Any]]:
-        """
-        BATCH PROCESSING
-        
-        Process multiple reviews by calling classify_review for each one.
-        This demonstrates agent reusability for multiple tasks.
-        """
+
         results = []
         for review_text in reviews:
             result = self.classify_review(review_text)
             results.append(result)
         
         return results
-
-
-# =============================================================================
-# DEMONSTRATION AND USAGE EXAMPLE
-# =============================================================================
-
-def demo_classifier_agent():
-    """
-    DEMONSTRATION FUNCTION
-    
-    This shows how the sentiment classifier works:
-    1. Create agent instance (CrewAI structure)
-    2. Process sample reviews using HuggingFace
-    3. Show results
-    
-    NOTE: Full CrewAI functionality requires OpenAI API key
-    This demo shows the HuggingFace integration working directly
-    """
-    print("=== CrewAI Sentiment Classifier Demo ===")
-    print("(Using HuggingFace directly - no API keys required)")
-    
-    # Step 1: Create agent
-    classifier = ReviewClassifierAgent()
-    print(f"✅ Created agent: {classifier.name}")
-    print(f"   Role: {classifier.role}")
-    print(f"   Model: cardiffnlp/twitter-roberta-base-sentiment-latest")
-    
-    # Step 2: Test with sample reviews
-    sample_reviews = [
-        "Amazing service! The staff was incredibly helpful and the room was perfect.",
-        "Terrible experience. The room was dirty and the staff was rude.",
-        "The hotel was okay. Nothing special but not bad either."
-    ]
-    
-    print("\n=== Processing Reviews with HuggingFace Model ===")
-    for i, review in enumerate(sample_reviews, 1):
-        print(f"\nReview {i}: {review}")
-        result = classifier.classify_review(review)
-        print(f"Result: {result['sentiment']} (confidence: {result['confidence']:.2f})")
-        if result['sentiment'] != 'neutral':
-            print(f"✅ Successfully classified!")
-        else:
-            print(f"⚠️  Using fallback (may need API access)")
-    
-    # Step 3: Batch processing demo
-    print("\n=== Batch Processing Demo ===")
-    batch_results = classifier.batch_classify(sample_reviews)
-    for i, result in enumerate(batch_results, 1):
-        print(f"Review {i}: {result['sentiment']} ({result['confidence']:.2f})")
-    
-    print("\n=== Demo Complete ===")
-    print("✅ Agent structure: CrewAI framework")
-    print("✅ AI Model: HuggingFace RoBERTa") 
-    print("✅ Functionality: Working sentiment classification")
-    print("\nNOTE: For full CrewAI crew functionality, set OPENAI_API_KEY environment variable")
-
-
-if __name__ == "__main__":
-    demo_classifier_agent()
