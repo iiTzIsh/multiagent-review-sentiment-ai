@@ -1373,3 +1373,46 @@ INFO 2025-09-26 18:30:53,834 orchestrator 28480 16380 [COMPLETED] Single review 
 INFO 2025-09-26 18:30:53,846 basehttp 28480 16380 "POST /api/v1/process/ HTTP/1.1" 200 388
 INFO 2025-09-26 18:30:55,887 basehttp 28480 16380 "GET /dashboard/ HTTP/1.1" 200 42780
 INFO 2025-09-26 18:30:57,590 basehttp 28480 16380 "GET /dashboard/reviews/ HTTP/1.1" 200 163157
+INFO 2025-09-26 18:50:13,619 autoreload 30460 41956 Watching for file changes with StatReloader
+INFO 2025-09-26 18:50:16,405 basehttp 30460 19984 "GET / HTTP/1.1" 302 0
+INFO 2025-09-26 18:50:16,434 basehttp 30460 19984 "GET /dashboard/ HTTP/1.1" 200 42782
+INFO 2025-09-26 18:50:22,352 basehttp 30460 19984 "GET /dashboard/upload/ HTTP/1.1" 200 60952
+INFO 2025-09-26 18:50:26,286 basehttp 30460 19984 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-26 18:50:27,987 basehttp 30460 19984 "GET /dashboard/ HTTP/1.1" 200 42776
+INFO 2025-09-26 18:50:29,169 basehttp 30460 19984 "GET /dashboard/reviews/ HTTP/1.1" 200 161252
+INFO 2025-09-26 18:50:31,366 basehttp 30460 19984 "GET /dashboard/ HTTP/1.1" 200 42776
+ERROR 2025-09-26 18:50:33,528 views 30460 19984 AI agent processing failed: No module named 'crewai'
+ERROR 2025-09-26 18:50:33,528 log 30460 19984 Internal Server Error: /api/v1/process/
+ERROR 2025-09-26 18:50:33,528 basehttp 30460 19984 "POST /api/v1/process/ HTTP/1.1" 500 142
+INFO 2025-09-26 18:50:49,585 autoreload 7072 20580 Watching for file changes with StatReloader
+INFO 2025-09-26 18:50:51,189 basehttp 7072 37800 "GET / HTTP/1.1" 302 0
+INFO 2025-09-26 18:50:51,214 basehttp 7072 37800 "GET /dashboard/ HTTP/1.1" 200 42776
+INFO 2025-09-26 18:51:00,137 orchestrator 7072 37800 [OK] Classifier Agent initialized
+INFO 2025-09-26 18:51:00,139 orchestrator 7072 37800 [OK] Scorer Agent initialized
+INFO 2025-09-26 18:51:00,141 orchestrator 7072 37800 [OK] Summarizer Agent initialized
+INFO 2025-09-26 18:51:00,141 orchestrator 7072 37800 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-26 18:51:00,142 views 7072 37800 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-26 18:51:00,146 orchestrator 7072 37800 [STEP 1] Classifying sentiment for review 2cafc5d7-1df0-4791-a99d-f1337b5001e7
+INFO 2025-09-26 18:51:01,273 orchestrator 7072 37800 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-26 18:51:07,697 orchestrator 7072 37800 [COMPLETED] Single review workflow completed in 7.55s
+INFO 2025-09-26 18:51:07,704 orchestrator 7072 37800 [STEP 1] Classifying sentiment for review 99052b0e-98a1-4ebb-813f-74f35f230575
+INFO 2025-09-26 18:51:08,626 orchestrator 7072 37800 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-26 18:51:09,427 orchestrator 7072 37800 [COMPLETED] Single review workflow completed in 1.72s
+INFO 2025-09-26 18:51:09,434 orchestrator 7072 37800 [STEP 1] Classifying sentiment for review bc661695-0c49-4ac6-93ff-b8ac2f39646d
+INFO 2025-09-26 18:51:10,229 orchestrator 7072 37800 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-26 18:51:11,026 orchestrator 7072 37800 [COMPLETED] Single review workflow completed in 1.59s
+INFO 2025-09-26 18:51:11,031 orchestrator 7072 37800 [STEP 1] Classifying sentiment for review af6f5d43-ad9c-4e87-9da0-c242db798192
+INFO 2025-09-26 18:51:11,987 orchestrator 7072 37800 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-26 18:51:12,788 orchestrator 7072 37800 [COMPLETED] Single review workflow completed in 1.76s
+INFO 2025-09-26 18:51:12,794 orchestrator 7072 37800 [STEP 1] Classifying sentiment for review 99370d87-d671-4918-8631-8a91b50dcece
+INFO 2025-09-26 18:51:13,617 orchestrator 7072 37800 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-26 18:51:15,029 orchestrator 7072 37800 [COMPLETED] Single review workflow completed in 2.23s
+INFO 2025-09-26 18:51:15,040 basehttp 7072 37800 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-26 18:51:17,063 basehttp 7072 37800 "GET /dashboard/ HTTP/1.1" 200 42781
+INFO 2025-09-26 18:51:18,903 basehttp 7072 37800 "GET /dashboard/reviews/ HTTP/1.1" 200 163157
+INFO 2025-09-26 18:52:18,131 autoreload 21856 29112 Watching for file changes with StatReloader
+INFO 2025-09-26 18:52:20,791 basehttp 21856 32264 "GET /dashboard/reviews/ HTTP/1.1" 200 163157
+INFO 2025-09-26 18:52:26,955 basehttp 21856 32264 "GET /dashboard/ HTTP/1.1" 200 42781
+INFO 2025-09-26 18:52:33,577 basehttp 21856 32264 "GET /dashboard/analytics/ HTTP/1.1" 200 76741
+WARNING 2025-09-26 18:52:33,598 basehttp 21856 32264 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-26 18:52:38,718 basehttp 21856 23608 "GET /dashboard/ HTTP/1.1" 200 42781
