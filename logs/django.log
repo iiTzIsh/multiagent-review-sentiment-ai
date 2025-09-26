@@ -1416,3 +1416,23 @@ INFO 2025-09-26 18:52:26,955 basehttp 21856 32264 "GET /dashboard/ HTTP/1.1" 200
 INFO 2025-09-26 18:52:33,577 basehttp 21856 32264 "GET /dashboard/analytics/ HTTP/1.1" 200 76741
 WARNING 2025-09-26 18:52:33,598 basehttp 21856 32264 "GET /static/css/analytics.css HTTP/1.1" 404 1978
 INFO 2025-09-26 18:52:38,718 basehttp 21856 23608 "GET /dashboard/ HTTP/1.1" 200 42781
+INFO 2025-09-26 20:33:42,708 autoreload 35088 9080 Watching for file changes with StatReloader
+INFO 2025-09-26 20:33:47,063 basehttp 35088 40668 "GET / HTTP/1.1" 302 0
+INFO 2025-09-26 20:33:47,177 basehttp 35088 40668 "GET /dashboard/ HTTP/1.1" 200 42830
+INFO 2025-09-26 20:33:47,208 basehttp 35088 3680 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-09-26 20:33:47,239 basehttp 35088 40668 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 35242
+INFO 2025-09-26 20:33:52,879 basehttp 35088 40668 "GET /dashboard/reviews/ HTTP/1.1" 200 163157
+INFO 2025-09-26 20:33:59,725 basehttp 35088 40668 "GET /dashboard/analytics/ HTTP/1.1" 200 76741
+INFO 2025-09-26 20:33:59,740 basehttp 35088 40668 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+WARNING 2025-09-26 20:33:59,754 basehttp 35088 3680 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-26 20:34:04,522 basehttp 35088 40668 "GET /dashboard/upload/ HTTP/1.1" 200 61000
+INFO 2025-09-26 20:34:07,336 basehttp 35088 40668 "GET /dashboard/reports/generate/ HTTP/1.1" 200 29158
+INFO 2025-09-26 20:34:07,349 basehttp 35088 40668 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-26 20:34:12,695 basehttp 35088 40668 "GET /dashboard/upload/ HTTP/1.1" 200 61000
+INFO 2025-09-26 20:34:14,084 basehttp 35088 40668 "GET /dashboard/reviews/ HTTP/1.1" 200 163157
+INFO 2025-09-26 20:34:36,249 basehttp 35088 40668 "GET /dashboard/reviews/ HTTP/1.1" 200 163157
+INFO 2025-09-26 20:34:36,262 basehttp 35088 40668 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37178
+INFO 2025-09-26 21:12:16,763 basehttp 35088 38996 "GET /dashboard/reviews/ HTTP/1.1" 200 163157
+INFO 2025-09-26 21:12:16,775 basehttp 35088 38996 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37178
+INFO 2025-09-26 21:12:18,755 basehttp 35088 38996 "GET /dashboard/ HTTP/1.1" 200 42832
+INFO 2025-09-26 21:12:37,372 basehttp 35088 38996 "GET /dashboard/reviews/ HTTP/1.1" 200 163157
