@@ -381,3 +381,51 @@ class ReviewSearchAgent:
         # Sort by relevance score (descending)
         return sorted(reviews, key=lambda x: x.get('relevance_score', 0), reverse=True)
     
+       
+    def suggest_keywords(self, category: str = "general") -> List[str]:
+        """
+        KEYWORD SUGGESTION FUNCTION
+        
+        Get keyword suggestions for better search results
+        """
+        try:
+            tool = KeywordSuggestionTool()
+            result = tool._run(category)
+            
+            # Extract keywords from the result
+            if "Suggested keywords" in result:
+                keywords_part = result.split(": ", 1)[1]
+                keywords = [kw.strip() for kw in keywords_part.split(", ")]
+                return keywords
+            
+            return []
+            
+        except Exception as e:
+            logger.error(f"Keyword suggestion failed: {str(e)}")
+            return ['service', 'room', 'staff', 'clean', 'location']
+    
+    def advanced_search(self, reviews: List[Dict[str, Any]], 
+                       sentiment: Optional[str] = None,
+                       min_score: Optional[float] = None,
+                       max_score: Optional[float] = None,
+                       keywords: Optional[List[str]] = None,
+                       exclude_keywords: Optional[List[str]] = None) -> Dict[str, Any]:
+        """
+        ADVANCED SEARCH FUNCTION
+        
+        Comprehensive search with all available criteria
+        """
+        search_criteria = {}
+        
+        if sentiment:
+            search_criteria['sentiment'] = sentiment
+        if min_score is not None:
+            search_criteria['min_score'] = min_score
+        if max_score is not None:
+            search_criteria['max_score'] = max_score
+        if keywords:
+            search_criteria['keywords'] = keywords
+        if exclude_keywords:
+            search_criteria['exclude_keywords'] = exclude_keywords
+        
+        return self.search_reviews(reviews, **search_criteria)
