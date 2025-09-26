@@ -429,3 +429,114 @@ class ReviewSearchAgent:
             search_criteria['exclude_keywords'] = exclude_keywords
         
         return self.search_reviews(reviews, **search_criteria)
+
+    # =============================================================================
+# DEMONSTRATION AND USAGE EXAMPLE
+# =============================================================================
+
+def demo_search_agent():
+    """
+    DEMONSTRATION FUNCTION
+    
+    This shows how the review search agent works:
+    1. Create agent instance (CrewAI structure)
+    2. Search sample reviews with different criteria
+    3. Show results and search statistics
+    
+    NOTE: Full CrewAI functionality requires OpenAI API key
+    This demo shows the search logic working directly
+    """
+    print("=== CrewAI Review Search Agent Demo ===")
+    print("(Using rule-based filtering - no API keys required)")
+    
+    # Step 1: Create agent
+    searcher = ReviewSearchAgent()
+    print(f"✅ Created agent: {searcher.name}")
+    print(f"   Role: {searcher.role}")
+    print(f"   Search method: Multi-criteria filtering with relevance ranking")
+    
+    # Step 2: Create sample review dataset
+    sample_reviews = [
+        {
+            "text": "Amazing service! The staff was incredibly helpful and the room was perfect.",
+            "sentiment": "positive",
+            "score": 4.8
+        },
+        {
+            "text": "Terrible experience. The room was dirty and the staff was rude.",
+            "sentiment": "negative", 
+            "score": 1.2
+        },
+        {
+            "text": "The hotel was okay. Clean room but average service.",
+            "sentiment": "neutral",
+            "score": 3.0
+        },
+        {
+            "text": "Great location and friendly staff. Wifi was excellent!",
+            "sentiment": "positive",
+            "score": 4.2
+        },
+        {
+            "text": "Room was clean but the service was disappointing. Staff not helpful.",
+            "sentiment": "negative",
+            "score": 2.1
+        }
+    ]
+    
+    print(f"\n=== Sample Dataset: {len(sample_reviews)} Reviews ===")
+    
+    # Step 3: Demo different search scenarios
+    search_scenarios = [
+        {
+            "name": "Search for positive reviews",
+            "criteria": {"sentiment": "positive"}
+        },
+        {
+            "name": "Search for high-scoring reviews (4.0+)",
+            "criteria": {"min_score": 4.0}
+        },
+        {
+            "name": "Search for 'staff' mentions",
+            "criteria": {"keywords": ["staff"]}
+        },
+        {
+            "name": "Search for service issues (negative + service keywords)",
+            "criteria": {"sentiment": "negative", "keywords": ["service", "staff"]}
+        }
+    ]
+    
+    print("\n=== Running Search Scenarios ===")
+    for scenario in search_scenarios:
+        print(f"\n🔍 {scenario['name']}:")
+        result = searcher.search_reviews(sample_reviews, **scenario['criteria'])
+        
+        if result['success']:
+            stats = result['search_stats']
+            print(f"   Found: {stats['total_matches_found']} / {stats['total_reviews_searched']} reviews")
+            print(f"   Match rate: {stats['match_percentage']:.1f}%")
+            
+            # Show first result if any
+            if result['results']:
+                first_result = result['results'][0]
+                preview = first_result['text'][:50] + "..." if len(first_result['text']) > 50 else first_result['text']
+                print(f"   Preview: \"{preview}\"")
+        else:
+            print("   ❌ Search failed")
+    
+    # Step 4: Demo keyword suggestions
+    print("\n=== Keyword Suggestions Demo ===")
+    categories = ['service', 'room', 'amenities', 'problems']
+    for category in categories:
+        keywords = searcher.suggest_keywords(category)
+        print(f"{category.capitalize()}: {', '.join(keywords[:5])}...")
+    
+    print("\n=== Demo Complete ===")
+    print("✅ Agent structure: CrewAI framework")
+    print("✅ Search method: Multi-criteria filtering with relevance ranking") 
+    print("✅ Functionality: Working review search and filtering")
+    print("\nNOTE: For full CrewAI crew functionality, set OPENAI_API_KEY environment variable")
+
+
+if __name__ == "__main__":
+    demo_search_agent()
