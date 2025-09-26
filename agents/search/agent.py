@@ -115,3 +115,77 @@ class ReviewFilterTool(BaseTool):
                     return False
         
         return True
+    
+class KeywordSuggestionTool(BaseTool):
+    """
+    Keyword Suggestion Tool for CrewAI
+    
+    PURPOSE: Suggest relevant keywords based on common hotel review themes
+    INPUTS: Current search context or category
+    OUTPUT: List of suggested keywords for better search results
+    """
+    
+    name: str = "keyword_suggester"
+    description: str = "Suggest relevant keywords for hotel review searches"
+    
+    def _run(self, category: str = "general") -> str:
+        """
+        KEYWORD SUGGESTION FUNCTION
+        
+        Provide keyword suggestions based on hotel review categories
+        """
+        try:
+            keyword_categories = {
+                'service': [
+                    'staff', 'service', 'helpful', 'friendly', 'rude', 'professional',
+                    'reception', 'front desk', 'concierge', 'housekeeping'
+                ],
+                'room': [
+                    'room', 'bed', 'bathroom', 'clean', 'dirty', 'comfortable',
+                    'spacious', 'small', 'view', 'balcony', 'window', 'furniture'
+                ],
+                'amenities': [
+                    'wifi', 'internet', 'pool', 'gym', 'spa', 'restaurant',
+                    'bar', 'breakfast', 'parking', 'elevator', 'air conditioning'
+                ],
+                'location': [
+                    'location', 'convenient', 'downtown', 'airport', 'beach',
+                    'transport', 'walking distance', 'nearby', 'accessible'
+                ],
+                'value': [
+                    'price', 'value', 'expensive', 'cheap', 'worth', 'money',
+                    'budget', 'affordable', 'overpriced', 'reasonable'
+                ],
+                'experience': [
+                    'experience', 'stay', 'visit', 'trip', 'vacation',
+                    'business', 'family', 'couple', 'recommend', 'return'
+                ],
+                'problems': [
+                    'problem', 'issue', 'complaint', 'broken', 'noise', 'noisy',
+                    'smell', 'maintenance', 'construction', 'renovation'
+                ],
+                'positive': [
+                    'excellent', 'amazing', 'perfect', 'wonderful', 'great',
+                    'fantastic', 'outstanding', 'superb', 'brilliant', 'awesome'
+                ],
+                'negative': [
+                    'terrible', 'horrible', 'awful', 'bad', 'worst', 'disgusting',
+                    'disappointed', 'poor', 'unacceptable', 'nasty'
+                ]
+            }
+            
+            category_lower = category.lower()
+            if category_lower in keyword_categories:
+                suggestions = keyword_categories[category_lower]
+            else:
+                # General suggestions - mix of all categories
+                suggestions = [
+                    'service', 'room', 'staff', 'clean', 'location', 'wifi',
+                    'breakfast', 'comfortable', 'friendly', 'value', 'experience'
+                ]
+            
+            return f"Suggested keywords for '{category}': {', '.join(suggestions)}"
+            
+        except Exception as e:
+            logger.error(f"Keyword suggestion failed: {str(e)}")
+            return "Suggested keywords: service, room, staff, clean, location"
