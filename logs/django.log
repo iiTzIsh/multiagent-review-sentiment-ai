@@ -1436,3 +1436,4 @@ INFO 2025-09-26 21:12:16,763 basehttp 35088 38996 "GET /dashboard/reviews/ HTTP/
 INFO 2025-09-26 21:12:16,775 basehttp 35088 38996 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37178
 INFO 2025-09-26 21:12:18,755 basehttp 35088 38996 "GET /dashboard/ HTTP/1.1" 200 42832
 INFO 2025-09-26 21:12:37,372 basehttp 35088 38996 "GET /dashboard/reviews/ HTTP/1.1" 200 163157
+INFO 2025-09-27 10:06:59,457 autoreload 12904 7552 Watching for file changes with StatReloader
