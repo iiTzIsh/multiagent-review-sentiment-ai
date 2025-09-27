@@ -198,10 +198,12 @@ class ReviewSummarizerAgent:
             combined_text = ' '.join(review_texts)
             
             # Use tools for analysis
-            summary_tool = TextSummarizationTool()
+            summary_tool_rule = TextSummarizationTool()
+            summary_tool_model = ModelSummarizationTool()
             keyword_tool = KeywordExtractionTool()
             
-            summary_text = summary_tool._run(combined_text)
+            rule_based_summary = summary_tool_rule._run(combined_text)
+            model_based_summary = summary_tool_model._run(combined_text)
             key_themes = keyword_tool._run(review_texts)
             
             # Generate insights and recommendations
