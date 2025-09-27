@@ -863,3 +863,23 @@ WARNING 2025-09-27 02:54:20,657 basehttp 8952 25200 "GET /static/css/analytics.c
 INFO 2025-09-27 02:54:52,847 basehttp 8952 18328 "GET /dashboard/reviews/ HTTP/1.1" 200 161975
 WARNING 2025-09-27 02:55:01,706 log 8952 19988 Method Not Allowed: /api/v1/search/
 WARNING 2025-09-27 02:55:01,707 basehttp 8952 19988 "GET /api/v1/search/?q=excellent HTTP/1.1" 405 40
+INFO 2025-09-27 11:20:04,387 autoreload 21012 27108 Watching for file changes with StatReloader
+INFO 2025-09-27 11:20:11,033 basehttp 21012 27588 "GET / HTTP/1.1" 302 0
+INFO 2025-09-27 11:20:11,354 basehttp 21012 27588 "GET /dashboard/ HTTP/1.1" 200 42811
+INFO 2025-09-27 11:20:11,479 basehttp 21012 8488 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-09-27 11:20:11,541 basehttp 21012 27588 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 200 37280
+WARNING 2025-09-27 11:20:12,023 log 21012 23828 Not Found: /favicon.ico
+WARNING 2025-09-27 11:20:12,024 basehttp 21012 23828 "GET /favicon.ico HTTP/1.1" 404 3322
+INFO 2025-09-27 11:20:28,724 basehttp 21012 23828 "GET /dashboard/upload/ HTTP/1.1" 200 60987
+INFO 2025-09-27 11:20:51,004 basehttp 21012 6504 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-27 11:21:24,181 basehttp 21012 6504 "GET /dashboard/reviews/ HTTP/1.1" 200 160830
+INFO 2025-09-27 11:21:31,252 basehttp 21012 6504 "GET /dashboard/analytics/ HTTP/1.1" 200 76739
+WARNING 2025-09-27 11:21:31,266 basehttp 21012 6504 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-27 11:21:33,689 basehttp 21012 5156 "GET /dashboard/upload/ HTTP/1.1" 200 60973
+INFO 2025-09-27 11:21:35,796 basehttp 21012 5156 "GET /dashboard/reports/generate/ HTTP/1.1" 200 29047
+INFO 2025-09-27 11:21:37,877 basehttp 21012 5156 "GET /dashboard/ HTTP/1.1" 200 42796
+INFO 2025-09-27 11:39:10,639 basehttp 21012 9212 "GET /dashboard/upload/ HTTP/1.1" 200 60974
+INFO 2025-09-27 11:39:10,654 basehttp 21012 9212 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-27 11:39:14,205 basehttp 21012 9212 "GET /dashboard/reviews/ HTTP/1.1" 200 160830
+INFO 2025-09-27 11:39:16,891 basehttp 21012 9212 "GET /dashboard/analytics/ HTTP/1.1" 200 76739
+WARNING 2025-09-27 11:39:16,906 basehttp 21012 9212 "GET /static/css/analytics.css HTTP/1.1" 404 1978
