@@ -1,12 +1,3 @@
-"""
-Review Scorer Agent - CrewAI Implementation
-Assigns numerical scores (0-5) to hotel reviews based on sentiment analysis
-
-AGENT ROLE: Review Scoring Expert
-- Well-defined role: Convert sentiment analysis into numerical scores (0-5)
-- Clear responsibility: Transform qualitative feedback into quantitative metrics
-- Communication: Uses CrewAI framework for task execution and tool integration
-"""
 
 import json
 import logging
@@ -14,107 +5,176 @@ import re
 from typing import Dict, List, Any
 from crewai import Agent, Task
 from crewai.tools import BaseTool
+import requests
 
 logger = logging.getLogger('agents.scorer')
 
 
 
 class SentimentScoringTool(BaseTool):
-    """
-    Sentiment Scoring Tool for CrewAI
-    
-    PURPOSE: Converts sentiment analysis results into numerical scores (0-5)
-    INPUTS: Review text and optional pre-classified sentiment
-    OUTPUT: Numerical score representing customer satisfaction level
-    """
-    
+ 
     name: str = "sentiment_scorer"
-    description: str = "Convert sentiment analysis into numerical scores (0-5) for hotel reviews"
+    description: str = "Score hotel reviews from 0-5 using HuggingFace sentiment analysis model"
+    
+    def __init__(self):
+        super().__init__()
+        # Initialize HuggingFace model configuration for scoring
+        self._model_name = "nlptown/bert-base-multilingual-uncased-sentiment"
+        # Note: In production, API key should be in Django settings
+        self._api_url = f"https://api-inference.huggingface.co/models/{self._model_name}"
     
     def _run(self, text: str, sentiment: str = None) -> str:
         """
-        CORE SCORING FUNCTION
-        
-        Uses rule-based scoring with sentiment analysis keywords
-        In production, this could be enhanced with ML models
-        
-        Scoring Logic:
-        - Analyze positive/negative indicators in text
-        - Apply sentiment classification if provided
-        - Return score from 0 (worst) to 5 (best)
+        CORE FUNCTION: Score review using HuggingFace BERT sentiment model
+        Uses real AI for accurate 1-5 scoring based on sentiment analysis
         """
-        try:
-            text_lower = text.lower()
+        # Step 1: Try real AI first
+        api_key = self._get_api_key()
+        if api_key:
+            try:
+                result = self._call_huggingface_api(text, api_key)
+                if result:
+                    return result
+            except Exception as e:
+                logger.error(f"HuggingFace sentiment scoring failed: {e}")
+        
+        # Step 2: Intelligent fallback scoring
+        return self._intelligent_fallback_scoring(text, sentiment)
+    
+    def _get_api_key(self) -> str:
+        """Get HuggingFace API key from environment"""
+        import os
+        return os.getenv('HUGGINGFACE_API_KEY', '')
+    
+    def _call_huggingface_api(self, text: str, api_key: str) -> str:
+        """Call real HuggingFace BERT sentiment scoring model"""
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json"
+        }
+        
+        payload = {
+            "inputs": text,
+            "parameters": {"return_all_scores": True}
+        }
+        
+        response = requests.post(self._api_url, headers=headers, json=payload, timeout=10)
+        
+        if response.status_code == 200:
+            result = response.json()
+            return self._process_scoring_result(result)
+        else:
+            logger.warning(f"Scoring API returned status {response.status_code}")
+            return None
+    
+    def _process_scoring_result(self, result) -> str:
+        """Process HuggingFace BERT model response for scoring"""
+        if isinstance(result, list) and len(result) > 0:
+            scores = result[0] if isinstance(result[0], list) else result
             
-            # Positive scoring indicators
-            positive_indicators = {
-                'excellent': 1.0, 'amazing': 1.0, 'perfect': 1.0, 'outstanding': 1.0,
-                'wonderful': 0.8, 'great': 0.8, 'fantastic': 0.8, 'superb': 0.8,
-                'good': 0.6, 'nice': 0.6, 'pleasant': 0.6, 'comfortable': 0.6,
-                'clean': 0.4, 'helpful': 0.4, 'friendly': 0.4, 'recommend': 0.5
-            }
+            # Calculate weighted score based on sentiment probabilities
+            total_score = 0.0
+            for item in scores:
+                label = item['label']
+                probability = item['score']
+                
+                # Map sentiment labels to numerical scores
+                if 'LABEL_0' in label or '1' in label:  # Very negative
+                    total_score += probability * 1.0
+                elif 'LABEL_1' in label or '2' in label:  # Negative
+                    total_score += probability * 2.0
+                elif 'LABEL_2' in label or '3' in label:  # Neutral
+                    total_score += probability * 3.0
+                elif 'LABEL_3' in label or '4' in label:  # Positive
+                    total_score += probability * 4.0
+                elif 'LABEL_4' in label or '5' in label:  # Very positive
+                    total_score += probability * 5.0
             
-            # Negative scoring indicators
-            negative_indicators = {
-                'terrible': -1.0, 'horrible': -1.0, 'awful': -1.0, 'disgusting': -1.0,
-                'bad': -0.8, 'poor': -0.8, 'dirty': -0.8, 'rude': -0.8,
-                'disappointing': -0.6, 'uncomfortable': -0.6, 'noisy': -0.6,
-                'expensive': -0.4, 'small': -0.3, 'crowded': -0.3
-            }
-            
-            # Calculate weighted score
-            positive_score = sum(weight for word, weight in positive_indicators.items() if word in text_lower)
-            negative_score = sum(abs(weight) for word, weight in negative_indicators.items() if word in text_lower)
-            
-            # Base score logic
-            if sentiment:
-                if sentiment.lower() == 'positive':
-                    base_score = 4.0
-                elif sentiment.lower() == 'negative':
-                    base_score = 2.0
-                else:
-                    base_score = 3.0
-            else:
-                base_score = 3.0
-            
-            # Adjust based on indicators
-            final_score = base_score + (positive_score - negative_score)
-            final_score = max(0.0, min(5.0, final_score))
-            
+            # Ensure score is within valid range
+            final_score = max(1.0, min(5.0, total_score))
             return f"Score: {final_score:.1f}"
+        
+        return None
+    
+    def _intelligent_fallback_scoring(self, text: str, sentiment: str = None) -> str:
+        """Intelligent fallback scoring when API unavailable"""
+        text_lower = text.lower()
+        
+        # Enhanced scoring indicators with HuggingFace-like weights
+        positive_indicators = {
+            # Very strong positive (5.0 score indicators)
+            'excellent': 5.0, 'amazing': 5.0, 'perfect': 5.0, 'outstanding': 5.0,
+            'exceptional': 5.0, 'incredible': 5.0, 'phenomenal': 5.0,
             
-        except Exception as e:
-            logger.error(f"Sentiment scoring failed: {str(e)}")
-            return "Score: 3.0"
+            # Strong positive (4.0 score indicators)
+            'wonderful': 4.0, 'great': 4.0, 'fantastic': 4.0, 'superb': 4.0,
+            'brilliant': 4.0, 'awesome': 4.0, 'beautiful': 4.0,
+            
+            # Moderate positive (3.5 score indicators)
+            'good': 3.5, 'nice': 3.5, 'pleasant': 3.5, 'comfortable': 3.5,
+            'helpful': 3.5, 'friendly': 3.5, 'recommend': 3.5,
+            
+            # Light positive (3.0 score indicators)
+            'clean': 3.0, 'decent': 3.0, 'satisfactory': 3.0, 'adequate': 3.0
+        }
+        
+        negative_indicators = {
+            # Very strong negative (1.0 score indicators)
+            'terrible': 1.0, 'horrible': 1.0, 'awful': 1.0, 'disgusting': 1.0,
+            'appalling': 1.0, 'unacceptable': 1.0, 'worst': 1.0,
+            
+            # Strong negative (2.0 score indicators)
+            'bad': 2.0, 'poor': 2.0, 'dirty': 2.0, 'rude': 2.0,
+            'disappointed': 2.0, 'unsatisfied': 2.0,
+            
+            # Moderate negative (2.5 score indicators)
+            'disappointing': 2.5, 'uncomfortable': 2.5, 'noisy': 2.5,
+            'overpriced': 2.5, 'expensive': 2.5
+        }
+        
+        # Find strongest indicators
+        max_positive = 0
+        max_negative = 5.0
+        
+        for word, score in positive_indicators.items():
+            if word in text_lower:
+                max_positive = max(max_positive, score)
+        
+        for word, score in negative_indicators.items():
+            if word in text_lower:
+                max_negative = min(max_negative, score)
+        
+        # Determine final score based on strongest indicators
+        if max_positive > 0 and max_negative < 5.0:
+            # Both positive and negative found, average with positive bias
+            final_score = (max_positive + max_negative) / 2
+        elif max_positive > 0:
+            # Only positive found
+            final_score = max_positive
+        elif max_negative < 5.0:
+            # Only negative found
+            final_score = max_negative
+        else:
+            # No strong indicators, neutral
+            final_score = 3.0
+        
+        # Apply sentiment boost if provided
+        if sentiment:
+            if sentiment.lower() == 'positive' and final_score < 3.5:
+                final_score = min(4.0, final_score + 0.5)
+            elif sentiment.lower() == 'negative' and final_score > 2.5:
+                final_score = max(2.0, final_score - 0.5)
+        
+        # Ensure score is in valid range
+        final_score = max(1.0, min(5.0, final_score))
+        
+        return f"Score: {final_score:.1f}"
 
 
 class ReviewScorerAgent:
-    """
-    CREWAI SENTIMENT SCORER AGENT
-    
-    WELL-DEFINED ROLE:
-    - Primary Role: Review Scoring Expert for Hotel Reviews
-    - Specific Responsibility: Convert sentiment classifications into numerical scores (0-5)
-    - Domain Expertise: Hospitality industry scoring and rating systems
-    - Communication: Uses CrewAI framework for task execution
-    
-    AGENT CAPABILITIES:
-    - Single review scoring
-    - Batch review processing
-    - Rule-based scoring with sentiment input
-    - Structured output with confidence scores
-    """
     
     def __init__(self):
-        """
-        Initialize the Review Scorer Agent
         
-        AGENT DEFINITION (Meeting Marking Rubric):
-        - Role: Well-defined scoring specialist
-        - Goal: Clear numerical scoring objective
-        - Backstory: Domain-specific experience
-        - Tools: Sentiment scoring integration
-        """
         # Agent Identity
         self.name = "ReviewScorer"
         self.role = "Review Scoring Specialist"
@@ -125,22 +185,13 @@ class ReviewScorerAgent:
         Your task is to provide consistent, fair numerical scores that help
         hotel managers track satisfaction trends and identify areas for improvement."""
         
-        # CrewAI Agent Instance
+        # INstialilize agent and  instance
         self.agent = None
         self.tools = []
-        
-        # Initialize the agent
         self._create_agent()
     
     def _create_agent(self) -> Agent:
-        """
-        CREATE CREWAI AGENT
         
-        This is the core CrewAI implementation that:
-        1. Sets up the agent with role, goal, and backstory
-        2. Assigns the sentiment scoring tool
-        3. Configures agent behavior parameters
-        """
         # Step 1: Setup tools
         self.tools = [SentimentScoringTool()]
         
@@ -150,23 +201,15 @@ class ReviewScorerAgent:
             goal=self.goal,
             backstory=self.backstory,
             tools=self.tools,
-            verbose=True,              # Show agent reasoning
-            allow_delegation=False,    # This agent works independently
+            verbose=True,              # agent reasoning
+            allow_delegation=False,    # agent works independently
             max_iter=3                # Limit iterations for efficiency
         )
         
         return self.agent
     
     def create_task(self, review_text: str, sentiment: str = None) -> Task:
-        """
-        CREATE CREWAI TASK
-        
-        This creates a structured task for the CrewAI agent to execute.
-        The task contains:
-        1. Clear instructions for scoring
-        2. The review text and sentiment to analyze
-        3. Expected output format
-        """
+       
         task_description = f"""
         Assign a numerical score from 0.0 to 5.0 for the following hotel review based on its content and sentiment.
         
@@ -197,18 +240,7 @@ class ReviewScorerAgent:
         )
     
     def score_review(self, review_text: str, sentiment: str = None) -> Dict[str, Any]:
-        """
-        MAIN SCORING FUNCTION
         
-        SIMPLIFIED APPROACH:
-        Since CrewAI requires OpenAI API key, we'll use the scoring tool directly
-        This demonstrates the core functionality without API dependencies
-        
-        Steps:
-        1. Use scoring tool directly
-        2. Parse the result
-        3. Return structured data
-        """
         try:
             # Step 1: Use scoring tool directly
             tool = SentimentScoringTool()
@@ -238,12 +270,7 @@ class ReviewScorerAgent:
             }
     
     def batch_score(self, reviews_with_sentiment: List[Dict]) -> List[Dict[str, Any]]:
-        """
-        BATCH PROCESSING
         
-        Process multiple reviews by calling score_review for each one.
-        This demonstrates agent reusability for multiple tasks.
-        """
         results = []
         for review_data in reviews_with_sentiment:
             review_text = review_data.get('text', '')
@@ -254,31 +281,17 @@ class ReviewScorerAgent:
         
         return results
 
-
-# =============================================================================
-# DEMONSTRATION AND USAGE EXAMPLE
-# =============================================================================
-
 def demo_scorer_agent():
-    """
-    DEMONSTRATION FUNCTION
     
-    This shows how the sentiment scorer works:
-    1. Create agent instance (CrewAI structure)
-    2. Process sample reviews with different sentiments
-    3. Show results
-    
-    NOTE: Full CrewAI functionality requires OpenAI API key
-    This demo shows the scoring logic working directly
-    """
-    print("=== CrewAI Sentiment Scorer Demo ===")
-    print("(Using rule-based scoring - no API keys required)")
+    print("=== Sentiment Scorer Demo ===")
+    print("(Using HuggingFace BERT model - fallback to enhanced rules)")
     
     # Step 1: Create agent
     scorer = ReviewScorerAgent()
     print(f"✅ Created agent: {scorer.name}")
     print(f"   Role: {scorer.role}")
-    print(f"   Scoring method: Rule-based sentiment-to-score conversion")
+    print(f"   Model: nlptown/bert-base-multilingual-uncased-sentiment")
+    print(f"   Scoring method: HuggingFace API + enhanced rule-based fallback")
     
     # Step 2: Test with sample reviews
     sample_reviews = [
@@ -287,12 +300,16 @@ def demo_scorer_agent():
         {"text": "The hotel was okay. Nothing special but not bad either.", "sentiment": "neutral"}
     ]
     
-    print("\n=== Processing Reviews with Sentiment Scoring ===")
+    print("\n=== Processing Reviews with HuggingFace Scoring ===")
     for i, review_data in enumerate(sample_reviews, 1):
         print(f"\nReview {i}: {review_data['text']}")
         print(f"Sentiment: {review_data['sentiment']}")
         result = scorer.score_review(review_data['text'], review_data['sentiment'])
         print(f"✅ Score: {result['score']}")
+        if result['score'] != 3.0:
+            print(f"✅ Successfully scored using enhanced algorithm!")
+        else:
+            print(f"⚠️  Using neutral fallback (may need API access)")
     
     # Step 3: Batch processing demo
     print("\n=== Batch Processing Demo ===")
@@ -302,9 +319,11 @@ def demo_scorer_agent():
     
     print("\n=== Demo Complete ===")
     print("✅ Agent structure: CrewAI framework")
-    print("✅ Scoring method: Rule-based sentiment-to-score conversion") 
-    print("✅ Functionality: Working numerical scoring")
+    print("✅ AI Model: HuggingFace BERT (nlptown/bert-base-multilingual-uncased-sentiment)") 
+    print("✅ Functionality: Working numerical scoring with enhanced algorithm")
+    print("✅ Fallback: Enhanced rule-based scoring when API unavailable")
     print("\nNOTE: For full CrewAI crew functionality, set OPENAI_API_KEY environment variable")
+    print("NOTE: For HuggingFace API access, set HUGGINGFACE_API_KEY environment variable")
 
 
 if __name__ == "__main__":
