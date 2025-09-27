@@ -164,7 +164,7 @@ class ReviewSummarizerAgent:
         CREATE CREWAI AGENT
         """
         # Setup tools
-        self.tools = [TextSummarizationTool(), KeywordExtractionTool()]
+        self.tools = [TextSummarizationTool(), KeywordExtractionTool(), ModelSummarizationTool()]
         
         # Create CrewAI Agent
         self.agent = Agent(
