@@ -211,7 +211,8 @@ class ReviewSummarizerAgent:
             recommendations = self._generate_recommendations(reviews, sentiment_counts, avg_score)
             
             return {
-                'summary_text': summary_text,
+                'rule_based_summary': rule_based_summary,
+                'model_based_summary': model_based_summary,
                 'total_reviews': len(reviews),
                 'sentiment_distribution': dict(sentiment_counts),
                 'average_score': round(avg_score, 1),
@@ -227,7 +228,8 @@ class ReviewSummarizerAgent:
         except Exception as e:
             logger.error(f"Summary generation failed: {str(e)}")
             return {
-                'summary_text': 'Unable to generate summary due to processing error',
+                'rule_based_summary': 'Unable to generate rule-based summary',
+                'model_based_summary': 'Unable to generate model-based summary',
                 'total_reviews': len(reviews),
                 'sentiment_distribution': {'neutral': len(reviews)},
                 'average_score': 3.0,
