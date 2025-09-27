@@ -93,6 +93,35 @@ class KeywordExtractionTool(BaseTool):
             return "Key themes: service, room, staff, location"
 
 
+class ModelSummarizationTool(BaseTool):
+    """Tool for text summarization using Hugging Face models"""
+    
+    name: str = "hf_text_summarizer"
+    description: str = "Generate abstractive summaries using Hugging Face transformer models"
+    
+    def __init__(self):
+        super().__init__()
+        # Load Hugging Face summarization pipeline
+        self.summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+    
+    def _run(self, text: str, max_length: int = 150, min_length: int = 30) -> str:
+        try:
+            if not text.strip():
+                return "Summary: (no content provided)"
+            
+            summary = self.summarizer(
+                text, 
+                max_length=max_length, 
+                min_length=min_length, 
+                do_sample=False
+            )
+            return f"Summary: {summary[0]['summary_text']}"
+        
+        except Exception as e:
+            logger.error(f"Hugging Face summarization failed: {str(e)}")
+            return "Summary: Unable to generate model-based summary"
+
+
 class ReviewSummarizerAgent:
     """
     CREWAI REVIEW SUMMARIZER AGENT
