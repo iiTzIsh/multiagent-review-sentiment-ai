@@ -20,34 +20,14 @@ class SentimentScoringTool(BaseTool):
         super().__init__()
         # Initialize HuggingFace model configuration for scoring
         self._model_name = "nlptown/bert-base-multilingual-uncased-sentiment"
-        # Note: In production, API key should be in Django settings
         self._api_url = f"https://api-inference.huggingface.co/models/{self._model_name}"
     
-    def _run(self, text: str, sentiment: str = None) -> str:
-        """
-        CORE FUNCTION: Score review using HuggingFace BERT sentiment model
-        Uses real AI for accurate 1-5 scoring based on sentiment analysis
-        """
-        # Step 1: Try real AI first
-        api_key = self._get_api_key()
-        if api_key:
-            try:
-                result = self._call_huggingface_api(text, api_key)
-                if result:
-                    return result
-            except Exception as e:
-                logger.error(f"HuggingFace sentiment scoring failed: {e}")
-        
-        # Step 2: Intelligent fallback scoring
-        return self._intelligent_fallback_scoring(text, sentiment)
     
     def _get_api_key(self) -> str:
-        """Get HuggingFace API key from environment"""
         import os
         return os.getenv('HUGGINGFACE_API_KEY', '')
     
     def _call_huggingface_api(self, text: str, api_key: str) -> str:
-        """Call real HuggingFace BERT sentiment scoring model"""
         headers = {
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json"
@@ -67,8 +47,24 @@ class SentimentScoringTool(BaseTool):
             logger.warning(f"Scoring API returned status {response.status_code}")
             return None
     
+    
+    def _run(self, text: str, sentiment: str = None) -> str:
+        # Try real AI first and else go to manual mode
+        api_key = self._get_api_key()
+        if api_key:
+            try:
+                result = self._call_huggingface_api(text, api_key)
+                if result:
+                    return result
+            except Exception as e:
+                logger.error(f"HuggingFace sentiment scoring failed: {e}")
+        
+        # Intelligent fallback scoring
+        return self._intelligent_fallback_scoring(text, sentiment)
+    
+    
+    
     def _process_scoring_result(self, result) -> str:
-        """Process HuggingFace BERT model response for scoring"""
         if isinstance(result, list) and len(result) > 0:
             scores = result[0] if isinstance(result[0], list) else result
             
@@ -78,7 +74,7 @@ class SentimentScoringTool(BaseTool):
                 label = item['label']
                 probability = item['score']
                 
-                # Map sentiment labels to numerical scores
+                # Map labels to scores
                 if 'LABEL_0' in label or '1' in label:  # Very negative
                     total_score += probability * 1.0
                 elif 'LABEL_1' in label or '2' in label:  # Negative
@@ -97,7 +93,6 @@ class SentimentScoringTool(BaseTool):
         return None
     
     def _intelligent_fallback_scoring(self, text: str, sentiment: str = None) -> str:
-        """Intelligent fallback scoring when API unavailable"""
         text_lower = text.lower()
         
         # Enhanced scoring indicators with HuggingFace-like weights
@@ -280,52 +275,3 @@ class ReviewScorerAgent:
             results.append(result)
         
         return results
-
-def demo_scorer_agent():
-    
-    print("=== Sentiment Scorer Demo ===")
-    print("(Using HuggingFace BERT model - fallback to enhanced rules)")
-    
-    # Step 1: Create agent
-    scorer = ReviewScorerAgent()
-    print(f"✅ Created agent: {scorer.name}")
-    print(f"   Role: {scorer.role}")
-    print(f"   Model: nlptown/bert-base-multilingual-uncased-sentiment")
-    print(f"   Scoring method: HuggingFace API + enhanced rule-based fallback")
-    
-    # Step 2: Test with sample reviews
-    sample_reviews = [
-        {"text": "Amazing service! The staff was incredibly helpful and the room was perfect.", "sentiment": "positive"},
-        {"text": "Terrible experience. The room was dirty and the staff was rude.", "sentiment": "negative"},
-        {"text": "The hotel was okay. Nothing special but not bad either.", "sentiment": "neutral"}
-    ]
-    
-    print("\n=== Processing Reviews with HuggingFace Scoring ===")
-    for i, review_data in enumerate(sample_reviews, 1):
-        print(f"\nReview {i}: {review_data['text']}")
-        print(f"Sentiment: {review_data['sentiment']}")
-        result = scorer.score_review(review_data['text'], review_data['sentiment'])
-        print(f"✅ Score: {result['score']}")
-        if result['score'] != 3.0:
-            print(f"✅ Successfully scored using enhanced algorithm!")
-        else:
-            print(f"⚠️  Using neutral fallback (may need API access)")
-    
-    # Step 3: Batch processing demo
-    print("\n=== Batch Processing Demo ===")
-    batch_results = scorer.batch_score(sample_reviews)
-    for i, result in enumerate(batch_results, 1):
-        print(f"Review {i}: {result['score']:.1f} (sentiment: {result['sentiment']})")
-    
-    print("\n=== Demo Complete ===")
-    print("✅ Agent structure: CrewAI framework")
-    print("✅ AI Model: HuggingFace BERT (nlptown/bert-base-multilingual-uncased-sentiment)") 
-    print("✅ Functionality: Working numerical scoring with enhanced algorithm")
-    print("✅ Fallback: Enhanced rule-based scoring when API unavailable")
-    print("\nNOTE: For full CrewAI crew functionality, set OPENAI_API_KEY environment variable")
-    print("NOTE: For HuggingFace API access, set HUGGINGFACE_API_KEY environment variable")
-
-
-if __name__ == "__main__":
-    demo_scorer_agent()
-   
