@@ -25,7 +25,7 @@ class ReviewFilterTool(BaseTool):
     
     PURPOSE: Filter reviews based on sentiment, score, keywords, and other criteria
     INPUTS: Review collection and search criteria
-    OUTPUT: Filtered reviews matching the specified criteria
+    OUTPUT: Filtered reviews matching the specified criteria ###
     """
     
     name: str = "review_filter"
