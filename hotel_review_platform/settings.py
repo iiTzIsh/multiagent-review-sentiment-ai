@@ -151,6 +151,14 @@ CELERY_TIMEZONE = TIME_ZONE
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB
 
+# AI Configuration
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+if not GEMINI_API_KEY:
+    print("WARNING: GEMINI_API_KEY not found in environment variables. AI features may not work properly.")
+
+# HuggingFace Configuration
+HUGGINGFACE_API_KEY = os.getenv('HUGGINGFACE_API_KEY')
+
 # Logging
 import os
 
@@ -208,3 +216,7 @@ LOGGING = {
         },
     },
 }
+
+# Suppress timezone warnings for existing data
+import warnings
+warnings.filterwarnings('ignore', message='DateTimeField.*received a naive datetime.*while time zone support is active')

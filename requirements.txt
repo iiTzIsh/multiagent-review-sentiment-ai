@@ -48,6 +48,7 @@ django-environ
 python-jose
 sentry-sdk
 drf-spectacular
+google-generativeai
 python-dateutil
 pytz
 six

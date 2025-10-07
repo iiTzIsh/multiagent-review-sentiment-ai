@@ -19,7 +19,6 @@ from apps.reviews.models import Review, Hotel, ReviewBatch, ReviewSummary
 from apps.analytics.models import SentimentTrend, AnalyticsReport
 from utils.file_processor import ReviewFileProcessor
 from utils.chart_generator import ChartGenerator
-# from agents.base_agent import AgentOrchestrator  # Commented out until crewai is installed
 
 
 def dashboard_home(request):
@@ -332,6 +331,9 @@ def analytics_overview(request):
         'positive_count': positive_count,
         'negative_count': negative_count,
         'neutral_count': neutral_count,
+        'positive_percentage': round(positive_percentage, 1),
+        'negative_percentage': round(negative_percentage, 1),
+        'neutral_percentage': round(neutral_percentage, 1),
     }
     
     context = {
@@ -532,16 +534,18 @@ def report_detail(request, report_id):
 
 @require_http_methods(["POST"])
 def process_reviews_ajax(request):
-    """AJAX endpoint to process unprocessed reviews"""
+    """AJAX endpoint to process unprocessed reviews with AI-powered summarization"""
     try:
         import json
         from django.core.management import call_command
         from io import StringIO
         import sys
+        from agents.django_integration import summarize_reviews
         
         # Parse request data
         data = json.loads(request.body)
         batch_size = data.get('batch_size', 50)
+        generate_summary = data.get('generate_summary', True)  # New option for summarization
         
         # Capture command output
         out = StringIO()
@@ -556,10 +560,11 @@ def process_reviews_ajax(request):
                 'success': True,
                 'message': 'All reviews are already processed',
                 'processed_count': 0,
-                'unprocessed_count': 0
+                'unprocessed_count': 0,
+                'summary_generated': False
             })
         
-        # Run the processing command
+        # Step 1: Run the classification and scoring processing command
         try:
             call_command('process_with_crewai', batch_size=batch_size, stdout=out)
             
@@ -570,13 +575,73 @@ def process_reviews_ajax(request):
             
             processed_count = unprocessed_count - unprocessed_after
             
-            return JsonResponse({
+            response_data = {
                 'success': True,
                 'message': 'Reviews processed successfully',
                 'processed_count': processed_count,
                 'unprocessed_count': unprocessed_after,
-                'total_reviews': Review.objects.count()
-            })
+                'total_reviews': Review.objects.count(),
+                'summary_generated': False
+            }
+            
+            # Step 2: Generate AI-powered summary if requested and reviews were processed
+            if generate_summary and processed_count > 0:
+                try:
+                    # Get recently processed reviews for summarization
+                    recent_reviews = Review.objects.filter(processed=True).order_by('-updated_at')[:100]
+                    
+                    if recent_reviews.exists():
+                        # Convert to format expected by summarizer agent
+                        reviews_data = []
+                        for review in recent_reviews:
+                            reviews_data.append({
+                                'text': review.text,
+                                'sentiment': review.sentiment or 'neutral',
+                                'score': review.ai_score or review.original_rating or 3.0,
+                                'hotel': review.hotel.name if review.hotel else 'Unknown',
+                                'date': review.created_at.isoformat()
+                            })
+                        
+                        # Generate AI summary using the new Gemini-powered agent
+                        summary_result = summarize_reviews(reviews_data, analysis_type="post_processing")
+                        
+                        # Store summary in database for future reference
+                        summary_obj, created = ReviewSummary.objects.get_or_create(
+                            summary_type='ai_processing_summary',
+                            defaults={
+                                'summary_text': summary_result.get('summary_text', ''),
+                                'total_reviews': len(reviews_data),
+                                'sentiment_distribution': summary_result.get('sentiment_distribution', {}),
+                                'average_score': summary_result.get('average_score', 0),
+                                'insights': summary_result.get('key_insights', []),
+                                'recommendations': summary_result.get('recommendations', [])
+                            }
+                        )
+                        
+                        if not created:
+                            # Update existing summary
+                            summary_obj.summary_text = summary_result.get('summary_text', '')
+                            summary_obj.total_reviews = len(reviews_data)
+                            summary_obj.sentiment_distribution = summary_result.get('sentiment_distribution', {})
+                            summary_obj.average_score = summary_result.get('average_score', 0)
+                            summary_obj.insights = summary_result.get('key_insights', [])
+                            summary_obj.recommendations = summary_result.get('recommendations', [])
+                            summary_obj.save()
+                        
+                        response_data.update({
+                            'summary_generated': True,
+                            'summary_id': summary_obj.id,
+                            'summary_preview': summary_result.get('summary_text', '')[:200] + '...',
+                            'ai_insights_count': len(summary_result.get('key_insights', [])),
+                            'message': f'Successfully processed {processed_count} reviews and generated AI-powered summary'
+                        })
+                        
+                except Exception as summary_error:
+                    # Don't fail the entire process if summarization fails
+                    response_data['summary_error'] = f'Summary generation failed: {str(summary_error)}'
+                    response_data['message'] += ' (Summary generation failed)'
+            
+            return JsonResponse(response_data)
             
         except Exception as cmd_error:
             return JsonResponse({

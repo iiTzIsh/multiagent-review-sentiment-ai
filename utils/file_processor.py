@@ -171,7 +171,7 @@ class ReviewFileProcessor:
             defaults={'is_active': True}
         )
         
-        # Create review
+        # Create review with AI fields initialized
         review = Review.objects.create(
             hotel=hotel,
             source=source,
@@ -181,6 +181,8 @@ class ReviewFileProcessor:
             reviewer_name=data['reviewer_name'],
             reviewer_location=data['reviewer_location'],
             date_posted=data['date_posted'],
+            ai_keywords='',  # Initialize empty, will be populated by AI agents
+            ai_summary='',   # Initialize empty, will be populated by AI agents
             processed=False  # Will be processed by agents
         )
         

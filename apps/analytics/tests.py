@@ -1,3 +1,2 @@
-from django.test import TestCase
-
-# Create your tests here.
+# Tests for analytics app
+# TODO: Add tests when analytics functionality is implemented

@@ -12,20 +12,22 @@
 
 {% block page_actions %}
 <div class="d-flex gap-2 flex-wrap">
+    <button id="generate-ai-analysis-btn" class="btn btn-warning btn-lg" data-bs-toggle="tooltip" title="Generate comprehensive AI analysis including summary, tags, and insights">
+        <i class="fas fa-brain me-2"></i>Generate AI Analysis
+    </button>
     <a href="{% url 'dashboard:upload_reviews' %}" class="btn btn-primary" data-bs-toggle="tooltip" title="Upload new review data">
         <i class="fas fa-upload me-1"></i>Upload Reviews
     </a>
     <button id="process-reviews-btn" class="btn btn-success" data-bs-toggle="tooltip" title="Process uploaded reviews with AI">
         <i class="fas fa-cog me-1"></i>Process Reviews
     </button>
-    <button class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Refresh analytics data">
+    <button id="refresh-analytics-btn" class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Refresh analytics data">
         <i class="fas fa-sync-alt me-1"></i>Refresh
     </button>
 </div>
 {% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/analytics.css' %}">
 <style>
     /* Modern Card Header Styles for Analytics Page */
     .card .card-header {
@@ -300,6 +302,55 @@
         flex-shrink: 0;
     }
 
+    /* AI Summary Styles */
+    .ai-summary-text .summary-content {
+        background: rgba(13, 110, 253, 0.1);
+        border: 1px solid rgba(13, 110, 253, 0.2);
+        border-radius: 12px;
+        padding: 1.5rem;
+        line-height: 1.7;
+        font-size: 1rem;
+        color: var(--text-primary);
+    }
+
+    .insights-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .insights-list li {
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.5rem;
+        background: rgba(23, 162, 184, 0.1);
+        border: 1px solid rgba(23, 162, 184, 0.2);
+        border-radius: 8px;
+        border-left: 4px solid #17a2b8;
+        transition: transform 0.2s ease;
+    }
+
+    .insights-list li:hover {
+        transform: translateX(2px);
+    }
+
+    .recommendations-list .recommendation-item {
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        background: rgba(255, 193, 7, 0.1);
+        border: 1px solid rgba(255, 193, 7, 0.2);
+        border-radius: 8px;
+        border-left: 4px solid #ffc107;
+        transition: transform 0.2s ease;
+    }
+
+    .recommendations-list .recommendation-item:hover {
+        transform: translateX(2px);
+    }
+
+    .recommendations-list .recommendation-item::before {
+        content: '💡';
+        margin-right: 0.5rem;
+    }
+
     .insight-priority.high {
         background: #dc3545;
     }
@@ -377,6 +428,130 @@
         font-size: 0.75rem;
     }
 
+    /* Emerging Topics Styles */
+    .emerging-topic-card {
+        background: #ffffff !important;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e5e7eb;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .emerging-topic-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        border-color: #3b82f6;
+    }
+
+    .emerging-topic-card .topic-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.2rem;
+    }
+
+    .emerging-topic-card .topic-content {
+        flex: 1;
+    }
+
+    .emerging-topic-card .topic-content h6 {
+        margin: 0 0 0.25rem 0;
+        font-weight: 600;
+        color: #1f2937 !important;
+        font-size: 1.1rem !important;
+    }
+
+    .emerging-topic-card .topic-content small {
+        color: #6b7280 !important;
+        font-size: 0.875rem;
+    }
+
+    .emerging-topic-card .topic-badge .badge {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
+    }
+
+    /* Issues List Styles */
+    .issues-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .issue-item {
+        background: #ffffff !important;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        border: 1px solid #e5e7eb;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .issue-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .issue-item .issue-priority {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .issue-item .issue-priority.high {
+        background: #dc2626;
+        box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+    }
+
+    .issue-item .issue-priority.medium {
+        background: #f59e0b;
+        box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.2);
+    }
+
+    .issue-item .issue-priority.low {
+        background: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    .issue-item .issue-content {
+        flex: 1;
+    }
+
+    .issue-item .issue-title {
+        font-weight: 600;
+        color: #1f2937 !important;
+        margin-bottom: 0.25rem;
+        font-size: 1.1rem !important;
+    }
+
+    .issue-item .issue-desc {
+        color: #6b7280 !important;
+        font-size: 0.875rem;
+    }
+
+    .issue-item .issue-desc {
+        font-size: 0.875rem;
+        color: #6b7280;
+    }
+
+    .issue-item .issue-impact .badge {
+        font-size: 0.75rem;
+        padding: 0.375rem 0.75rem;
+    }
+
     /* Responsive adjustments */
     @media (max-width: 768px) {
         .keyword-cloud {
@@ -399,11 +574,23 @@
         .insight-impact {
             margin: 0.5rem 0 0;
         }
+
+        .emerging-topic-card,
+        .issue-item {
+            flex-direction: column;
+            text-align: center;
+            gap: 0.75rem;
+        }
+
+        .issue-item .issue-priority {
+            margin: 0 auto;
+        }
     }
 </style>
 {% endblock %}
 
 {% block content %}
+{% csrf_token %}
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -488,7 +675,7 @@
                     <div class="metric-card bg-warning text-white fade-in" style="animation-delay: 0.3s">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <div class="metric-value">{{ top_hotels|length|default:0 }}</div>
+                                <div class="metric-value">{{ total_hotels|default:0 }}</div>
                                 <div class="metric-label">Active Hotels</div>
                             </div>
                             <div class="opacity-75">
@@ -500,6 +687,96 @@
                                 <i class="fas fa-clock me-1"></i>Real-time monitoring
                             </small>
                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI-Generated Summary Section -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-robot me-2"></i>AI-Powered Business Insights
+                                </h5>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-outline-light" onclick="refreshSummary()" data-bs-toggle="tooltip" title="Refresh AI analysis">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                    <button class="btn btn-outline-light" onclick="exportSummary()" data-bs-toggle="tooltip" title="Export summary">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="aiSummaryContent">
+                                <!-- This will be populated by JavaScript after processing -->
+                                <div class="text-center text-muted py-4" id="noSummaryMessage">
+                                    <i class="fas fa-magic fa-3x mb-3 opacity-50"></i>
+                                    <h6>No AI Summary Available</h6>
+                                    <p class="mb-3">Process some reviews to generate intelligent business insights powered by Google Gemini AI.</p>
+                                    <button class="btn btn-success" onclick="processAllReviewsFromAnalytics()">
+                                        <i class="fas fa-robot me-2"></i>Generate AI Analysis
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- AI Summary Template (hidden) -->
+                            <div id="aiSummaryTemplate" style="display: none;">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="ai-summary-text">
+                                            <h6 class="text-primary mb-3">
+                                                <i class="fas fa-lightbulb me-2"></i>Executive Summary
+                                            </h6>
+                                            <div id="summaryText" class="summary-content">
+                                                <!-- AI-generated summary will be inserted here -->
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-4">
+                                            <h6 class="text-info mb-3">
+                                                <i class="fas fa-chart-line me-2"></i>Key Insights
+                                            </h6>
+                                            <ul id="keyInsights" class="insights-list">
+                                                <!-- AI-generated insights will be inserted here -->
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="mt-4">
+                                            <div class="alert alert-primary border-0 shadow-sm" style="background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); border-radius: 12px;">
+                                                <div class="text-white">
+                                                    <div class="d-flex align-items-center mb-2">
+                                                        <i class="fas fa-robot me-2 fs-5"></i>
+                                                        <strong class="fs-6">AI Analysis Report</strong>
+                                                    </div>
+                                                    <div class="d-flex align-items-center mb-1">
+                                                        <i class="fas fa-brain me-2 text-warning"></i>
+                                                        <small class="text-white-50">Powered by Google Gemini AI</small>
+                                                    </div>
+                                                    <span id="analysisMetadata" class="text-white fw-medium" style="font-size: 0.875rem;">
+                                                        <!-- Metadata will be inserted here -->
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="ai-recommendations">
+                                            <h6 class="text-warning mb-3">
+                                                <i class="fas fa-tasks me-2"></i>Recommendations
+                                            </h6>
+                                            <div id="recommendations" class="recommendations-list">
+                                                <!-- AI-generated recommendations will be inserted here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -892,7 +1169,451 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeFilters();
     initializeKeywordInteractions();
     initializeInsightInteractions();
+    
+    // Load existing AI analysis on page load
+    loadExistingAIAnalysis();
+    
+    // Add event listener for Generate AI Analysis button
+    const generateAIButton = document.getElementById('generate-ai-analysis-btn');
+    if (generateAIButton) {
+        generateAIButton.addEventListener('click', generateCompleteAIAnalysis);
+    }
+    
+    // Add event listener for Refresh button
+    const refreshButton = document.getElementById('refresh-analytics-btn');
+    if (refreshButton) {
+        refreshButton.addEventListener('click', refreshAnalytics);
+    }
 });
+
+// AI Analysis Functions - Load Existing & On-Demand Generation
+
+function loadExistingAIAnalysis() {
+    console.log('Checking for existing AI analysis...');
+    
+    // Check if there's existing analysis
+    fetch('/api/v1/get-ai-analysis/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success' && data.has_existing_analysis) {
+            console.log('Found existing AI analysis, displaying...');
+            
+            // Transform data to match the format expected by display functions
+            const transformedData = {
+                summary: data.analysis.summary,
+                tags_analysis: data.analysis.tags_analysis,
+                generated_at: data.analysis.generated_at,
+                processed_reviews: data.analysis.summary.total_reviews
+            };
+            
+            // Display existing analysis
+            displayAISummary(transformedData);
+            displayAITagsAnalysis(transformedData.tags_analysis);
+            
+            // Update button text to indicate regeneration
+            const generateBtn = document.getElementById('generate-ai-analysis-btn');
+            if (generateBtn) {
+                generateBtn.innerHTML = '<i class="bi bi-arrow-clockwise me-2"></i>Regenerate AI Analysis';
+                generateBtn.title = 'Click to regenerate AI analysis with latest data';
+            }
+            
+            console.log('Existing AI analysis loaded successfully');
+        } else {
+            console.log('No existing AI analysis found');
+            // Keep the default "Generate AI Analysis" button text
+        }
+    })
+    .catch(error => {
+        console.error('Error loading existing AI analysis:', error);
+        // Don't show error to user - just continue without existing analysis
+    });
+}
+
+function generateCompleteAIAnalysis() {
+    const button = document.getElementById('generate-ai-analysis-btn');
+    
+    if (!button) return;
+    
+    // Show loading state
+    setButtonLoading(button, true);
+    showProcessingOverlay('Generating comprehensive AI analysis...<br><small>This includes summary, tags, topics, and insights using Google Gemini AI</small>');
+    
+    // Get CSRF token with null safety
+    const csrfTokenElement = document.querySelector('[name=csrfmiddlewaretoken]');
+    const csrfToken = csrfTokenElement ? csrfTokenElement.value : '';
+    
+    // Make combined API call
+    fetch('/api/v1/ai-analysis/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify({
+            days: 30  // Can be made configurable
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        hideProcessingOverlay();
+        setButtonLoading(button, false);
+        
+        if (data.status === 'success') {
+            // Display summary
+            displayAISummary(data);
+            
+            // Display tags analysis
+            displayAITagsAnalysis(data.tags_analysis);
+            
+            // Show success message
+            showToast('success', `AI analysis completed! Processed ${data.processed_reviews} reviews with advanced insights.`);
+            
+            // Update button text to indicate completion and enable regeneration
+            updateButtonSuccess(button);
+            
+            // Change button text to indicate regeneration capability
+            setTimeout(() => {
+                button.innerHTML = '<i class="bi bi-arrow-clockwise me-2"></i>Regenerate AI Analysis';
+                button.title = 'Click to regenerate AI analysis with latest data';
+                button.disabled = false;
+                button.classList.remove('btn-success');
+                button.classList.add('btn-primary');
+            }, 2000);
+            
+        } else if (data.status === 'no_data') {
+            showToast('warning', data.message);
+            setButtonDisabled(button, 'No Data Available');
+        } else {
+            showToast('error', data.error_message || 'AI analysis generation failed');
+        }
+    })
+    .catch(error => {
+        hideProcessingOverlay();
+        setButtonLoading(button, false);
+        showToast('error', 'Failed to generate AI analysis. Please try again.');
+        console.error('AI Analysis Error:', error);
+    });
+}
+
+function processAllReviewsFromAnalytics() {
+    if (!confirm('This will process all unprocessed reviews and generate an AI-powered summary. This may take several minutes. Continue?')) {
+        return;
+    }
+    
+    showProcessingOverlay('Processing reviews with AI agents and generating business insights...');
+    
+    fetch('{% url "dashboard:process_reviews" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        },
+        body: JSON.stringify({
+            batch_size: 100,
+            generate_summary: true
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        hideProcessingOverlay();
+        
+        if (data.success) {
+            showToast('success', `Successfully processed ${data.processed_count} reviews!`);
+            
+            if (data.summary_generated) {
+                // Refresh the summary display
+                setTimeout(() => {
+                    loadExistingSummary();
+                }, 1000);
+                
+                showToast('success', 'AI-powered business summary generated!');
+            }
+        } else {
+            showToast('error', data.error || 'Processing failed');
+        }
+    })
+    .catch(error => {
+        hideProcessingOverlay();
+        showToast('error', 'Processing request failed');
+        console.error('Error:', error);
+    });
+}
+
+function displayAISummary(data) {
+    const noSummaryMessage = document.getElementById('noSummaryMessage');
+    const summaryTemplate = document.getElementById('aiSummaryTemplate');
+    
+    if (noSummaryMessage) {
+        noSummaryMessage.style.display = 'none';
+    }
+    
+    if (summaryTemplate && data.summary) {
+        // Clone the template
+        const summaryContent = summaryTemplate.cloneNode(true);
+        summaryContent.id = 'aiSummaryActive';
+        summaryContent.style.display = 'block';
+        
+        // Populate the summary text
+        const summaryTextElement = summaryContent.querySelector('#summaryText');
+        if (summaryTextElement && data.summary.text) {
+            summaryTextElement.innerHTML = data.summary.text.replace(/\n/g, '<br>');
+        }
+        
+        // Populate insights if available
+        const insightsElement = summaryContent.querySelector('#keyInsights');
+        if (insightsElement && data.insights) {
+            const insights = data.insights.sentiment_percentages ? 
+                Object.entries(data.insights.sentiment_percentages).map(([key, value]) => 
+                    `${key}: ${value.toFixed(1)}%`
+                ) : [];
+            
+            insightsElement.innerHTML = insights.map(insight => `<li>${insight}</li>`).join('');
+        }
+        
+        // Populate AI-generated recommendations
+        const recommendationsElement = summaryContent.querySelector('#recommendations');
+        if (recommendationsElement) {
+            let recommendations = [];
+            
+            // Get recommendations from the data
+            if (data.summary && data.summary.recommendations) {
+                recommendations = data.summary.recommendations;
+            } else if (data.recommendations) {
+                recommendations = data.recommendations;
+            } else {
+                // Fallback recommendations
+                recommendations = [
+                    "Monitor review trends weekly for early issue detection",
+                    "Respond to all reviews promptly and professionally", 
+                    "Focus on addressing most common customer complaints"
+                ];
+            }
+            
+            console.log('Displaying recommendations:', recommendations);
+            
+            recommendationsElement.innerHTML = recommendations.map(rec => {
+                // Handle both string and object formats
+                const recText = typeof rec === 'object' ? rec.text : rec;
+                return `<div class="recommendation-item">${recText}</div>`;
+            }).join('');
+        }
+        
+        // Populate metadata
+        const metadataElement = summaryContent.querySelector('#analysisMetadata');
+        if (metadataElement && data.summary) {
+            metadataElement.innerHTML = `
+                <div class="d-flex flex-wrap gap-3 mt-1">
+                    <span><i class="fas fa-chart-bar me-1 text-warning"></i><strong>${data.summary.total_reviews}</strong> reviews analyzed</span>
+                    <span><i class="fas fa-star me-1 text-warning"></i>Avg Score: <strong>${data.summary.average_score}/5</strong></span>
+                    <span><i class="fas fa-calendar me-1 text-warning"></i>Generated: <strong>${new Date().toLocaleDateString()}</strong></span>
+                </div>
+            `;
+        }
+        
+        // Replace the content
+        const aiSummaryContent = document.getElementById('aiSummaryContent');
+        if (aiSummaryContent) {
+            aiSummaryContent.innerHTML = '';
+            aiSummaryContent.appendChild(summaryContent);
+        }
+    }
+}
+
+function refreshAnalytics() {
+    // Simply regenerate the AI analysis
+    generateCompleteAIAnalysis();
+}
+
+// Button Management Functions
+function setButtonLoading(button, isLoading) {
+    if (isLoading) {
+        button.disabled = true;
+        button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Generating...';
+        button.classList.add('btn-secondary');
+        button.classList.remove('btn-warning');
+    } else {
+        button.disabled = false;
+        button.innerHTML = '<i class="fas fa-brain me-2"></i>Generate AI Analysis';
+        button.classList.remove('btn-secondary');
+        button.classList.add('btn-warning');
+    }
+}
+
+function updateButtonSuccess(button) {
+    button.innerHTML = '<i class="fas fa-check me-2"></i>Analysis Complete';
+    button.classList.remove('btn-warning');
+    button.classList.add('btn-success');
+    
+    // Reset after 3 seconds
+    setTimeout(() => {
+        button.innerHTML = '<i class="fas fa-brain me-2"></i>Regenerate Analysis';
+        button.classList.remove('btn-success');
+        button.classList.add('btn-warning');
+    }, 3000);
+}
+
+function setButtonDisabled(button, text) {
+    button.disabled = true;
+    button.innerHTML = `<i class="fas fa-exclamation-triangle me-2"></i>${text}`;
+    button.classList.remove('btn-warning');
+    button.classList.add('btn-secondary');
+}
+
+function displayAITagsAnalysis(tagsData) {
+    // Update positive keywords
+    const positiveKeywordsContainer = document.querySelector('.keyword-cloud.positive');
+    if (positiveKeywordsContainer && tagsData.positive_keywords) {
+        positiveKeywordsContainer.innerHTML = tagsData.positive_keywords.map((keyword, index) => {
+            const size = index < 3 ? 'large' : (index < 6 ? 'medium' : 'small');
+            return `<span class="keyword-tag ${size}">${keyword}</span>`;
+        }).join('');
+    }
+
+    // Update negative keywords
+    const negativeKeywordsContainer = document.querySelector('.keyword-cloud.negative');
+    if (negativeKeywordsContainer && tagsData.negative_keywords) {
+        negativeKeywordsContainer.innerHTML = tagsData.negative_keywords.map((keyword, index) => {
+            const size = index < 3 ? 'large' : (index < 6 ? 'medium' : 'small');
+            return `<span class="keyword-tag ${size}">${keyword}</span>`;
+        }).join('');
+    }
+
+    // Update topic metrics
+    if (tagsData.topic_metrics) {
+        updateTopicCard('service', tagsData.topic_metrics.service);
+        updateTopicCard('cleanliness', tagsData.topic_metrics.cleanliness);
+        updateTopicCard('location', tagsData.topic_metrics.location);
+        updateTopicCard('value', tagsData.topic_metrics.value);
+    }
+
+    // Store for other views (issues, topics)
+    window.aiTagsData = tagsData;
+}
+
+function updateTopicCard(topicName, topicData) {
+    const topicCard = document.querySelector(`.topic-card.${topicName}`);
+    if (topicCard && topicData) {
+        const scoreElement = topicCard.querySelector('.topic-score');
+        const keywordsElement = topicCard.querySelector('small.text-muted');
+        
+        if (scoreElement) {
+            scoreElement.textContent = `${topicData.percentage}%`;
+            scoreElement.className = `topic-score ${topicData.percentage >= 70 ? 'positive' : 'negative'}`;
+        }
+        
+        if (keywordsElement && topicData.keywords) {
+            keywordsElement.textContent = topicData.keywords.join(', ');
+        }
+    }
+}
+
+function exportSummary() {
+    // Simple export functionality
+    const summaryText = document.querySelector('#summaryText')?.textContent || '';
+    const insights = Array.from(document.querySelectorAll('#keyInsights li')).map(li => li.textContent).join('\n');
+    const recommendations = Array.from(document.querySelectorAll('.recommendation-item')).map(item => item.textContent).join('\n');
+    
+    const exportContent = `AI-POWERED BUSINESS ANALYSIS REPORT
+Generated: ${new Date().toLocaleDateString()}
+
+EXECUTIVE SUMMARY:
+${summaryText}
+
+KEY INSIGHTS:
+${insights}
+
+RECOMMENDATIONS:
+${recommendations}
+
+Generated by Google Gemini AI via Hotel Review Analytics Platform
+`;
+    
+    const blob = new Blob([exportContent], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `ai-analysis-report-${new Date().toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+function showProcessingOverlay(message) {
+    let overlay = document.getElementById('processingOverlay');
+    if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'processingOverlay';
+        overlay.innerHTML = `
+            <div class="processing-content">
+                <div class="spinner-border text-light mb-3" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <h5 class="text-light" id="processingMessage">${message}</h5>
+            </div>
+        `;
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        `;
+        document.body.appendChild(overlay);
+    } else {
+        document.getElementById('processingMessage').textContent = message;
+        overlay.style.display = 'flex';
+    }
+}
+
+function hideProcessingOverlay() {
+    const overlay = document.getElementById('processingOverlay');
+    if (overlay) {
+        overlay.style.display = 'none';
+    }
+}
+
+function showToast(type, message) {
+    // Simple toast implementation
+    const toastContainer = document.getElementById('toastContainer') || (() => {
+        const container = document.createElement('div');
+        container.id = 'toastContainer';
+        container.className = 'toast-container position-fixed bottom-0 end-0 p-3';
+        container.style.zIndex = '9999';
+        document.body.appendChild(container);
+        return container;
+    })();
+    
+    const toast = document.createElement('div');
+    toast.className = `toast align-items-center text-white bg-${type === 'success' ? 'success' : 'danger'} border-0`;
+    toast.innerHTML = `
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} me-2"></i>
+                ${message}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    `;
+    
+    toastContainer.appendChild(toast);
+    const bsToast = new bootstrap.Toast(toast);
+    bsToast.show();
+    
+    toast.addEventListener('hidden.bs.toast', () => {
+        toast.remove();
+    });
+}
 
 function initializeEnhancedAnalyticsCharts() {
     // Enhanced Sentiment Distribution Chart
@@ -1100,9 +1821,178 @@ function toggleTopicView(view) {
     });
     event.target.classList.add('active');
     
-    // Show/hide relevant sections
-    // Implementation would switch between keyword cloud, topic breakdown, and issues list
-    console.log('Switching to topic view:', view);
+    const keywordAnalysis = document.getElementById('keywordAnalysis');
+    
+    if (view === 'keywords') {
+        // Show keywords and topic metrics (default view)
+        keywordAnalysis.innerHTML = generateKeywordsView();
+    } else if (view === 'topics') {
+        // Show emerging topics
+        keywordAnalysis.innerHTML = generateTopicsView();
+    } else if (view === 'issues') {
+        // Show main issues identified
+        keywordAnalysis.innerHTML = generateIssuesView();
+    }
+}
+
+function generateKeywordsView() {
+    const aiData = window.aiTagsData || {};
+    const positiveKeywords = aiData.positive_keywords || ['excellent', 'clean', 'friendly', 'comfortable', 'beautiful'];
+    const negativeKeywords = aiData.negative_keywords || ['dirty', 'noise', 'rude', 'expensive', 'old'];
+    const topicMetrics = aiData.topic_metrics || {};
+    
+    return `
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="text-success mb-3"><i class="fas fa-thumbs-up me-2"></i>Top Positive Keywords</h6>
+                <div class="keyword-cloud positive">
+                    ${positiveKeywords.map((keyword, index) => {
+                        const size = index < 3 ? 'large' : (index < 6 ? 'medium' : 'small');
+                        return `<span class="keyword-tag ${size}">${keyword}</span>`;
+                    }).join('')}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h6 class="text-danger mb-3"><i class="fas fa-thumbs-down me-2"></i>Top Negative Keywords</h6>
+                <div class="keyword-cloud negative">
+                    ${negativeKeywords.map((keyword, index) => {
+                        const size = index < 3 ? 'large' : (index < 6 ? 'medium' : 'small');
+                        return `<span class="keyword-tag ${size}">${keyword}</span>`;
+                    }).join('')}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Topic Breakdown -->
+        <div class="row mt-4">
+            ${generateTopicCards(topicMetrics)}
+        </div>
+    `;
+}
+
+function generateTopicsView() {
+    const aiData = window.aiTagsData || {};
+    let emergingTopics = [];
+    
+    console.log('AI Data for topics view:', aiData);
+    console.log('Emerging topics raw:', aiData.emerging_topics);
+    
+    // Get emerging topics from AI data
+    if (aiData.emerging_topics && Array.isArray(aiData.emerging_topics) && aiData.emerging_topics.length > 0) {
+        emergingTopics = aiData.emerging_topics;
+        console.log('Using AI-generated emerging topics:', emergingTopics);
+    } else {
+        // Fallback if no AI data available
+        emergingTopics = [
+            'Health and safety protocols',
+            'Digital service integration', 
+            'Sustainability practices',
+            'Contactless services',
+            'Flexible booking policies'
+        ];
+        console.log('Using fallback emerging topics:', emergingTopics);
+    }
+    
+    return `
+        <div class="row">
+            <div class="col-12">
+                <h6 class="text-primary mb-4"><i class="fas fa-lightbulb me-2"></i>Emerging Topics & Trends</h6>
+                <div class="row">
+                    ${emergingTopics.map((topic, index) => `
+                        <div class="col-md-6 mb-3">
+                            <div class="emerging-topic-card">
+                                <div class="topic-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="topic-content">
+                                    <h6 style="color: #1f2937 !important; font-weight: 600; margin-bottom: 0.25rem;">${topic}</h6>
+                                    <small style="color: #6b7280 !important;">Trend #${index + 1}</small>
+                                </div>
+                                <div class="topic-badge">
+                                    <span class="badge bg-info">Emerging</span>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function generateIssuesView() {
+    const aiData = window.aiTagsData || {};
+    let mainIssues = [];
+    
+    console.log('AI Data for issues view:', aiData);
+    console.log('Issues identified raw:', aiData.issues_identified);
+    
+    // Get issues from AI data
+    if (aiData.issues_identified && Array.isArray(aiData.issues_identified) && aiData.issues_identified.length > 0) {
+        mainIssues = aiData.issues_identified;
+        console.log('Using AI-generated issues:', mainIssues);
+    } else {
+        // Fallback if no AI data available
+        mainIssues = [
+            'Service quality concerns',
+            'Cleanliness standards',
+            'Noise levels',
+            'Value for money',
+            'Facility maintenance'
+        ];
+        console.log('Using fallback issues:', mainIssues);
+    }
+    
+    return `
+        <div class="row">
+            <div class="col-12">
+                <h6 class="text-warning mb-4"><i class="fas fa-exclamation-triangle me-2"></i>Main Issues Identified</h6>
+                <div class="issues-list">
+                    ${mainIssues.map((issue, index) => `
+                        <div class="issue-item">
+                            <div class="issue-priority ${index < 2 ? 'high' : (index < 4 ? 'medium' : 'low')}"></div>
+                            <div class="issue-content">
+                                <div class="issue-title" style="color: #1f2937 !important; font-weight: 600; font-size: 1.1rem;">${issue}</div>
+                                <div class="issue-desc" style="color: #6b7280 !important; font-size: 0.875rem;">Issue #${index + 1} - Requires attention</div>
+                            </div>
+                            <div class="issue-impact">
+                                <span class="badge ${index < 2 ? 'bg-danger' : (index < 4 ? 'bg-warning text-dark' : 'bg-info')}">
+                                    ${index < 2 ? 'High Priority' : (index < 4 ? 'Medium Priority' : 'Low Priority')}
+                                </span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function generateTopicCards(topicMetrics) {
+    const topics = [
+        { key: 'service', icon: 'fas fa-concierge-bell', title: 'Service' },
+        { key: 'cleanliness', icon: 'fas fa-broom', title: 'Cleanliness' },
+        { key: 'location', icon: 'fas fa-map-marker-alt', title: 'Location' },
+        { key: 'value', icon: 'fas fa-dollar-sign', title: 'Value' }
+    ];
+    
+    return topics.map(topic => {
+        const data = topicMetrics[topic.key] || { percentage: 75, keywords: ['analysis', 'pending'], description: 'Analysis pending' };
+        const scoreClass = data.percentage >= 70 ? 'positive' : 'negative';
+        
+        return `
+            <div class="col-md-3">
+                <div class="topic-card ${topic.key}">
+                    <div class="topic-icon">
+                        <i class="${topic.icon}"></i>
+                    </div>
+                    <h6>${topic.title}</h6>
+                    <div class="topic-score ${scoreClass}">${data.percentage}%</div>
+                    <small class="text-muted">${data.keywords ? data.keywords.join(', ') : 'Loading...'}</small>
+                </div>
+            </div>
+        `;
+    }).join('');
 }
 
 function toggleTrendView(view) {

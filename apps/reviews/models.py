@@ -75,6 +75,42 @@ class Review(models.Model):
         validators=[MinValueValidator(0), MaxValueValidator(1)],
         default=0.5
     )
+    ai_keywords = models.CharField(
+        max_length=200, 
+        blank=True, 
+        help_text="AI-generated keywords"
+    )
+    ai_summary = models.TextField(
+        blank=True, 
+        help_text="AI-generated review summary"
+    )
+    
+    # AI Tags Analysis Fields
+    ai_positive_keywords = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="AI-generated positive keywords list"
+    )
+    ai_negative_keywords = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="AI-generated negative keywords list"
+    )
+    ai_topics_analysis = models.JSONField(
+        default=dict,
+        blank=True,
+        help_text="AI-generated topic metrics and analysis"
+    )
+    ai_issues_identified = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="AI-identified main issues and concerns"
+    )
+    ai_emerging_topics = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="AI-identified emerging topics and trends"
+    )
     
     # Processing status
     processed = models.BooleanField(default=False)
@@ -162,6 +198,69 @@ class ReviewSummary(models.Model):
     
     def __str__(self):
         return f"Summary for {self.hotel.name} ({self.total_reviews} reviews)"
+
+
+class AIAnalysisSession(models.Model):
+    """Store persistent AI analysis results for analytics dashboard"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    
+    # Analysis content
+    ai_summary = models.TextField(
+        blank=True,
+        help_text="AI-generated comprehensive summary"
+    )
+    ai_positive_keywords = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="AI-identified positive keywords"
+    )
+    ai_negative_keywords = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="AI-identified negative keywords"
+    )
+    ai_topics_analysis = models.JSONField(
+        default=dict,
+        blank=True,
+        help_text="AI-generated comprehensive topics analysis"
+    )
+    ai_issues_identified = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="AI-identified main issues and concerns"
+    )
+    ai_emerging_topics = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="AI-identified emerging topics and trends"
+    )
+    ai_recommendations = models.JSONField(
+        default=list,
+        blank=True,
+        help_text="AI-generated business recommendations"
+    )
+    
+    # Analysis metadata
+    analysis_date_range = models.JSONField(
+        default=dict,
+        help_text="Date range used for analysis"
+    )
+    total_reviews_analyzed = models.PositiveIntegerField(default=0)
+    generation_duration = models.FloatField(
+        null=True, blank=True,
+        help_text="Time taken to generate analysis in seconds"
+    )
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+        get_latest_by = 'created_at'
+    
+    def __str__(self):
+        return f"AI Analysis Session - {self.created_at.strftime('%Y-%m-%d %H:%M')}"
 
 
 class SearchQuery(models.Model):

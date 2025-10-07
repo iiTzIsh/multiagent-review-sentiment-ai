@@ -7,7 +7,6 @@ from django.shortcuts import get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from django.views import View
 from django.core.paginator import Paginator
 from django.db.models import Count, Avg, Q
 from django.utils import timezone
@@ -17,8 +16,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 import json
 import logging
+from datetime import datetime, timedelta
 
-from apps.reviews.models import Review, Hotel, ReviewBatch, AgentTask
+from apps.reviews.models import Review, Hotel, ReviewBatch, AgentTask, AIAnalysisSession
 from apps.analytics.models import AnalyticsReport, SentimentTrend
 from .serializers import ReviewSerializer, HotelSerializer, AnalyticsReportSerializer
 from django.contrib.auth.models import User
@@ -196,7 +196,6 @@ class AnalyticsViewSet(viewsets.ViewSet):
             )
             
             # Recent trends
-            from datetime import datetime, timedelta
             end_date = datetime.now().date()
             start_date = end_date - timedelta(days=30)
             
@@ -277,14 +276,14 @@ class ProcessReviewsAPIView(APIView):
                 }
             )
             
-            # Initialize proper agent orchestrator
+            # Initialize Two-Stage Workflow orchestrator
             orchestrator = ReviewProcessingOrchestrator()
-            logger.info(f"Using {orchestrator.name} to process {reviews.count()} reviews")
+            logger.info(f"[STAGE 1] Using {orchestrator.name} for core processing of {reviews.count()} reviews")
             
             task.status = 'running'
             task.save()
             
-            # Process reviews using proper agent pipeline
+            # STAGE 1: Core Processing (Fast, Essential)
             processed_count = 0
             agent_results = []
             
@@ -294,7 +293,7 @@ class ProcessReviewsAPIView(APIView):
             
             for review in reviews_to_process:
                 try:
-                    # Use orchestrator to process each review through agent pipeline
+                    # Stage 1: Core processing only (sentiment + score)
                     result = orchestrator.process_single_review(
                         review_text=review.text,
                         review_id=str(review.id)
@@ -486,10 +485,10 @@ class SearchAPIView(APIView):
 
 class SummaryAPIView(APIView):
     """
-    API endpoint for generating summaries using proper Summarizer Agent
+    API endpoint for AI-powered summaries using Google Gemini
     
-    REPLACED: Rule-based summarization logic with proper AI agent
-    NOW USES: ReviewSummarizerAgent for intelligent analysis and insights
+    Uses ReviewSummarizerAgent with Google Gemini integration for intelligent 
+    analysis and actionable business insights from hotel reviews.
     """
     
     def get(self, request):
@@ -506,7 +505,6 @@ class SummaryAPIView(APIView):
                 reviews = reviews.filter(hotel_id=hotel_id)
             
             # Date filter
-            from datetime import datetime, timedelta
             start_date = datetime.now() - timedelta(days=days)
             reviews = reviews.filter(created_at__gte=start_date)
             
@@ -561,9 +559,9 @@ class SummaryAPIView(APIView):
                 'insights': {
                     'sentiment_percentages': summary_result['summary_data'].get('sentiment_percentages', {}),
                     'score_range': summary_result['summary_data'].get('score_range', [0, 5]),
-                    'generated_by': summary_result['generated_by']
+                    'generated_by': summary_result.get('generated_by', 'ReviewSummarizer')
                 },
-                'agent_used': summary_result['generated_by'],
+                'agent_used': summary_result.get('generated_by', 'ReviewSummarizer'),
                 'processing_info': {
                     'method': 'AI Agent Analysis',
                     'replaced': 'Rule-based summarization'
@@ -576,6 +574,330 @@ class SummaryAPIView(APIView):
                 'error': f"Summary generation failed: {str(e)}",
                 'fallback': 'Consider using rule-based backup'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class TagsAnalysisAPIView(APIView):
+    """
+    API endpoint for AI-powered tags and topic analysis using Google Gemini
+    
+    Uses ReviewTagsGeneratorAgent with Google Gemini integration to generate
+    comprehensive topic analysis including keywords, topics, and issues.
+    """
+    
+    def get(self, request):
+        """Get AI-generated tags analysis for specified criteria"""
+        try:
+            from agents.orchestrator import ReviewProcessingOrchestrator
+            
+            hotel_id = request.GET.get('hotel')
+            days = int(request.GET.get('days', 30))
+            
+            # Get reviews
+            reviews = Review.objects.all()
+            if hotel_id:
+                reviews = reviews.filter(hotel_id=hotel_id)
+            
+            # Date filter
+            start_date = datetime.now() - timedelta(days=days)
+            reviews = reviews.filter(created_at__gte=start_date)
+            
+            # Convert Django queryset to agent-compatible format
+            reviews_data = []
+            for review in reviews:
+                reviews_data.append({
+                    'text': review.text,
+                    'sentiment': review.sentiment or 'neutral',
+                    'original_rating': review.original_rating or 3.0,
+                    'hotel': review.hotel.name if review.hotel else 'Unknown',
+                    'date': review.created_at.isoformat()
+                })
+            
+            if not reviews_data:
+                return Response({
+                    'status': 'no_data',
+                    'message': f"No reviews found for the specified criteria over the last {days} days.",
+                    'tags_analysis': {
+                        'positive_keywords': [],
+                        'negative_keywords': [],
+                        'topic_metrics': {},
+                        'main_issues': [],
+                        'emerging_topics': []
+                    },
+                    'processed_reviews': 0,
+                    'date_range': {
+                        'start': start_date.date(),
+                        'end': datetime.now().date()
+                    }
+                })
+            
+            # Use the orchestrator's tags generation method
+            orchestrator = ReviewProcessingOrchestrator()
+            
+            logger.info(f"Generating AI-powered tags analysis for {len(reviews_data)} reviews")
+            
+            tags_result = orchestrator.generate_tags_analysis(reviews_data)
+            
+            # Format response in API-compatible structure
+            return Response({
+                'status': tags_result.get('status', 'success'),
+                'tags_analysis': tags_result.get('tags_analysis', {}),
+                'processed_reviews': tags_result.get('processed_reviews', len(reviews_data)),
+                'generated_at': tags_result.get('generated_at'),
+                'agent_used': tags_result.get('agent', 'TagsGeneratorAgent'),
+                'date_range': {
+                    'start': start_date.date(),
+                    'end': datetime.now().date()
+                },
+                'processing_info': {
+                    'method': 'AI Agent Analysis',
+                    'model': 'Google Gemini 2.0 Flash',
+                    'replaced': 'Hard-coded patterns'
+                }
+            })
+            
+        except Exception as e:
+            logger.error(f"AI-powered tags analysis failed: {str(e)}")
+            return Response({
+                'status': 'error',
+                'error_message': str(e),
+                'tags_analysis': {
+                    'positive_keywords': ['excellent', 'clean', 'friendly', 'comfortable', 'beautiful'],
+                    'negative_keywords': ['dirty', 'noise', 'rude', 'expensive', 'old'],
+                    'topic_metrics': {
+                        'service': {'percentage': 75, 'keywords': ['staff', 'support'], 'description': 'Service quality'},
+                        'cleanliness': {'percentage': 70, 'keywords': ['clean', 'hygiene'], 'description': 'Cleanliness standards'},
+                        'location': {'percentage': 80, 'keywords': ['area', 'transport'], 'description': 'Location convenience'},
+                        'value': {'percentage': 65, 'keywords': ['price', 'cost'], 'description': 'Value for money'}
+                    },
+                    'main_issues': ['Service concerns', 'Cleanliness issues'],
+                    'emerging_topics': ['Safety protocols', 'Digital services']
+                },
+                'processed_reviews': 0,
+                'generated_at': datetime.now().isoformat(),
+                'fallback': 'Default tags structure used'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class CombinedAIAnalysisAPIView(APIView):
+    """
+    Combined API endpoint for generating both summary and tags analysis
+    
+    This endpoint generates all AI analysis in a single request to avoid
+    multiple API calls and page reloading. Optimized for on-demand generation.
+    """
+    
+    def post(self, request):
+        """Generate complete AI analysis including summary and tags"""
+        try:
+            from agents.orchestrator import ReviewProcessingOrchestrator
+            from agents.summarizer.agent import ReviewSummarizerAgent
+            
+            # Get parameters
+            hotel_id = request.data.get('hotel')
+            days = int(request.data.get('days', 30))
+            
+            # Get reviews
+            reviews = Review.objects.all()
+            if hotel_id:
+                reviews = reviews.filter(hotel_id=hotel_id)
+            
+            # Date filter
+            start_date = datetime.now() - timedelta(days=days)
+            reviews = reviews.filter(created_at__gte=start_date)
+            
+            if not reviews.exists():
+                return Response({
+                    'status': 'no_data',
+                    'message': f"No reviews found for the specified criteria over the last {days} days.",
+                    'summary': None,
+                    'tags_analysis': None,
+                    'processed_reviews': 0
+                })
+            
+            # Convert Django queryset to agent-compatible format
+            reviews_data = []
+            for review in reviews:
+                reviews_data.append({
+                    'text': review.text,
+                    'sentiment': review.sentiment or 'neutral',
+                    'score': review.ai_score or 3.0,
+                    'original_rating': review.original_rating or 3.0,
+                    'hotel': review.hotel.name if review.hotel else 'Unknown',
+                    'date': review.created_at.isoformat()
+                })
+            
+            logger.info(f"[STAGE 2] Generating analytics for {len(reviews_data)} reviews")
+            
+            # Initialize Two-Stage Workflow orchestrator
+            orchestrator = ReviewProcessingOrchestrator()
+            
+            # STAGE 2: Analytics Generation (On-Demand)
+            # Generate tags analysis first (for context)
+            tags_result = orchestrator.generate_tags_analysis(reviews_data)
+            
+            # Generate AI-powered recommendations with context from tags analysis
+            recommendations_result = orchestrator.generate_recommendations(
+                reviews_data, 
+                analysis_context={'tags_analysis': tags_result.get('tags_analysis', {})}
+            )
+            
+            # Generate executive summary using Stage 2 method
+            summary_result = orchestrator.generate_analytics_summary(reviews_data)
+            
+            # Combine Stage 2 Analytics Results
+            response_data = {
+                'status': 'success',
+                'workflow_stage': 'analytics_generation',
+                'summary': {
+                    'text': summary_result.get('summary_text', ''),
+                    'total_reviews': summary_result.get('total_reviews', len(reviews_data)),
+                    'average_score': summary_result.get('summary_data', {}).get('average_score', 0),
+                    'sentiment_distribution': [
+                        {'sentiment': k, 'count': v} 
+                        for k, v in summary_result.get('summary_data', {}).get('sentiment_distribution', {}).items()
+                    ],
+                    'insights': {
+                        'sentiment_percentages': summary_result.get('summary_data', {}).get('sentiment_percentages', {}),
+                        'score_range': summary_result.get('summary_data', {}).get('score_range', [0, 5]),
+                        'generated_by': summary_result.get('generated_by', 'Two-Stage Workflow')
+                    },
+                    'recommendations': recommendations_result.get('recommendations', [])
+                },
+                'tags_analysis': tags_result.get('tags_analysis', {}),
+                'processed_reviews': len(reviews_data),
+                'generated_at': datetime.now().isoformat(),
+                'date_range': {
+                    'start': start_date.date(),
+                    'end': datetime.now().date()
+                },
+                'workflow_info': {
+                    'architecture': 'Two-Stage Workflow',
+                    'stage_executed': 'Stage 2: Analytics Generation'
+                },
+                'agents_used': {
+                    'summarizer': summary_result.get('generated_by', 'ReviewSummarizer'),
+                    'tags_generator': tags_result.get('agent', 'TagsGeneratorAgent')
+                }
+            }
+            
+            # Save analysis results to database for persistence
+            try:
+                # Create AIAnalysisSession instance
+                analysis_session = AIAnalysisSession.objects.create(
+                    ai_summary=summary_result['summary_text'],
+                    ai_positive_keywords=tags_result.get('tags_analysis', {}).get('positive_keywords', []),
+                    ai_negative_keywords=tags_result.get('tags_analysis', {}).get('negative_keywords', []),
+                    ai_topics_analysis=tags_result.get('tags_analysis', {}).get('topic_metrics', {}),
+                    ai_issues_identified=tags_result.get('tags_analysis', {}).get('main_issues', []),
+                    ai_emerging_topics=tags_result.get('tags_analysis', {}).get('emerging_topics', []),
+                    ai_recommendations=recommendations_result.get('recommendations', []),
+                    analysis_date_range={
+                        'start': start_date.date().isoformat(),
+                        'end': datetime.now().date().isoformat(),
+                        'days': days
+                    },
+                    total_reviews_analyzed=len(reviews_data)
+                )
+                
+                logger.info(f"AI analysis saved to database with ID: {analysis_session.id}")
+                response_data['analysis_session_id'] = str(analysis_session.id)
+                
+            except Exception as save_error:
+                logger.warning(f"Failed to save analysis to database: {save_error}")
+                # Continue without saving - don't break the API response
+            
+            logger.info("Complete AI analysis generated successfully")
+            return Response(response_data)
+            
+        except Exception as e:
+            logger.error(f"Combined AI analysis failed: {str(e)}")
+            return Response({
+                'status': 'error',
+                'error_message': str(e),
+                'summary': None,
+                'tags_analysis': None,
+                'processed_reviews': 0,
+                'generated_at': datetime.now().isoformat(),
+                'fallback': 'AI analysis generation failed'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class GetAIAnalysisAPIView(APIView):
+    """API endpoint to retrieve existing AI analysis"""
+    
+    def get(self, request):
+        """Get the latest AI analysis session"""
+        try:
+            # Get the most recent analysis session
+            latest_analysis = AIAnalysisSession.objects.latest('created_at')
+            
+            return Response({
+                'status': 'success',
+                'has_existing_analysis': True,
+                'analysis': {
+                    'id': str(latest_analysis.id),
+                    'summary': {
+                        'text': latest_analysis.ai_summary,
+                        'total_reviews': latest_analysis.total_reviews_analyzed,
+                        'average_score': self._calculate_average_score_for_period(latest_analysis.analysis_date_range),
+                        'date_range': latest_analysis.analysis_date_range,
+                        'recommendations': latest_analysis.ai_recommendations or []
+                    },
+                    'tags_analysis': {
+                        'positive_keywords': latest_analysis.ai_positive_keywords,
+                        'negative_keywords': latest_analysis.ai_negative_keywords,
+                        'topic_metrics': latest_analysis.ai_topics_analysis,
+                        'issues_identified': latest_analysis.ai_issues_identified,
+                        'emerging_topics': latest_analysis.ai_emerging_topics
+                    },
+                    'generated_at': latest_analysis.created_at.isoformat(),
+                    'date_range': latest_analysis.analysis_date_range
+                }
+            })
+            
+        except AIAnalysisSession.DoesNotExist:
+            return Response({
+                'status': 'no_data',
+                'has_existing_analysis': False,
+                'message': 'No previous AI analysis found. Generate new analysis.',
+                'analysis': None
+            })
+            
+        except Exception as e:
+            logger.error(f"Failed to retrieve AI analysis: {str(e)}")
+            return Response({
+                'status': 'error',
+                'has_existing_analysis': False,
+                'error_message': str(e),
+                'analysis': None
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def _calculate_average_score_for_period(self, date_range):
+        """Calculate average score for the analysis period"""
+        try:
+            from datetime import datetime
+            from django.db.models import Avg
+            
+            if not date_range or 'start' not in date_range or 'end' not in date_range:
+                # Fallback to overall average if no date range
+                avg_score = Review.objects.aggregate(avg_score=Avg('ai_score'))['avg_score']
+                return round(avg_score, 1) if avg_score else 3.0
+                
+            # Parse date range
+            start_date = datetime.fromisoformat(date_range['start'])
+            end_date = datetime.fromisoformat(date_range['end'])
+            
+            # Calculate average for the period
+            avg_score = Review.objects.filter(
+                created_at__gte=start_date,
+                created_at__lte=end_date
+            ).aggregate(avg_score=Avg('ai_score'))['avg_score']
+            
+            return round(avg_score, 1) if avg_score else 3.0
+            
+        except Exception as e:
+            logger.warning(f"Failed to calculate average score: {e}")
+            return 3.0
 
 
 class ExportAPIView(APIView):
