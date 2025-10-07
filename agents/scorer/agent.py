@@ -5,6 +5,7 @@ Uses HuggingFace BERT model for review scoring.
 
 import json
 import logging
+import os
 import re
 from typing import Dict, Any, List
 from crewai import Agent, Task
@@ -21,7 +22,7 @@ class SentimentScoringTool(BaseTool):
     def __init__(self):
         super().__init__()
         self._api_url = "https://api-inference.huggingface.co/models/nlptown/bert-base-multilingual-uncased-sentiment"
-        self._api_key = "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"
+        self._api_key = os.getenv('HUGGINGFACE_API_KEY', '')
 
     def _run(self, text: str, sentiment: str = None) -> str:
         """Score review using HuggingFace BERT model"""
