@@ -14,6 +14,9 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 import json
 import logging
 from datetime import datetime, timedelta
@@ -50,16 +53,33 @@ class AuthProfileView(APIView):
 
 class DashboardStatsView(APIView):
     """API endpoint for dashboard statistics"""
+    permission_classes = [IsAuthenticated]
     
     def get(self, request):
         try:
+            # Filter by accessible hotels
+            accessible_hotels = request.user.profile.get_accessible_hotels()
+            
+            if accessible_hotels:
+                total_reviews = Review.objects.filter(hotel__in=accessible_hotels).count()
+                processed_reviews = Review.objects.filter(processed=True, hotel__in=accessible_hotels).count()
+                pending_reviews = Review.objects.filter(processed=False, hotel__in=accessible_hotels).count()
+                sentiment_distribution = list(Review.objects.filter(hotel__in=accessible_hotels).values('sentiment').annotate(count=Count('sentiment')))
+                avg_score = Review.objects.filter(hotel__in=accessible_hotels).aggregate(avg_score=Avg('ai_score'))['avg_score'] or 0
+            else:
+                total_reviews = 0
+                processed_reviews = 0
+                pending_reviews = 0
+                sentiment_distribution = []
+                avg_score = 0
+            
             stats = {
-                'total_reviews': Review.objects.count(),
-                'total_hotels': Hotel.objects.count(),
-                'processed_reviews': Review.objects.filter(processed=True).count(),
-                'pending_reviews': Review.objects.filter(processed=False).count(),
-                'sentiment_distribution': list(Review.objects.values('sentiment').annotate(count=Count('sentiment'))),
-                'avg_score': Review.objects.aggregate(avg_score=Avg('ai_score'))['avg_score'] or 0,
+                'total_reviews': total_reviews,
+                'total_hotels': len(accessible_hotels),
+                'processed_reviews': processed_reviews,
+                'pending_reviews': pending_reviews,
+                'sentiment_distribution': sentiment_distribution,
+                'avg_score': avg_score,
             }
             return Response(stats)
         except Exception as e:
@@ -684,6 +704,7 @@ class CombinedAIAnalysisAPIView(APIView):
     This endpoint generates all AI analysis in a single request to avoid
     multiple API calls and page reloading. Optimized for on-demand generation.
     """
+    permission_classes = [IsAuthenticated]
     
     def post(self, request):
         """Generate complete AI analysis including summary and tags"""
@@ -695,9 +716,20 @@ class CombinedAIAnalysisAPIView(APIView):
             hotel_id = request.data.get('hotel')
             days = int(request.data.get('days', 30))
             
+            # Filter by accessible hotels
+            accessible_hotels = request.user.profile.get_accessible_hotels()
+            
             # Get reviews
-            reviews = Review.objects.all()
-            if hotel_id:
+            if accessible_hotels:
+                reviews = Review.objects.filter(hotel__in=accessible_hotels)
+                if hotel_id:
+                    # Verify user can access this specific hotel
+                    if int(hotel_id) in [h.id for h in accessible_hotels]:
+                        reviews = reviews.filter(hotel_id=hotel_id)
+                    else:
+                        return Response({'error': 'You do not have access to this hotel'}, status=403)
+            else:
+                reviews = Review.objects.none()
                 reviews = reviews.filter(hotel_id=hotel_id)
             
             # Date filter

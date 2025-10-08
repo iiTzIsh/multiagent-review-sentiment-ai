@@ -1,0 +1,504 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}User Profile - Hotel Review Platform{% endblock %}
+
+{% block page_icon %}<i class="fas fa-user-edit me-2"></i>{% endblock %}
+{% block page_title %}User Profile{% endblock %}
+{% block page_description %}Manage your account information and settings{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Text Visibility Fixes */
+    .profile-card * {
+        color: #1f2937 !important;
+    }
+    
+    .form-label, label {
+        color: #1f2937 !important;
+        font-weight: 600 !important;
+    }
+    
+    .form-control {
+        background-color: white !important;
+        color: #1f2937 !important;
+        border: 2px solid #e5e7eb !important;
+    }
+    
+    .form-control:focus {
+        color: #1f2937 !important;
+        background-color: white !important;
+    }
+    
+    .form-control::placeholder {
+        color: #6b7280 !important;
+    }
+    
+    .form-text, small {
+        color: #6b7280 !important;
+    }
+    
+    p {
+        color: #4b5563 !important;
+    }
+    
+    .info-value {
+        color: #1f2937 !important;
+        font-weight: 600 !important;
+    }
+    
+    .info-label {
+        color: #4b5563 !important;
+    }
+    
+    .profile-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    
+    .profile-header {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 40px 30px;
+        text-align: center;
+    }
+    
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 3rem;
+    }
+    
+    .profile-name {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    
+    .profile-role {
+        font-size: 1rem;
+        opacity: 0.9;
+    }
+    
+    .profile-body {
+        padding: 30px;
+    }
+    
+    .profile-section {
+        margin-bottom: 30px;
+        padding: 25px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border-left: 4px solid #667eea;
+    }
+    
+    .section-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #2d3748;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .section-title i {
+        margin-right: 10px;
+        color: #667eea;
+    }
+    
+    .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .info-item:last-child {
+        border-bottom: none;
+    }
+    
+    .info-label {
+        font-weight: 500;
+        color: #4a5568;
+        display: flex;
+        align-items: center;
+    }
+    
+    .info-label i {
+        margin-right: 8px;
+        color: #718096;
+        width: 16px;
+    }
+    
+    .info-value {
+        color: #2d3748;
+        font-weight: 500;
+    }
+    
+    .form-control {
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px 15px;
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    .btn-update {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        border: none;
+        border-radius: 10px;
+        padding: 12px 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-update:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .btn-change-password {
+        background: linear-gradient(45deg, #48bb78, #38a169);
+        border: none;
+        border-radius: 10px;
+        padding: 12px 25px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-change-password:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(72, 187, 120, 0.3);
+    }
+    
+    .hotel-badge {
+        background: #667eea;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+    
+    .role-badge {
+        background: #48bb78;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-transform: capitalize;
+    }
+    
+    .password-form {
+        display: none;
+        background: #fff8dc;
+        border: 1px solid #f6e05e;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    
+    .password-form.show {
+        display: block;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10 col-xl-8">
+        <div class="profile-card">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h2 class="profile-name">{{ user.get_full_name|default:user.username }}</h2>
+                <p class="profile-role">
+                    {% if profile.role %}
+                        {{ profile.get_role_display }}
+                        {% if profile.hotel %} • {{ profile.hotel.name }}{% endif %}
+                    {% else %}
+                        User
+                    {% endif %}
+                </p>
+            </div>
+            
+            <div class="profile-body">
+                <!-- Account Information -->
+                <div class="profile-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-user"></i>
+                        Account Information
+                    </h3>
+                    
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fas fa-user-tag"></i>
+                            Username
+                        </span>
+                        <span class="info-value">{{ user.username }}</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fas fa-envelope"></i>
+                            Email
+                        </span>
+                        <span class="info-value">{{ user.email|default:"Not provided" }}</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fas fa-calendar-alt"></i>
+                            Member Since
+                        </span>
+                        <span class="info-value">{{ user.date_joined|date:"F d, Y" }}</span>
+                    </div>
+                    
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fas fa-clock"></i>
+                            Last Login
+                        </span>
+                        <span class="info-value">
+                            {% if user.last_login %}
+                                {{ user.last_login|date:"F d, Y g:i A" }}
+                            {% else %}
+                                Never
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Role & Access -->
+                <div class="profile-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-shield-alt"></i>
+                        Role & Access
+                    </h3>
+                    
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fas fa-user-shield"></i>
+                            Role
+                        </span>
+                        <span class="role-badge">{{ profile.get_role_display|default:"User" }}</span>
+                    </div>
+                    
+                    {% if profile.hotel %}
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fas fa-building"></i>
+                            Primary Hotel
+                        </span>
+                        <span class="hotel-badge">{{ profile.hotel.name }}</span>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fas fa-key"></i>
+                            Accessible Hotels
+                        </span>
+                        <span class="info-value">
+                            {% if accessible_hotels %}
+                                {{ accessible_hotels|length }} hotel{{ accessible_hotels|length|pluralize }}
+                            {% else %}
+                                No hotels accessible
+                            {% endif %}
+                        </span>
+                    </div>
+                    
+                    {% if profile.department %}
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fas fa-briefcase"></i>
+                            Department
+                        </span>
+                        <span class="info-value">{{ profile.department }}</span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if profile.phone_number %}
+                    <div class="info-item">
+                        <span class="info-label">
+                            <i class="fas fa-phone"></i>
+                            Phone
+                        </span>
+                        <span class="info-value">{{ profile.phone_number }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Edit Profile -->
+                <div class="profile-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-edit"></i>
+                        Edit Profile
+                    </h3>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="first_name" class="form-label">First Name</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="first_name" 
+                                       name="first_name" 
+                                       value="{{ user.first_name }}">
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="last_name" class="form-label">Last Name</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="last_name" 
+                                       name="last_name" 
+                                       value="{{ user.last_name }}">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" 
+                                       class="form-control" 
+                                       id="email" 
+                                       name="email" 
+                                       value="{{ user.email }}">
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="phone_number" class="form-label">Phone Number</label>
+                                <input type="text" 
+                                       class="form-control" 
+                                       id="phone_number" 
+                                       name="phone_number" 
+                                       value="{{ profile.phone_number }}">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="department" class="form-label">Department/Position</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="department" 
+                                   name="department" 
+                                   value="{{ profile.department }}">
+                        </div>
+                        
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-primary btn-update">
+                                <i class="fas fa-save me-2"></i>
+                                Update Profile
+                            </button>
+                            
+                            <button type="button" 
+                                    class="btn btn-success btn-change-password" 
+                                    onclick="togglePasswordForm()">
+                                <i class="fas fa-key me-2"></i>
+                                Change Password
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <!-- Password Change Form -->
+                    <div class="password-form" id="passwordForm">
+                        <h5><i class="fas fa-key me-2"></i>Change Password</h5>
+                        <form action="{% url 'auth:change_password' %}" method="post">
+                            {% csrf_token %}
+                            
+                            <div class="row">
+                                <div class="col-md-4 mb-3">
+                                    <label for="current_password" class="form-label">Current Password</label>
+                                    <input type="password" 
+                                           class="form-control" 
+                                           id="current_password" 
+                                           name="current_password" 
+                                           required>
+                                </div>
+                                
+                                <div class="col-md-4 mb-3">
+                                    <label for="new_password" class="form-label">New Password</label>
+                                    <input type="password" 
+                                           class="form-control" 
+                                           id="new_password" 
+                                           name="new_password" 
+                                           required>
+                                </div>
+                                
+                                <div class="col-md-4 mb-3">
+                                    <label for="confirm_password" class="form-label">Confirm Password</label>
+                                    <input type="password" 
+                                           class="form-control" 
+                                           id="confirm_password" 
+                                           name="confirm_password" 
+                                           required>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-check me-2"></i>
+                                    Update Password
+                                </button>
+                                
+                                <button type="button" 
+                                        class="btn btn-outline-secondary" 
+                                        onclick="togglePasswordForm()">
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function togglePasswordForm() {
+        const form = document.getElementById('passwordForm');
+        form.classList.toggle('show');
+        
+        if (form.classList.contains('show')) {
+            document.getElementById('current_password').focus();
+        } else {
+            // Clear form when hiding
+            form.querySelectorAll('input').forEach(input => input.value = '');
+        }
+    }
+    
+    // Password confirmation validation
+    document.getElementById('confirm_password')?.addEventListener('input', function() {
+        const newPassword = document.getElementById('new_password').value;
+        const confirmPassword = this.value;
+        
+        if (confirmPassword && newPassword !== confirmPassword) {
+            this.classList.add('is-invalid');
+        } else {
+            this.classList.remove('is-invalid');
+        }
+    });
+</script>
+{% endblock %}

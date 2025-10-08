@@ -40,12 +40,14 @@
     --bg-secondary: var(--gray-50);
     --bg-tertiary: var(--gray-100);
     
-    /* Text Colors - Updated for dark background visibility */
-    --text-primary: #ffffff;
-    --text-secondary: #e5e7eb;
-    --text-tertiary: #d1d5db;
-    --text-muted: #9ca3af;
-    --text-inverse: #ffffff;
+    /* Text Colors - Fixed for better contrast and visibility */
+    --text-primary: #1f2937;        /* Dark gray for main text on light backgrounds */
+    --text-secondary: #4b5563;      /* Medium gray for secondary text */
+    --text-tertiary: #6b7280;       /* Light gray for tertiary text */
+    --text-muted: #9ca3af;          /* Muted gray for less important text */
+    --text-inverse: #ffffff;        /* White text for dark backgrounds */
+    --text-on-dark: #ffffff;        /* White text specifically for dark backgrounds */
+    --text-on-light: #1f2937;       /* Dark text specifically for light backgrounds */
     
     /* Modern Gradient Colors for Card Headers */
     --gradient-purple: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1665,6 +1667,261 @@ small.text-muted {
     background: #f59e0b !important;
     border: none !important;
     outline: none !important;
+}
+
+/* USER MANAGEMENT INTERFACE - IMPROVED TEXT VISIBILITY */
+/* User Management Cards */
+.user-card,
+.user-item,
+.list-group-item {
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--gray-200) !important;
+}
+
+/* User Management Text Elements */
+.user-card h5,
+.user-card h6,
+.user-card p,
+.user-card span,
+.user-card small,
+.user-item h5,
+.user-item h6,
+.user-item p,
+.user-item span,
+.user-item small {
+    color: var(--text-primary) !important;
+}
+
+/* User Management Secondary Text */
+.user-card .text-muted,
+.user-item .text-muted,
+.user-info .text-muted {
+    color: var(--text-secondary) !important;
+}
+
+/* User List Items */
+.list-group-item {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-primary) !important;
+}
+
+.list-group-item h6,
+.list-group-item p,
+.list-group-item span,
+.list-group-item small {
+    color: var(--text-primary) !important;
+}
+
+.list-group-item .text-muted {
+    color: var(--text-secondary) !important;
+}
+
+/* User Badges and Status */
+.badge {
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+.badge.bg-success {
+    background-color: var(--success-color) !important;
+    color: white !important;
+}
+
+.badge.bg-warning {
+    background-color: var(--warning-color) !important;
+    color: var(--text-primary) !important;
+}
+
+.badge.bg-secondary {
+    background-color: var(--gray-500) !important;
+    color: white !important;
+}
+
+/* User Avatar and Profile Elements */
+.avatar,
+.user-avatar {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    font-weight: 600 !important;
+}
+
+/* Search and Filter Elements */
+.form-control {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--gray-300) !important;
+}
+
+.form-control::placeholder {
+    color: var(--text-tertiary) !important;
+}
+
+/* Action Buttons in User Management */
+.btn-outline-primary {
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+}
+
+.btn-outline-success {
+    color: var(--success-color) !important;
+    border-color: var(--success-color) !important;
+}
+
+.btn-outline-success:hover {
+    background-color: var(--success-color) !important;
+    color: white !important;
+}
+
+/* User Role and Status Indicators */
+.role-badge {
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+
+.status-active {
+    color: var(--success-color) !important;
+}
+
+.status-inactive {
+    color: var(--danger-color) !important;
+}
+
+/* User Info Cards */
+.user-info-card {
+    background: var(--bg-primary) !important;
+    border: 1px solid var(--gray-200) !important;
+    border-radius: var(--border-radius-lg) !important;
+}
+
+.user-info-card h6,
+.user-info-card p,
+.user-info-card span {
+    color: var(--text-primary) !important;
+}
+
+.user-info-card .text-muted {
+    color: var(--text-secondary) !important;
+}
+
+/* Fix for any remaining invisible text */
+* {
+    text-shadow: none !important;
+}
+
+/* Ensure high contrast for all interactive elements */
+a {
+    color: var(--primary-color) !important;
+}
+
+a:hover {
+    color: var(--primary-dark) !important;
+}
+
+/* Dark mode text fixes */
+@media (prefers-color-scheme: dark) {
+    body,
+    .card,
+    .card-body,
+    .list-group-item {
+        color: #f9fafb !important;
+    }
+    
+    .text-muted {
+        color: #9ca3af !important;
+    }
+}
+
+/* ULTIMATE TEXT VISIBILITY OVERRIDE - NUCLEAR OPTION */
+/* Force ALL text to be visible with maximum specificity */
+.user-info h5,
+.user-info .user-email,
+.user-row h5,
+.user-row .user-email,
+.stat-card .stat-number,
+.stat-card .stat-label,
+.user-actions small,
+.text-muted,
+.card-body h5,
+.card-body p,
+.card-body span,
+.card-body div,
+.card h6,
+.card small,
+div h5,
+div p,
+div span,
+div small,
+.user-meta,
+.meta-badge {
+    color: #1f2937 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Specific overrides for user management template */
+.stats-cards .stat-card .stat-number {
+    color: #1f2937 !important;
+    font-weight: 700 !important;
+}
+
+.stats-cards .stat-card .stat-label {
+    color: #4b5563 !important;
+}
+
+.user-row .user-info h5 {
+    color: #1f2937 !important;
+    font-weight: 600 !important;
+}
+
+.user-row .user-email {
+    color: #4b5563 !important;
+}
+
+.user-actions small.text-muted {
+    color: #6b7280 !important;
+}
+
+/* Override any Bootstrap text utilities that might interfere */
+.text-dark,
+.text-body,
+h1, h2, h3, h4, h5, h6,
+p, span, div, small {
+    color: #1f2937 !important;
+}
+
+.text-secondary {
+    color: #4b5563 !important;
+}
+
+.text-muted {
+    color: #6b7280 !important;
+}
+
+/* Force visibility on any remaining elements */
+* {
+    text-shadow: none !important;
+}
+
+/* Ensure high contrast for readability */
+body * {
+    color: inherit !important;
+}
+
+/* Final catch-all for any missed text */
+.main-content * {
+    color: #1f2937 !important;
+}
+
+.main-content .text-muted {
+    color: #6b7280 !important;
 }
 
 .metric-card.bg-info {

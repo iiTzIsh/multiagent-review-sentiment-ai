@@ -1,0 +1,369 @@
+/* Authentication Pages - Text Visibility Fix */
+:root {
+    /* Text Colors for Authentication Pages */
+    --auth-text-primary: #1f2937;
+    --auth-text-secondary: #4b5563;
+    --auth-text-muted: #6b7280;
+    --auth-bg-primary: #ffffff;
+    --auth-bg-secondary: #f9fafb;
+    --auth-border: #e5e7eb;
+    --auth-primary: #2563eb;
+}
+
+/* Global Text Visibility Override for Auth Pages */
+body {
+    color: var(--auth-text-primary) !important;
+}
+
+/* Form Elements */
+.form-label,
+label {
+    color: var(--auth-text-primary) !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.form-control {
+    background-color: var(--auth-bg-primary) !important;
+    border: 1px solid var(--auth-border) !important;
+    color: var(--auth-text-primary) !important;
+    padding: 0.75rem 1rem !important;
+    border-radius: 0.5rem !important;
+}
+
+.form-control:focus {
+    border-color: var(--auth-primary) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+    color: var(--auth-text-primary) !important;
+}
+
+.form-control::placeholder {
+    color: var(--auth-text-muted) !important;
+}
+
+/* Form Text and Help Text */
+.form-text,
+.help-text,
+small {
+    color: var(--auth-text-muted) !important;
+}
+
+/* Card and Container Text */
+.card {
+    background-color: var(--auth-bg-primary) !important;
+    border: 1px solid var(--auth-border) !important;
+}
+
+.card-header {
+    background-color: var(--auth-bg-secondary) !important;
+    border-bottom: 1px solid var(--auth-border) !important;
+    color: var(--auth-text-primary) !important;
+}
+
+.card-body {
+    background-color: var(--auth-bg-primary) !important;
+    color: var(--auth-text-primary) !important;
+}
+
+.card-title {
+    color: var(--auth-text-primary) !important;
+    font-weight: 600 !important;
+}
+
+.card-text {
+    color: var(--auth-text-secondary) !important;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--auth-text-primary) !important;
+}
+
+/* Paragraph Text */
+p {
+    color: var(--auth-text-secondary) !important;
+}
+
+/* Links */
+a {
+    color: var(--auth-primary) !important;
+}
+
+a:hover {
+    color: #1d4ed8 !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--auth-primary) !important;
+    border-color: var(--auth-primary) !important;
+    color: white !important;
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8 !important;
+    border-color: #1d4ed8 !important;
+    color: white !important;
+}
+
+.btn-outline-primary {
+    color: var(--auth-primary) !important;
+    border-color: var(--auth-primary) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--auth-primary) !important;
+    border-color: var(--auth-primary) !important;
+    color: white !important;
+}
+
+/* Alert Messages */
+.alert {
+    color: var(--auth-text-primary) !important;
+}
+
+.alert-success {
+    background-color: #f0fdf4 !important;
+    border-color: #bbf7d0 !important;
+    color: #166534 !important;
+}
+
+.alert-danger {
+    background-color: #fef2f2 !important;
+    border-color: #fecaca !important;
+    color: #dc2626 !important;
+}
+
+.alert-warning {
+    background-color: #fffbeb !important;
+    border-color: #fed7aa !important;
+    color: #d97706 !important;
+}
+
+.alert-info {
+    background-color: #eff6ff !important;
+    border-color: #bfdbfe !important;
+    color: #2563eb !important;
+}
+
+/* Form Validation Text */
+.invalid-feedback {
+    color: #dc2626 !important;
+}
+
+.valid-feedback {
+    color: #16a34a !important;
+}
+
+/* Select Dropdowns */
+.form-select {
+    background-color: var(--auth-bg-primary) !important;
+    border: 1px solid var(--auth-border) !important;
+    color: var(--auth-text-primary) !important;
+}
+
+.form-select:focus {
+    border-color: var(--auth-primary) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+    color: var(--auth-text-primary) !important;
+}
+
+/* Checkbox and Radio Labels */
+.form-check-label {
+    color: var(--auth-text-primary) !important;
+}
+
+.form-check-input:checked {
+    background-color: var(--auth-primary) !important;
+    border-color: var(--auth-primary) !important;
+}
+
+/* Tables (if any in auth pages) */
+.table {
+    color: var(--auth-text-primary) !important;
+}
+
+.table th {
+    color: var(--auth-text-primary) !important;
+    background-color: var(--auth-bg-secondary) !important;
+}
+
+.table td {
+    color: var(--auth-text-primary) !important;
+}
+
+/* Navigation Elements */
+.nav-link {
+    color: var(--auth-text-secondary) !important;
+}
+
+.nav-link.active,
+.nav-link:hover {
+    color: var(--auth-primary) !important;
+}
+
+/* Breadcrumbs */
+.breadcrumb-item {
+    color: var(--auth-text-secondary) !important;
+}
+
+.breadcrumb-item.active {
+    color: var(--auth-text-primary) !important;
+}
+
+/* List Groups */
+.list-group-item {
+    background-color: var(--auth-bg-primary) !important;
+    color: var(--auth-text-primary) !important;
+    border-color: var(--auth-border) !important;
+}
+
+/* Badges */
+.badge {
+    color: white !important;
+}
+
+.badge.bg-secondary {
+    background-color: #6b7280 !important;
+    color: white !important;
+}
+
+/* Modal Elements */
+.modal-content {
+    background-color: var(--auth-bg-primary) !important;
+    color: var(--auth-text-primary) !important;
+}
+
+.modal-header {
+    background-color: var(--auth-bg-secondary) !important;
+    border-bottom-color: var(--auth-border) !important;
+    color: var(--auth-text-primary) !important;
+}
+
+.modal-body {
+    color: var(--auth-text-primary) !important;
+}
+
+.modal-footer {
+    background-color: var(--auth-bg-secondary) !important;
+    border-top-color: var(--auth-border) !important;
+}
+
+/* Specific Auth Form Styling */
+.auth-form {
+    background-color: var(--auth-bg-primary) !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+    padding: 2rem !important;
+}
+
+.auth-form .form-group {
+    margin-bottom: 1.5rem !important;
+}
+
+.auth-form .form-label {
+    color: var(--auth-text-primary) !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.5rem !important;
+    display: block !important;
+}
+
+.auth-form .form-control {
+    background-color: var(--auth-bg-primary) !important;
+    border: 2px solid var(--auth-border) !important;
+    color: var(--auth-text-primary) !important;
+    font-size: 1rem !important;
+    padding: 0.75rem 1rem !important;
+    border-radius: 0.5rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.auth-form .form-control:focus {
+    border-color: var(--auth-primary) !important;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+    outline: none !important;
+}
+
+/* Text Override - Nuclear Option */
+* {
+    color: inherit !important;
+}
+
+/* Force all text to be visible */
+.auth-container *,
+.auth-form *,
+.card *,
+.form-group *,
+.mb-3 *,
+.row *,
+.col * {
+    color: var(--auth-text-primary) !important;
+}
+
+/* Form labels specifically */
+.auth-container label,
+.auth-form label,
+.card label,
+.form-group label {
+    color: var(--auth-text-primary) !important;
+    font-weight: 600 !important;
+}
+
+/* Small text and help text */
+.auth-container small,
+.auth-form small,
+.card small {
+    color: var(--auth-text-muted) !important;
+}
+
+/* Override any remaining invisible text */
+.text-muted {
+    color: var(--auth-text-muted) !important;
+}
+
+.text-dark {
+    color: var(--auth-text-primary) !important;
+}
+
+.text-secondary {
+    color: var(--auth-text-secondary) !important;
+}
+
+/* Ensure high contrast */
+body, html {
+    color: var(--auth-text-primary) !important;
+    background-color: var(--auth-bg-secondary) !important;
+}
+
+/* Profile page specific */
+.profile-form .form-label,
+.profile-form label {
+    color: var(--auth-text-primary) !important;
+    font-weight: 600 !important;
+}
+
+.profile-info {
+    color: var(--auth-text-primary) !important;
+}
+
+.profile-info .text-muted {
+    color: var(--auth-text-muted) !important;
+}
+
+/* Registration and login form specifics */
+.registration-form .form-label,
+.login-form .form-label {
+    color: var(--auth-text-primary) !important;
+    font-weight: 600 !important;
+    display: block !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* Final catch-all for any missed elements */
+.main-content label,
+.main-content .form-label,
+.main-content p,
+.main-content span,
+.main-content div {
+    color: var(--auth-text-primary) !important;
+}

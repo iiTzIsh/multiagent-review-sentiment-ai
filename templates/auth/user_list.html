@@ -1,0 +1,246 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}User Management - Hotel Review Platform{% endblock %}
+
+{% block page_icon %}<i class="fas fa-users me-2"></i>{% endblock %}
+{% block page_title %}User Management{% endblock %}
+{% block page_description %}Manage user accounts and permissions{% endblock %}
+
+{% block page_actions %}
+<a href="{% url 'auth:register' %}" class="btn btn-primary">
+    <i class="fas fa-user-plus me-2"></i>
+    Add New User
+</a>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Override all text colors for visibility */
+    .stat-card * {
+        color: #1f2937 !important;
+    }
+    
+    .stat-card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #1f2937 !important;
+        margin-bottom: 5px;
+    }
+    
+    .stat-label {
+        color: #4b5563 !important;
+        font-size: 0.9rem;
+    }
+    
+    .user-card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid #e2e8f0;
+    }
+    
+    .user-card h5 {
+        color: #1f2937 !important;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    
+    .user-card p {
+        color: #4b5563 !important;
+        margin-bottom: 8px;
+    }
+    
+    .user-card small {
+        color: #6b7280 !important;
+    }
+    
+    .badge {
+        color: white !important;
+        font-weight: 600;
+    }
+    
+    .user-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #667eea;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-right: 15px;
+    }
+    
+    .search-box input {
+        border-radius: 10px;
+        border: 2px solid #e2e8f0;
+        padding: 12px 20px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Statistics Cards -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-number">{{ users|length }}</div>
+            <div class="stat-label">Total Users</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-number">
+                {% for user in users %}{% if user.is_active %}{{ forloop.counter }}{% endif %}{% empty %}0{% endfor %}
+            </div>
+            <div class="stat-label">Active Users</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-number">
+                {% for user in users %}{% if user.userprofile.role == 'admin' %}{{ forloop.counter }}{% endif %}{% empty %}0{% endfor %}
+            </div>
+            <div class="stat-label">Administrators</div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="stat-card">
+            <div class="stat-number">
+                {% for user in users %}{% if user.userprofile.role == 'manager' %}{{ forloop.counter }}{% endif %}{% empty %}0{% endfor %}
+            </div>
+            <div class="stat-label">Managers</div>
+        </div>
+    </div>
+</div>
+
+<!-- Search Box -->
+<div class="search-box">
+    <input type="text" id="userSearch" placeholder="Search users by name, email, or role..." class="form-control">
+</div>
+
+<!-- User Accounts Section -->
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0"><i class="fas fa-users me-2"></i> User Accounts</h5>
+    </div>
+    <div class="card-body">
+        {% for user in users %}
+        <div class="user-card d-flex align-items-center">
+            <div class="user-avatar">
+                {{ user.get_full_name|default:user.username|first|upper }}
+            </div>
+            <div class="flex-grow-1">
+                <h5>{{ user.get_full_name|default:user.username }}</h5>
+                <p class="mb-1">{{ user.email|default:"No email provided" }}</p>
+                <div class="d-flex gap-2 flex-wrap">
+                    <span class="badge bg-primary">{{ user.userprofile.get_role_display|default:"User" }}</span>
+                    {% if user.is_active %}
+                        <span class="badge bg-success">Active</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Inactive</span>
+                    {% endif %}
+                    {% if user.userprofile.hotels.exists %}
+                        <span class="badge bg-info">{{ user.userprofile.hotels.count }} Hotel{{ user.userprofile.hotels.count|pluralize }}</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div>
+                <small class="text-muted">
+                    {% if user.last_login %}
+                        Last login: {{ user.last_login|date:"M d, Y" }}
+                    {% else %}
+                        Never logged in
+                    {% endif %}
+                </small>
+                {% if not user.is_superuser %}
+                    <div class="mt-2">
+                        {% if user.is_active %}
+                            <button class="btn btn-sm btn-outline-warning" onclick="toggleUser({{ user.id }})">
+                                <i class="fas fa-user-times me-1"></i> Deactivate
+                            </button>
+                        {% else %}
+                            <button class="btn btn-sm btn-outline-success" onclick="toggleUser({{ user.id }})">
+                                <i class="fas fa-user-check me-1"></i> Activate
+                            </button>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <span class="badge bg-warning">Superuser</span>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center py-5">
+            <i class="fas fa-users fa-3x text-muted mb-3"></i>
+            <h4>No Users Found</h4>
+            <p class="text-muted">There are no user accounts in the system yet.</p>
+            <a href="{% url 'auth:register' %}" class="btn btn-primary">
+                <i class="fas fa-user-plus me-2"></i>
+                Create First User
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Simple search functionality
+document.getElementById('userSearch').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    const userCards = document.querySelectorAll('.user-card');
+    
+    userCards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(searchTerm)) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+});
+
+// Toggle user status
+function toggleUser(userId) {
+    if (confirm('Are you sure you want to change this user\'s status?')) {
+        fetch('{% url "auth:toggle_user_status" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({user_id: userId})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Error: ' + data.error);
+            }
+        })
+        .catch(error => {
+            alert('An error occurred: ' + error);
+        });
+    }
+}
+</script>
+{% endblock %}
