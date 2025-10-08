@@ -354,3 +354,274 @@ INFO 2025-10-08 17:04:38,736 basehttp 28736 17012 "GET /dashboard/reviews/ HTTP/
 INFO 2025-10-08 17:04:53,727 basehttp 28736 17012 "GET /dashboard/analytics/ HTTP/1.1" 200 113025
 INFO 2025-10-08 17:04:54,156 views 28736 17012 Retrieved persisted AI analysis: 742d3891-98a7-457f-a62b-884e7b8f29eb
 INFO 2025-10-08 17:04:54,517 basehttp 28736 17012 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 4597
+INFO 2025-10-08 17:06:10,203 autoreload 38776 13952 Watching for file changes with StatReloader
+INFO 2025-10-08 17:06:15,082 basehttp 38776 3152 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 17:06:18,537 basehttp 38776 3152 "GET /dashboard/ HTTP/1.1" 200 43758
+INFO 2025-10-08 17:06:18,663 basehttp 38776 25888 - Broken pipe from ('127.0.0.1', 13499)
+INFO 2025-10-08 17:06:29,588 basehttp 38776 3152 "GET /dashboard/analytics/ HTTP/1.1" 200 113025
+INFO 2025-10-08 17:06:30,114 views 38776 3152 Retrieved persisted AI analysis: 742d3891-98a7-457f-a62b-884e7b8f29eb
+INFO 2025-10-08 17:06:30,642 basehttp 38776 3152 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 4597
+INFO 2025-10-08 17:06:45,434 views 38776 3152 [STAGE 2] Generating analytics for 45 reviews
+INFO 2025-10-08 17:06:45,440 orchestrator 38776 3152 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 17:06:45,443 orchestrator 38776 3152 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 17:06:45,443 orchestrator 38776 3152 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 17:06:45,443 orchestrator 38776 3152 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 17:06:45,443 orchestrator 38776 3152 [STAGE 2] Generating tags analysis for 45 reviews
+INFO 2025-10-08 17:06:45,444 agent 38776 3152 Gemini model initialized successfully for summarization
+INFO 2025-10-08 17:06:45,446 orchestrator 38776 3152 [STAGE 2] Summarizer Agent initialized
+INFO 2025-10-08 17:06:45,447 agent 38776 3152 Gemini model initialized successfully for tags generation
+INFO 2025-10-08 17:06:45,447 agent 38776 3152 [OK] Tags Generator Agent initialized
+INFO 2025-10-08 17:06:45,447 orchestrator 38776 3152 [STAGE 2] Tags Generator Agent initialized
+INFO 2025-10-08 17:06:45,447 agent 38776 3152 Gemini model initialized successfully for recommendations generation
+INFO 2025-10-08 17:06:45,448 agent 38776 3152 [OK] Recommendations Agent initialized
+INFO 2025-10-08 17:06:45,448 orchestrator 38776 3152 [STAGE 2] Recommendations Agent initialized
+INFO 2025-10-08 17:06:45,448 orchestrator 38776 3152 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 17:06:49,946 agent 38776 3152 AI tags generation completed successfully
+INFO 2025-10-08 17:06:49,947 agent 38776 3152 Tags generation completed for 45 reviews
+INFO 2025-10-08 17:06:49,947 orchestrator 38776 3152 [STAGE 2] Tags analysis completed successfully
+INFO 2025-10-08 17:06:49,948 orchestrator 38776 3152 [STAGE 2] Generating business recommendations for 45 reviews
+INFO 2025-10-08 17:06:49,948 orchestrator 38776 3152 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 17:06:49,948 agent 38776 3152 Generating AI recommendations for 45 reviews
+INFO 2025-10-08 17:06:51,586 agent 38776 3152 AI recommendations generated successfully
+INFO 2025-10-08 17:06:51,586 orchestrator 38776 3152 [STAGE 2] Business recommendations generated successfully
+INFO 2025-10-08 17:06:51,587 orchestrator 38776 3152 [STAGE 2] Generating executive summary for 45 reviews
+INFO 2025-10-08 17:06:51,587 orchestrator 38776 3152 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 17:06:51,587 agent 38776 3152 Starting AI-powered summarization for 45 reviews
+INFO 2025-10-08 17:06:51,589 agent 38776 3152 Gemini model initialized successfully for summarization
+INFO 2025-10-08 17:06:55,776 agent 38776 3152 AI summarization completed successfully for 45 reviews
+INFO 2025-10-08 17:06:55,777 orchestrator 38776 3152 [STAGE 2] Executive summary generated successfully
+INFO 2025-10-08 17:06:56,075 views 38776 3152 AI analysis saved to database with ID: 7183244b-cb98-4e6b-9415-c25f8d20bf21
+INFO 2025-10-08 17:06:56,076 views 38776 3152 Complete AI analysis generated successfully
+INFO 2025-10-08 17:06:56,437 basehttp 38776 3152 "POST /api/v1/ai-analysis/ HTTP/1.1" 200 4799
+INFO 2025-10-08 17:07:10,278 basehttp 38776 3152 "GET /dashboard/ HTTP/1.1" 200 43758
+INFO 2025-10-08 17:07:47,375 basehttp 38776 3152 "GET /dashboard/reviews/ HTTP/1.1" 200 170254
+INFO 2025-10-08 17:07:58,357 basehttp 38776 3152 "GET /dashboard/reviews/acfee74f-862f-40e2-8a7a-672d5f5d0f8c/ HTTP/1.1" 200 21396
+INFO 2025-10-08 17:11:09,118 basehttp 38776 3152 "GET /dashboard/reviews/acfee74f-862f-40e2-8a7a-672d5f5d0f8c/ HTTP/1.1" 200 21479
+INFO 2025-10-08 17:11:21,396 basehttp 38776 3152 "GET /dashboard/reviews/acfee74f-862f-40e2-8a7a-672d5f5d0f8c/ HTTP/1.1" 200 21479
+INFO 2025-10-08 17:11:36,853 basehttp 38776 3152 "GET /dashboard/reviews/acfee74f-862f-40e2-8a7a-672d5f5d0f8c/ HTTP/1.1" 200 21486
+INFO 2025-10-08 17:11:45,154 basehttp 38776 3152 "GET /dashboard/reviews/ HTTP/1.1" 200 170254
+INFO 2025-10-08 17:11:49,986 basehttp 38776 3152 "GET /dashboard/reviews/b2d9ee84-c952-49df-9a7e-4d68551d9307/ HTTP/1.1" 200 21492
+INFO 2025-10-08 17:11:59,452 basehttp 38776 3152 "GET /dashboard/ HTTP/1.1" 200 43759
+INFO 2025-10-08 17:45:22,611 autoreload 15844 28372 Watching for file changes with StatReloader
+INFO 2025-10-08 17:45:27,507 basehttp 15844 20936 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 17:45:31,261 basehttp 15844 20936 "GET /dashboard/ HTTP/1.1" 200 43759
+INFO 2025-10-08 17:45:41,561 basehttp 15844 20936 "GET /dashboard/reports/generate/ HTTP/1.1" 200 29820
+INFO 2025-10-08 17:45:54,728 basehttp 15844 20936 "GET /auth/users/ HTTP/1.1" 200 22277
+INFO 2025-10-08 17:46:05,783 basehttp 15844 20936 "GET /auth/register/ HTTP/1.1" 200 31609
+INFO 2025-10-08 17:47:45,701 basehttp 15844 20936 "GET /dashboard/ HTTP/1.1" 200 43759
+INFO 2025-10-08 17:47:55,145 basehttp 15844 20936 "GET /dashboard/reviews/ HTTP/1.1" 200 170254
+WARNING 2025-10-08 17:49:54,722 log 15844 20936 Not Found: /dashboard/admin
+WARNING 2025-10-08 17:49:54,723 basehttp 15844 20936 "GET /dashboard/admin HTTP/1.1" 404 6223
+INFO 2025-10-08 17:50:00,982 basehttp 15844 20936 "GET /admin/ HTTP/1.1" 200 10354
+ERROR 2025-10-08 17:50:23,313 log 15844 20936 Internal Server Error: /admin/reviews/hotel/
+Traceback (most recent call last):
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\models\options.py", line 683, in get_field
+    return self.fields_map[field_name]
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'positive_percentage'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\contrib\admin\utils.py", line 290, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\contrib\admin\utils.py", line 330, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\db\models\options.py", line 685, in get_field
+    raise FieldDoesNotExist(
+        "%s has no field named '%s'" % (self.object_name, field_name)
+    )
+django.core.exceptions.FieldDoesNotExist: Hotel has no field named 'positive_percentage'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+                   ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\backends\django.py", line 107, in render
+    return self.template.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 171, in render
+    return self._render(context)
+           ~~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loader_tags.py", line 159, in render
+    return compiled_parent._render(context)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 163, in _render
+    return self.nodelist.render(context)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loader_tags.py", line 65, in render
+    result = block.nodelist.render(context)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 1016, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+                               ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 977, in render_annotated
+    return self.render(context)
+           ~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\contrib\admin\templatetags\base.py", line 45, in render
+    return super().render(context)
+           ~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\library.py", line 359, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 354, in result_list
+    "results": list(results(cl)),
+               ~~~~^^^^^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 330, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+          ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 321, in __init__
+    super().__init__(*items)
+    ~~~~~~~~~~~~~~~~^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 219, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+                     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\contrib\admin\utils.py", line 299, in lookup_field
+    value = attr(obj)
+  File "E:\ish\multiagent-review-sentiment-ai\apps\reviews\admin.py", line 57, in positive_percentage
+    return format_html(
+        '<span style="color: {};">{:.1f}%</span>',
+        color, percentage
+    )
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\utils\html.py", line 145, in format_html
+    return mark_safe(format_string.format(*args_safe, **kwargs_safe))
+                     ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Unknown format code 'f' for object of type 'SafeString'
+ERROR 2025-10-08 17:50:23,325 basehttp 15844 20936 "GET /admin/reviews/hotel/ HTTP/1.1" 500 388662
+INFO 2025-10-08 17:50:27,745 basehttp 15844 20936 "GET /admin/ HTTP/1.1" 200 10354
+INFO 2025-10-08 17:51:33,042 autoreload 35056 32020 Watching for file changes with StatReloader
+INFO 2025-10-08 17:51:38,518 basehttp 35056 32932 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 17:51:42,819 basehttp 35056 32932 "GET /dashboard/ HTTP/1.1" 200 43774
+INFO 2025-10-08 17:54:06,517 basehttp 35056 32932 "GET /dashboard/upload/ HTTP/1.1" 200 61867
+INFO 2025-10-08 17:54:21,779 basehttp 35056 32932 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-10-08 17:54:27,216 basehttp 35056 32932 "GET /dashboard/ HTTP/1.1" 200 43791
+INFO 2025-10-08 17:54:52,818 basehttp 35056 32932 "GET /dashboard/reviews/ HTTP/1.1" 200 168338
+INFO 2025-10-08 17:55:14,757 basehttp 35056 32932 "GET /dashboard/ HTTP/1.1" 200 43802
+INFO 2025-10-08 17:55:28,511 orchestrator 35056 32932 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 17:55:28,515 orchestrator 35056 32932 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 17:55:28,515 orchestrator 35056 32932 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 17:55:28,515 orchestrator 35056 32932 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 17:55:28,646 views 35056 32932 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 5 reviews
+INFO 2025-10-08 17:55:28,980 orchestrator 35056 32932 [STAGE 1] Processing review dd901a45-ca33-4270-b324-8645ad36326d
+INFO 2025-10-08 17:55:34,623 orchestrator 35056 32932 [COMPLETED] Single review workflow completed in 5.64s
+INFO 2025-10-08 17:55:34,902 orchestrator 35056 32932 [STAGE 1] Processing review 67302113-23e4-4e5b-b651-35fabf5dfc43
+INFO 2025-10-08 17:55:37,005 orchestrator 35056 32932 [COMPLETED] Single review workflow completed in 2.10s
+INFO 2025-10-08 17:55:37,130 orchestrator 35056 32932 [STAGE 1] Processing review c87401df-d8c4-4093-9469-4282893aca03
+INFO 2025-10-08 17:55:39,232 orchestrator 35056 32932 [COMPLETED] Single review workflow completed in 2.10s
+INFO 2025-10-08 17:55:39,359 orchestrator 35056 32932 [STAGE 1] Processing review ce5d53d8-4c5d-4721-80ce-b2e2d0ee20c1
+INFO 2025-10-08 17:55:41,811 orchestrator 35056 32932 [COMPLETED] Single review workflow completed in 2.45s
+INFO 2025-10-08 17:55:41,947 orchestrator 35056 32932 [STAGE 1] Processing review 1f7ab37d-c532-423d-924c-971e00270d26
+INFO 2025-10-08 17:55:43,837 orchestrator 35056 32932 [COMPLETED] Single review workflow completed in 1.89s
+INFO 2025-10-08 17:55:44,684 basehttp 35056 32932 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-10-08 17:55:50,616 basehttp 35056 32932 "GET /dashboard/ HTTP/1.1" 200 43769
+INFO 2025-10-08 17:56:00,518 basehttp 35056 32932 "GET /dashboard/reviews/ HTTP/1.1" 200 170243
+INFO 2025-10-08 17:56:33,878 basehttp 35056 32932 "GET /dashboard/analytics/ HTTP/1.1" 200 113025
+INFO 2025-10-08 17:56:34,268 views 35056 32932 Retrieved persisted AI analysis: 7183244b-cb98-4e6b-9415-c25f8d20bf21
+INFO 2025-10-08 17:56:34,602 basehttp 35056 32932 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5629
+INFO 2025-10-08 17:56:49,755 views 35056 32932 [STAGE 2] Generating analytics for 50 reviews
+INFO 2025-10-08 17:56:49,758 orchestrator 35056 32932 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 17:56:49,761 orchestrator 35056 32932 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 17:56:49,761 orchestrator 35056 32932 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 17:56:49,761 orchestrator 35056 32932 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 17:56:49,762 orchestrator 35056 32932 [STAGE 2] Generating tags analysis for 50 reviews
+INFO 2025-10-08 17:56:49,762 agent 35056 32932 Gemini model initialized successfully for summarization
+INFO 2025-10-08 17:56:49,765 orchestrator 35056 32932 [STAGE 2] Summarizer Agent initialized
+INFO 2025-10-08 17:56:49,765 agent 35056 32932 Gemini model initialized successfully for tags generation
+INFO 2025-10-08 17:56:49,766 agent 35056 32932 [OK] Tags Generator Agent initialized
+INFO 2025-10-08 17:56:49,766 orchestrator 35056 32932 [STAGE 2] Tags Generator Agent initialized
+INFO 2025-10-08 17:56:49,766 agent 35056 32932 Gemini model initialized successfully for recommendations generation
+INFO 2025-10-08 17:56:49,766 agent 35056 32932 [OK] Recommendations Agent initialized
+INFO 2025-10-08 17:56:49,767 orchestrator 35056 32932 [STAGE 2] Recommendations Agent initialized
+INFO 2025-10-08 17:56:49,767 orchestrator 35056 32932 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 17:56:55,020 agent 35056 32932 AI tags generation completed successfully
+INFO 2025-10-08 17:56:55,020 agent 35056 32932 Tags generation completed for 50 reviews
+INFO 2025-10-08 17:56:55,021 orchestrator 35056 32932 [STAGE 2] Tags analysis completed successfully
+INFO 2025-10-08 17:56:55,021 orchestrator 35056 32932 [STAGE 2] Generating business recommendations for 50 reviews
+INFO 2025-10-08 17:56:55,021 orchestrator 35056 32932 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 17:56:55,022 agent 35056 32932 Generating AI recommendations for 50 reviews
+INFO 2025-10-08 17:56:57,250 agent 35056 32932 AI recommendations generated successfully
+INFO 2025-10-08 17:56:57,251 orchestrator 35056 32932 [STAGE 2] Business recommendations generated successfully
+INFO 2025-10-08 17:56:57,251 orchestrator 35056 32932 [STAGE 2] Generating executive summary for 50 reviews
+INFO 2025-10-08 17:56:57,252 orchestrator 35056 32932 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 17:56:57,252 agent 35056 32932 Starting AI-powered summarization for 50 reviews
+INFO 2025-10-08 17:56:57,253 agent 35056 32932 Gemini model initialized successfully for summarization
+INFO 2025-10-08 17:56:59,772 agent 35056 32932 AI summarization completed successfully for 50 reviews
+INFO 2025-10-08 17:56:59,772 orchestrator 35056 32932 [STAGE 2] Executive summary generated successfully
+INFO 2025-10-08 17:57:00,018 views 35056 32932 AI analysis saved to database with ID: 12168fb7-5d5b-425f-bac3-653eafabbacd
+INFO 2025-10-08 17:57:00,019 views 35056 32932 Complete AI analysis generated successfully
+INFO 2025-10-08 17:57:00,366 basehttp 35056 32932 "POST /api/v1/ai-analysis/ HTTP/1.1" 200 4298
+INFO 2025-10-08 17:59:06,233 basehttp 35056 32932 "GET /dashboard/reviews/ HTTP/1.1" 200 170243
+INFO 2025-10-08 17:59:20,340 basehttp 35056 32932 "GET /dashboard/analytics/ HTTP/1.1" 200 113025
+INFO 2025-10-08 17:59:20,755 views 35056 32932 Retrieved persisted AI analysis: 12168fb7-5d5b-425f-bac3-653eafabbacd
+INFO 2025-10-08 17:59:21,140 basehttp 35056 32932 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5445
+INFO 2025-10-08 17:59:37,673 basehttp 35056 32932 "GET /auth/profile/ HTTP/1.1" 200 33489
+INFO 2025-10-08 17:59:56,971 basehttp 35056 32932 "GET /auth/users/ HTTP/1.1" 200 22277
+INFO 2025-10-08 18:00:14,167 basehttp 35056 32932 "GET /auth/register/ HTTP/1.1" 200 31609
+INFO 2025-10-08 18:00:40,152 basehttp 35056 32932 "GET /auth/users/ HTTP/1.1" 200 22277
+INFO 2025-10-08 18:00:48,746 basehttp 35056 32932 "GET /auth/logout/ HTTP/1.1" 302 0
+INFO 2025-10-08 18:00:48,779 basehttp 35056 32932 "GET /auth/login/ HTTP/1.1" 200 11905
+INFO 2025-10-08 18:01:03,531 basehttp 35056 32932 "POST /auth/login/ HTTP/1.1" 200 11888
+INFO 2025-10-08 18:01:19,875 basehttp 35056 32932 "POST /auth/login/ HTTP/1.1" 200 11888
+INFO 2025-10-08 18:01:32,265 basehttp 35056 32932 "POST /auth/login/ HTTP/1.1" 302 0
+INFO 2025-10-08 18:01:35,934 basehttp 35056 32932 "GET /dashboard/ HTTP/1.1" 200 44381
+INFO 2025-10-08 18:01:40,342 basehttp 35056 32932 "GET /auth/users/ HTTP/1.1" 200 22277
+INFO 2025-10-08 18:01:51,926 basehttp 35056 32932 "GET /dashboard/upload/ HTTP/1.1" 200 61871
+INFO 2025-10-08 18:02:03,801 basehttp 35056 32932 "GET /dashboard/ HTTP/1.1" 200 43772
+INFO 2025-10-08 18:02:11,001 basehttp 35056 32932 "GET /dashboard/analytics/ HTTP/1.1" 200 113025
+INFO 2025-10-08 18:02:11,398 views 35056 32932 Retrieved persisted AI analysis: 12168fb7-5d5b-425f-bac3-653eafabbacd
+INFO 2025-10-08 18:02:11,881 basehttp 35056 32932 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5445
+INFO 2025-10-08 18:02:27,094 basehttp 35056 32932 "GET /dashboard/reviews/ HTTP/1.1" 200 170243
+INFO 2025-10-08 18:02:33,229 basehttp 35056 32932 "GET /dashboard/ HTTP/1.1" 200 43773
+INFO 2025-10-08 18:03:10,120 basehttp 35056 32932 "GET /dashboard/reviews/ HTTP/1.1" 200 170243
+INFO 2025-10-08 18:03:15,321 basehttp 35056 32932 "GET /auth/profile/ HTTP/1.1" 200 33489
+INFO 2025-10-08 18:04:01,207 basehttp 35056 32932 "GET /dashboard/reports/generate/ HTTP/1.1" 200 29820
+INFO 2025-10-08 18:04:09,653 basehttp 35056 32932 "GET /dashboard/ HTTP/1.1" 200 43774
+INFO 2025-10-08 18:05:17,400 basehttp 35056 32932 "GET /dashboard/reviews/ HTTP/1.1" 200 170243
+INFO 2025-10-08 18:05:22,498 basehttp 35056 32932 "GET /dashboard/reviews/dd901a45-ca33-4270-b324-8645ad36326d/ HTTP/1.1" 200 21445
+INFO 2025-10-08 18:05:38,459 basehttp 35056 32932 "GET /dashboard/ HTTP/1.1" 200 43775
+INFO 2025-10-08 18:05:51,292 basehttp 35056 32932 "GET /dashboard/reviews/ HTTP/1.1" 200 170243
+INFO 2025-10-08 18:06:59,074 basehttp 35056 32932 "GET /dashboard/analytics/ HTTP/1.1" 200 113025
+INFO 2025-10-08 18:06:59,463 views 35056 32932 Retrieved persisted AI analysis: 12168fb7-5d5b-425f-bac3-653eafabbacd
+INFO 2025-10-08 18:06:59,814 basehttp 35056 32932 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5445
