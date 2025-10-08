@@ -11,70 +11,75 @@
 <style>
     /* Text Visibility Fixes */
     .profile-card * {
-        color: #1f2937 !important;
+        color: #FFFFFF !important; /* Change to white text */
     }
     
     .form-label, label {
-        color: #1f2937 !important;
+        color: #FFFFFF !important; /* White labels */
         font-weight: 600 !important;
     }
     
     .form-control {
-        background-color: white !important;
-        color: #1f2937 !important;
-        border: 2px solid #e5e7eb !important;
+        background-color: #4A5568 !important; /* Dark background for inputs */
+        color: #FFFFFF !important; /* White text in inputs */
+        border: 2px solid #718096 !important; /* Gray border */
     }
     
     .form-control:focus {
-        color: #1f2937 !important;
-        background-color: white !important;
+        color: #FFFFFF !important;
+        background-color: #4A5568 !important;
     }
     
     .form-control::placeholder {
-        color: #6b7280 !important;
+        color: #A0AEC0 !important; /* Light gray placeholders */
     }
     
     .form-text, small {
-        color: #6b7280 !important;
+        color: #A0AEC0 !important; /* Light gray small text */
     }
     
     p {
-        color: #4b5563 !important;
+        color: #E2E8F0 !important; /* Light gray paragraphs */
     }
     
     .info-value {
-        color: #1f2937 !important;
+        color: #FFFFFF !important; /* White values */
         font-weight: 600 !important;
     }
     
     .info-label {
-        color: #4b5563 !important;
+        color: #E2E8F0 !important; /* Light gray labels */
     }
     
     .profile-card {
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
+        background: transparent; /* Make container transparent */
+        border-radius: 0;
+        box-shadow: none;
+        overflow: visible;
     }
     
     .profile-header {
-        background: linear-gradient(45deg, #667eea, #764ba2);
+        background: #4A5568; /* Dark blue-gray color to match the image */
         color: white;
-        padding: 40px 30px;
+        padding: 25px 30px; /* Reduced vertical padding from 40px to 25px */
         text-align: center;
+        border-top-left-radius: 15px; /* Full border radius for standalone block */
+        border-top-right-radius: 15px; 
+        margin-top: 30px; /* Add gap at the top */
+       
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Add shadow to header */
     }
     
     .profile-avatar {
-        width: 100px;
-        height: 100px;
+        width: 80px; /* Reduced from 100px */
+        height: 80px; /* Reduced from 100px */
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.2);
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 20px;
-        font-size: 3rem;
+        margin: 0 auto 15px; /* Reduced bottom margin from 20px to 15px */
+        font-size: 2.5rem; /* Reduced from 3rem */
     }
     
     .profile-name {
@@ -89,21 +94,25 @@
     }
     
     .profile-body {
-        padding: 30px;
+        padding: 30px; /* Clean padding */
+        background: #2D3748; /* Dark blue background like the image */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Add shadow to body */
+        border-bottom-left-radius: 15px; /* Full border radius for standalone block */
+        border-bottom-right-radius: 15px; 
     }
     
     .profile-section {
-        margin-bottom: 30px;
-        padding: 25px;
-        background: #f8f9fa;
+        margin-bottom: 25px; /* Reduced from 30px */
+        padding: 20px; /* Reduced from 25px */
+        background: #1A202C; /* Darker background for sections */
         border-radius: 10px;
-        border-left: 4px solid #667eea;
+        border-left: 4px solid #4A5568; /* Changed to match header color */
     }
     
     .section-title {
         font-size: 1.2rem;
         font-weight: 600;
-        color: #2d3748;
+        color: #FFFFFF; /* White section titles */
         margin-bottom: 20px;
         display: flex;
         align-items: center;
@@ -111,7 +120,7 @@
     
     .section-title i {
         margin-right: 10px;
-        color: #667eea;
+        color: #A0AEC0; /* Light gray icons */
     }
     
     .info-item {
@@ -119,7 +128,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 12px 0;
-        border-bottom: 1px solid #e2e8f0;
+        border-bottom: 1px solid #4A5568; /* Dark gray borders */
     }
     
     .info-item:last-child {
@@ -128,46 +137,49 @@
     
     .info-label {
         font-weight: 500;
-        color: #4a5568;
+        color: #E2E8F0; /* Light gray labels */
         display: flex;
         align-items: center;
     }
     
     .info-label i {
         margin-right: 8px;
-        color: #718096;
+        color: #A0AEC0; /* Light gray icons */
         width: 16px;
     }
     
     .info-value {
-        color: #2d3748;
+        color: #FFFFFF; /* White values */
         font-weight: 500;
     }
     
     .form-control {
-        border: 2px solid #e2e8f0;
+        border: 2px solid #4A5568; /* Dark borders */
         border-radius: 8px;
         padding: 12px 15px;
         transition: all 0.3s ease;
     }
     
     .form-control:focus {
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        border-color: #718096; /* Lighter border on focus */
+        box-shadow: 0 0 0 3px rgba(113, 128, 150, 0.1); /* Gray shadow */
     }
     
     .btn-update {
-        background: linear-gradient(45deg, #667eea, #764ba2);
+        background: #4A5568; /* Match header color */
         border: none;
         border-radius: 10px;
         padding: 12px 25px;
         font-weight: 600;
         transition: all 0.3s ease;
+        color: white;
     }
     
     .btn-update:hover {
+        background: #2D3748; /* Darker on hover */
         transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        box-shadow: 0 10px 25px rgba(74, 85, 104, 0.3);
+        color: white;
     }
     
     .btn-change-password {
@@ -219,7 +231,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="row justify-content-center">
+<div class="row justify-content-center" style="margin-top: 10px; margin-bottom: 10px;">
     <div class="col-lg-10 col-xl-8">
         <div class="profile-card">
             <!-- Profile Header -->

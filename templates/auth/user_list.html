@@ -16,54 +16,58 @@
 
 {% block extra_css %}
 <style>
-    /* Override all text colors for visibility */
-    .stat-card * {
-        color: #1f2937 !important;
+    /* Dark blue theme for users page */
+    .card {
+        background-color: #2D3748;
+        border: 1px solid #4A5568;
+        color: #FFFFFF;
+        
     }
     
-    .stat-card {
-        background: white;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        margin-bottom: 20px;
+    .card-header {
+        background-color: #4A5568;
+        border-bottom: 1px solid #4A5568;
+        color: #FFFFFF;
     }
     
-    .stat-number {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #1f2937 !important;
-        margin-bottom: 5px;
+    .card-header h5 {
+        color: #FFFFFF !important;
+        margin: 0;
     }
     
-    .stat-label {
-        color: #4b5563 !important;
-        font-size: 0.9rem;
+    .card-body {
+        background-color: #2D3748;
+        color: #FFFFFF;
     }
+
     
     .user-card {
-        background: white;
+        background-color: #1A202C;
         border-radius: 10px;
         padding: 20px;
         margin-bottom: 15px;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        border-left: 4px solid #e2e8f0;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        border-left: 4px solid #4A5568;
+        color: #FFFFFF;
     }
     
     .user-card h5 {
-        color: #1f2937 !important;
+        color: #FFFFFF !important;
         font-weight: 600;
         margin-bottom: 5px;
     }
     
     .user-card p {
-        color: #4b5563 !important;
+        color: #E2E8F0 !important;
         margin-bottom: 8px;
     }
     
     .user-card small {
-        color: #6b7280 !important;
+        color: #A0AEC0 !important;
+    }
+    
+    .text-muted {
+        color: #A0AEC0 !important;
     }
     
     .badge {
@@ -75,7 +79,7 @@
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background: #667eea;
+        background: #4A5568;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -85,61 +89,51 @@
         margin-right: 15px;
     }
     
-    .search-box input {
-        border-radius: 10px;
-        border: 2px solid #e2e8f0;
-        padding: 12px 20px;
-        margin-bottom: 20px;
-        width: 100%;
+    /* Button styling for dark theme */
+    .btn-outline-warning {
+        border-color: #F6AD55;
+        color: #F6AD55;
+        background-color: transparent;
+    }
+    
+    .btn-outline-warning:hover {
+        background-color: #F6AD55;
+        color: #1A202C;
+    }
+    
+    .btn-outline-success {
+        border-color: #68D391;
+        color: #68D391;
+        background-color: transparent;
+    }
+    
+    .btn-outline-success:hover {
+        background-color: #68D391;
+        color: #1A202C;
+    }
+    
+    /* Empty state styling */
+    .text-center i.fa-3x {
+        color: #4A5568 !important;
+    }
+    
+    .text-center h4 {
+        color: #FFFFFF !important;
+    }
+    
+    .text-center .text-muted {
+        color: #A0AEC0 !important;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<!-- Statistics Cards -->
-<div class="row mb-4">
-    <div class="col-md-3">
-        <div class="stat-card">
-            <div class="stat-number">{{ users|length }}</div>
-            <div class="stat-label">Total Users</div>
+<div class="container-fluid mt-4">
+    <!-- User Accounts Section -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-users me-2"></i> User Accounts</h5>
         </div>
-    </div>
-    <div class="col-md-3">
-        <div class="stat-card">
-            <div class="stat-number">
-                {% for user in users %}{% if user.is_active %}{{ forloop.counter }}{% endif %}{% empty %}0{% endfor %}
-            </div>
-            <div class="stat-label">Active Users</div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="stat-card">
-            <div class="stat-number">
-                {% for user in users %}{% if user.userprofile.role == 'admin' %}{{ forloop.counter }}{% endif %}{% empty %}0{% endfor %}
-            </div>
-            <div class="stat-label">Administrators</div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="stat-card">
-            <div class="stat-number">
-                {% for user in users %}{% if user.userprofile.role == 'manager' %}{{ forloop.counter }}{% endif %}{% empty %}0{% endfor %}
-            </div>
-            <div class="stat-label">Managers</div>
-        </div>
-    </div>
-</div>
-
-<!-- Search Box -->
-<div class="search-box">
-    <input type="text" id="userSearch" placeholder="Search users by name, email, or role..." class="form-control">
-</div>
-
-<!-- User Accounts Section -->
-<div class="card">
-    <div class="card-header">
-        <h5 class="mb-0"><i class="fas fa-users me-2"></i> User Accounts</h5>
-    </div>
     <div class="card-body">
         {% for user in users %}
         <div class="user-card d-flex align-items-center">
@@ -150,14 +144,18 @@
                 <h5>{{ user.get_full_name|default:user.username }}</h5>
                 <p class="mb-1">{{ user.email|default:"No email provided" }}</p>
                 <div class="d-flex gap-2 flex-wrap">
-                    <span class="badge bg-primary">{{ user.userprofile.get_role_display|default:"User" }}</span>
+                    {% if user.profile %}
+                        <span class="badge bg-primary">{{ user.profile.get_role_display|default:"User" }}</span>
+                    {% else %}
+                        <span class="badge bg-primary">User</span>
+                    {% endif %}
                     {% if user.is_active %}
                         <span class="badge bg-success">Active</span>
                     {% else %}
                         <span class="badge bg-secondary">Inactive</span>
                     {% endif %}
-                    {% if user.userprofile.hotels.exists %}
-                        <span class="badge bg-info">{{ user.userprofile.hotels.count }} Hotel{{ user.userprofile.hotels.count|pluralize }}</span>
+                    {% if user.profile and user.profile.hotel %}
+                        <span class="badge bg-info">{{ user.profile.hotel.name }}</span>
                     {% endif %}
                 </div>
             </div>
@@ -172,11 +170,11 @@
                 {% if not user.is_superuser %}
                     <div class="mt-2">
                         {% if user.is_active %}
-                            <button class="btn btn-sm btn-outline-warning" onclick="toggleUser({{ user.id }})">
+                            <button class="btn btn-sm btn-outline-warning" onclick="toggleUser('{{ user.id }}')">
                                 <i class="fas fa-user-times me-1"></i> Deactivate
                             </button>
                         {% else %}
-                            <button class="btn btn-sm btn-outline-success" onclick="toggleUser({{ user.id }})">
+                            <button class="btn btn-sm btn-outline-success" onclick="toggleUser('{{ user.id }}')">
                                 <i class="fas fa-user-check me-1"></i> Activate
                             </button>
                         {% endif %}
@@ -199,25 +197,11 @@
         {% endfor %}
     </div>
 </div>
+</div>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-// Simple search functionality
-document.getElementById('userSearch').addEventListener('input', function(e) {
-    const searchTerm = e.target.value.toLowerCase();
-    const userCards = document.querySelectorAll('.user-card');
-    
-    userCards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        if (text.includes(searchTerm)) {
-            card.style.display = 'flex';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-});
-
 // Toggle user status
 function toggleUser(userId) {
     if (confirm('Are you sure you want to change this user\'s status?')) {
@@ -225,20 +209,26 @@ function toggleUser(userId) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': '{{ csrf_token }}'
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]')?.value || '{{ csrf_token }}'
             },
-            body: JSON.stringify({user_id: userId})
+            body: JSON.stringify({user_id: parseInt(userId)})
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.success) {
                 location.reload();
             } else {
-                alert('Error: ' + data.error);
+                alert('Error: ' + (data.error || 'Unknown error occurred'));
             }
         })
         .catch(error => {
-            alert('An error occurred: ' + error);
+            console.error('Error:', error);
+            alert('An error occurred: ' + error.message);
         });
     }
 }

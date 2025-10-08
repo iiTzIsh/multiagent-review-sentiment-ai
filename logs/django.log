@@ -121,3 +121,73 @@ INFO 2025-10-08 15:08:41,413 autoreload 37692 24944 E:\ish\multiagent-review-sen
 INFO 2025-10-08 15:08:44,614 autoreload 2436 32056 Watching for file changes with StatReloader
 INFO 2025-10-08 15:08:53,194 basehttp 2436 42756 "GET /dashboard/ HTTP/1.1" 200 40663
 INFO 2025-10-08 15:09:14,439 basehttp 2436 42756 "GET /auth/profile/ HTTP/1.1" 200 32018
+INFO 2025-10-08 15:27:33,280 autoreload 10252 7620 Watching for file changes with StatReloader
+INFO 2025-10-08 15:27:37,680 basehttp 10252 18080 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 15:27:41,244 basehttp 10252 18080 "GET /dashboard/ HTTP/1.1" 200 40664
+INFO 2025-10-08 15:27:48,104 basehttp 10252 18080 "GET /dashboard/reviews/ HTTP/1.1" 200 169725
+INFO 2025-10-08 15:28:00,344 basehttp 10252 18080 "GET /dashboard/upload/ HTTP/1.1" 200 54893
+INFO 2025-10-08 15:28:07,892 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32018
+INFO 2025-10-08 15:28:44,509 basehttp 10252 32720 "GET /dashboard/reviews/ HTTP/1.1" 200 169725
+INFO 2025-10-08 15:33:43,134 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 33520
+INFO 2025-10-08 15:34:10,620 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32018
+INFO 2025-10-08 15:38:58,146 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32577
+INFO 2025-10-08 15:41:15,191 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32577
+INFO 2025-10-08 15:41:33,380 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32596
+INFO 2025-10-08 15:41:41,479 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32598
+INFO 2025-10-08 15:42:49,940 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32577
+INFO 2025-10-08 15:43:28,072 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32577
+INFO 2025-10-08 15:44:15,580 basehttp 10252 32720 "GET /dashboard/reviews/ HTTP/1.1" 200 169725
+INFO 2025-10-08 15:44:35,352 basehttp 10252 32720 "GET /dashboard/analytics/ HTTP/1.1" 200 113025
+INFO 2025-10-08 15:44:35,825 views 10252 32720 Retrieved persisted AI analysis: 3fa65de6-928f-4ff1-8efa-d228865baa62
+INFO 2025-10-08 15:44:36,196 basehttp 10252 32720 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5067
+INFO 2025-10-08 15:44:59,198 basehttp 10252 32720 "GET /auth/users/ HTTP/1.1" 200 21510
+INFO 2025-10-08 15:45:02,349 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32634
+INFO 2025-10-08 15:46:23,734 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32913
+INFO 2025-10-08 15:47:26,127 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32954
+INFO 2025-10-08 15:48:12,971 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 33005
+INFO 2025-10-08 15:49:19,319 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32946
+INFO 2025-10-08 15:49:31,834 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32879
+INFO 2025-10-08 15:51:06,163 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 32995
+INFO 2025-10-08 15:52:02,772 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 33050
+INFO 2025-10-08 15:52:16,180 basehttp 10252 32720 "GET /dashboard/reviews/ HTTP/1.1" 200 169725
+INFO 2025-10-08 15:53:11,681 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 33050
+INFO 2025-10-08 15:55:00,964 basehttp 10252 32720 "GET /auth/profile/ HTTP/1.1" 200 33488
+INFO 2025-10-08 15:55:37,751 basehttp 10252 32720 "GET /auth/users/ HTTP/1.1" 200 21510
+INFO 2025-10-08 15:59:39,139 basehttp 10252 21996 "GET /auth/profile/ HTTP/1.1" 200 33488
+INFO 2025-10-08 15:59:51,923 basehttp 10252 21996 "GET /auth/users/ HTTP/1.1" 200 20558
+INFO 2025-10-08 16:00:27,468 basehttp 10252 21996 "GET /auth/users/ HTTP/1.1" 200 20558
+INFO 2025-10-08 16:01:51,851 autoreload 10252 7620 E:\ish\multiagent-review-sentiment-ai\apps\authentication\views.py changed, reloading.
+INFO 2025-10-08 16:01:52,593 autoreload 8024 11836 Watching for file changes with StatReloader
+INFO 2025-10-08 16:02:34,075 autoreload 8024 11836 E:\ish\multiagent-review-sentiment-ai\apps\authentication\views.py changed, reloading.
+INFO 2025-10-08 16:02:34,708 autoreload 15904 4040 Watching for file changes with StatReloader
+INFO 2025-10-08 16:07:43,312 autoreload 23660 21016 Watching for file changes with StatReloader
+INFO 2025-10-08 16:07:50,034 basehttp 23660 30064 "GET /auth/users/ HTTP/1.1" 200 20961
+INFO 2025-10-08 16:07:59,812 basehttp 23660 30064 "GET /auth/users/ HTTP/1.1" 200 21016
+INFO 2025-10-08 16:08:10,713 basehttp 23660 30064 "GET /auth/users/ HTTP/1.1" 200 21043
+INFO 2025-10-08 16:08:17,219 basehttp 23660 30064 "GET /auth/users/ HTTP/1.1" 200 21043
+INFO 2025-10-08 16:09:55,666 basehttp 23660 30064 "GET /auth/users/ HTTP/1.1" 200 20971
+INFO 2025-10-08 16:10:29,993 basehttp 23660 30064 "GET /auth/users/ HTTP/1.1" 200 21221
+INFO 2025-10-08 16:10:37,738 basehttp 23660 30064 "GET /auth/users/ HTTP/1.1" 200 21221
+INFO 2025-10-08 16:11:08,602 basehttp 23660 30064 "GET /auth/users/ HTTP/1.1" 200 20981
+INFO 2025-10-08 16:11:23,752 basehttp 23660 30064 "GET /auth/users/ HTTP/1.1" 200 20981
+INFO 2025-10-08 16:11:29,522 basehttp 23660 30064 "GET /auth/profile/ HTTP/1.1" 200 33488
+INFO 2025-10-08 16:11:33,162 basehttp 23660 30064 "GET /admin/ HTTP/1.1" 200 10354
+INFO 2025-10-08 16:12:06,302 basehttp 23660 30064 "GET /auth/profile/ HTTP/1.1" 200 33488
+INFO 2025-10-08 16:14:32,561 basehttp 23660 30064 "GET /dashboard/ HTTP/1.1" 200 40673
+INFO 2025-10-08 16:14:37,483 basehttp 23660 30064 "GET /dashboard/upload/ HTTP/1.1" 200 54902
+INFO 2025-10-08 16:14:43,466 basehttp 23660 30064 "GET /auth/users/ HTTP/1.1" 200 20981
+INFO 2025-10-08 16:14:46,961 basehttp 23660 30064 "GET /auth/register/ HTTP/1.1" 200 31000
+INFO 2025-10-08 16:17:31,116 basehttp 23660 30064 "GET /auth/register/ HTTP/1.1" 200 32434
+INFO 2025-10-08 16:19:37,604 basehttp 23660 30064 "GET /auth/register/ HTTP/1.1" 200 32509
+INFO 2025-10-08 16:19:44,437 basehttp 23660 30064 "GET /auth/register/ HTTP/1.1" 200 32710
+INFO 2025-10-08 16:20:21,818 basehttp 23660 30064 "GET /auth/register/ HTTP/1.1" 200 32517
+INFO 2025-10-08 16:20:33,050 basehttp 23660 30064 "GET /auth/register/ HTTP/1.1" 200 32517
+INFO 2025-10-08 16:23:52,587 basehttp 23660 30064 "GET /auth/register/ HTTP/1.1" 200 31392
+INFO 2025-10-08 16:24:05,408 basehttp 23660 30064 "GET /auth/register/ HTTP/1.1" 200 31392
+INFO 2025-10-08 16:24:13,767 basehttp 23660 30064 "GET /auth/register/ HTTP/1.1" 200 31392
+INFO 2025-10-08 16:25:39,397 basehttp 23660 30064 "GET /auth/register/ HTTP/1.1" 200 31751
+INFO 2025-10-08 16:26:07,181 basehttp 23660 30064 "GET /auth/register/ HTTP/1.1" 200 32973
+INFO 2025-10-08 16:27:38,120 basehttp 23660 30064 "GET /auth/register/ HTTP/1.1" 200 31392
+INFO 2025-10-08 16:29:32,305 basehttp 23660 17028 "GET /auth/register/ HTTP/1.1" 200 31609
+INFO 2025-10-08 16:32:09,724 basehttp 23660 17028 "GET /auth/profile/ HTTP/1.1" 200 33488
+INFO 2025-10-08 16:32:20,884 basehttp 23660 17028 "GET /dashboard/ HTTP/1.1" 200 40673
