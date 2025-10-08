@@ -719,18 +719,31 @@ class CombinedAIAnalysisAPIView(APIView):
             # Filter by accessible hotels
             accessible_hotels = request.user.profile.get_accessible_hotels()
             
+            # Convert to list if it's a QuerySet to avoid multiple evaluation issues
+            if hasattr(accessible_hotels, 'all'):  # It's a QuerySet
+                accessible_hotels_list = list(accessible_hotels)
+            else:  # It's already a list
+                accessible_hotels_list = accessible_hotels
+            
             # Get reviews
-            if accessible_hotels:
-                reviews = Review.objects.filter(hotel__in=accessible_hotels)
+            if accessible_hotels_list:
+                reviews = Review.objects.filter(hotel__in=accessible_hotels_list)
                 if hotel_id:
                     # Verify user can access this specific hotel
-                    if int(hotel_id) in [h.id for h in accessible_hotels]:
+                    accessible_hotel_ids = [h.id for h in accessible_hotels_list]
+                    if int(hotel_id) in accessible_hotel_ids:
                         reviews = reviews.filter(hotel_id=hotel_id)
                     else:
                         return Response({'error': 'You do not have access to this hotel'}, status=403)
             else:
-                reviews = Review.objects.none()
-                reviews = reviews.filter(hotel_id=hotel_id)
+                # No accessible hotels - return empty result
+                return Response({
+                    'status': 'no_access',
+                    'message': 'You do not have access to any hotels.',
+                    'summary': None,
+                    'tags_analysis': None,
+                    'processed_reviews': 0
+                }, status=403)
             
             # Date filter
             start_date = datetime.now() - timedelta(days=days)

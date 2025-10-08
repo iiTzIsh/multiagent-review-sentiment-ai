@@ -7,3 +7,117 @@ INFO 2025-10-08 14:34:12,489 basehttp 1696 13664 "GET /dashboard/ HTTP/1.1" 200 
 INFO 2025-10-08 14:34:18,940 basehttp 1696 13664 "GET /auth/users/ HTTP/1.1" 200 21510
 INFO 2025-10-08 14:34:27,423 basehttp 1696 13664 "GET /auth/register/ HTTP/1.1" 200 31000
 INFO 2025-10-08 14:34:43,672 basehttp 1696 13664 "GET /dashboard/ HTTP/1.1" 200 39806
+INFO 2025-10-08 14:59:05,744 autoreload 16676 40828 Watching for file changes with StatReloader
+INFO 2025-10-08 14:59:14,899 basehttp 16676 7628 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 14:59:18,858 basehttp 16676 7628 "GET /dashboard/ HTTP/1.1" 200 39806
+INFO 2025-10-08 14:59:47,402 basehttp 16676 7628 "GET /dashboard/upload/ HTTP/1.1" 200 53349
+INFO 2025-10-08 14:59:55,479 basehttp 16676 7628 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-10-08 15:00:00,667 basehttp 16676 7628 "GET /dashboard/ HTTP/1.1" 200 40694
+INFO 2025-10-08 15:00:12,792 orchestrator 16676 7628 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 15:00:12,794 orchestrator 16676 7628 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 15:00:12,794 orchestrator 16676 7628 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 15:00:12,794 orchestrator 16676 7628 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 15:00:12,926 views 16676 7628 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 5 reviews
+INFO 2025-10-08 15:00:13,299 orchestrator 16676 7628 [STAGE 1] Processing review d10be321-ac13-44fd-b86b-ecafd8e29c44
+INFO 2025-10-08 15:00:19,040 orchestrator 16676 7628 [COMPLETED] Single review workflow completed in 5.74s
+INFO 2025-10-08 15:00:19,158 orchestrator 16676 7628 [STAGE 1] Processing review d4c22e9b-9ace-42bd-a61a-dd250dede4c8
+INFO 2025-10-08 15:00:24,002 orchestrator 16676 7628 [COMPLETED] Single review workflow completed in 4.84s
+INFO 2025-10-08 15:00:24,123 orchestrator 16676 7628 [STAGE 1] Processing review 36edfccb-1f91-45e7-b1c9-e2fbe96bd3de
+INFO 2025-10-08 15:00:28,915 orchestrator 16676 7628 [COMPLETED] Single review workflow completed in 4.79s
+INFO 2025-10-08 15:00:29,047 orchestrator 16676 7628 [STAGE 1] Processing review 3768d996-7fb4-41f9-ac15-ea310760ab91
+INFO 2025-10-08 15:00:34,400 orchestrator 16676 7628 [COMPLETED] Single review workflow completed in 5.35s
+INFO 2025-10-08 15:00:34,525 orchestrator 16676 7628 [STAGE 1] Processing review 0fa50173-e5d7-494e-879c-8bb2d5d214ff
+INFO 2025-10-08 15:00:39,844 orchestrator 16676 7628 [COMPLETED] Single review workflow completed in 5.32s
+INFO 2025-10-08 15:00:40,639 basehttp 16676 7628 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-10-08 15:00:47,009 basehttp 16676 7628 "GET /dashboard/ HTTP/1.1" 200 40663
+INFO 2025-10-08 15:01:07,418 basehttp 16676 7628 "GET /dashboard/reviews/ HTTP/1.1" 200 169725
+INFO 2025-10-08 15:01:29,823 basehttp 16676 7628 "GET /dashboard/analytics/ HTTP/1.1" 200 113025
+INFO 2025-10-08 15:01:30,266 views 16676 7628 Retrieved persisted AI analysis: f61d2782-a488-4cb6-84e8-ef39848c3b3a
+INFO 2025-10-08 15:01:30,611 basehttp 16676 7628 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5163
+INFO 2025-10-08 15:01:35,389 basehttp 16676 7628 "POST /api/v1/process/ HTTP/1.1" 200 52
+INFO 2025-10-08 15:01:47,298 basehttp 16676 7628 "GET /dashboard/analytics/ HTTP/1.1" 200 113025
+INFO 2025-10-08 15:01:48,806 views 16676 7628 Retrieved persisted AI analysis: f61d2782-a488-4cb6-84e8-ef39848c3b3a
+INFO 2025-10-08 15:01:49,178 basehttp 16676 7628 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5163
+INFO 2025-10-08 15:01:51,296 basehttp 16676 7628 "POST /api/v1/process/ HTTP/1.1" 200 52
+WARNING 2025-10-08 15:01:54,125 log 16676 7628 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-08 15:01:54,127 basehttp 16676 7628 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3428
+INFO 2025-10-08 15:02:03,700 basehttp 16676 7628 "GET /dashboard/analytics/ HTTP/1.1" 200 113025
+WARNING 2025-10-08 15:02:04,218 log 16676 7628 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-10-08 15:02:04,218 basehttp 16676 7628 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3428
+INFO 2025-10-08 15:02:05,179 views 16676 36928 Retrieved persisted AI analysis: f61d2782-a488-4cb6-84e8-ef39848c3b3a
+INFO 2025-10-08 15:02:05,541 basehttp 16676 36928 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5163
+INFO 2025-10-08 15:02:10,567 basehttp 16676 36928 "POST /api/v1/process/ HTTP/1.1" 200 52
+INFO 2025-10-08 15:04:32,580 orchestrator 20488 9456 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 15:04:32,678 orchestrator 20488 9456 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 15:04:32,678 orchestrator 20488 9456 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 15:04:32,678 orchestrator 20488 9456 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 15:06:21,221 orchestrator 28176 8368 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 15:06:21,223 orchestrator 28176 8368 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 15:06:21,223 orchestrator 28176 8368 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 15:06:21,223 orchestrator 28176 8368 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 15:06:21,914 orchestrator 28176 8368 [STAGE 2] Generating executive summary for 3 reviews
+INFO 2025-10-08 15:06:21,914 agent 28176 8368 Gemini model initialized successfully for summarization
+INFO 2025-10-08 15:06:21,916 orchestrator 28176 8368 [STAGE 2] Summarizer Agent initialized
+INFO 2025-10-08 15:06:21,916 agent 28176 8368 Gemini model initialized successfully for tags generation
+INFO 2025-10-08 15:06:21,917 agent 28176 8368 [OK] Tags Generator Agent initialized
+INFO 2025-10-08 15:06:21,917 orchestrator 28176 8368 [STAGE 2] Tags Generator Agent initialized
+INFO 2025-10-08 15:06:21,917 agent 28176 8368 Gemini model initialized successfully for recommendations generation
+INFO 2025-10-08 15:06:21,917 agent 28176 8368 [OK] Recommendations Agent initialized
+INFO 2025-10-08 15:06:21,917 orchestrator 28176 8368 [STAGE 2] Recommendations Agent initialized
+INFO 2025-10-08 15:06:21,918 orchestrator 28176 8368 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 15:06:21,918 agent 28176 8368 Starting AI-powered summarization for 3 reviews
+INFO 2025-10-08 15:06:21,919 agent 28176 8368 Gemini model initialized successfully for summarization
+INFO 2025-10-08 15:06:24,478 agent 28176 8368 AI summarization completed successfully for 3 reviews
+INFO 2025-10-08 15:06:24,478 orchestrator 28176 8368 [STAGE 2] Executive summary generated successfully
+INFO 2025-10-08 15:06:24,479 orchestrator 28176 8368 [STAGE 2] Generating tags analysis for 3 reviews
+INFO 2025-10-08 15:06:24,479 orchestrator 28176 8368 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 15:06:27,117 agent 28176 8368 AI tags generation completed successfully
+INFO 2025-10-08 15:06:27,117 agent 28176 8368 Tags generation completed for 3 reviews
+INFO 2025-10-08 15:06:27,118 orchestrator 28176 8368 [STAGE 2] Tags analysis completed successfully
+INFO 2025-10-08 15:07:18,343 autoreload 23168 8764 Watching for file changes with StatReloader
+INFO 2025-10-08 15:07:34,277 autoreload 37692 24944 Watching for file changes with StatReloader
+INFO 2025-10-08 15:07:39,353 basehttp 37692 41664 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 15:07:42,823 basehttp 37692 41664 "GET /dashboard/ HTTP/1.1" 200 40663
+INFO 2025-10-08 15:07:50,759 basehttp 37692 41664 "GET /dashboard/analytics/ HTTP/1.1" 200 113025
+INFO 2025-10-08 15:07:51,135 views 37692 41664 Retrieved persisted AI analysis: f61d2782-a488-4cb6-84e8-ef39848c3b3a
+INFO 2025-10-08 15:07:51,516 basehttp 37692 41664 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5163
+INFO 2025-10-08 15:08:07,022 views 37692 41664 [STAGE 2] Generating analytics for 25 reviews
+INFO 2025-10-08 15:08:07,025 orchestrator 37692 41664 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 15:08:07,028 orchestrator 37692 41664 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 15:08:07,028 orchestrator 37692 41664 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 15:08:07,028 orchestrator 37692 41664 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 15:08:07,029 orchestrator 37692 41664 [STAGE 2] Generating tags analysis for 25 reviews
+INFO 2025-10-08 15:08:07,029 agent 37692 41664 Gemini model initialized successfully for summarization
+INFO 2025-10-08 15:08:07,032 orchestrator 37692 41664 [STAGE 2] Summarizer Agent initialized
+INFO 2025-10-08 15:08:07,032 agent 37692 41664 Gemini model initialized successfully for tags generation
+INFO 2025-10-08 15:08:07,033 agent 37692 41664 [OK] Tags Generator Agent initialized
+INFO 2025-10-08 15:08:07,033 orchestrator 37692 41664 [STAGE 2] Tags Generator Agent initialized
+INFO 2025-10-08 15:08:07,033 agent 37692 41664 Gemini model initialized successfully for recommendations generation
+INFO 2025-10-08 15:08:07,033 agent 37692 41664 [OK] Recommendations Agent initialized
+INFO 2025-10-08 15:08:07,034 orchestrator 37692 41664 [STAGE 2] Recommendations Agent initialized
+INFO 2025-10-08 15:08:07,034 orchestrator 37692 41664 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 15:08:11,196 agent 37692 41664 AI tags generation completed successfully
+INFO 2025-10-08 15:08:11,197 agent 37692 41664 Tags generation completed for 25 reviews
+INFO 2025-10-08 15:08:11,197 orchestrator 37692 41664 [STAGE 2] Tags analysis completed successfully
+INFO 2025-10-08 15:08:11,198 orchestrator 37692 41664 [STAGE 2] Generating business recommendations for 25 reviews
+INFO 2025-10-08 15:08:11,198 orchestrator 37692 41664 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 15:08:11,199 agent 37692 41664 Generating AI recommendations for 25 reviews
+INFO 2025-10-08 15:08:12,845 agent 37692 41664 AI recommendations generated successfully
+INFO 2025-10-08 15:08:12,846 orchestrator 37692 41664 [STAGE 2] Business recommendations generated successfully
+INFO 2025-10-08 15:08:12,846 orchestrator 37692 41664 [STAGE 2] Generating executive summary for 25 reviews
+INFO 2025-10-08 15:08:12,846 orchestrator 37692 41664 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 15:08:12,847 agent 37692 41664 Starting AI-powered summarization for 25 reviews
+INFO 2025-10-08 15:08:12,848 agent 37692 41664 Gemini model initialized successfully for summarization
+INFO 2025-10-08 15:08:15,515 agent 37692 41664 AI summarization completed successfully for 25 reviews
+INFO 2025-10-08 15:08:15,516 orchestrator 37692 41664 [STAGE 2] Executive summary generated successfully
+INFO 2025-10-08 15:08:15,943 views 37692 41664 AI analysis saved to database with ID: 3fa65de6-928f-4ff1-8efa-d228865baa62
+INFO 2025-10-08 15:08:15,944 views 37692 41664 Complete AI analysis generated successfully
+INFO 2025-10-08 15:08:16,313 basehttp 37692 41664 "POST /api/v1/ai-analysis/ HTTP/1.1" 200 4068
+INFO 2025-10-08 15:08:29,013 basehttp 37692 41664 "GET /dashboard/analytics/ HTTP/1.1" 200 113025
+INFO 2025-10-08 15:08:29,397 views 37692 41664 Retrieved persisted AI analysis: 3fa65de6-928f-4ff1-8efa-d228865baa62
+INFO 2025-10-08 15:08:29,799 basehttp 37692 41664 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5067
+INFO 2025-10-08 15:08:38,996 basehttp 37692 41664 "GET /dashboard/reviews/ HTTP/1.1" 200 169725
+INFO 2025-10-08 15:08:41,413 autoreload 37692 24944 E:\ish\multiagent-review-sentiment-ai\apps\api\views.py changed, reloading.
+INFO 2025-10-08 15:08:44,614 autoreload 2436 32056 Watching for file changes with StatReloader
+INFO 2025-10-08 15:08:53,194 basehttp 2436 42756 "GET /dashboard/ HTTP/1.1" 200 40663
+INFO 2025-10-08 15:09:14,439 basehttp 2436 42756 "GET /auth/profile/ HTTP/1.1" 200 32018
