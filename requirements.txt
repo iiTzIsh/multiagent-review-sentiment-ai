@@ -59,3 +59,8 @@ djangorestframework
 channels
 channels-redis
 daphne
+
+# Production dependencies
+dj-database-url
+django-redis
+whitenoise[brotli]

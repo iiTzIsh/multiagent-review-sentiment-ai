@@ -18,9 +18,8 @@ import json
 import logging
 from datetime import datetime, timedelta
 
-from apps.reviews.models import Review, Hotel, ReviewBatch, AgentTask, AIAnalysisSession
-from apps.analytics.models import AnalyticsReport, SentimentTrend
-from .serializers import ReviewSerializer, HotelSerializer, AnalyticsReportSerializer
+from apps.reviews.models import Review, Hotel, ReviewBatch, AgentTask, AIAnalysisResult
+from .serializers import ReviewSerializer, HotelSerializer
 from django.contrib.auth.models import User
 
 logger = logging.getLogger(__name__)
@@ -195,14 +194,23 @@ class AnalyticsViewSet(viewsets.ViewSet):
                 count=Count('sentiment')
             )
             
-            # Recent trends
+            # Generate simple trends from actual review data
             end_date = datetime.now().date()
             start_date = end_date - timedelta(days=30)
             
-            trends = SentimentTrend.objects.filter(
-                date__gte=start_date,
-                date__lte=end_date
-            ).order_by('date')
+            trends = []
+            current_date = start_date
+            while current_date <= end_date:
+                daily_reviews = Review.objects.filter(created_at__date=current_date)
+                if daily_reviews.exists():
+                    trends.append({
+                        'date': current_date.isoformat(),
+                        'total_reviews': daily_reviews.count(),
+                        'average_score': daily_reviews.aggregate(avg=Avg('ai_score'))['avg'] or 0,
+                        'positive_percentage': daily_reviews.filter(sentiment='positive').count() / daily_reviews.count() * 100 if daily_reviews.count() > 0 else 0,
+                        'negative_percentage': daily_reviews.filter(sentiment='negative').count() / daily_reviews.count() * 100 if daily_reviews.count() > 0 else 0
+                    })
+                current_date += timedelta(days=1)
             
             analytics_data = {
                 'overview': {
@@ -211,16 +219,7 @@ class AnalyticsViewSet(viewsets.ViewSet):
                     'sentiment_distribution': list(sentiment_data),
                     'processed_reviews': Review.objects.filter(processed=True).count()
                 },
-                'trends': [
-                    {
-                        'date': trend.date,
-                        'total_reviews': trend.total_reviews,
-                        'average_score': trend.average_score,
-                        'positive_percentage': trend.positive_percentage,
-                        'negative_percentage': trend.negative_percentage
-                    }
-                    for trend in trends
-                ]
+                'trends': trends
             }
             
             return Response(analytics_data)
@@ -782,29 +781,48 @@ class CombinedAIAnalysisAPIView(APIView):
             
             # Save analysis results to database for persistence
             try:
-                # Create AIAnalysisSession instance
-                analysis_session = AIAnalysisSession.objects.create(
-                    ai_summary=summary_result['summary_text'],
-                    ai_positive_keywords=tags_result.get('tags_analysis', {}).get('positive_keywords', []),
-                    ai_negative_keywords=tags_result.get('tags_analysis', {}).get('negative_keywords', []),
-                    ai_topics_analysis=tags_result.get('tags_analysis', {}).get('topic_metrics', {}),
-                    ai_issues_identified=tags_result.get('tags_analysis', {}).get('main_issues', []),
-                    ai_emerging_topics=tags_result.get('tags_analysis', {}).get('emerging_topics', []),
-                    ai_recommendations=recommendations_result.get('recommendations', []),
-                    analysis_date_range={
-                        'start': start_date.date().isoformat(),
-                        'end': datetime.now().date().isoformat(),
-                        'days': days
+                # Mark previous analysis as inactive
+                if hotel_id:
+                    AIAnalysisResult.objects.filter(
+                        hotel_id=hotel_id, 
+                        is_active=True
+                    ).update(is_active=False)
+                else:
+                    AIAnalysisResult.objects.filter(
+                        hotel__isnull=True, 
+                        is_active=True
+                    ).update(is_active=False)
+                
+                # Create new analysis result
+                analysis_result = AIAnalysisResult.objects.create(
+                    analysis_type='combined',
+                    hotel_id=hotel_id,
+                    days_analyzed=days,
+                    date_range_start=start_date.date(),
+                    date_range_end=datetime.now().date(),
+                    total_reviews_analyzed=len(reviews_data),
+                    summary_data=response_data['summary'],
+                    sentiment_analysis={
+                        'sentiment_distribution': response_data['summary']['sentiment_distribution'],
+                        'sentiment_percentages': response_data['summary']['insights']['sentiment_percentages'],
+                        'average_score': response_data['summary']['average_score'],
+                        'score_range': response_data['summary']['insights']['score_range']
                     },
-                    total_reviews_analyzed=len(reviews_data)
+                    tags_analysis=response_data['tags_analysis'],
+                    recommendations=response_data['summary']['recommendations'],
+                    agents_used=response_data['agents_used'],
+                    workflow_info=response_data['workflow_info'],
+                    is_active=True
                 )
                 
-                logger.info(f"AI analysis saved to database with ID: {analysis_session.id}")
-                response_data['analysis_session_id'] = str(analysis_session.id)
+                logger.info(f"AI analysis saved to database with ID: {analysis_result.id}")
+                response_data['analysis_id'] = str(analysis_result.id)
+                response_data['persisted'] = True
                 
             except Exception as save_error:
                 logger.warning(f"Failed to save analysis to database: {save_error}")
-                # Continue without saving - don't break the API response
+                response_data['persisted'] = False
+                response_data['save_error'] = str(save_error)
             
             logger.info("Complete AI analysis generated successfully")
             return Response(response_data)
@@ -823,42 +841,54 @@ class CombinedAIAnalysisAPIView(APIView):
 
 
 class GetAIAnalysisAPIView(APIView):
-    """API endpoint to retrieve existing AI analysis"""
+    """API endpoint to retrieve persisted AI analysis results"""
     
     def get(self, request):
-        """Get the latest AI analysis session"""
+        """Get the latest AI analysis from database"""
         try:
-            # Get the most recent analysis session
-            latest_analysis = AIAnalysisSession.objects.latest('created_at')
+            # Get parameters
+            hotel_id = request.GET.get('hotel')
             
-            return Response({
+            # Get the most recent active analysis
+            query = AIAnalysisResult.objects.filter(is_active=True)
+            if hotel_id:
+                query = query.filter(hotel_id=hotel_id)
+            else:
+                query = query.filter(hotel__isnull=True)
+            
+            latest_analysis = query.latest('created_at')
+            
+            # Format response to match frontend expectations
+            response_data = {
                 'status': 'success',
                 'has_existing_analysis': True,
+                'persisted': True,
                 'analysis': {
                     'id': str(latest_analysis.id),
-                    'summary': {
-                        'text': latest_analysis.ai_summary,
-                        'total_reviews': latest_analysis.total_reviews_analyzed,
-                        'average_score': self._calculate_average_score_for_period(latest_analysis.analysis_date_range),
-                        'date_range': latest_analysis.analysis_date_range,
-                        'recommendations': latest_analysis.ai_recommendations or []
-                    },
-                    'tags_analysis': {
-                        'positive_keywords': latest_analysis.ai_positive_keywords,
-                        'negative_keywords': latest_analysis.ai_negative_keywords,
-                        'topic_metrics': latest_analysis.ai_topics_analysis,
-                        'issues_identified': latest_analysis.ai_issues_identified,
-                        'emerging_topics': latest_analysis.ai_emerging_topics
-                    },
+                    'summary': latest_analysis.summary_data,
+                    'tags_analysis': latest_analysis.tags_analysis,
+                    'sentiment_analysis': latest_analysis.sentiment_analysis,
+                    'recommendations': latest_analysis.recommendations,
+                    'processed_reviews': latest_analysis.total_reviews_analyzed,
                     'generated_at': latest_analysis.created_at.isoformat(),
-                    'date_range': latest_analysis.analysis_date_range
+                    'date_range': {
+                        'start': latest_analysis.date_range_start,
+                        'end': latest_analysis.date_range_end,
+                        'days': latest_analysis.days_analyzed
+                    },
+                    'workflow_info': latest_analysis.workflow_info,
+                    'agents_used': latest_analysis.agents_used
                 }
-            })
+            }
             
-        except AIAnalysisSession.DoesNotExist:
+            logger.info(f"Retrieved persisted AI analysis: {latest_analysis.id}")
+            return Response(response_data)
+            
+        except AIAnalysisResult.DoesNotExist:
             return Response({
                 'status': 'no_data',
                 'has_existing_analysis': False,
+                'persisted': False,
                 'message': 'No previous AI analysis found. Generate new analysis.',
                 'analysis': None
             })
@@ -868,6 +898,7 @@ class GetAIAnalysisAPIView(APIView):
             return Response({
                 'status': 'error',
                 'has_existing_analysis': False,
+                'persisted': False,
                 'error_message': str(e),
                 'analysis': None
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

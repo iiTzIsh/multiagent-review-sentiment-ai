@@ -48,14 +48,12 @@ class SentimentClassificationTool(BaseTool):
                 predictions = result[0] if isinstance(result[0], list) else result
                 best_prediction = max(predictions, key=lambda x: x.get('score', 0))
                 
-                # Map RoBERTa labels
-                label_mapping = {
-                    'LABEL_0': 'negative',
-                    'LABEL_1': 'neutral',   
-                    'LABEL_2': 'positive'
-                }
+                # Get direct sentiment label from the API response
+                sentiment_label = best_prediction.get('label', 'neutral').lower()
                 
-                sentiment = label_mapping.get(best_prediction.get('label', 'neutral'), 'neutral')
+                # Ensure we have valid sentiment values
+                valid_sentiments = ['positive', 'negative', 'neutral']
+                sentiment = sentiment_label if sentiment_label in valid_sentiments else 'neutral'
                 confidence = best_prediction.get('score', 0.5)
                 
                 return f"Sentiment: {sentiment}, Confidence: {confidence:.3f}"

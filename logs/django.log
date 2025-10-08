@@ -6841,3 +6841,823 @@ INFO 2025-10-07 23:00:46,717 basehttp 37652 42284 "GET /dashboard/ HTTP/1.1" 200
 INFO 2025-10-07 23:00:48,748 basehttp 37652 42284 "GET /dashboard/reviews/ HTTP/1.1" 200 169534
 INFO 2025-10-07 23:01:04,346 autoreload 37652 692 E:\ish\multiagent-review-sentiment-ai\apps\analytics\admin.py changed, reloading.
 INFO 2025-10-07 23:01:07,467 autoreload 8888 41188 Watching for file changes with StatReloader
+INFO 2025-10-07 23:31:20,068 autoreload 28852 12560 Watching for file changes with StatReloader
+INFO 2025-10-07 23:36:15,924 autoreload 28852 12560 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-08 07:19:01,413 autoreload 15960 30356 Watching for file changes with StatReloader
+INFO 2025-10-08 07:19:05,318 basehttp 15960 30876 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 07:19:05,352 basehttp 15960 30876 "GET /dashboard/ HTTP/1.1" 200 42948
+INFO 2025-10-08 07:19:05,380 basehttp 15960 30876 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+WARNING 2025-10-08 07:19:05,501 log 15960 30876 Not Found: /favicon.ico
+WARNING 2025-10-08 07:19:05,501 basehttp 15960 30876 "GET /favicon.ico HTTP/1.1" 404 3322
+INFO 2025-10-08 07:19:07,572 basehttp 15960 30876 "GET /dashboard/reviews/ HTTP/1.1" 200 169534
+INFO 2025-10-08 07:19:10,237 basehttp 15960 30876 "GET /dashboard/analytics/ HTTP/1.1" 200 112148
+INFO 2025-10-08 07:19:10,263 basehttp 15960 30876 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 4486
+INFO 2025-10-08 07:55:50,823 autoreload 6064 32748 Watching for file changes with StatReloader
+INFO 2025-10-08 07:56:00,478 autoreload 12884 7676 Watching for file changes with StatReloader
+INFO 2025-10-08 07:56:03,529 basehttp 12884 42832 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 07:56:07,137 basehttp 12884 42832 "GET /dashboard/ HTTP/1.1" 200 38969
+WARNING 2025-10-08 07:56:07,446 log 12884 42832 Not Found: /favicon.ico
+WARNING 2025-10-08 07:56:07,446 basehttp 12884 42832 "GET /favicon.ico HTTP/1.1" 404 3322
+INFO 2025-10-08 07:56:16,331 basehttp 12884 42832 "GET /dashboard/reviews/ HTTP/1.1" 200 169534
+INFO 2025-10-08 07:56:23,785 basehttp 12884 42832 "GET /dashboard/analytics/ HTTP/1.1" 200 112148
+INFO 2025-10-08 07:56:24,049 basehttp 12884 42832 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 132
+INFO 2025-10-08 07:58:51,380 autoreload 35504 27864 Watching for file changes with StatReloader
+INFO 2025-10-08 07:58:59,433 autoreload 6624 34136 Watching for file changes with StatReloader
+INFO 2025-10-08 07:59:13,531 autoreload 28972 33668 Watching for file changes with StatReloader
+INFO 2025-10-08 07:59:18,154 basehttp 28972 29560 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 07:59:22,152 basehttp 28972 29560 "GET /dashboard/ HTTP/1.1" 200 38969
+INFO 2025-10-08 07:59:28,916 basehttp 28972 29560 "GET /dashboard/reviews/ HTTP/1.1" 200 169534
+INFO 2025-10-08 08:00:41,390 autoreload 21716 25388 Watching for file changes with StatReloader
+INFO 2025-10-08 08:00:50,555 autoreload 10904 14716 Watching for file changes with StatReloader
+INFO 2025-10-08 08:09:26,311 autoreload 39428 14936 Watching for file changes with StatReloader
+INFO 2025-10-08 08:09:29,043 basehttp 39428 27316 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 08:09:32,403 basehttp 39428 27316 "GET /dashboard/ HTTP/1.1" 200 38969
+INFO 2025-10-08 08:09:37,728 basehttp 39428 27316 "GET /dashboard/reviews/ HTTP/1.1" 200 169534
+INFO 2025-10-08 08:09:40,257 basehttp 39428 27316 "GET /dashboard/upload/ HTTP/1.1" 200 52466
+INFO 2025-10-08 08:09:48,862 basehttp 39428 27316 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-10-08 08:09:55,693 basehttp 39428 27316 "GET /dashboard/reviews/ HTTP/1.1" 200 167629
+INFO 2025-10-08 08:10:00,244 basehttp 39428 27316 "GET /dashboard/ HTTP/1.1" 200 39819
+INFO 2025-10-08 08:10:16,242 orchestrator 39428 27316 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 08:10:16,246 orchestrator 39428 27316 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 08:10:16,246 orchestrator 39428 27316 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 08:10:16,247 orchestrator 39428 27316 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 08:10:16,368 views 39428 27316 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 5 reviews
+INFO 2025-10-08 08:10:16,730 orchestrator 39428 27316 [STAGE 1] Processing review 489a29a7-a5e1-4b7f-9820-75216b0010f0
+INFO 2025-10-08 08:10:22,384 orchestrator 39428 27316 [COMPLETED] Single review workflow completed in 5.65s
+INFO 2025-10-08 08:10:22,502 orchestrator 39428 27316 [STAGE 1] Processing review 90117696-69e1-4fdd-bda6-78eccbba887c
+INFO 2025-10-08 08:10:24,464 orchestrator 39428 27316 [COMPLETED] Single review workflow completed in 1.96s
+INFO 2025-10-08 08:10:24,583 orchestrator 39428 27316 [STAGE 1] Processing review d3224f88-2638-40b3-9e9c-bfd2e6aeb06c
+INFO 2025-10-08 08:10:26,546 orchestrator 39428 27316 [COMPLETED] Single review workflow completed in 1.96s
+INFO 2025-10-08 08:10:26,663 orchestrator 39428 27316 [STAGE 1] Processing review a44af827-99a0-4799-906a-dedaed4850f8
+INFO 2025-10-08 08:10:28,565 orchestrator 39428 27316 [COMPLETED] Single review workflow completed in 1.90s
+INFO 2025-10-08 08:10:28,699 orchestrator 39428 27316 [STAGE 1] Processing review 062c6370-ff8d-458e-ad05-7df188dd1165
+INFO 2025-10-08 08:10:30,545 orchestrator 39428 27316 [COMPLETED] Single review workflow completed in 1.85s
+INFO 2025-10-08 08:10:30,963 basehttp 39428 27316 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-10-08 08:10:36,442 basehttp 39428 27316 "GET /dashboard/ HTTP/1.1" 200 39820
+INFO 2025-10-08 08:10:41,856 basehttp 39428 27316 "GET /dashboard/reviews/ HTTP/1.1" 200 169514
+INFO 2025-10-08 08:10:58,883 basehttp 39428 27316 "GET /dashboard/ HTTP/1.1" 200 39819
+INFO 2025-10-08 08:11:05,969 basehttp 39428 27316 "GET /dashboard/reviews/ HTTP/1.1" 200 169514
+INFO 2025-10-08 08:12:37,029 basehttp 39428 27316 "GET /dashboard/ HTTP/1.1" 200 39820
+INFO 2025-10-08 08:12:42,501 basehttp 39428 27316 "GET /dashboard/reviews/ HTTP/1.1" 200 169514
+INFO 2025-10-08 08:20:51,443 orchestrator 37060 16832 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 08:20:51,555 orchestrator 37060 16832 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 08:20:51,555 orchestrator 37060 16832 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 08:20:51,555 orchestrator 37060 16832 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 08:20:51,555 orchestrator 37060 16832 [STAGE 1] Processing review test-123
+INFO 2025-10-08 08:20:54,129 orchestrator 37060 16832 [COMPLETED] Single review workflow completed in 2.57s
+INFO 2025-10-08 08:22:13,813 autoreload 15604 40096 Watching for file changes with StatReloader
+INFO 2025-10-08 08:22:24,719 autoreload 6752 32416 Watching for file changes with StatReloader
+INFO 2025-10-08 08:22:27,918 basehttp 6752 23572 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 08:22:31,625 basehttp 6752 23572 "GET /dashboard/ HTTP/1.1" 200 39817
+INFO 2025-10-08 08:23:32,413 orchestrator 27452 42940 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 08:23:32,415 orchestrator 27452 42940 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 08:23:32,415 orchestrator 27452 42940 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 08:23:32,415 orchestrator 27452 42940 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 08:23:32,547 views 27452 42940 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 170 reviews
+INFO 2025-10-08 08:23:33,326 orchestrator 27452 42940 [STAGE 1] Processing review 489a29a7-a5e1-4b7f-9820-75216b0010f0
+INFO 2025-10-08 08:23:39,178 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 5.85s
+INFO 2025-10-08 08:23:39,380 orchestrator 27452 42940 [STAGE 1] Processing review 90117696-69e1-4fdd-bda6-78eccbba887c
+INFO 2025-10-08 08:23:41,278 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 1.90s
+INFO 2025-10-08 08:23:41,415 orchestrator 27452 42940 [STAGE 1] Processing review d3224f88-2638-40b3-9e9c-bfd2e6aeb06c
+INFO 2025-10-08 08:23:43,110 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 1.69s
+INFO 2025-10-08 08:23:43,277 orchestrator 27452 42940 [STAGE 1] Processing review a44af827-99a0-4799-906a-dedaed4850f8
+INFO 2025-10-08 08:23:45,006 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 1.73s
+INFO 2025-10-08 08:23:45,130 orchestrator 27452 42940 [STAGE 1] Processing review 062c6370-ff8d-458e-ad05-7df188dd1165
+INFO 2025-10-08 08:23:46,926 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 1.80s
+INFO 2025-10-08 08:23:47,055 orchestrator 27452 42940 [STAGE 1] Processing review 6ac99a4f-5347-42b3-b23a-2b0ff752953d
+INFO 2025-10-08 08:23:49,007 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 1.95s
+INFO 2025-10-08 08:23:49,132 orchestrator 27452 42940 [STAGE 1] Processing review 98345e68-eab8-40c3-97ac-d04a4fc53ab3
+INFO 2025-10-08 08:23:51,168 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 2.04s
+INFO 2025-10-08 08:23:51,297 orchestrator 27452 42940 [STAGE 1] Processing review 50d5d249-f337-4e16-85c1-4b065128064d
+INFO 2025-10-08 08:23:53,326 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 2.03s
+INFO 2025-10-08 08:23:53,452 orchestrator 27452 42940 [STAGE 1] Processing review 2e392dcd-afac-4484-901e-b3ff712c6de6
+INFO 2025-10-08 08:23:55,886 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 2.43s
+INFO 2025-10-08 08:23:56,315 orchestrator 27452 42940 [STAGE 1] Processing review 1736bba8-14c9-46e1-9e57-5c227f920dc3
+INFO 2025-10-08 08:23:58,134 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 1.82s
+INFO 2025-10-08 08:23:58,259 orchestrator 27452 42940 [STAGE 1] Processing review e338f04d-ce61-42ed-a7ce-92e3e61498a0
+INFO 2025-10-08 08:24:00,539 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 2.28s
+INFO 2025-10-08 08:24:00,681 orchestrator 27452 42940 [STAGE 1] Processing review a9fd16a2-92e1-4784-8532-1ceb4d57745e
+INFO 2025-10-08 08:24:02,653 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 1.97s
+INFO 2025-10-08 08:24:02,777 orchestrator 27452 42940 [STAGE 1] Processing review a9b38a5a-0603-4b25-9ed0-9309a29e7767
+INFO 2025-10-08 08:24:04,846 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 2.07s
+INFO 2025-10-08 08:24:04,974 orchestrator 27452 42940 [STAGE 1] Processing review 1d19a8fa-b363-4b8d-b031-b6e6bb037e0e
+INFO 2025-10-08 08:24:07,406 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 2.43s
+INFO 2025-10-08 08:24:07,531 orchestrator 27452 42940 [STAGE 1] Processing review c4d6a998-15bf-4ecd-a314-52f44a8a5e7d
+INFO 2025-10-08 08:24:09,813 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 2.28s
+INFO 2025-10-08 08:24:09,938 orchestrator 27452 42940 [STAGE 1] Processing review c2520da7-b876-489e-b563-133c1e72586f
+INFO 2025-10-08 08:24:13,808 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 3.87s
+INFO 2025-10-08 08:24:14,251 orchestrator 27452 42940 [STAGE 1] Processing review 21453941-86fb-4912-8b5e-5c441b233814
+INFO 2025-10-08 08:24:16,366 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 2.11s
+INFO 2025-10-08 08:24:16,499 orchestrator 27452 42940 [STAGE 1] Processing review 9c935c83-b5e4-4f3f-ac01-c010830930e4
+INFO 2025-10-08 08:24:18,446 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 1.95s
+INFO 2025-10-08 08:24:18,582 orchestrator 27452 42940 [STAGE 1] Processing review ad18e6f7-fb5d-46c6-a7f3-66679d7b39bf
+INFO 2025-10-08 08:24:20,304 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 1.72s
+INFO 2025-10-08 08:24:20,508 orchestrator 27452 42940 [STAGE 1] Processing review d2f8fca6-bfc3-4597-8ddc-3f55043faa04
+INFO 2025-10-08 08:24:22,288 orchestrator 27452 42940 [COMPLETED] Single review workflow completed in 1.78s
+INFO 2025-10-08 08:25:40,806 orchestrator 13216 3932 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 08:25:40,809 orchestrator 13216 3932 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 08:25:40,809 orchestrator 13216 3932 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 08:25:40,809 orchestrator 13216 3932 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 08:25:40,934 views 13216 3932 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 150 reviews
+INFO 2025-10-08 08:25:41,416 orchestrator 13216 3932 [STAGE 1] Processing review 5cdd576f-994a-4a0d-a7ac-b5f755c7c261
+INFO 2025-10-08 08:25:47,248 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 5.83s
+INFO 2025-10-08 08:25:47,369 orchestrator 13216 3932 [STAGE 1] Processing review d54f129a-1507-4b32-98a3-1381aa501a5b
+INFO 2025-10-08 08:25:49,283 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.91s
+INFO 2025-10-08 08:25:49,420 orchestrator 13216 3932 [STAGE 1] Processing review 95084a8a-9497-40e8-ab9b-09da8368e515
+INFO 2025-10-08 08:25:51,488 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.07s
+INFO 2025-10-08 08:25:51,663 orchestrator 13216 3932 [STAGE 1] Processing review c5e58803-5d05-4a68-958a-99ba0654902e
+INFO 2025-10-08 08:25:54,385 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.72s
+INFO 2025-10-08 08:25:55,025 orchestrator 13216 3932 [STAGE 1] Processing review edd4f43f-dedd-4651-af69-4a892bebbbe0
+INFO 2025-10-08 08:25:57,486 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.46s
+INFO 2025-10-08 08:25:57,826 orchestrator 13216 3932 [STAGE 1] Processing review 915d6be1-9dbe-44e5-a3ef-1a3dba23d56c
+INFO 2025-10-08 08:25:59,886 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.06s
+INFO 2025-10-08 08:26:00,028 orchestrator 13216 3932 [STAGE 1] Processing review d7bde687-dce6-4d26-b9d0-64c41627d083
+INFO 2025-10-08 08:26:02,285 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.26s
+INFO 2025-10-08 08:26:02,410 orchestrator 13216 3932 [STAGE 1] Processing review 1c3c24c1-f512-49f3-86d2-023075b0599a
+INFO 2025-10-08 08:26:04,686 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.28s
+INFO 2025-10-08 08:26:04,864 orchestrator 13216 3932 [STAGE 1] Processing review ad7cbe0f-a305-451b-90f2-8d1ca4ee4600
+INFO 2025-10-08 08:26:06,765 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.90s
+INFO 2025-10-08 08:26:06,904 orchestrator 13216 3932 [STAGE 1] Processing review d17943e6-8044-4cd1-a8c2-c8e8bd90271e
+INFO 2025-10-08 08:26:09,042 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.14s
+INFO 2025-10-08 08:26:09,214 orchestrator 13216 3932 [STAGE 1] Processing review 5f2da54b-15e9-4cff-9c0e-4fb6b73436ff
+INFO 2025-10-08 08:26:11,246 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.03s
+INFO 2025-10-08 08:26:11,403 orchestrator 13216 3932 [STAGE 1] Processing review 66c6df62-f9a8-4cf5-ac84-0bdc65a4d566
+INFO 2025-10-08 08:26:13,378 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.97s
+INFO 2025-10-08 08:26:13,643 orchestrator 13216 3932 [STAGE 1] Processing review e0212701-02db-4d45-aa9d-22640cfb8cc9
+INFO 2025-10-08 08:26:16,358 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.71s
+INFO 2025-10-08 08:26:16,489 orchestrator 13216 3932 [STAGE 1] Processing review 669a2b49-0d95-4085-b3bd-1ad1283b7ffb
+INFO 2025-10-08 08:26:24,692 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 8.20s
+INFO 2025-10-08 08:26:24,862 orchestrator 13216 3932 [STAGE 1] Processing review c6463507-abe5-4752-b0a6-79916ce7bdef
+INFO 2025-10-08 08:26:26,841 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.98s
+INFO 2025-10-08 08:26:26,955 orchestrator 13216 3932 [STAGE 1] Processing review fb63d697-c9ab-4380-b0fd-6928a7539efe
+INFO 2025-10-08 08:26:29,173 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.22s
+INFO 2025-10-08 08:26:29,305 orchestrator 13216 3932 [STAGE 1] Processing review 2fb462d2-9367-44f2-a8c1-81718f621d15
+INFO 2025-10-08 08:26:31,111 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.81s
+INFO 2025-10-08 08:26:31,224 orchestrator 13216 3932 [STAGE 1] Processing review 41ce7909-8b47-4167-a70d-1d22eb87fe15
+INFO 2025-10-08 08:26:32,951 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.73s
+INFO 2025-10-08 08:26:33,064 orchestrator 13216 3932 [STAGE 1] Processing review 48e67a3f-9163-46e7-8784-2aa0dc77e047
+INFO 2025-10-08 08:26:34,848 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.78s
+INFO 2025-10-08 08:26:34,959 orchestrator 13216 3932 [STAGE 1] Processing review 8aab5a70-6c9b-4233-bca8-e2628736bf63
+INFO 2025-10-08 08:26:36,685 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.73s
+INFO 2025-10-08 08:26:37,745 orchestrator 13216 3932 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 08:26:37,748 orchestrator 13216 3932 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 08:26:37,748 orchestrator 13216 3932 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 08:26:37,749 orchestrator 13216 3932 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 08:26:37,905 views 13216 3932 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 130 reviews
+INFO 2025-10-08 08:26:38,425 orchestrator 13216 3932 [STAGE 1] Processing review 0321f32b-9737-4655-8178-4e7c186affdd
+INFO 2025-10-08 08:26:40,526 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.10s
+INFO 2025-10-08 08:26:40,664 orchestrator 13216 3932 [STAGE 1] Processing review e03853fa-db52-411a-9e63-914aa88698be
+INFO 2025-10-08 08:26:42,767 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.10s
+INFO 2025-10-08 08:26:42,922 orchestrator 13216 3932 [STAGE 1] Processing review 6c8ac4c4-5740-4ffe-8585-2d45de80221e
+INFO 2025-10-08 08:26:44,769 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.85s
+INFO 2025-10-08 08:26:44,898 orchestrator 13216 3932 [STAGE 1] Processing review 3d34bac0-992a-4505-863e-36a8fb427e83
+INFO 2025-10-08 08:26:47,405 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.51s
+INFO 2025-10-08 08:26:47,947 orchestrator 13216 3932 [STAGE 1] Processing review f4171255-3a9c-4b0d-b20d-e76112b56fab
+INFO 2025-10-08 08:26:49,902 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.95s
+INFO 2025-10-08 08:26:50,036 orchestrator 13216 3932 [STAGE 1] Processing review 9f66f526-26b7-4bde-8b20-5ac98a179738
+INFO 2025-10-08 08:26:51,944 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.91s
+INFO 2025-10-08 08:26:52,064 orchestrator 13216 3932 [STAGE 1] Processing review 140c7893-1c90-44e7-ba8b-be2cccb3db40
+INFO 2025-10-08 08:26:54,125 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.06s
+INFO 2025-10-08 08:26:54,275 orchestrator 13216 3932 [STAGE 1] Processing review ade1e2f4-7d78-4812-83f0-4a9e1168f806
+INFO 2025-10-08 08:26:56,844 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.57s
+INFO 2025-10-08 08:26:57,589 orchestrator 13216 3932 [STAGE 1] Processing review 3bff9a56-938b-4a2c-a618-f038152a345d
+INFO 2025-10-08 08:26:59,890 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.30s
+INFO 2025-10-08 08:27:00,163 orchestrator 13216 3932 [STAGE 1] Processing review 536a59fc-bc2e-43ef-8b5f-7d3599d3d19f
+INFO 2025-10-08 08:27:02,285 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.12s
+INFO 2025-10-08 08:27:02,478 orchestrator 13216 3932 [STAGE 1] Processing review 5624be1c-4736-45d1-88f9-cff4e83bf0e8
+INFO 2025-10-08 08:27:13,885 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 11.41s
+INFO 2025-10-08 08:27:14,014 orchestrator 13216 3932 [STAGE 1] Processing review 4e5a298c-f458-4fb1-b72c-79c4acc429e8
+INFO 2025-10-08 08:27:16,284 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.27s
+INFO 2025-10-08 08:27:16,414 orchestrator 13216 3932 [STAGE 1] Processing review b1370719-8c12-4b49-a2c2-281a2e9eb557
+INFO 2025-10-08 08:27:18,622 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.21s
+INFO 2025-10-08 08:27:18,781 orchestrator 13216 3932 [STAGE 1] Processing review 5dc2fe10-d6f4-421e-9023-d10e9437dbb6
+INFO 2025-10-08 08:27:21,636 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.86s
+INFO 2025-10-08 08:27:21,763 orchestrator 13216 3932 [STAGE 1] Processing review 2dd3c5ec-1e78-4abd-99a0-4e53f6808335
+INFO 2025-10-08 08:27:24,204 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.44s
+INFO 2025-10-08 08:27:24,355 orchestrator 13216 3932 [STAGE 1] Processing review 4a7bf75b-8247-4788-87b7-90af9da1d8f8
+INFO 2025-10-08 08:27:26,151 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.80s
+INFO 2025-10-08 08:27:26,275 orchestrator 13216 3932 [STAGE 1] Processing review 6e9f7b5e-53ca-4cb2-98f1-4515621cb4f8
+INFO 2025-10-08 08:27:28,348 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.07s
+INFO 2025-10-08 08:27:28,469 orchestrator 13216 3932 [STAGE 1] Processing review fd6a9ab9-c8ea-47fa-99d6-308fe0e98a7d
+INFO 2025-10-08 08:27:30,451 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.98s
+INFO 2025-10-08 08:27:30,569 orchestrator 13216 3932 [STAGE 1] Processing review 28bca38d-825a-4696-8dc2-c51b9b4b74ab
+INFO 2025-10-08 08:27:32,525 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.96s
+INFO 2025-10-08 08:27:32,664 orchestrator 13216 3932 [STAGE 1] Processing review 1e25981a-8f6b-4407-896e-b22f19d28892
+INFO 2025-10-08 08:27:34,684 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.02s
+INFO 2025-10-08 08:27:36,455 orchestrator 13216 3932 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 08:27:36,457 orchestrator 13216 3932 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 08:27:36,458 orchestrator 13216 3932 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 08:27:36,458 orchestrator 13216 3932 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 08:27:36,614 views 13216 3932 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 110 reviews
+INFO 2025-10-08 08:27:38,086 orchestrator 13216 3932 [STAGE 1] Processing review ee74866d-9946-4779-8fcd-8f72f939b4f8
+INFO 2025-10-08 08:27:40,206 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.12s
+INFO 2025-10-08 08:27:40,329 orchestrator 13216 3932 [STAGE 1] Processing review 5976b3bb-558f-498d-9829-1bda84506286
+INFO 2025-10-08 08:27:43,245 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.92s
+INFO 2025-10-08 08:27:44,180 orchestrator 13216 3932 [STAGE 1] Processing review 7f1d2562-d170-40ad-ae01-0c06fe120d54
+INFO 2025-10-08 08:27:46,211 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.03s
+INFO 2025-10-08 08:27:46,363 orchestrator 13216 3932 [STAGE 1] Processing review b8e4fd9e-946b-40e1-bd9e-045dc83aecd8
+INFO 2025-10-08 08:27:48,809 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.45s
+INFO 2025-10-08 08:27:48,961 orchestrator 13216 3932 [STAGE 1] Processing review c32de0ba-d24e-4546-ae64-e295b1fdf6db
+INFO 2025-10-08 08:27:51,215 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.25s
+INFO 2025-10-08 08:27:51,367 orchestrator 13216 3932 [STAGE 1] Processing review 88b0df8d-a0a5-406b-90b8-dd67ef03b392
+INFO 2025-10-08 08:27:53,600 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.23s
+INFO 2025-10-08 08:27:53,833 orchestrator 13216 3932 [STAGE 1] Processing review b5740889-2d7f-4c5c-ae47-6d91e71b48d0
+INFO 2025-10-08 08:27:55,832 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.00s
+INFO 2025-10-08 08:27:55,970 orchestrator 13216 3932 [STAGE 1] Processing review 0f275a77-1747-415c-84b7-40d78b82f9d8
+INFO 2025-10-08 08:27:57,848 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.88s
+INFO 2025-10-08 08:27:58,132 orchestrator 13216 3932 [STAGE 1] Processing review 05ff0734-75cc-4f07-a7ef-08300bbd5e20
+INFO 2025-10-08 08:27:59,826 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.69s
+INFO 2025-10-08 08:27:59,943 orchestrator 13216 3932 [STAGE 1] Processing review f930e15e-f0a0-4129-a533-3de4420d74fd
+INFO 2025-10-08 08:28:02,086 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.14s
+INFO 2025-10-08 08:28:02,214 orchestrator 13216 3932 [STAGE 1] Processing review a8e08611-a574-4a78-a7a1-651a324929fe
+INFO 2025-10-08 08:28:04,607 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.39s
+INFO 2025-10-08 08:28:04,780 orchestrator 13216 3932 [STAGE 1] Processing review fd2eddd8-072f-45a2-97df-f42929d441c3
+INFO 2025-10-08 08:28:06,630 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.85s
+INFO 2025-10-08 08:28:06,797 orchestrator 13216 3932 [STAGE 1] Processing review 4f43c0e4-a862-4b3a-82a2-8379c91054e0
+INFO 2025-10-08 08:28:08,970 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.17s
+INFO 2025-10-08 08:28:09,119 orchestrator 13216 3932 [STAGE 1] Processing review f2816459-d2cd-4449-8f01-b7496dab6520
+INFO 2025-10-08 08:28:11,113 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.99s
+INFO 2025-10-08 08:28:11,259 orchestrator 13216 3932 [STAGE 1] Processing review ca118828-35c1-44b2-bd54-501918148101
+INFO 2025-10-08 08:28:13,488 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.23s
+INFO 2025-10-08 08:28:14,110 orchestrator 13216 3932 [STAGE 1] Processing review 243590c8-32ce-4330-b4c1-a2a1019305c0
+INFO 2025-10-08 08:28:16,005 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.90s
+INFO 2025-10-08 08:28:16,153 orchestrator 13216 3932 [STAGE 1] Processing review 27695955-9409-4016-a5f9-102ad5c4de78
+INFO 2025-10-08 08:28:19,404 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 3.25s
+INFO 2025-10-08 08:28:19,533 orchestrator 13216 3932 [STAGE 1] Processing review 85586f89-8c15-40f0-a647-aa6b60bd69fe
+INFO 2025-10-08 08:28:21,704 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.17s
+INFO 2025-10-08 08:28:21,963 orchestrator 13216 3932 [STAGE 1] Processing review b1c55d0b-be54-4800-ad44-649092a059ad
+INFO 2025-10-08 08:28:24,684 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.72s
+INFO 2025-10-08 08:28:27,241 orchestrator 13216 3932 [STAGE 1] Processing review 9d00b9ad-8f91-48b6-82b0-9253400649bf
+INFO 2025-10-08 08:28:31,084 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 3.84s
+INFO 2025-10-08 08:28:35,377 orchestrator 13216 3932 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 08:28:35,380 orchestrator 13216 3932 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 08:28:35,380 orchestrator 13216 3932 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 08:28:35,381 orchestrator 13216 3932 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 08:28:35,567 views 13216 3932 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 90 reviews
+INFO 2025-10-08 08:28:39,750 orchestrator 13216 3932 [STAGE 1] Processing review 8ece1ce5-56b8-4cef-816f-b6478c39efff
+INFO 2025-10-08 08:28:41,730 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.98s
+INFO 2025-10-08 08:28:43,331 orchestrator 13216 3932 [STAGE 1] Processing review 834fe954-dbc8-4740-8be9-ccdfe4bb98ff
+INFO 2025-10-08 08:28:45,383 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.05s
+INFO 2025-10-08 08:28:45,522 orchestrator 13216 3932 [STAGE 1] Processing review b94152a0-24d5-4306-8b6b-53e7c6624856
+INFO 2025-10-08 08:28:47,324 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.80s
+INFO 2025-10-08 08:28:47,438 orchestrator 13216 3932 [STAGE 1] Processing review f5162989-2271-4538-a144-7f6cca51543e
+INFO 2025-10-08 08:28:49,381 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.94s
+INFO 2025-10-08 08:28:49,497 orchestrator 13216 3932 [STAGE 1] Processing review 68678fe1-222a-4d18-af9f-43bc2c1f6e72
+INFO 2025-10-08 08:28:51,626 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.13s
+INFO 2025-10-08 08:28:51,985 orchestrator 13216 3932 [STAGE 1] Processing review 20608495-9927-4cba-880f-e74174398fa0
+INFO 2025-10-08 08:28:56,211 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 4.23s
+INFO 2025-10-08 08:28:56,684 orchestrator 13216 3932 [STAGE 1] Processing review 7fbfc1c7-db8f-4d45-ae18-e95ae938c2ad
+INFO 2025-10-08 08:28:58,605 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.92s
+INFO 2025-10-08 08:28:58,781 orchestrator 13216 3932 [STAGE 1] Processing review c6bde1b5-e6f0-4e88-8b68-a39d3b5f6da2
+INFO 2025-10-08 08:29:02,630 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 3.85s
+INFO 2025-10-08 08:29:03,189 orchestrator 13216 3932 [STAGE 1] Processing review 612286e7-c0d5-40c4-a235-67cf9516404d
+INFO 2025-10-08 08:29:08,388 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 5.20s
+INFO 2025-10-08 08:29:09,013 orchestrator 13216 3932 [STAGE 1] Processing review f81fc678-6d2a-41b9-b5a9-b957e687c90b
+INFO 2025-10-08 08:29:12,446 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 3.43s
+INFO 2025-10-08 08:29:12,633 orchestrator 13216 3932 [STAGE 1] Processing review 6ce2c014-5a66-4d0a-9936-ac3e3bb29d76
+ERROR 2025-10-08 08:29:24,345 agent 13216 3932 Scoring error: HTTPSConnectionPool(host='api-inference.huggingface.co', port=443): Read timed out. (read timeout=10)
+INFO 2025-10-08 08:29:24,346 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 11.71s
+INFO 2025-10-08 08:29:34,887 orchestrator 13216 3932 [STAGE 1] Processing review c490672c-5276-4598-b63c-143d4c2d9f85
+INFO 2025-10-08 08:29:41,323 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 6.44s
+INFO 2025-10-08 08:29:42,448 orchestrator 13216 3932 [STAGE 1] Processing review bbb6113d-2b48-41da-898c-c073bd2687bc
+INFO 2025-10-08 08:29:46,726 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 4.28s
+INFO 2025-10-08 08:29:47,143 orchestrator 13216 3932 [STAGE 1] Processing review aec8f01c-c040-4f95-9d82-93539cd0a33b
+INFO 2025-10-08 08:29:49,963 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.82s
+INFO 2025-10-08 08:29:50,928 orchestrator 13216 3932 [STAGE 1] Processing review 495931ca-cdf1-4481-b949-d51a3edebab4
+INFO 2025-10-08 08:29:54,621 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 3.69s
+INFO 2025-10-08 08:29:54,776 orchestrator 13216 3932 [STAGE 1] Processing review 581a0c7b-d754-4cc1-9bdb-1644b55bc8f9
+INFO 2025-10-08 08:29:56,770 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.99s
+INFO 2025-10-08 08:29:56,953 orchestrator 13216 3932 [STAGE 1] Processing review 16d4c987-92ec-4643-9c3f-720767cf1e7b
+INFO 2025-10-08 08:30:01,684 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 4.73s
+INFO 2025-10-08 08:30:02,863 orchestrator 13216 3932 [STAGE 1] Processing review e9b64135-314b-430f-946a-87fb08050262
+INFO 2025-10-08 08:30:05,165 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.30s
+INFO 2025-10-08 08:30:05,454 orchestrator 13216 3932 [STAGE 1] Processing review 41ef6baa-9435-48b4-a745-7c13d106c54d
+INFO 2025-10-08 08:30:08,363 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.91s
+INFO 2025-10-08 08:30:08,626 orchestrator 13216 3932 [STAGE 1] Processing review a1ef0af5-3734-4a65-811b-3a386f140ebc
+INFO 2025-10-08 08:30:16,025 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 7.40s
+INFO 2025-10-08 08:30:20,783 orchestrator 13216 3932 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 08:30:20,785 orchestrator 13216 3932 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 08:30:20,785 orchestrator 13216 3932 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 08:30:20,786 orchestrator 13216 3932 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 08:30:20,914 views 13216 3932 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 70 reviews
+INFO 2025-10-08 08:30:24,681 orchestrator 13216 3932 [STAGE 1] Processing review 94f08349-5e98-4d40-a98a-b560fa86dbb8
+INFO 2025-10-08 08:30:27,243 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.56s
+INFO 2025-10-08 08:30:28,776 orchestrator 13216 3932 [STAGE 1] Processing review ab11b58c-8633-411c-b54f-6b3d27b13f64
+INFO 2025-10-08 08:30:34,283 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 5.51s
+INFO 2025-10-08 08:30:34,571 orchestrator 13216 3932 [STAGE 1] Processing review c9841884-9987-4361-8e7c-07f8ca943d0f
+INFO 2025-10-08 08:30:37,003 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.43s
+INFO 2025-10-08 08:30:37,153 orchestrator 13216 3932 [STAGE 1] Processing review d4ed2477-a847-4f9e-b8cd-3e955cac491c
+INFO 2025-10-08 08:30:40,043 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.89s
+INFO 2025-10-08 08:30:40,339 orchestrator 13216 3932 [STAGE 1] Processing review 6ccb8def-5dd8-438b-be51-d010f76b6425
+INFO 2025-10-08 08:30:43,324 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.99s
+INFO 2025-10-08 08:30:43,561 orchestrator 13216 3932 [STAGE 1] Processing review db37bd2b-7a41-4da1-aea2-204a6b3dc271
+INFO 2025-10-08 08:30:47,723 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 4.16s
+INFO 2025-10-08 08:30:48,162 orchestrator 13216 3932 [STAGE 1] Processing review de75bdec-4e66-4242-9b7b-b0b5ba345edd
+INFO 2025-10-08 08:30:52,294 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 4.13s
+INFO 2025-10-08 08:30:52,657 orchestrator 13216 3932 [STAGE 1] Processing review 6f0e0e16-33a2-4d24-b4c4-8df177373d11
+INFO 2025-10-08 08:30:56,244 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 3.59s
+INFO 2025-10-08 08:30:56,421 orchestrator 13216 3932 [STAGE 1] Processing review 296e2230-a473-4312-95db-fe3750ad3930
+INFO 2025-10-08 08:30:59,244 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.82s
+INFO 2025-10-08 08:30:59,383 orchestrator 13216 3932 [STAGE 1] Processing review 33b179af-49de-4e77-9f4f-8f7fa42a0148
+INFO 2025-10-08 08:31:01,645 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.26s
+INFO 2025-10-08 08:31:01,773 orchestrator 13216 3932 [STAGE 1] Processing review a171dcea-4387-4e7f-ac15-18e4c14b023e
+INFO 2025-10-08 08:31:03,884 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.11s
+INFO 2025-10-08 08:31:04,033 orchestrator 13216 3932 [STAGE 1] Processing review 4cc50fe2-9a9d-4269-a84d-01fcc49f8b48
+INFO 2025-10-08 08:31:05,968 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.93s
+INFO 2025-10-08 08:31:06,215 orchestrator 13216 3932 [STAGE 1] Processing review a0f67227-c5f9-4eed-ab47-d72d182b825b
+INFO 2025-10-08 08:31:08,204 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.99s
+INFO 2025-10-08 08:31:08,485 orchestrator 13216 3932 [STAGE 1] Processing review 6aafaa49-d6b7-440d-aacb-1d7cb3fa16b8
+INFO 2025-10-08 08:31:10,611 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.13s
+INFO 2025-10-08 08:31:10,799 orchestrator 13216 3932 [STAGE 1] Processing review 5d1b3819-eca1-4c8c-888f-b4a74d4f8afc
+INFO 2025-10-08 08:31:12,692 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 1.89s
+INFO 2025-10-08 08:31:12,833 orchestrator 13216 3932 [STAGE 1] Processing review ee96c380-c711-4855-b45a-7fa2d5f224df
+INFO 2025-10-08 08:31:15,724 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.89s
+INFO 2025-10-08 08:31:15,893 orchestrator 13216 3932 [STAGE 1] Processing review 1074de97-2525-4469-b802-2ee6970a6063
+INFO 2025-10-08 08:31:17,929 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.04s
+INFO 2025-10-08 08:31:18,129 orchestrator 13216 3932 [STAGE 1] Processing review 1428907b-18f6-470a-b63e-3f26ce644f72
+INFO 2025-10-08 08:31:22,114 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 3.99s
+INFO 2025-10-08 08:31:22,529 orchestrator 13216 3932 [STAGE 1] Processing review f03770d3-50bc-4e9a-bbc8-5a7d3cb5da11
+INFO 2025-10-08 08:31:25,244 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 2.72s
+INFO 2025-10-08 08:31:26,131 orchestrator 13216 3932 [STAGE 1] Processing review 575e041d-fa38-426b-b1b0-91ede21b99ee
+INFO 2025-10-08 08:31:35,082 orchestrator 13216 3932 [COMPLETED] Single review workflow completed in 8.95s
+INFO 2025-10-08 08:31:45,493 orchestrator 13216 3932 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 08:31:45,494 orchestrator 13216 3932 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 08:31:45,495 orchestrator 13216 3932 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 08:31:45,495 orchestrator 13216 3932 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 08:31:45,608 views 13216 3932 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 50 reviews
+INFO 2025-10-08 08:32:54,154 autoreload 18808 19568 Watching for file changes with StatReloader
+INFO 2025-10-08 08:33:03,663 autoreload 25024 27152 Watching for file changes with StatReloader
+INFO 2025-10-08 08:33:06,853 basehttp 25024 33932 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 08:33:10,961 basehttp 25024 33932 "GET /dashboard/ HTTP/1.1" 200 39824
+INFO 2025-10-08 08:33:19,375 basehttp 25024 33932 "GET /dashboard/reviews/ HTTP/1.1" 200 169534
+INFO 2025-10-08 08:33:34,742 basehttp 25024 33932 "GET /dashboard/ HTTP/1.1" 200 39824
+INFO 2025-10-08 08:33:43,022 basehttp 25024 33932 "GET /dashboard/reviews/ HTTP/1.1" 200 169534
+INFO 2025-10-08 08:33:55,613 basehttp 25024 27964 "GET /dashboard/analytics/?id=33851bd1-6407-423e-82a8-15bf2cee97f5&vscodeBrowserReqId=1759892629029 HTTP/1.1" 200 112147
+INFO 2025-10-08 08:52:00,892 autoreload 2396 36584 Watching for file changes with StatReloader
+INFO 2025-10-08 08:52:09,529 autoreload 8660 16400 Watching for file changes with StatReloader
+INFO 2025-10-08 08:52:13,800 basehttp 8660 10324 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 08:52:16,837 basehttp 8660 10324 "GET /dashboard/ HTTP/1.1" 200 31038
+INFO 2025-10-08 08:52:20,957 basehttp 8660 10324 "GET /dashboard/reviews/ HTTP/1.1" 200 41307
+INFO 2025-10-08 08:52:28,298 basehttp 8660 10324 "GET /dashboard/analytics/ HTTP/1.1" 200 99845
+INFO 2025-10-08 08:52:28,837 basehttp 8660 10324 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 314
+INFO 2025-10-08 08:52:39,294 basehttp 8660 10324 "GET /dashboard/upload/ HTTP/1.1" 200 52466
+INFO 2025-10-08 08:52:50,607 basehttp 8660 10324 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-10-08 08:52:56,193 basehttp 8660 10324 "GET /dashboard/ HTTP/1.1" 200 39729
+INFO 2025-10-08 08:53:06,914 orchestrator 8660 10324 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 08:53:06,917 orchestrator 8660 10324 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 08:53:06,917 orchestrator 8660 10324 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 08:53:06,917 orchestrator 8660 10324 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 08:53:07,039 views 8660 10324 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 5 reviews
+INFO 2025-10-08 08:53:07,432 orchestrator 8660 10324 [STAGE 1] Processing review 0e0b7e0a-c93c-45b6-8110-9aff7b790433
+INFO 2025-10-08 08:53:15,585 orchestrator 8660 10324 [COMPLETED] Single review workflow completed in 8.15s
+INFO 2025-10-08 08:53:15,703 orchestrator 8660 10324 [STAGE 1] Processing review 5194693b-a4b0-4cfa-9bb6-1ce2e97ee618
+INFO 2025-10-08 08:53:17,994 orchestrator 8660 10324 [COMPLETED] Single review workflow completed in 2.29s
+INFO 2025-10-08 08:53:18,113 orchestrator 8660 10324 [STAGE 1] Processing review 86a8b58b-2cf1-4f3d-b552-ac70158de97c
+INFO 2025-10-08 08:53:19,966 orchestrator 8660 10324 [COMPLETED] Single review workflow completed in 1.85s
+INFO 2025-10-08 08:53:20,076 orchestrator 8660 10324 [STAGE 1] Processing review 0e14949e-0d46-4988-81d8-023b271a2a3f
+INFO 2025-10-08 08:53:22,307 orchestrator 8660 10324 [COMPLETED] Single review workflow completed in 2.23s
+INFO 2025-10-08 08:53:22,529 orchestrator 8660 10324 [STAGE 1] Processing review 24cdea22-6c2e-4903-88ad-346ddcbc05e6
+INFO 2025-10-08 08:53:24,376 orchestrator 8660 10324 [COMPLETED] Single review workflow completed in 1.85s
+INFO 2025-10-08 08:53:24,789 basehttp 8660 10324 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-10-08 08:53:30,995 basehttp 8660 10324 "GET /dashboard/ HTTP/1.1" 200 39775
+INFO 2025-10-08 08:53:46,493 basehttp 8660 10324 "GET /dashboard/reviews/ HTTP/1.1" 200 72907
+INFO 2025-10-08 08:54:03,067 basehttp 8660 10324 "GET /dashboard/analytics/ HTTP/1.1" 200 112141
+INFO 2025-10-08 08:54:03,556 basehttp 8660 10324 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 342
+INFO 2025-10-08 08:54:12,111 views 8660 10324 [STAGE 2] Generating analytics for 5 reviews
+INFO 2025-10-08 08:54:12,114 orchestrator 8660 10324 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 08:54:12,117 orchestrator 8660 10324 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 08:54:12,117 orchestrator 8660 10324 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 08:54:12,118 orchestrator 8660 10324 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 08:54:12,118 orchestrator 8660 10324 [STAGE 2] Generating tags analysis for 5 reviews
+INFO 2025-10-08 08:54:12,119 agent 8660 10324 Gemini model initialized successfully for summarization
+INFO 2025-10-08 08:54:12,121 orchestrator 8660 10324 [STAGE 2] Summarizer Agent initialized
+INFO 2025-10-08 08:54:12,121 agent 8660 10324 Gemini model initialized successfully for tags generation
+INFO 2025-10-08 08:54:12,122 agent 8660 10324 [OK] Tags Generator Agent initialized
+INFO 2025-10-08 08:54:12,122 orchestrator 8660 10324 [STAGE 2] Tags Generator Agent initialized
+INFO 2025-10-08 08:54:12,122 agent 8660 10324 Gemini model initialized successfully for recommendations generation
+INFO 2025-10-08 08:54:12,123 agent 8660 10324 [OK] Recommendations Agent initialized
+INFO 2025-10-08 08:54:12,123 orchestrator 8660 10324 [STAGE 2] Recommendations Agent initialized
+INFO 2025-10-08 08:54:12,123 orchestrator 8660 10324 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 08:54:15,627 agent 8660 10324 AI tags generation completed successfully
+INFO 2025-10-08 08:54:15,627 agent 8660 10324 Tags generation completed for 5 reviews
+INFO 2025-10-08 08:54:15,628 orchestrator 8660 10324 [STAGE 2] Tags analysis completed successfully
+INFO 2025-10-08 08:54:15,628 orchestrator 8660 10324 [STAGE 2] Generating business recommendations for 5 reviews
+INFO 2025-10-08 08:54:15,628 orchestrator 8660 10324 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 08:54:15,628 agent 8660 10324 Generating AI recommendations for 5 reviews
+ERROR 2025-10-08 08:54:15,877 agent 8660 10324 Failed to generate AI recommendations: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 43.960595967s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 43
+}
+]
+ERROR 2025-10-08 08:54:15,878 agent 8660 10324 Exception type: ResourceExhausted
+ERROR 2025-10-08 08:54:15,956 agent 8660 10324 Traceback: Traceback (most recent call last):
+  File "E:\ish\multiagent-review-sentiment-ai\agents\recommender\agent.py", line 80, in generate_recommendations
+    response = self.model.generate_content(prompt)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\generativeai\generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+        request,
+        **request_options,
+    )
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\ai\generativelanguage_v1beta\services\generative_service\client.py", line 835, in generate_content
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 43.960595967s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 43
+}
+]
+
+WARNING 2025-10-08 08:54:15,957 agent 8660 10324 Using fallback recommendations instead of AI-generated ones
+INFO 2025-10-08 08:54:15,957 orchestrator 8660 10324 [STAGE 2] Business recommendations generated successfully
+INFO 2025-10-08 08:54:15,957 orchestrator 8660 10324 [STAGE 2] Generating executive summary for 5 reviews
+INFO 2025-10-08 08:54:15,958 orchestrator 8660 10324 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 08:54:15,958 agent 8660 10324 Starting AI-powered summarization for 5 reviews
+INFO 2025-10-08 08:54:15,959 agent 8660 10324 Gemini model initialized successfully for summarization
+ERROR 2025-10-08 08:54:16,602 agent 8660 10324 Gemini summarization failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 43.229956579s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 43
+}
+]
+INFO 2025-10-08 08:54:16,603 agent 8660 10324 AI summarization completed successfully for 5 reviews
+INFO 2025-10-08 08:54:16,603 orchestrator 8660 10324 [STAGE 2] Executive summary generated successfully
+INFO 2025-10-08 08:54:16,603 views 8660 10324 Complete AI analysis generated successfully
+INFO 2025-10-08 08:54:16,605 basehttp 8660 10324 "POST /api/v1/ai-analysis/ HTTP/1.1" 200 1896
+INFO 2025-10-08 08:55:51,143 basehttp 8660 10324 "GET /dashboard/analytics/ HTTP/1.1" 200 112141
+INFO 2025-10-08 08:55:51,702 basehttp 8660 10324 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 342
+INFO 2025-10-08 08:55:54,011 views 8660 10324 [STAGE 2] Generating analytics for 5 reviews
+INFO 2025-10-08 08:55:54,014 orchestrator 8660 10324 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 08:55:54,015 orchestrator 8660 10324 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 08:55:54,016 orchestrator 8660 10324 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 08:55:54,016 orchestrator 8660 10324 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 08:55:54,016 orchestrator 8660 10324 [STAGE 2] Generating tags analysis for 5 reviews
+INFO 2025-10-08 08:55:54,017 agent 8660 10324 Gemini model initialized successfully for summarization
+INFO 2025-10-08 08:55:54,018 orchestrator 8660 10324 [STAGE 2] Summarizer Agent initialized
+INFO 2025-10-08 08:55:54,018 agent 8660 10324 Gemini model initialized successfully for tags generation
+INFO 2025-10-08 08:55:54,018 agent 8660 10324 [OK] Tags Generator Agent initialized
+INFO 2025-10-08 08:55:54,019 orchestrator 8660 10324 [STAGE 2] Tags Generator Agent initialized
+INFO 2025-10-08 08:55:54,019 agent 8660 10324 Gemini model initialized successfully for recommendations generation
+INFO 2025-10-08 08:55:54,019 agent 8660 10324 [OK] Recommendations Agent initialized
+INFO 2025-10-08 08:55:54,019 orchestrator 8660 10324 [STAGE 2] Recommendations Agent initialized
+INFO 2025-10-08 08:55:54,020 orchestrator 8660 10324 [STAGE 2] All analytics agents ready
+ERROR 2025-10-08 08:55:54,891 agent 8660 10324 Error in AI tags generation: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 5.067630194s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 5
+}
+]
+INFO 2025-10-08 08:55:54,891 agent 8660 10324 Tags generation completed for 5 reviews
+INFO 2025-10-08 08:55:54,892 orchestrator 8660 10324 [STAGE 2] Tags analysis completed successfully
+INFO 2025-10-08 08:55:54,892 orchestrator 8660 10324 [STAGE 2] Generating business recommendations for 5 reviews
+INFO 2025-10-08 08:55:54,892 orchestrator 8660 10324 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 08:55:54,893 agent 8660 10324 Generating AI recommendations for 5 reviews
+ERROR 2025-10-08 08:55:55,212 agent 8660 10324 Failed to generate AI recommendations: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 4.695336129s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 4
+}
+]
+ERROR 2025-10-08 08:55:55,213 agent 8660 10324 Exception type: ResourceExhausted
+ERROR 2025-10-08 08:55:55,216 agent 8660 10324 Traceback: Traceback (most recent call last):
+  File "E:\ish\multiagent-review-sentiment-ai\agents\recommender\agent.py", line 80, in generate_recommendations
+    response = self.model.generate_content(prompt)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\generativeai\generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+        request,
+        **request_options,
+    )
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\ai\generativelanguage_v1beta\services\generative_service\client.py", line 835, in generate_content
+    response = rpc(
+        request,
+    ...<2 lines>...
+        metadata=metadata,
+    )
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\gapic_v1\method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 294, in retry_wrapped_func
+    return retry_target(
+        target,
+    ...<3 lines>...
+        on_error=on_error,
+    )
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 156, in retry_target
+    next_sleep = _retry_error_helper(
+        exc,
+    ...<6 lines>...
+        timeout,
+    )
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\retry\retry_base.py", line 214, in _retry_error_helper
+    raise final_exc from source_exc
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\retry\retry_unary.py", line 147, in retry_target
+    result = target()
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\timeout.py", line 130, in func_with_timeout
+    return func(*args, **kwargs)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\google\api_core\grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ResourceExhausted: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 4.695336129s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 4
+}
+]
+
+WARNING 2025-10-08 08:55:55,217 agent 8660 10324 Using fallback recommendations instead of AI-generated ones
+INFO 2025-10-08 08:55:55,217 orchestrator 8660 10324 [STAGE 2] Business recommendations generated successfully
+INFO 2025-10-08 08:55:55,217 orchestrator 8660 10324 [STAGE 2] Generating executive summary for 5 reviews
+INFO 2025-10-08 08:55:55,218 orchestrator 8660 10324 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 08:55:55,218 agent 8660 10324 Starting AI-powered summarization for 5 reviews
+INFO 2025-10-08 08:55:55,219 agent 8660 10324 Gemini model initialized successfully for summarization
+ERROR 2025-10-08 08:55:55,759 agent 8660 10324 Gemini summarization failed: 429 You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits.
+* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 50
+Please retry in 4.086131993s. [violations {
+  quota_metric: "generativelanguage.googleapis.com/generate_content_free_tier_requests"
+  quota_id: "GenerateRequestsPerDayPerProjectPerModel-FreeTier"
+  quota_dimensions {
+    key: "model"
+    value: "gemini-2.0-flash-exp"
+  }
+  quota_dimensions {
+    key: "location"
+    value: "global"
+  }
+  quota_value: 50
+}
+, links {
+  description: "Learn more about Gemini API quotas"
+  url: "https://ai.google.dev/gemini-api/docs/rate-limits"
+}
+, retry_delay {
+  seconds: 4
+}
+]
+INFO 2025-10-08 08:55:55,759 agent 8660 10324 AI summarization completed successfully for 5 reviews
+INFO 2025-10-08 08:55:55,760 orchestrator 8660 10324 [STAGE 2] Executive summary generated successfully
+INFO 2025-10-08 08:55:55,760 views 8660 10324 Complete AI analysis generated successfully
+INFO 2025-10-08 08:55:55,761 basehttp 8660 10324 "POST /api/v1/ai-analysis/ HTTP/1.1" 200 1598
+INFO 2025-10-08 08:56:12,963 autoreload 7760 16816 Watching for file changes with StatReloader
+INFO 2025-10-08 08:56:15,917 basehttp 7760 36464 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 08:56:20,232 basehttp 7760 36464 "GET /dashboard/ HTTP/1.1" 200 39775
+INFO 2025-10-08 08:56:29,216 basehttp 7760 36464 "GET /dashboard/analytics/ HTTP/1.1" 200 112141
+INFO 2025-10-08 08:56:29,773 basehttp 7760 36464 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 342
+INFO 2025-10-08 08:56:37,484 views 7760 36464 [STAGE 2] Generating analytics for 5 reviews
+INFO 2025-10-08 08:56:37,488 orchestrator 7760 36464 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 08:56:37,490 orchestrator 7760 36464 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 08:56:37,490 orchestrator 7760 36464 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 08:56:37,490 orchestrator 7760 36464 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 08:56:37,490 orchestrator 7760 36464 [STAGE 2] Generating tags analysis for 5 reviews
+INFO 2025-10-08 08:56:37,491 agent 7760 36464 Gemini model initialized successfully for summarization
+INFO 2025-10-08 08:56:37,492 orchestrator 7760 36464 [STAGE 2] Summarizer Agent initialized
+INFO 2025-10-08 08:56:37,492 agent 7760 36464 Gemini model initialized successfully for tags generation
+INFO 2025-10-08 08:56:37,493 agent 7760 36464 [OK] Tags Generator Agent initialized
+INFO 2025-10-08 08:56:37,493 orchestrator 7760 36464 [STAGE 2] Tags Generator Agent initialized
+INFO 2025-10-08 08:56:37,493 agent 7760 36464 Gemini model initialized successfully for recommendations generation
+INFO 2025-10-08 08:56:37,493 agent 7760 36464 [OK] Recommendations Agent initialized
+INFO 2025-10-08 08:56:37,493 orchestrator 7760 36464 [STAGE 2] Recommendations Agent initialized
+INFO 2025-10-08 08:56:37,494 orchestrator 7760 36464 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 08:56:40,966 agent 7760 36464 AI tags generation completed successfully
+INFO 2025-10-08 08:56:40,966 agent 7760 36464 Tags generation completed for 5 reviews
+INFO 2025-10-08 08:56:40,967 orchestrator 7760 36464 [STAGE 2] Tags analysis completed successfully
+INFO 2025-10-08 08:56:40,967 orchestrator 7760 36464 [STAGE 2] Generating business recommendations for 5 reviews
+INFO 2025-10-08 08:56:40,967 orchestrator 7760 36464 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 08:56:40,968 agent 7760 36464 Generating AI recommendations for 5 reviews
+INFO 2025-10-08 08:56:42,412 agent 7760 36464 AI recommendations generated successfully
+INFO 2025-10-08 08:56:42,412 orchestrator 7760 36464 [STAGE 2] Business recommendations generated successfully
+INFO 2025-10-08 08:56:42,413 orchestrator 7760 36464 [STAGE 2] Generating executive summary for 5 reviews
+INFO 2025-10-08 08:56:42,413 orchestrator 7760 36464 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 08:56:42,414 agent 7760 36464 Starting AI-powered summarization for 5 reviews
+INFO 2025-10-08 08:56:42,416 agent 7760 36464 Gemini model initialized successfully for summarization
+INFO 2025-10-08 08:56:45,452 agent 7760 36464 AI summarization completed successfully for 5 reviews
+INFO 2025-10-08 08:56:45,453 orchestrator 7760 36464 [STAGE 2] Executive summary generated successfully
+INFO 2025-10-08 08:56:45,453 views 7760 36464 Complete AI analysis generated successfully
+INFO 2025-10-08 08:56:45,456 basehttp 7760 36464 "POST /api/v1/ai-analysis/ HTTP/1.1" 200 3852
+INFO 2025-10-08 08:56:57,442 basehttp 7760 36464 "GET /dashboard/analytics/ HTTP/1.1" 200 112141
+INFO 2025-10-08 08:56:57,955 basehttp 7760 36464 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 342
+INFO 2025-10-08 08:57:09,930 autoreload 7760 16816 E:\ish\multiagent-review-sentiment-ai\apps\reviews\admin.py changed, reloading.
+INFO 2025-10-08 08:57:13,170 autoreload 34536 29184 Watching for file changes with StatReloader
+INFO 2025-10-08 09:01:49,899 autoreload 34536 29184 E:\ish\multiagent-review-sentiment-ai\apps\reviews\models.py changed, reloading.
+INFO 2025-10-08 09:01:50,519 autoreload 37732 22672 Watching for file changes with StatReloader
+INFO 2025-10-08 09:01:58,003 autoreload 37732 22672 E:\ish\multiagent-review-sentiment-ai\apps\reviews\admin.py changed, reloading.
+INFO 2025-10-08 09:01:58,639 autoreload 28348 31208 Watching for file changes with StatReloader
+INFO 2025-10-08 09:02:11,294 autoreload 28348 31208 E:\ish\multiagent-review-sentiment-ai\apps\reviews\admin.py changed, reloading.
+INFO 2025-10-08 09:02:11,888 autoreload 22652 11868 Watching for file changes with StatReloader
+INFO 2025-10-08 09:02:27,651 autoreload 22652 11868 E:\ish\multiagent-review-sentiment-ai\apps\api\views.py changed, reloading.
+INFO 2025-10-08 09:02:28,256 autoreload 34584 6268 Watching for file changes with StatReloader
+INFO 2025-10-08 09:02:43,035 autoreload 34584 6268 E:\ish\multiagent-review-sentiment-ai\apps\api\views.py changed, reloading.
+INFO 2025-10-08 09:02:43,610 autoreload 24364 17584 Watching for file changes with StatReloader
+INFO 2025-10-08 09:03:00,495 autoreload 24364 17584 E:\ish\multiagent-review-sentiment-ai\apps\api\views.py changed, reloading.
+INFO 2025-10-08 09:03:01,075 autoreload 35136 13776 Watching for file changes with StatReloader
+INFO 2025-10-08 09:03:08,438 autoreload 35136 13776 E:\ish\multiagent-review-sentiment-ai\apps\api\serializers.py changed, reloading.
+INFO 2025-10-08 09:03:09,059 autoreload 39928 26120 Watching for file changes with StatReloader
+INFO 2025-10-08 09:03:18,745 autoreload 39928 26120 E:\ish\multiagent-review-sentiment-ai\apps\api\serializers.py changed, reloading.
+INFO 2025-10-08 09:03:19,404 autoreload 13648 11312 Watching for file changes with StatReloader
+INFO 2025-10-08 09:06:22,258 autoreload 33240 35632 Watching for file changes with StatReloader
+INFO 2025-10-08 09:06:31,828 autoreload 35956 8024 Watching for file changes with StatReloader
+INFO 2025-10-08 09:06:35,389 basehttp 35956 7520 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 09:06:39,178 basehttp 35956 7520 "GET /dashboard/ HTTP/1.1" 200 39776
+INFO 2025-10-08 09:06:46,914 basehttp 35956 7520 "GET /dashboard/analytics/ HTTP/1.1" 200 112141
+INFO 2025-10-08 09:06:47,067 basehttp 35956 7520 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 150
+INFO 2025-10-08 09:07:03,063 views 35956 7520 [STAGE 2] Generating analytics for 5 reviews
+INFO 2025-10-08 09:07:03,068 orchestrator 35956 7520 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 09:07:03,071 orchestrator 35956 7520 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 09:07:03,071 orchestrator 35956 7520 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 09:07:03,071 orchestrator 35956 7520 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 09:07:03,071 orchestrator 35956 7520 [STAGE 2] Generating tags analysis for 5 reviews
+INFO 2025-10-08 09:07:03,072 agent 35956 7520 Gemini model initialized successfully for summarization
+INFO 2025-10-08 09:07:03,075 orchestrator 35956 7520 [STAGE 2] Summarizer Agent initialized
+INFO 2025-10-08 09:07:03,075 agent 35956 7520 Gemini model initialized successfully for tags generation
+INFO 2025-10-08 09:07:03,075 agent 35956 7520 [OK] Tags Generator Agent initialized
+INFO 2025-10-08 09:07:03,075 orchestrator 35956 7520 [STAGE 2] Tags Generator Agent initialized
+INFO 2025-10-08 09:07:03,075 agent 35956 7520 Gemini model initialized successfully for recommendations generation
+INFO 2025-10-08 09:07:03,076 agent 35956 7520 [OK] Recommendations Agent initialized
+INFO 2025-10-08 09:07:03,076 orchestrator 35956 7520 [STAGE 2] Recommendations Agent initialized
+INFO 2025-10-08 09:07:03,076 orchestrator 35956 7520 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 09:07:07,053 agent 35956 7520 AI tags generation completed successfully
+INFO 2025-10-08 09:07:07,053 agent 35956 7520 Tags generation completed for 5 reviews
+INFO 2025-10-08 09:07:07,053 orchestrator 35956 7520 [STAGE 2] Tags analysis completed successfully
+INFO 2025-10-08 09:07:07,053 orchestrator 35956 7520 [STAGE 2] Generating business recommendations for 5 reviews
+INFO 2025-10-08 09:07:07,053 orchestrator 35956 7520 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 09:07:07,054 agent 35956 7520 Generating AI recommendations for 5 reviews
+INFO 2025-10-08 09:07:08,814 agent 35956 7520 AI recommendations generated successfully
+INFO 2025-10-08 09:07:08,815 orchestrator 35956 7520 [STAGE 2] Business recommendations generated successfully
+INFO 2025-10-08 09:07:08,815 orchestrator 35956 7520 [STAGE 2] Generating executive summary for 5 reviews
+INFO 2025-10-08 09:07:08,816 orchestrator 35956 7520 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 09:07:08,816 agent 35956 7520 Starting AI-powered summarization for 5 reviews
+INFO 2025-10-08 09:07:08,817 agent 35956 7520 Gemini model initialized successfully for summarization
+INFO 2025-10-08 09:07:12,090 agent 35956 7520 AI summarization completed successfully for 5 reviews
+INFO 2025-10-08 09:07:12,090 orchestrator 35956 7520 [STAGE 2] Executive summary generated successfully
+INFO 2025-10-08 09:07:12,376 views 35956 7520 AI analysis saved to database with ID: a63dbe35-4cc5-4fe5-98e9-9dd78939ccb7
+INFO 2025-10-08 09:07:12,377 views 35956 7520 Complete AI analysis generated successfully
+INFO 2025-10-08 09:07:12,378 basehttp 35956 7520 "POST /api/v1/ai-analysis/ HTTP/1.1" 200 4449
+INFO 2025-10-08 09:07:23,974 basehttp 35956 7520 "GET /dashboard/analytics/ HTTP/1.1" 200 112141
+INFO 2025-10-08 09:07:24,121 views 35956 7520 Retrieved persisted AI analysis: a63dbe35-4cc5-4fe5-98e9-9dd78939ccb7
+INFO 2025-10-08 09:07:24,122 basehttp 35956 7520 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5386
+INFO 2025-10-08 09:08:56,358 autoreload 18588 32652 Watching for file changes with StatReloader
+INFO 2025-10-08 09:09:01,690 basehttp 18588 39616 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 09:09:06,280 basehttp 18588 39616 "GET /dashboard/ HTTP/1.1" 200 39776
+INFO 2025-10-08 09:09:23,280 basehttp 18588 39616 "GET /dashboard/analytics/ HTTP/1.1" 200 112141
+INFO 2025-10-08 09:09:23,929 views 18588 39616 Retrieved persisted AI analysis: a63dbe35-4cc5-4fe5-98e9-9dd78939ccb7
+INFO 2025-10-08 09:09:23,931 basehttp 18588 39616 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5386
+INFO 2025-10-08 09:47:41,916 autoreload 18588 32652 E:\ish\multiagent-review-sentiment-ai\apps\reviews\models.py changed, reloading.
+INFO 2025-10-08 09:47:42,530 autoreload 16992 33192 Watching for file changes with StatReloader
+INFO 2025-10-08 09:48:11,908 autoreload 37556 16324 Watching for file changes with StatReloader
+INFO 2025-10-08 09:48:14,883 basehttp 37556 13948 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 09:48:18,929 basehttp 37556 13948 "GET /dashboard/ HTTP/1.1" 200 39776
+INFO 2025-10-08 09:48:18,951 basehttp 37556 13948 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-10-08 09:52:36,940 autoreload 21888 30940 Watching for file changes with StatReloader
+INFO 2025-10-08 09:52:40,066 basehttp 21888 29764 "GET / HTTP/1.1" 302 0
+INFO 2025-10-08 09:52:43,858 basehttp 21888 29764 "GET /dashboard/ HTTP/1.1" 200 39772
+INFO 2025-10-08 09:52:49,003 basehttp 21888 29764 "GET /dashboard/reviews/ HTTP/1.1" 200 72907
+INFO 2025-10-08 09:52:57,556 basehttp 21888 29764 "GET /dashboard/analytics/ HTTP/1.1" 200 112141
+INFO 2025-10-08 09:52:57,719 views 21888 29764 Retrieved persisted AI analysis: a63dbe35-4cc5-4fe5-98e9-9dd78939ccb7
+INFO 2025-10-08 09:52:57,720 basehttp 21888 29764 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5386
+INFO 2025-10-08 09:53:10,736 basehttp 21888 29764 "GET /dashboard/ HTTP/1.1" 200 39772
+INFO 2025-10-08 09:53:13,178 basehttp 21888 29764 "GET /dashboard/upload/ HTTP/1.1" 200 54006
+INFO 2025-10-08 09:53:20,100 basehttp 21888 29764 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-10-08 09:53:24,136 basehttp 21888 29764 "GET /dashboard/ HTTP/1.1" 200 40573
+INFO 2025-10-08 09:53:34,955 orchestrator 21888 29764 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 09:53:34,958 orchestrator 21888 29764 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 09:53:34,958 orchestrator 21888 29764 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 09:53:34,959 orchestrator 21888 29764 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 09:53:35,068 views 21888 29764 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 5 reviews
+INFO 2025-10-08 09:53:35,455 orchestrator 21888 29764 [STAGE 1] Processing review 074211ae-06a3-4fa8-98bf-d533a7ee718e
+INFO 2025-10-08 09:53:37,837 orchestrator 21888 29764 [COMPLETED] Single review workflow completed in 2.38s
+INFO 2025-10-08 09:53:37,954 orchestrator 21888 29764 [STAGE 1] Processing review 39f9cf26-328f-48ed-a865-94192094f3cd
+INFO 2025-10-08 09:53:39,836 orchestrator 21888 29764 [COMPLETED] Single review workflow completed in 1.88s
+INFO 2025-10-08 09:53:39,950 orchestrator 21888 29764 [STAGE 1] Processing review 27834791-b791-4b63-8949-19cd23ba9403
+INFO 2025-10-08 09:53:41,757 orchestrator 21888 29764 [COMPLETED] Single review workflow completed in 1.81s
+INFO 2025-10-08 09:53:41,874 orchestrator 21888 29764 [STAGE 1] Processing review cd165498-972c-4603-8102-059a73215d7c
+INFO 2025-10-08 09:53:43,996 orchestrator 21888 29764 [COMPLETED] Single review workflow completed in 2.12s
+INFO 2025-10-08 09:53:44,110 orchestrator 21888 29764 [STAGE 1] Processing review 067d51fd-8b64-41f0-bbbb-611e77fbb85a
+INFO 2025-10-08 09:53:45,915 orchestrator 21888 29764 [COMPLETED] Single review workflow completed in 1.81s
+INFO 2025-10-08 09:53:46,673 basehttp 21888 29764 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-10-08 09:53:52,215 basehttp 21888 29764 "GET /dashboard/ HTTP/1.1" 200 40552
+INFO 2025-10-08 09:53:57,415 basehttp 21888 29764 "GET /dashboard/reviews/ HTTP/1.1" 200 104314

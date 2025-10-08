@@ -47,22 +47,22 @@ class SentimentScoringTool(BaseTool):
             if result and len(result) > 0:
                 scores = result[0] if isinstance(result[0], list) else result
                 
-                # Calculate weighted score
+                # Calculate weighted score using direct star labels
                 total_score = 0.0
                 for item in scores:
                     label = item['label']
                     probability = item['score']
                     
-                    # Map labels to scores (1-5 scale)
-                    if 'LABEL_0' in label:  # 1 star
+                    # Map star labels to scores (1-5 scale)
+                    if '1 star' in label:
                         total_score += probability * 1.0
-                    elif 'LABEL_1' in label:  # 2 stars
+                    elif '2 stars' in label:
                         total_score += probability * 2.0
-                    elif 'LABEL_2' in label:  # 3 stars
+                    elif '3 stars' in label:
                         total_score += probability * 3.0
-                    elif 'LABEL_3' in label:  # 4 stars
+                    elif '4 stars' in label:
                         total_score += probability * 4.0
-                    elif 'LABEL_4' in label:  # 5 stars
+                    elif '5 stars' in label:
                         total_score += probability * 5.0
                 
                 final_score = max(1.0, min(5.0, total_score))

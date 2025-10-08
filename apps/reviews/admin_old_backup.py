@@ -6,7 +6,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from django.urls import reverse
 from django.utils import timezone
-from apps.reviews.models import Hotel, ReviewSource, Review, ReviewBatch, AgentTask, AIAnalysisResult
+from .models import Hotel, ReviewSource, Review, ReviewBatch
 
 
 @admin.register(Hotel)
@@ -269,114 +269,110 @@ class ReviewBatchAdmin(admin.ModelAdmin):
     success_rate_display.short_description = 'Success Rate'
 
 
+# Admin site customization
+admin.site.site_header = "Hotel Review Analytics - Admin"
+admin.site.site_title = "Review Analytics Admin"
+admin.site.index_title = "Hotel Review Management System"
+    
+    actions = ['mark_as_processed', 'mark_as_unprocessed']
+    
+    def mark_as_processed(self, request, queryset):
+        queryset.update(processed=True)
+        self.message_user(request, f'{queryset.count()} reviews marked as processed.')
+    mark_as_processed.short_description = 'Mark selected reviews as processed'
+    
+    def mark_as_unprocessed(self, request, queryset):
+        queryset.update(processed=False)
+        self.message_user(request, f'{queryset.count()} reviews marked as unprocessed.')
+    mark_as_unprocessed.short_description = 'Mark selected reviews as unprocessed'
+
+
+@admin.register(ReviewBatch)
+class ReviewBatchAdmin(admin.ModelAdmin):
+    list_display = ['file_name', 'status', 'total_reviews', 'processed_reviews', 'failed_reviews', 'upload_date', 'uploaded_by']
+    list_filter = ['status', 'upload_date', 'uploaded_by']
+    search_fields = ['file_name', 'uploaded_by__username']
+    readonly_fields = ['id', 'upload_date', 'processing_started', 'processing_completed', 'processing_progress']
+    date_hierarchy = 'upload_date'
+    
+    fieldsets = (
+        ('Batch Information', {
+            'fields': ('file_name', 'uploaded_by', 'status')
+        }),
+        ('Processing Stats', {
+            'fields': ('total_reviews', 'processed_reviews', 'failed_reviews', 'processing_progress')
+        }),
+        ('Timestamps', {
+            'fields': ('upload_date', 'processing_started', 'processing_completed')
+        }),
+        ('Errors', {
+            'fields': ('error_message',),
+            'classes': ('collapse',)
+        }),
+        ('Metadata', {
+            'fields': ('id',),
+            'classes': ('collapse',)
+        }),
+    )
+
+
+@admin.register(ReviewSummary)
+class ReviewSummaryAdmin(admin.ModelAdmin):
+    list_display = ['hotel', 'total_reviews', 'average_score', 'date_from', 'date_to', 'created_at']
+    list_filter = ['created_at', 'hotel', 'created_by_agent']
+    search_fields = ['hotel__name', 'summary_text']
+    readonly_fields = ['id', 'created_at']
+    date_hierarchy = 'created_at'
+    
+    fieldsets = (
+        ('Summary Information', {
+            'fields': ('hotel', 'total_reviews', 'average_score', 'created_by_agent')
+        }),
+        ('Date Range', {
+            'fields': ('date_from', 'date_to')
+        }),
+        ('Content', {
+            'fields': ('summary_text', 'key_positives', 'key_negatives', 'recommendations')
+        }),
+        ('Statistics', {
+            'fields': ('sentiment_distribution',)
+        }),
+        ('Metadata', {
+            'fields': ('id', 'created_at'),
+            'classes': ('collapse',)
+        }),
+    )
+
+
+@admin.register(SearchQuery)
+class SearchQueryAdmin(admin.ModelAdmin):
+    list_display = ['query_text', 'search_type', 'results_count', 'user', 'created_at']
+    list_filter = ['search_type', 'created_at', 'user']
+    search_fields = ['query_text']
+    readonly_fields = ['created_at']
+    date_hierarchy = 'created_at'
+
+
 @admin.register(AgentTask)
 class AgentTaskAdmin(admin.ModelAdmin):
-    """Agent task monitoring interface"""
-    
-    list_display = [
-        'agent_name', 'task_type', 'status_badge', 
-        'duration_display', 'created_at'
-    ]
-    list_filter = ['status', 'agent_name', 'task_type', 'created_at']
+    list_display = ['agent_name', 'task_type', 'status', 'created_at', 'started_at', 'completed_at']
+    list_filter = ['agent_name', 'task_type', 'status', 'created_at']
     search_fields = ['agent_name', 'task_type']
-    readonly_fields = [
-        'id', 'created_at', 'started_at', 'completed_at'
-    ]
+    readonly_fields = ['id', 'created_at', 'started_at', 'completed_at']
+    date_hierarchy = 'created_at'
     
     fieldsets = (
         ('Task Information', {
             'fields': ('agent_name', 'task_type', 'status')
         }),
         ('Task Data', {
-            'fields': ('input_data', 'output_data'),
-            'classes': ('collapse',)
+            'fields': ('input_data', 'output_data', 'error_message')
         }),
-        ('Error Information', {
-            'fields': ('error_message',),
-            'classes': ('collapse',)
+        ('Timing', {
+            'fields': ('created_at', 'started_at', 'completed_at')
         }),
-        ('Timestamps', {
-            'fields': ('created_at', 'started_at', 'completed_at'),
-            'classes': ('collapse',)
-        }),
-        ('System Metadata', {
+        ('Metadata', {
             'fields': ('id',),
             'classes': ('collapse',)
         }),
     )
-    
-    def status_badge(self, obj):
-        colors = {
-            'pending': '#6c757d',
-            'running': '#007bff',
-            'completed': '#28a745',
-            'failed': '#dc3545'
-        }
-        color = colors.get(obj.status, '#6c757d')
-        return format_html(
-            '<span style="background-color: {}; color: white; padding: 2px 8px; '
-            'border-radius: 12px; font-size: 11px;">{}</span>',
-            color, obj.status.title()
-        )
-    status_badge.short_description = 'Status'
-    
-    def duration_display(self, obj):
-        if obj.completed_at and obj.started_at:
-            duration = obj.completed_at - obj.started_at
-            return f"{duration.total_seconds():.1f}s"
-        elif obj.started_at:
-            from django.utils import timezone
-            duration = timezone.now() - obj.started_at
-            return f"{duration.total_seconds():.1f}s (running)"
-        return "Not started"
-    duration_display.short_description = 'Duration'
-
-
-@admin.register(AIAnalysisResult)
-class AIAnalysisResultAdmin(admin.ModelAdmin):
-    """AI Analysis Results management interface"""
-    
-    list_display = [
-        'analysis_type', 'hotel_display', 'total_reviews_analyzed',
-        'days_analyzed', 'is_active', 'created_at'
-    ]
-    list_filter = ['analysis_type', 'is_active', 'created_at', 'days_analyzed']
-    search_fields = ['hotel__name']
-    readonly_fields = [
-        'id', 'created_at', 'updated_at'
-    ]
-    
-    fieldsets = (
-        ('Analysis Information', {
-            'fields': ('analysis_type', 'hotel', 'is_active')
-        }),
-        ('Analysis Parameters', {
-            'fields': ('days_analyzed', 'date_range_start', 'date_range_end', 'total_reviews_analyzed')
-        }),
-        ('AI Results', {
-            'fields': ('summary_data', 'sentiment_analysis', 'tags_analysis', 'recommendations'),
-            'classes': ('collapse',)
-        }),
-        ('System Information', {
-            'fields': ('agents_used', 'workflow_info'),
-            'classes': ('collapse',)
-        }),
-        ('Timestamps', {
-            'fields': ('created_at', 'updated_at'),
-            'classes': ('collapse',)
-        }),
-        ('System Metadata', {
-            'fields': ('id',),
-            'classes': ('collapse',)
-        }),
-    )
-    
-    def hotel_display(self, obj):
-        return obj.hotel.name if obj.hotel else "All Hotels"
-    hotel_display.short_description = 'Hotel'
-
-
-# Admin site customization
-admin.site.site_header = "Hotel Review Analytics - Admin"
-admin.site.site_title = "Review Analytics Admin"
-admin.site.index_title = "Hotel Review Management System"

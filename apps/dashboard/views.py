@@ -15,10 +15,8 @@ import json
 import pandas as pd
 import io
 
-from apps.reviews.models import Review, Hotel, ReviewBatch, ReviewSummary
-from apps.analytics.models import SentimentTrend, AnalyticsReport
+from apps.reviews.models import Review, Hotel, ReviewBatch
 from utils.file_processor import ReviewFileProcessor
-from utils.chart_generator import ChartGenerator
 
 
 def dashboard_home(request):
@@ -363,43 +361,32 @@ def analytics_overview(request):
 @csrf_exempt
 @require_http_methods(["POST"])
 def search_reviews(request):
-    """AJAX endpoint for searching reviews"""
+    """AJAX endpoint for searching reviews (simplified)"""
     try:
         data = json.loads(request.body)
         query = data.get('query', '')
-        search_type = data.get('type', 'semantic')
+        search_type = data.get('type', 'keyword')
         
-        # Initialize search agent (simplified for now)
-        from agents.search.agent import InformationRetrievalAgent
-        
-        search_agent = InformationRetrievalAgent()
-        
-        # Get all reviews for search
-        reviews = Review.objects.all().values(
-            'id', 'text', 'sentiment', 'ai_score', 'hotel__name'
-        )
-        
-        # Index reviews
-        review_list = [
-            {
-                'id': str(r['id']),
-                'text': r['text'],
-                'sentiment': r['sentiment'],
-                'score': r['ai_score'],
-                'hotel': r['hotel__name']
-            }
-            for r in reviews
-        ]
-        
-        search_agent.index_reviews(review_list)
-        
-        # Perform search
-        if search_type == 'semantic':
-            results = search_agent.semantic_search(query, top_k=20)
-        elif search_type == 'keyword':
-            results = search_agent.keyword_search(query)
+        # Simple keyword search in review text
+        if query:
+            reviews = Review.objects.filter(
+                Q(text__icontains=query) | Q(title__icontains=query)
+            ).values(
+                'id', 'text', 'sentiment', 'ai_score', 'hotel__name'
+            )[:20]
+            
+            results = [
+                {
+                    'id': str(r['id']),
+                    'text': r['text'][:200] + '...' if len(r['text']) > 200 else r['text'],
+                    'sentiment': r['sentiment'],
+                    'score': r['ai_score'],
+                    'hotel': r['hotel__name']
+                }
+                for r in reviews
+            ]
         else:
-            results = search_agent.filter_reviews(query)
+            results = []
         
         return JsonResponse({
             'success': True,
@@ -457,11 +444,11 @@ def export_data(request):
 
 
 def generate_report(request):
-    """Generate analytics report"""
+    """Generate analytics report (simplified for professional database)"""
     if request.method == 'POST':
         report_type = request.POST.get('report_type', 'weekly')
         hotel_id = request.POST.get('hotel')
-        format_type = request.POST.get('format', 'pdf')
+        format_type = request.POST.get('format', 'csv')
         
         try:
             # Date range based on report type
@@ -475,36 +462,53 @@ def generate_report(request):
             else:
                 start_date = end_date - timedelta(days=7)
             
-            # Create report
-            report = AnalyticsReport.objects.create(
-                title=f'{report_type.title()} Report',
-                report_type=report_type,
-                hotel_id=hotel_id,
-                format=format_type,
-                date_from=start_date,
-                date_to=end_date,
-                generated_by=request.user if request.user.is_authenticated else None
+            # Get filtered reviews
+            reviews = Review.objects.filter(
+                created_at__gte=start_date,
+                created_at__lte=end_date
             )
             
-            # Generate report data (simplified)
-            report_data = {
-                'title': report.title,
-                'period': f"{start_date.date()} to {end_date.date()}",
-                'total_reviews': Review.objects.filter(
-                    created_at__gte=start_date,
-                    created_at__lte=end_date
-                ).count(),
-                'avg_score': Review.objects.filter(
-                    created_at__gte=start_date,
-                    created_at__lte=end_date
-                ).aggregate(avg=Avg('ai_score'))['avg'] or 0,
-            }
+            if hotel_id:
+                reviews = reviews.filter(hotel_id=hotel_id)
+                hotel = get_object_or_404(Hotel, id=hotel_id)
+                hotel_name = hotel.name
+            else:
+                hotel_name = "All Hotels"
             
-            report.data = report_data
-            report.save()
+            # Generate report data
+            total_reviews = reviews.count()
+            sentiment_stats = reviews.values('sentiment').annotate(count=Count('sentiment'))
+            avg_score = reviews.aggregate(avg=Avg('ai_score'))['avg'] or 0
             
-            messages.success(request, 'Report generated successfully')
-            return redirect('dashboard:report_detail', report_id=report.id)
+            # Generate downloadable report
+            if format_type == 'csv':
+                response = HttpResponse(content_type='text/csv')
+                response['Content-Disposition'] = f'attachment; filename="{report_type}_report_{timezone.now().date()}.csv"'
+                
+                # Convert to DataFrame and export
+                data = reviews.values(
+                    'hotel__name', 'text', 'sentiment', 'ai_score',
+                    'original_rating', 'date_posted', 'reviewer_name', 'created_at'
+                )
+                
+                df = pd.DataFrame(list(data))
+                df.to_csv(response, index=False)
+                return response
+            
+            else:
+                # Return JSON report
+                report_data = {
+                    'title': f'{report_type.title()} Report - {hotel_name}',
+                    'period': f"{start_date.date()} to {end_date.date()}",
+                    'total_reviews': total_reviews,
+                    'avg_score': round(avg_score, 2),
+                    'sentiment_distribution': list(sentiment_stats),
+                    'generated_at': timezone.now().isoformat()
+                }
+                
+                response = JsonResponse(report_data)
+                response['Content-Disposition'] = f'attachment; filename="{report_type}_report_{timezone.now().date()}.json"'
+                return response
             
         except Exception as e:
             messages.error(request, f'Report generation failed: {str(e)}')
@@ -520,32 +524,47 @@ def generate_report(request):
     return render(request, 'dashboard/generate_report.html', context)
 
 
-def report_detail(request, report_id):
-    """View generated report details"""
-    report = get_object_or_404(AnalyticsReport, id=report_id)
+def analytics_reports(request):
+    """View for analytics reports (simplified)"""
+    # Get basic statistics for the past periods
+    now = timezone.now()
     
-    context = {
-        'report': report,
-        'page_title': f'Report: {report.title}',
+    periods = {
+        'Today': (now - timedelta(days=1), now),
+        'This Week': (now - timedelta(days=7), now),
+        'This Month': (now - timedelta(days=30), now),
     }
     
-    return render(request, 'dashboard/report_detail.html', context)
+    report_data = {}
+    for period_name, (start_date, end_date) in periods.items():
+        reviews = Review.objects.filter(created_at__gte=start_date, created_at__lte=end_date)
+        sentiment_stats = reviews.values('sentiment').annotate(count=Count('sentiment'))
+        
+        report_data[period_name] = {
+            'total_reviews': reviews.count(),
+            'avg_score': reviews.aggregate(avg=Avg('ai_score'))['avg'] or 0,
+            'sentiment_distribution': {item['sentiment']: item['count'] for item in sentiment_stats}
+        }
+    
+    context = {
+        'report_data': report_data,
+        'page_title': 'Analytics Reports',
+    }
+    
+    return render(request, 'dashboard/analytics_reports.html', context)
 
 
 @require_http_methods(["POST"])
 def process_reviews_ajax(request):
-    """AJAX endpoint to process unprocessed reviews with AI-powered summarization"""
+    """AJAX endpoint to process unprocessed reviews with AI agents"""
     try:
         import json
         from django.core.management import call_command
         from io import StringIO
-        import sys
-        from agents.django_integration import summarize_reviews
         
         # Parse request data
         data = json.loads(request.body)
         batch_size = data.get('batch_size', 50)
-        generate_summary = data.get('generate_summary', True)  # New option for summarization
         
         # Capture command output
         out = StringIO()
@@ -560,11 +579,10 @@ def process_reviews_ajax(request):
                 'success': True,
                 'message': 'All reviews are already processed',
                 'processed_count': 0,
-                'unprocessed_count': 0,
-                'summary_generated': False
+                'unprocessed_count': 0
             })
         
-        # Step 1: Run the classification and scoring processing command
+        # Run the classification and scoring processing command
         try:
             call_command('process_with_crewai', batch_size=batch_size, stdout=out)
             
@@ -577,69 +595,11 @@ def process_reviews_ajax(request):
             
             response_data = {
                 'success': True,
-                'message': 'Reviews processed successfully',
+                'message': f'Successfully processed {processed_count} reviews',
                 'processed_count': processed_count,
                 'unprocessed_count': unprocessed_after,
-                'total_reviews': Review.objects.count(),
-                'summary_generated': False
+                'total_reviews': Review.objects.count()
             }
-            
-            # Step 2: Generate AI-powered summary if requested and reviews were processed
-            if generate_summary and processed_count > 0:
-                try:
-                    # Get recently processed reviews for summarization
-                    recent_reviews = Review.objects.filter(processed=True).order_by('-updated_at')[:100]
-                    
-                    if recent_reviews.exists():
-                        # Convert to format expected by summarizer agent
-                        reviews_data = []
-                        for review in recent_reviews:
-                            reviews_data.append({
-                                'text': review.text,
-                                'sentiment': review.sentiment or 'neutral',
-                                'score': review.ai_score or review.original_rating or 3.0,
-                                'hotel': review.hotel.name if review.hotel else 'Unknown',
-                                'date': review.created_at.isoformat()
-                            })
-                        
-                        # Generate AI summary using the new Gemini-powered agent
-                        summary_result = summarize_reviews(reviews_data, analysis_type="post_processing")
-                        
-                        # Store summary in database for future reference
-                        summary_obj, created = ReviewSummary.objects.get_or_create(
-                            summary_type='ai_processing_summary',
-                            defaults={
-                                'summary_text': summary_result.get('summary_text', ''),
-                                'total_reviews': len(reviews_data),
-                                'sentiment_distribution': summary_result.get('sentiment_distribution', {}),
-                                'average_score': summary_result.get('average_score', 0),
-                                'insights': summary_result.get('key_insights', []),
-                                'recommendations': summary_result.get('recommendations', [])
-                            }
-                        )
-                        
-                        if not created:
-                            # Update existing summary
-                            summary_obj.summary_text = summary_result.get('summary_text', '')
-                            summary_obj.total_reviews = len(reviews_data)
-                            summary_obj.sentiment_distribution = summary_result.get('sentiment_distribution', {})
-                            summary_obj.average_score = summary_result.get('average_score', 0)
-                            summary_obj.insights = summary_result.get('key_insights', [])
-                            summary_obj.recommendations = summary_result.get('recommendations', [])
-                            summary_obj.save()
-                        
-                        response_data.update({
-                            'summary_generated': True,
-                            'summary_id': summary_obj.id,
-                            'summary_preview': summary_result.get('summary_text', '')[:200] + '...',
-                            'ai_insights_count': len(summary_result.get('key_insights', [])),
-                            'message': f'Successfully processed {processed_count} reviews and generated AI-powered summary'
-                        })
-                        
-                except Exception as summary_error:
-                    # Don't fail the entire process if summarization fails
-                    response_data['summary_error'] = f'Summary generation failed: {str(summary_error)}'
-                    response_data['message'] += ' (Summary generation failed)'
             
             return JsonResponse(response_data)
             

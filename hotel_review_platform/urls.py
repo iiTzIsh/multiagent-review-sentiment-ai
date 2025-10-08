@@ -22,7 +22,6 @@ urlpatterns = [
     path('dashboard/', include('apps.dashboard.urls')),
     path('api/', include('apps.api.urls')),
     path('reviews/', include('apps.reviews.urls')),
-    path('analytics/', include('apps.analytics.urls')),
 ]
 
 # Serve media files during development
