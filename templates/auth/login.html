@@ -16,116 +16,130 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
-        /* Text Visibility Fixes */
-        * {
-            color: inherit !important;
-        }
-        
-        .login-right * {
-            color: #1f2937 !important;
-        }
-        
-        .form-label, label {
-            color: #1f2937 !important;
-            font-weight: 600 !important;
-        }
-        
-        .form-control {
-            background-color: white !important;
-            color: #1f2937 !important;
-            border: 2px solid #e5e7eb !important;
-        }
-        
-        .form-control:focus {
-            color: #1f2937 !important;
-            background-color: white !important;
-        }
-        
-        .form-control::placeholder {
-            color: #6b7280 !important;
-        }
-        
-        .form-text, small {
-            color: #6b7280 !important;
-        }
-        
-        p {
-            color: #4b5563 !important;
-        }
-        
-        h2 {
-            color: #1f2937 !important;
-        }
-        
+        /* Dark blue theme for login page */
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #1A202C;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 0;
+            padding: 20px;
         }
         
         .login-container {
-            background: white;
+            background-color: #2D3748;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
             overflow: hidden;
             max-width: 900px;
             width: 100%;
             margin: 20px;
+            border: 1px solid #4A5568;
         }
         
         .login-left {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background-color: #4A5568;
             color: white;
             padding: 60px 40px;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            min-height: 500px;
         }
         
         .login-right {
             padding: 60px 40px;
+            background-color: #2D3748;
+            color: #FFFFFF;
         }
         
         .brand-logo {
             font-size: 2.5rem;
             margin-bottom: 20px;
-            color: white;
+            color: #FFFFFF;
         }
         
         .brand-title {
             font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 10px;
+            color: #FFFFFF !important;
         }
         
         .brand-subtitle {
             font-size: 1rem;
             opacity: 0.9;
             line-height: 1.6;
+            color: #E2E8F0 !important;
         }
         
         .form-title {
             font-size: 2rem;
             font-weight: 700;
-            color: #2d3748;
+            color: #FFFFFF !important;
             margin-bottom: 10px;
         }
         
         .form-subtitle {
-            color: #718096;
+            color: #A0AEC0 !important;
             margin-bottom: 30px;
         }
         
         .form-floating {
             margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-floating > .form-control {
+            padding: 1rem 0.75rem;
+            height: calc(3.5rem + 2px);
+        }
+        
+        .form-floating > .form-control:focus,
+        .form-floating > .form-control:not(:placeholder-shown) {
+            padding-top: 1.625rem;
+            padding-bottom: 0.625rem;
+        }
+        
+        .form-floating > .form-label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            padding: 1rem 0.75rem;
+            pointer-events: none;
+            border: 1px solid transparent;
+            transform-origin: 0 0;
+            transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
+            color: #A0AEC0 !important;
+        }
+        
+        .form-floating > .form-control:focus ~ .form-label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ .form-label {
+            opacity: 0.65;
+            transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+            color: #E2E8F0 !important;
+        }
+        
+        /* Additional floating label fixes */
+        .form-floating > .form-control:focus,
+        .form-floating > .form-control:not(:placeholder-shown) {
+            background-color: #1A202C !important;
+            color: #FFFFFF !important;
+        }
+        
+        .form-floating > .form-control:focus::placeholder,
+        .form-floating > .form-control:not(:placeholder-shown)::placeholder {
+            color: transparent;
         }
         
         .form-control {
-            border: 2px solid #e2e8f0;
+            background-color: #1A202C !important;
+            color: #FFFFFF !important;
+            border: 2px solid #4A5568 !important;
             border-radius: 10px;
             padding: 15px;
             font-size: 16px;
@@ -133,33 +147,61 @@
         }
         
         .form-control:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background-color: #1A202C !important;
+            color: #FFFFFF !important;
+            border-color: #4A5568 !important;
+            box-shadow: 0 0 0 3px rgba(74, 85, 104, 0.3);
+        }
+        
+        .form-control::placeholder {
+            color: #A0AEC0 !important;
         }
         
         .form-label {
-            color: #4a5568;
+            color: #E2E8F0 !important;
             font-weight: 500;
         }
         
         .btn-login {
-            background: linear-gradient(45deg, #667eea, #764ba2);
+            background-color: #4A5568;
             border: none;
             border-radius: 10px;
             padding: 15px;
             font-weight: 600;
             font-size: 16px;
             width: 100%;
+            color: #FFFFFF;
             transition: all 0.3s ease;
         }
         
         .btn-login:hover {
+            background-color: #2D3748;
+            color: #FFFFFF;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 10px 25px rgba(74, 85, 104, 0.3);
         }
         
         .remember-me {
             margin: 20px 0;
+        }
+        
+        .form-check-label {
+            color: #E2E8F0 !important;
+        }
+        
+        .form-check-input {
+            background-color: #1A202C;
+            border-color: #4A5568;
+        }
+        
+        .form-check-input:checked {
+            background-color: #4A5568;
+            border-color: #4A5568;
+        }
+        
+        .form-check-input:focus {
+            border-color: #4A5568;
+            box-shadow: 0 0 0 0.25rem rgba(74, 85, 104, 0.25);
         }
         
         .alert {
@@ -169,18 +211,48 @@
         }
         
         .alert-danger {
-            background-color: #fed7d7;
-            color: #c53030;
+            background-color: #742A2A;
+            color: #FED7D7;
+            border: 1px solid #E53E3E;
         }
         
         .alert-success {
-            background-color: #c6f6d5;
-            color: #2f855a;
+            background-color: #22543D;
+            color: #C6F6D5;
+            border: 1px solid #38A169;
+        }
+        
+        .alert-info {
+            background-color: #1A365D;
+            color: #BEE3F8;
+            border: 1px solid #3182CE;
+        }
+        
+        .text-danger {
+            color: #F56565 !important;
+        }
+        
+        .text-muted {
+            color: #A0AEC0 !important;
+        }
+        
+        .text-center p {
+            color: #A0AEC0 !important;
+        }
+        
+        .text-center small {
+            color: #A0AEC0 !important;
+        }
+        
+        /* Override any remaining light theme colors */
+        * {
+            color: inherit;
         }
         
         @media (max-width: 768px) {
             .login-left {
                 padding: 40px 30px;
+                min-height: 300px;
             }
             
             .login-right {
@@ -193,6 +265,10 @@
             
             .form-title {
                 font-size: 1.5rem;
+            }
+            
+            body {
+                padding: 10px;
             }
         }
     </style>
@@ -239,7 +315,7 @@
                                    class="form-control" 
                                    id="id_username" 
                                    name="username" 
-                                   placeholder="Username"
+                                   placeholder=" "
                                    value="{{ form.username.value|default:'' }}"
                                    required
                                    autofocus>
@@ -260,7 +336,7 @@
                                    class="form-control" 
                                    id="id_password" 
                                    name="password" 
-                                   placeholder="Password"
+                                   placeholder=" "
                                    required>
                             <label for="id_password">
                                 <i class="fas fa-lock me-2"></i>Password

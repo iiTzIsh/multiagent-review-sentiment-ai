@@ -191,3 +191,166 @@ INFO 2025-10-08 16:27:38,120 basehttp 23660 30064 "GET /auth/register/ HTTP/1.1"
 INFO 2025-10-08 16:29:32,305 basehttp 23660 17028 "GET /auth/register/ HTTP/1.1" 200 31609
 INFO 2025-10-08 16:32:09,724 basehttp 23660 17028 "GET /auth/profile/ HTTP/1.1" 200 33488
 INFO 2025-10-08 16:32:20,884 basehttp 23660 17028 "GET /dashboard/ HTTP/1.1" 200 40673
+INFO 2025-10-08 16:38:39,282 autoreload 28736 34776 Watching for file changes with StatReloader
+INFO 2025-10-08 16:38:47,146 basehttp 28736 5416 "GET /auth/users/ HTTP/1.1" 200 20981
+INFO 2025-10-08 16:38:50,778 basehttp 28736 5416 "GET /auth/register/ HTTP/1.1" 200 31609
+INFO 2025-10-08 16:40:03,347 basehttp 28736 5416 "POST /auth/register/ HTTP/1.1" 200 31973
+INFO 2025-10-08 16:40:11,567 basehttp 28736 5416 "GET /auth/users/ HTTP/1.1" 200 20981
+INFO 2025-10-08 16:40:43,933 basehttp 28736 5416 "POST /auth/register/ HTTP/1.1" 302 0
+INFO 2025-10-08 16:40:45,307 basehttp 28736 5416 "GET /auth/register/ HTTP/1.1" 200 32249
+INFO 2025-10-08 16:41:01,417 basehttp 28736 5416 "GET /auth/users/ HTTP/1.1" 200 22268
+INFO 2025-10-08 16:41:17,076 basehttp 28736 5416 "GET /auth/logout/ HTTP/1.1" 302 0
+INFO 2025-10-08 16:41:17,082 basehttp 28736 5416 "GET /auth/login/ HTTP/1.1" 200 9411
+INFO 2025-10-08 16:41:32,165 basehttp 28736 5416 "POST /auth/login/ HTTP/1.1" 302 0
+INFO 2025-10-08 16:41:35,156 basehttp 28736 5416 "GET /dashboard/ HTTP/1.1" 200 32850
+INFO 2025-10-08 16:41:43,267 basehttp 28736 5416 "GET /dashboard/upload/ HTTP/1.1" 200 54350
+INFO 2025-10-08 16:44:20,826 basehttp 28736 5416 "GET /dashboard/ HTTP/1.1" 200 32234
+INFO 2025-10-08 16:44:25,266 basehttp 28736 5416 "GET /auth/profile/ HTTP/1.1" 200 33987
+INFO 2025-10-08 16:45:05,776 basehttp 28736 5416 "GET /dashboard/ HTTP/1.1" 200 32234
+INFO 2025-10-08 16:49:07,605 basehttp 28736 5416 "GET /dashboard/upload/ HTTP/1.1" 200 54350
+INFO 2025-10-08 16:49:17,838 basehttp 28736 5416 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-10-08 16:49:22,673 basehttp 28736 5416 "GET /dashboard/ HTTP/1.1" 200 33001
+INFO 2025-10-08 16:49:34,626 basehttp 28736 5416 "GET /dashboard/reviews/ HTTP/1.1" 200 41819
+INFO 2025-10-08 16:49:40,926 basehttp 28736 5416 "GET /dashboard/ HTTP/1.1" 200 33001
+INFO 2025-10-08 16:49:45,008 basehttp 28736 5416 "GET /dashboard/upload/ HTTP/1.1" 200 56084
+INFO 2025-10-08 16:50:05,253 basehttp 28736 5416 "POST /dashboard/upload/ HTTP/1.1" 200 145
+ERROR 2025-10-08 16:50:09,354 log 28736 5416 Internal Server Error: /dashboard/batch/f38a0770-082e-4596-bf0f-d04850e0d97b/
+Traceback (most recent call last):
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "E:\ish\multiagent-review-sentiment-ai\apps\dashboard\views.py", line 205, in batch_detail
+    return render(request, 'dashboard/batch_detail.html', context)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/batch_detail.html
+ERROR 2025-10-08 16:50:09,358 basehttp 28736 5416 "GET /dashboard/batch/f38a0770-082e-4596-bf0f-d04850e0d97b/ HTTP/1.1" 500 103628
+INFO 2025-10-08 16:50:12,904 basehttp 28736 5416 "GET /dashboard/upload/ HTTP/1.1" 200 57818
+INFO 2025-10-08 16:50:18,512 basehttp 28736 5416 "GET /dashboard/ HTTP/1.1" 200 33767
+INFO 2025-10-08 16:50:24,763 basehttp 28736 5416 "GET /auth/profile/ HTTP/1.1" 200 33987
+INFO 2025-10-08 16:52:13,386 basehttp 28736 5416 "GET /dashboard/ HTTP/1.1" 200 33768
+INFO 2025-10-08 16:52:16,303 basehttp 28736 5416 "GET /dashboard/upload/ HTTP/1.1" 200 57818
+INFO 2025-10-08 16:52:23,783 basehttp 28736 5416 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-10-08 16:52:28,830 basehttp 28736 5416 "GET /dashboard/ HTTP/1.1" 200 34535
+INFO 2025-10-08 16:52:49,223 basehttp 28736 40784 "GET /dashboard/upload/ HTTP/1.1" 200 59552
+INFO 2025-10-08 16:52:51,864 basehttp 28736 5416 - Broken pipe from ('127.0.0.1', 8492)
+INFO 2025-10-08 16:53:36,742 basehttp 28736 40784 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-10-08 16:53:42,402 basehttp 28736 40784 "GET /dashboard/ HTTP/1.1" 200 43149
+INFO 2025-10-08 16:53:48,670 basehttp 28736 40784 "GET /dashboard/reviews/ HTTP/1.1" 200 70895
+INFO 2025-10-08 16:53:57,641 basehttp 28736 40784 "GET /dashboard/analytics/ HTTP/1.1" 200 102301
+INFO 2025-10-08 16:53:58,069 views 28736 40784 Retrieved persisted AI analysis: 3fa65de6-928f-4ff1-8efa-d228865baa62
+INFO 2025-10-08 16:53:58,444 basehttp 28736 40784 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5067
+INFO 2025-10-08 16:54:04,101 basehttp 28736 40784 "GET /dashboard/ HTTP/1.1" 200 43149
+INFO 2025-10-08 16:54:16,126 orchestrator 28736 40784 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 16:54:16,128 orchestrator 28736 40784 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 16:54:16,128 orchestrator 28736 40784 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 16:54:16,128 orchestrator 28736 40784 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 16:54:16,239 views 28736 40784 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 20 reviews
+INFO 2025-10-08 16:54:16,762 orchestrator 28736 40784 [STAGE 1] Processing review acfee74f-862f-40e2-8a7a-672d5f5d0f8c
+INFO 2025-10-08 16:54:18,823 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 2.06s
+INFO 2025-10-08 16:54:18,949 orchestrator 28736 40784 [STAGE 1] Processing review b2d9ee84-c952-49df-9a7e-4d68551d9307
+INFO 2025-10-08 16:54:20,902 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 1.95s
+INFO 2025-10-08 16:54:21,016 orchestrator 28736 40784 [STAGE 1] Processing review 990d3b84-1049-4791-8266-2f6952d028ae
+INFO 2025-10-08 16:54:22,983 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 1.97s
+INFO 2025-10-08 16:54:23,104 orchestrator 28736 40784 [STAGE 1] Processing review 9222be14-50ab-47e4-8272-9792a38eced7
+INFO 2025-10-08 16:54:25,331 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 2.23s
+INFO 2025-10-08 16:54:25,458 orchestrator 28736 40784 [STAGE 1] Processing review 612deeae-7b51-48cc-9852-5a133748bfd7
+INFO 2025-10-08 16:54:27,571 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 2.11s
+INFO 2025-10-08 16:54:27,706 orchestrator 28736 40784 [STAGE 1] Processing review 1395de9f-ac65-4505-8af0-7a5008857f66
+INFO 2025-10-08 16:54:29,543 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 1.84s
+INFO 2025-10-08 16:54:29,669 orchestrator 28736 40784 [STAGE 1] Processing review 16f185c1-a62d-4bee-8a94-c9b335ff19dd
+INFO 2025-10-08 16:54:31,622 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 1.95s
+INFO 2025-10-08 16:54:31,773 orchestrator 28736 40784 [STAGE 1] Processing review ec52943d-960a-4128-b5e5-5aa44500eebc
+INFO 2025-10-08 16:54:33,742 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 1.97s
+INFO 2025-10-08 16:54:33,899 orchestrator 28736 40784 [STAGE 1] Processing review ffd829b2-6c3e-47f1-9fde-e5779986722b
+INFO 2025-10-08 16:54:37,635 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 3.74s
+INFO 2025-10-08 16:54:37,819 orchestrator 28736 40784 [STAGE 1] Processing review 258a8b27-b2a1-4489-bb1a-dd4dc984b1c4
+INFO 2025-10-08 16:54:39,563 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 1.74s
+INFO 2025-10-08 16:54:39,682 orchestrator 28736 40784 [STAGE 1] Processing review 25fd9575-dfe4-491c-a416-380a0d43e5b4
+INFO 2025-10-08 16:54:41,781 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 2.10s
+INFO 2025-10-08 16:54:41,923 orchestrator 28736 40784 [STAGE 1] Processing review e6ef5e4f-e35d-4d22-a018-78d8baefd749
+INFO 2025-10-08 16:54:44,341 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 2.42s
+INFO 2025-10-08 16:54:44,462 orchestrator 28736 40784 [STAGE 1] Processing review c5bf514c-e639-42eb-87d0-92a4e429fc07
+INFO 2025-10-08 16:54:46,262 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 1.80s
+INFO 2025-10-08 16:54:46,383 orchestrator 28736 40784 [STAGE 1] Processing review 5d748ed8-3f7c-4078-a00c-1a6bab61797b
+INFO 2025-10-08 16:54:48,902 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 2.52s
+INFO 2025-10-08 16:54:49,021 orchestrator 28736 40784 [STAGE 1] Processing review a92c5f80-9911-4386-aa3f-94687baa3825
+INFO 2025-10-08 16:54:51,462 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 2.44s
+INFO 2025-10-08 16:54:51,581 orchestrator 28736 40784 [STAGE 1] Processing review 580f678d-fd91-4070-86d4-7184ad158f17
+INFO 2025-10-08 16:54:53,703 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 2.12s
+INFO 2025-10-08 16:54:53,821 orchestrator 28736 40784 [STAGE 1] Processing review 84c18664-7066-4a86-88bd-5da2071d5214
+INFO 2025-10-08 16:54:56,100 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 2.28s
+INFO 2025-10-08 16:54:56,221 orchestrator 28736 40784 [STAGE 1] Processing review 46320192-28c6-4a9d-9a60-6865130ccc93
+INFO 2025-10-08 16:54:58,063 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 1.84s
+INFO 2025-10-08 16:54:58,211 orchestrator 28736 40784 [STAGE 1] Processing review ff59880c-5322-4fb2-9235-088361c28ef7
+INFO 2025-10-08 16:55:00,431 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 2.22s
+INFO 2025-10-08 16:55:00,548 orchestrator 28736 40784 [STAGE 1] Processing review 4dce62d4-98a0-4ed0-938a-934f9fdbc3c9
+INFO 2025-10-08 16:55:02,243 orchestrator 28736 40784 [COMPLETED] Single review workflow completed in 1.69s
+INFO 2025-10-08 16:55:03,003 basehttp 28736 40784 "POST /api/v1/process/ HTTP/1.1" 200 394
+INFO 2025-10-08 16:55:09,562 basehttp 28736 40784 "GET /dashboard/ HTTP/1.1" 200 43157
+INFO 2025-10-08 16:55:13,868 basehttp 28736 40784 "GET /dashboard/reviews/ HTTP/1.1" 200 72800
+INFO 2025-10-08 16:55:33,042 basehttp 28736 40784 "GET /dashboard/analytics/ HTTP/1.1" 200 102313
+INFO 2025-10-08 16:55:33,430 views 28736 40784 Retrieved persisted AI analysis: 3fa65de6-928f-4ff1-8efa-d228865baa62
+INFO 2025-10-08 16:55:33,801 basehttp 28736 40784 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5067
+INFO 2025-10-08 16:55:41,399 views 28736 40784 [STAGE 2] Generating analytics for 5 reviews
+INFO 2025-10-08 16:55:41,403 orchestrator 28736 40784 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-08 16:55:41,405 orchestrator 28736 40784 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-08 16:55:41,405 orchestrator 28736 40784 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-08 16:55:41,405 orchestrator 28736 40784 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-08 16:55:41,405 orchestrator 28736 40784 [STAGE 2] Generating tags analysis for 5 reviews
+INFO 2025-10-08 16:55:41,406 agent 28736 40784 Gemini model initialized successfully for summarization
+INFO 2025-10-08 16:55:41,407 orchestrator 28736 40784 [STAGE 2] Summarizer Agent initialized
+INFO 2025-10-08 16:55:41,407 agent 28736 40784 Gemini model initialized successfully for tags generation
+INFO 2025-10-08 16:55:41,408 agent 28736 40784 [OK] Tags Generator Agent initialized
+INFO 2025-10-08 16:55:41,408 orchestrator 28736 40784 [STAGE 2] Tags Generator Agent initialized
+INFO 2025-10-08 16:55:41,408 agent 28736 40784 Gemini model initialized successfully for recommendations generation
+INFO 2025-10-08 16:55:41,408 agent 28736 40784 [OK] Recommendations Agent initialized
+INFO 2025-10-08 16:55:41,408 orchestrator 28736 40784 [STAGE 2] Recommendations Agent initialized
+INFO 2025-10-08 16:55:41,409 orchestrator 28736 40784 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 16:55:44,627 agent 28736 40784 AI tags generation completed successfully
+INFO 2025-10-08 16:55:44,627 agent 28736 40784 Tags generation completed for 5 reviews
+INFO 2025-10-08 16:55:44,628 orchestrator 28736 40784 [STAGE 2] Tags analysis completed successfully
+INFO 2025-10-08 16:55:44,628 orchestrator 28736 40784 [STAGE 2] Generating business recommendations for 5 reviews
+INFO 2025-10-08 16:55:44,628 orchestrator 28736 40784 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 16:55:44,628 agent 28736 40784 Generating AI recommendations for 5 reviews
+INFO 2025-10-08 16:55:46,345 agent 28736 40784 AI recommendations generated successfully
+INFO 2025-10-08 16:55:46,345 orchestrator 28736 40784 [STAGE 2] Business recommendations generated successfully
+INFO 2025-10-08 16:55:46,346 orchestrator 28736 40784 [STAGE 2] Generating executive summary for 5 reviews
+INFO 2025-10-08 16:55:46,346 orchestrator 28736 40784 [STAGE 2] All analytics agents ready
+INFO 2025-10-08 16:55:46,346 agent 28736 40784 Starting AI-powered summarization for 5 reviews
+INFO 2025-10-08 16:55:46,348 agent 28736 40784 Gemini model initialized successfully for summarization
+INFO 2025-10-08 16:55:48,745 agent 28736 40784 AI summarization completed successfully for 5 reviews
+INFO 2025-10-08 16:55:48,745 orchestrator 28736 40784 [STAGE 2] Executive summary generated successfully
+INFO 2025-10-08 16:55:49,020 views 28736 40784 AI analysis saved to database with ID: 742d3891-98a7-457f-a62b-884e7b8f29eb
+INFO 2025-10-08 16:55:49,020 views 28736 40784 Complete AI analysis generated successfully
+INFO 2025-10-08 16:55:49,556 basehttp 28736 40784 "POST /api/v1/ai-analysis/ HTTP/1.1" 200 3746
+INFO 2025-10-08 16:56:08,186 basehttp 28736 40784 "GET /dashboard/ HTTP/1.1" 200 43158
+INFO 2025-10-08 16:56:17,820 basehttp 28736 40784 "GET /auth/profile/ HTTP/1.1" 200 33987
+INFO 2025-10-08 16:56:58,405 basehttp 28736 40784 "GET /dashboard/ HTTP/1.1" 200 43158
+INFO 2025-10-08 16:57:11,168 basehttp 28736 40784 "GET /auth/logout/ HTTP/1.1" 302 0
+INFO 2025-10-08 16:57:11,173 basehttp 28736 40784 "GET /auth/login/ HTTP/1.1" 200 9418
+INFO 2025-10-08 17:00:09,516 basehttp 28736 17012 "GET /auth/login/ HTTP/1.1" 200 10036
+INFO 2025-10-08 17:01:20,367 basehttp 28736 17012 "GET /auth/login/ HTTP/1.1" 200 10831
+INFO 2025-10-08 17:01:25,095 basehttp 28736 17012 "GET /auth/login/ HTTP/1.1" 200 10831
+INFO 2025-10-08 17:01:26,961 basehttp 28736 17012 "GET /auth/login/ HTTP/1.1" 200 10831
+INFO 2025-10-08 17:01:27,592 basehttp 28736 17012 "GET /auth/login/ HTTP/1.1" 200 10831
+INFO 2025-10-08 17:01:28,032 basehttp 28736 17012 "GET /auth/login/ HTTP/1.1" 200 10831
+INFO 2025-10-08 17:01:57,562 basehttp 28736 17012 "GET /auth/login/ HTTP/1.1" 200 10941
+INFO 2025-10-08 17:02:13,517 basehttp 28736 17012 "GET /auth/login/ HTTP/1.1" 200 10036
+INFO 2025-10-08 17:03:30,598 basehttp 28736 17012 "GET /auth/login/ HTTP/1.1" 200 11127
+INFO 2025-10-08 17:03:39,226 basehttp 28736 17012 "GET /auth/login/ HTTP/1.1" 200 11113
+INFO 2025-10-08 17:03:56,686 basehttp 28736 17012 "GET /auth/login/ HTTP/1.1" 200 11566
+INFO 2025-10-08 17:04:01,305 basehttp 28736 17012 "GET /auth/login/ HTTP/1.1" 200 11566
+INFO 2025-10-08 17:04:24,746 basehttp 28736 17012 "POST /auth/login/ HTTP/1.1" 302 0
+INFO 2025-10-08 17:04:28,620 basehttp 28736 17012 "GET /dashboard/ HTTP/1.1" 200 44367
+INFO 2025-10-08 17:04:38,736 basehttp 28736 17012 "GET /dashboard/reviews/ HTTP/1.1" 200 170254
+INFO 2025-10-08 17:04:53,727 basehttp 28736 17012 "GET /dashboard/analytics/ HTTP/1.1" 200 113025
+INFO 2025-10-08 17:04:54,156 views 28736 17012 Retrieved persisted AI analysis: 742d3891-98a7-457f-a62b-884e7b8f29eb
+INFO 2025-10-08 17:04:54,517 basehttp 28736 17012 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 4597
