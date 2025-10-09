@@ -7,7 +7,6 @@ from django.shortcuts import get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from django.views import View
 from django.core.paginator import Paginator
 from django.db.models import Count, Avg, Q
 from django.utils import timezone
@@ -15,12 +14,15 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 import json
 import logging
+from datetime import datetime, timedelta
 
-from apps.reviews.models import Review, Hotel, ReviewBatch, AgentTask
-from apps.analytics.models import AnalyticsReport, SentimentTrend
-from .serializers import ReviewSerializer, HotelSerializer, AnalyticsReportSerializer
+from apps.reviews.models import Review, Hotel, ReviewBatch, AgentTask, AIAnalysisResult
+from .serializers import ReviewSerializer, HotelSerializer
 from django.contrib.auth.models import User
 
 logger = logging.getLogger(__name__)
@@ -51,16 +53,33 @@ class AuthProfileView(APIView):
 
 class DashboardStatsView(APIView):
     """API endpoint for dashboard statistics"""
+    permission_classes = [IsAuthenticated]
     
     def get(self, request):
         try:
+            # Filter by accessible hotels
+            accessible_hotels = request.user.profile.get_accessible_hotels()
+            
+            if accessible_hotels:
+                total_reviews = Review.objects.filter(hotel__in=accessible_hotels).count()
+                processed_reviews = Review.objects.filter(processed=True, hotel__in=accessible_hotels).count()
+                pending_reviews = Review.objects.filter(processed=False, hotel__in=accessible_hotels).count()
+                sentiment_distribution = list(Review.objects.filter(hotel__in=accessible_hotels).values('sentiment').annotate(count=Count('sentiment')))
+                avg_score = Review.objects.filter(hotel__in=accessible_hotels).aggregate(avg_score=Avg('ai_score'))['avg_score'] or 0
+            else:
+                total_reviews = 0
+                processed_reviews = 0
+                pending_reviews = 0
+                sentiment_distribution = []
+                avg_score = 0
+            
             stats = {
-                'total_reviews': Review.objects.count(),
-                'total_hotels': Hotel.objects.count(),
-                'processed_reviews': Review.objects.filter(processed=True).count(),
-                'pending_reviews': Review.objects.filter(processed=False).count(),
-                'sentiment_distribution': list(Review.objects.values('sentiment').annotate(count=Count('sentiment'))),
-                'avg_score': Review.objects.aggregate(avg_score=Avg('ai_score'))['avg_score'] or 0,
+                'total_reviews': total_reviews,
+                'total_hotels': len(accessible_hotels),
+                'processed_reviews': processed_reviews,
+                'pending_reviews': pending_reviews,
+                'sentiment_distribution': sentiment_distribution,
+                'avg_score': avg_score,
             }
             return Response(stats)
         except Exception as e:
@@ -195,15 +214,23 @@ class AnalyticsViewSet(viewsets.ViewSet):
                 count=Count('sentiment')
             )
             
-            # Recent trends
-            from datetime import datetime, timedelta
+            # Generate simple trends from actual review data
             end_date = datetime.now().date()
             start_date = end_date - timedelta(days=30)
             
-            trends = SentimentTrend.objects.filter(
-                date__gte=start_date,
-                date__lte=end_date
-            ).order_by('date')
+            trends = []
+            current_date = start_date
+            while current_date <= end_date:
+                daily_reviews = Review.objects.filter(created_at__date=current_date)
+                if daily_reviews.exists():
+                    trends.append({
+                        'date': current_date.isoformat(),
+                        'total_reviews': daily_reviews.count(),
+                        'average_score': daily_reviews.aggregate(avg=Avg('ai_score'))['avg'] or 0,
+                        'positive_percentage': daily_reviews.filter(sentiment='positive').count() / daily_reviews.count() * 100 if daily_reviews.count() > 0 else 0,
+                        'negative_percentage': daily_reviews.filter(sentiment='negative').count() / daily_reviews.count() * 100 if daily_reviews.count() > 0 else 0
+                    })
+                current_date += timedelta(days=1)
             
             analytics_data = {
                 'overview': {
@@ -212,16 +239,7 @@ class AnalyticsViewSet(viewsets.ViewSet):
                     'sentiment_distribution': list(sentiment_data),
                     'processed_reviews': Review.objects.filter(processed=True).count()
                 },
-                'trends': [
-                    {
-                        'date': trend.date,
-                        'total_reviews': trend.total_reviews,
-                        'average_score': trend.average_score,
-                        'positive_percentage': trend.positive_percentage,
-                        'negative_percentage': trend.negative_percentage
-                    }
-                    for trend in trends
-                ]
+                'trends': trends
             }
             
             return Response(analytics_data)
@@ -277,14 +295,14 @@ class ProcessReviewsAPIView(APIView):
                 }
             )
             
-            # Initialize proper agent orchestrator
+            # Initialize Two-Stage Workflow orchestrator
             orchestrator = ReviewProcessingOrchestrator()
-            logger.info(f"Using {orchestrator.name} to process {reviews.count()} reviews")
+            logger.info(f"[STAGE 1] Using {orchestrator.name} for core processing of {reviews.count()} reviews")
             
             task.status = 'running'
             task.save()
             
-            # Process reviews using proper agent pipeline
+            # STAGE 1: Core Processing (Fast, Essential)
             processed_count = 0
             agent_results = []
             
@@ -294,7 +312,7 @@ class ProcessReviewsAPIView(APIView):
             
             for review in reviews_to_process:
                 try:
-                    # Use orchestrator to process each review through agent pipeline
+                    # Stage 1: Core processing only (sentiment + score)
                     result = orchestrator.process_single_review(
                         review_text=review.text,
                         review_id=str(review.id)
@@ -486,10 +504,10 @@ class SearchAPIView(APIView):
 
 class SummaryAPIView(APIView):
     """
-    API endpoint for generating summaries using proper Summarizer Agent
+    API endpoint for AI-powered summaries using Google Gemini
     
-    REPLACED: Rule-based summarization logic with proper AI agent
-    NOW USES: ReviewSummarizerAgent for intelligent analysis and insights
+    Uses ReviewSummarizerAgent with Google Gemini integration for intelligent 
+    analysis and actionable business insights from hotel reviews.
     """
     
     def get(self, request):
@@ -506,7 +524,6 @@ class SummaryAPIView(APIView):
                 reviews = reviews.filter(hotel_id=hotel_id)
             
             # Date filter
-            from datetime import datetime, timedelta
             start_date = datetime.now() - timedelta(days=days)
             reviews = reviews.filter(created_at__gte=start_date)
             
@@ -561,9 +578,9 @@ class SummaryAPIView(APIView):
                 'insights': {
                     'sentiment_percentages': summary_result['summary_data'].get('sentiment_percentages', {}),
                     'score_range': summary_result['summary_data'].get('score_range', [0, 5]),
-                    'generated_by': summary_result['generated_by']
+                    'generated_by': summary_result.get('generated_by', 'ReviewSummarizer')
                 },
-                'agent_used': summary_result['generated_by'],
+                'agent_used': summary_result.get('generated_by', 'ReviewSummarizer'),
                 'processing_info': {
                     'method': 'AI Agent Analysis',
                     'replaced': 'Rule-based summarization'
@@ -576,6 +593,387 @@ class SummaryAPIView(APIView):
                 'error': f"Summary generation failed: {str(e)}",
                 'fallback': 'Consider using rule-based backup'
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class TagsAnalysisAPIView(APIView):
+    """
+    API endpoint for AI-powered tags and topic analysis using Google Gemini
+    
+    Uses ReviewTagsGeneratorAgent with Google Gemini integration to generate
+    comprehensive topic analysis including keywords, topics, and issues.
+    """
+    
+    def get(self, request):
+        """Get AI-generated tags analysis for specified criteria"""
+        try:
+            from agents.orchestrator import ReviewProcessingOrchestrator
+            
+            hotel_id = request.GET.get('hotel')
+            days = int(request.GET.get('days', 30))
+            
+            # Get reviews
+            reviews = Review.objects.all()
+            if hotel_id:
+                reviews = reviews.filter(hotel_id=hotel_id)
+            
+            # Date filter
+            start_date = datetime.now() - timedelta(days=days)
+            reviews = reviews.filter(created_at__gte=start_date)
+            
+            # Convert Django queryset to agent-compatible format
+            reviews_data = []
+            for review in reviews:
+                reviews_data.append({
+                    'text': review.text,
+                    'sentiment': review.sentiment or 'neutral',
+                    'original_rating': review.original_rating or 3.0,
+                    'hotel': review.hotel.name if review.hotel else 'Unknown',
+                    'date': review.created_at.isoformat()
+                })
+            
+            if not reviews_data:
+                return Response({
+                    'status': 'no_data',
+                    'message': f"No reviews found for the specified criteria over the last {days} days.",
+                    'tags_analysis': {
+                        'positive_keywords': [],
+                        'negative_keywords': [],
+                        'topic_metrics': {},
+                        'main_issues': [],
+                        'emerging_topics': []
+                    },
+                    'processed_reviews': 0,
+                    'date_range': {
+                        'start': start_date.date(),
+                        'end': datetime.now().date()
+                    }
+                })
+            
+            # Use the orchestrator's tags generation method
+            orchestrator = ReviewProcessingOrchestrator()
+            
+            logger.info(f"Generating AI-powered tags analysis for {len(reviews_data)} reviews")
+            
+            tags_result = orchestrator.generate_tags_analysis(reviews_data)
+            
+            # Format response in API-compatible structure
+            return Response({
+                'status': tags_result.get('status', 'success'),
+                'tags_analysis': tags_result.get('tags_analysis', {}),
+                'processed_reviews': tags_result.get('processed_reviews', len(reviews_data)),
+                'generated_at': tags_result.get('generated_at'),
+                'agent_used': tags_result.get('agent', 'TagsGeneratorAgent'),
+                'date_range': {
+                    'start': start_date.date(),
+                    'end': datetime.now().date()
+                },
+                'processing_info': {
+                    'method': 'AI Agent Analysis',
+                    'model': 'Google Gemini 2.0 Flash',
+                    'replaced': 'Hard-coded patterns'
+                }
+            })
+            
+        except Exception as e:
+            logger.error(f"AI-powered tags analysis failed: {str(e)}")
+            return Response({
+                'status': 'error',
+                'error_message': str(e),
+                'tags_analysis': {
+                    'positive_keywords': ['excellent', 'clean', 'friendly', 'comfortable', 'beautiful'],
+                    'negative_keywords': ['dirty', 'noise', 'rude', 'expensive', 'old'],
+                    'topic_metrics': {
+                        'service': {'percentage': 75, 'keywords': ['staff', 'support'], 'description': 'Service quality'},
+                        'cleanliness': {'percentage': 70, 'keywords': ['clean', 'hygiene'], 'description': 'Cleanliness standards'},
+                        'location': {'percentage': 80, 'keywords': ['area', 'transport'], 'description': 'Location convenience'},
+                        'value': {'percentage': 65, 'keywords': ['price', 'cost'], 'description': 'Value for money'}
+                    },
+                    'main_issues': ['Service concerns', 'Cleanliness issues'],
+                    'emerging_topics': ['Safety protocols', 'Digital services']
+                },
+                'processed_reviews': 0,
+                'generated_at': datetime.now().isoformat(),
+                'fallback': 'Default tags structure used'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class CombinedAIAnalysisAPIView(APIView):
+    """
+    Combined API endpoint for generating both summary and tags analysis
+    
+    This endpoint generates all AI analysis in a single request to avoid
+    multiple API calls and page reloading. Optimized for on-demand generation.
+    """
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request):
+        """Generate complete AI analysis including summary and tags"""
+        try:
+            from agents.orchestrator import ReviewProcessingOrchestrator
+            from agents.summarizer.agent import ReviewSummarizerAgent
+            
+            # Get parameters
+            hotel_id = request.data.get('hotel')
+            days = int(request.data.get('days', 30))
+            
+            # Filter by accessible hotels
+            accessible_hotels = request.user.profile.get_accessible_hotels()
+            
+            # Convert to list if it's a QuerySet to avoid multiple evaluation issues
+            if hasattr(accessible_hotels, 'all'):  # It's a QuerySet
+                accessible_hotels_list = list(accessible_hotels)
+            else:  # It's already a list
+                accessible_hotels_list = accessible_hotels
+            
+            # Get reviews
+            if accessible_hotels_list:
+                reviews = Review.objects.filter(hotel__in=accessible_hotels_list)
+                if hotel_id:
+                    # Verify user can access this specific hotel
+                    accessible_hotel_ids = [h.id for h in accessible_hotels_list]
+                    if int(hotel_id) in accessible_hotel_ids:
+                        reviews = reviews.filter(hotel_id=hotel_id)
+                    else:
+                        return Response({'error': 'You do not have access to this hotel'}, status=403)
+            else:
+                # No accessible hotels - return empty result
+                return Response({
+                    'status': 'no_access',
+                    'message': 'You do not have access to any hotels.',
+                    'summary': None,
+                    'tags_analysis': None,
+                    'processed_reviews': 0
+                }, status=403)
+            
+            # Date filter
+            start_date = datetime.now() - timedelta(days=days)
+            reviews = reviews.filter(created_at__gte=start_date)
+            
+            if not reviews.exists():
+                return Response({
+                    'status': 'no_data',
+                    'message': f"No reviews found for the specified criteria over the last {days} days.",
+                    'summary': None,
+                    'tags_analysis': None,
+                    'processed_reviews': 0
+                })
+            
+            # Convert Django queryset to agent-compatible format
+            reviews_data = []
+            for review in reviews:
+                reviews_data.append({
+                    'text': review.text,
+                    'sentiment': review.sentiment or 'neutral',
+                    'score': review.ai_score or 3.0,
+                    'original_rating': review.original_rating or 3.0,
+                    'hotel': review.hotel.name if review.hotel else 'Unknown',
+                    'date': review.created_at.isoformat()
+                })
+            
+            logger.info(f"[STAGE 2] Generating analytics for {len(reviews_data)} reviews")
+            
+            # Initialize Two-Stage Workflow orchestrator
+            orchestrator = ReviewProcessingOrchestrator()
+            
+            # STAGE 2: Analytics Generation (On-Demand)
+            # Generate tags analysis first (for context)
+            tags_result = orchestrator.generate_tags_analysis(reviews_data)
+            
+            # Generate AI-powered recommendations with context from tags analysis
+            recommendations_result = orchestrator.generate_recommendations(
+                reviews_data, 
+                analysis_context={'tags_analysis': tags_result.get('tags_analysis', {})}
+            )
+            
+            # Generate executive summary using Stage 2 method
+            summary_result = orchestrator.generate_analytics_summary(reviews_data)
+            
+            # Combine Stage 2 Analytics Results
+            response_data = {
+                'status': 'success',
+                'workflow_stage': 'analytics_generation',
+                'summary': {
+                    'text': summary_result.get('summary_text', ''),
+                    'total_reviews': summary_result.get('total_reviews', len(reviews_data)),
+                    'average_score': summary_result.get('summary_data', {}).get('average_score', 0),
+                    'sentiment_distribution': [
+                        {'sentiment': k, 'count': v} 
+                        for k, v in summary_result.get('summary_data', {}).get('sentiment_distribution', {}).items()
+                    ],
+                    'insights': {
+                        'sentiment_percentages': summary_result.get('summary_data', {}).get('sentiment_percentages', {}),
+                        'score_range': summary_result.get('summary_data', {}).get('score_range', [0, 5]),
+                        'generated_by': summary_result.get('generated_by', 'Two-Stage Workflow')
+                    },
+                    'recommendations': recommendations_result.get('recommendations', [])
+                },
+                'tags_analysis': tags_result.get('tags_analysis', {}),
+                'processed_reviews': len(reviews_data),
+                'generated_at': datetime.now().isoformat(),
+                'date_range': {
+                    'start': start_date.date(),
+                    'end': datetime.now().date()
+                },
+                'workflow_info': {
+                    'architecture': 'Two-Stage Workflow',
+                    'stage_executed': 'Stage 2: Analytics Generation'
+                },
+                'agents_used': {
+                    'summarizer': summary_result.get('generated_by', 'ReviewSummarizer'),
+                    'tags_generator': tags_result.get('agent', 'TagsGeneratorAgent')
+                }
+            }
+            
+            # Save analysis results to database for persistence
+            try:
+                # Mark previous analysis as inactive
+                if hotel_id:
+                    AIAnalysisResult.objects.filter(
+                        hotel_id=hotel_id, 
+                        is_active=True
+                    ).update(is_active=False)
+                else:
+                    AIAnalysisResult.objects.filter(
+                        hotel__isnull=True, 
+                        is_active=True
+                    ).update(is_active=False)
+                
+                # Create new analysis result
+                analysis_result = AIAnalysisResult.objects.create(
+                    analysis_type='combined',
+                    hotel_id=hotel_id,
+                    days_analyzed=days,
+                    date_range_start=start_date.date(),
+                    date_range_end=datetime.now().date(),
+                    total_reviews_analyzed=len(reviews_data),
+                    summary_data=response_data['summary'],
+                    sentiment_analysis={
+                        'sentiment_distribution': response_data['summary']['sentiment_distribution'],
+                        'sentiment_percentages': response_data['summary']['insights']['sentiment_percentages'],
+                        'average_score': response_data['summary']['average_score'],
+                        'score_range': response_data['summary']['insights']['score_range']
+                    },
+                    tags_analysis=response_data['tags_analysis'],
+                    recommendations=response_data['summary']['recommendations'],
+                    agents_used=response_data['agents_used'],
+                    workflow_info=response_data['workflow_info'],
+                    is_active=True
+                )
+                
+                logger.info(f"AI analysis saved to database with ID: {analysis_result.id}")
+                response_data['analysis_id'] = str(analysis_result.id)
+                response_data['persisted'] = True
+                
+            except Exception as save_error:
+                logger.warning(f"Failed to save analysis to database: {save_error}")
+                response_data['persisted'] = False
+                response_data['save_error'] = str(save_error)
+            
+            logger.info("Complete AI analysis generated successfully")
+            return Response(response_data)
+            
+        except Exception as e:
+            logger.error(f"Combined AI analysis failed: {str(e)}")
+            return Response({
+                'status': 'error',
+                'error_message': str(e),
+                'summary': None,
+                'tags_analysis': None,
+                'processed_reviews': 0,
+                'generated_at': datetime.now().isoformat(),
+                'fallback': 'AI analysis generation failed'
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class GetAIAnalysisAPIView(APIView):
+    """API endpoint to retrieve persisted AI analysis results"""
+    
+    def get(self, request):
+        """Get the latest AI analysis from database"""
+        try:
+            # Get parameters
+            hotel_id = request.GET.get('hotel')
+            
+            # Get the most recent active analysis
+            query = AIAnalysisResult.objects.filter(is_active=True)
+            if hotel_id:
+                query = query.filter(hotel_id=hotel_id)
+            else:
+                query = query.filter(hotel__isnull=True)
+            
+            latest_analysis = query.latest('created_at')
+            
+            # Format response to match frontend expectations
+            response_data = {
+                'status': 'success',
+                'has_existing_analysis': True,
+                'persisted': True,
+                'analysis': {
+                    'id': str(latest_analysis.id),
+                    'summary': latest_analysis.summary_data,
+                    'tags_analysis': latest_analysis.tags_analysis,
+                    'sentiment_analysis': latest_analysis.sentiment_analysis,
+                    'recommendations': latest_analysis.recommendations,
+                    'processed_reviews': latest_analysis.total_reviews_analyzed,
+                    'generated_at': latest_analysis.created_at.isoformat(),
+                    'date_range': {
+                        'start': latest_analysis.date_range_start,
+                        'end': latest_analysis.date_range_end,
+                        'days': latest_analysis.days_analyzed
+                    },
+                    'workflow_info': latest_analysis.workflow_info,
+                    'agents_used': latest_analysis.agents_used
+                }
+            }
+            
+            logger.info(f"Retrieved persisted AI analysis: {latest_analysis.id}")
+            return Response(response_data)
+            
+        except AIAnalysisResult.DoesNotExist:
+            return Response({
+                'status': 'no_data',
+                'has_existing_analysis': False,
+                'persisted': False,
+                'message': 'No previous AI analysis found. Generate new analysis.',
+                'analysis': None
+            })
+            
+        except Exception as e:
+            logger.error(f"Failed to retrieve AI analysis: {str(e)}")
+            return Response({
+                'status': 'error',
+                'has_existing_analysis': False,
+                'persisted': False,
+                'error_message': str(e),
+                'analysis': None
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def _calculate_average_score_for_period(self, date_range):
+        """Calculate average score for the analysis period"""
+        try:
+            from datetime import datetime
+            from django.db.models import Avg
+            
+            if not date_range or 'start' not in date_range or 'end' not in date_range:
+                # Fallback to overall average if no date range
+                avg_score = Review.objects.aggregate(avg_score=Avg('ai_score'))['avg_score']
+                return round(avg_score, 1) if avg_score else 3.0
+                
+            # Parse date range
+            start_date = datetime.fromisoformat(date_range['start'])
+            end_date = datetime.fromisoformat(date_range['end'])
+            
+            # Calculate average for the period
+            avg_score = Review.objects.filter(
+                created_at__gte=start_date,
+                created_at__lte=end_date
+            ).aggregate(avg_score=Avg('ai_score'))['avg_score']
+            
+            return round(avg_score, 1) if avg_score else 3.0
+            
+        except Exception as e:
+            logger.warning(f"Failed to calculate average score: {e}")
+            return 3.0
 
 
 class ExportAPIView(APIView):

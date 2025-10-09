@@ -489,5 +489,12 @@ function initializeHomeCharts() {
 
 // Note: processReviews() function is implemented in enhanced-dashboard.js
 // It uses the correct API endpoint /api/v1/process/ instead of dashboard endpoint
+
+
+
+// Load charts when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    loadCharts();
+});
 </script>
 {% endblock %}

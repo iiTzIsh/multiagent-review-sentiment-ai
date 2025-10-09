@@ -63,9 +63,9 @@ This platform combines **artificial intelligence** with **web application develo
 ## 🛠️ Technology Stack
 
 ### **Backend Framework**
-- **Django 4.2**: Web framework and ORM
+- **Django 5.2**: Web framework and ORM
 - **Django REST Framework**: API development
-- **SQLite/PostgreSQL**: Database systems
+- **PostgreSQL (Supabase)**: Cloud database system
 
 ### **AI & Machine Learning**
 - **CrewAI**: Multi-agent framework and orchestration

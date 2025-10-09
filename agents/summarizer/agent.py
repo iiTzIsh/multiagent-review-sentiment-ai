@@ -1,196 +1,134 @@
+"""
+AI-Powered Summarizer Agent for Hotel Review Analysis
+Uses Google Gemini for intelligent review summarization.
+"""
+
 import json
 import logging
-import re
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 from collections import Counter
 from crewai import Agent, Task
 from crewai.tools import BaseTool
+import google.generativeai as genai
+from utils.api_config import get_gemini_api_key
 
 logger = logging.getLogger('agents.summarizer')
 
 
-class TextSummarizationTool(BaseTool):
-    """Tool for text summarization using rule-based approach"""
+class GeminiSummarizerTool(BaseTool):
+    """AI-powered text summarization using Google Gemini"""
     
-    name: str = "text_summarizer"
-    description: str = "Generate concise summaries of hotel reviews"
+    name: str = "gemini_summarizer"
+    description: str = "Generate intelligent summaries of hotel reviews using Google Gemini AI"
     
-    def _run(self, text: str, max_length: int = 150) -> str:
-        """Generate summary of the given text using rule-based approach"""
+    def __init__(self):
+        super().__init__()
+        self._initialize_model()
+    
+    def _initialize_model(self):
+        """Initialize the Gemini model"""
         try:
-            # Simple extractive summarization
-            sentences = text.split('. ')
-            if len(sentences) <= 3:
-                return text
-            
-            # Score sentences based on keywords
-            hotel_keywords = [
-                'room', 'service', 'staff', 'location', 'breakfast', 'wifi',
-                'clean', 'comfortable', 'friendly', 'helpful', 'excellent',
-                'terrible', 'disappointed', 'amazing', 'perfect', 'worst'
-            ]
-            
-            sentence_scores = []
-            for sentence in sentences:
-                score = 0
-                sentence_lower = sentence.lower()
-                for keyword in hotel_keywords:
-                    if keyword in sentence_lower:
-                        score += 1
-                sentence_scores.append((sentence, score))
-            
-            # Get top sentences
-            sentence_scores.sort(key=lambda x: x[1], reverse=True)
-            top_sentences = [sent[0] for sent in sentence_scores[:3]]
-            
-            summary = '. '.join(top_sentences)
-            if len(summary) > max_length:
-                summary = summary[:max_length] + "..."
-            
-            return f"Summary: {summary}"
-            
+            api_key = get_gemini_api_key()
+            if api_key:
+                genai.configure(api_key=api_key)
+                object.__setattr__(self, '_gemini_model', genai.GenerativeModel('gemini-2.0-flash-exp'))
+                logger.info("Gemini model initialized successfully for summarization")
+            else:
+                object.__setattr__(self, '_gemini_model', None)
+                logger.error("Gemini API key not found")
         except Exception as e:
-            logger.error(f"Text summarization failed: {str(e)}")
-            return f"Summary: {text[:200]}..."
-
-
-class KeywordExtractionTool(BaseTool):
-    """Tool for extracting key themes and topics from reviews"""
+            logger.error(f"Failed to initialize Gemini model: {str(e)}")
+            object.__setattr__(self, '_gemini_model', None)
     
-    name: str = "keyword_extractor"
-    description: str = "Extract key themes and topics from hotel reviews"
-    
-    def _run(self, reviews: List[str]) -> str:
-        """Extract common keywords and themes"""
+    def _run(self, text: str, review_count: int = 0) -> str:
+        """Generate AI-powered summary using Google Gemini"""
         try:
-            # Simple keyword extraction based on frequency
-            all_text = ' '.join(reviews).lower()
+            if not hasattr(self, '_gemini_model') or not self._gemini_model:
+                return self._fallback_summary(text)
             
-            # Hotel-specific keywords to look for
-            hotel_keywords = [
-                'room', 'service', 'staff', 'location', 'breakfast', 'wifi',
-                'clean', 'dirty', 'comfortable', 'noisy', 'quiet', 'helpful',
-                'rude', 'friendly', 'price', 'value', 'amenities', 'pool',
-                'gym', 'restaurant', 'bar', 'view', 'bathroom', 'bed',
-                'reception', 'check-in', 'check-out', 'parking'
-            ]
+            if not text or text.strip() == "":
+                return "No review content available for summarization"
             
-            # Count keyword occurrences
-            keyword_counts = {}
-            for keyword in hotel_keywords:
-                count = all_text.count(keyword)
-                if count > 0:
-                    keyword_counts[keyword] = count
+            prompt = f"""
+            Analyze these {review_count} hotel reviews and provide a concise business summary:
             
-            # Get top keywords
-            top_keywords = sorted(keyword_counts.items(), key=lambda x: x[1], reverse=True)[:10]
+            1. Overall guest satisfaction level
+            2. Main positive aspects mentioned
+            3. Common complaints or issues
+            4. Key actionable insights for management
             
-            keywords_str = ', '.join([f"{word} ({count})" for word, count in top_keywords])
-            return f"Key themes: {keywords_str}"
+            Keep it professional and concise (2-3 paragraphs).
             
+            Reviews: {text[:4000]}
+            """
+            
+            response = self._gemini_model.generate_content(prompt)
+            
+            if response and response.text:
+                return response.text.strip()
+            else:
+                return self._fallback_summary(text)
+                
         except Exception as e:
-            logger.error(f"Keyword extraction failed: {str(e)}")
-            return "Key themes: service, room, staff, location"
+            logger.error(f"Gemini summarization failed: {str(e)}")
+            return self._fallback_summary(text)
+    
+    def _fallback_summary(self, text: str) -> str:
+        """Simple fallback summary"""
+        sentences = text.split('. ')[:3]
+        fallback = '. '.join(sentences)
+        return f"Summary: {fallback[:200]}..." if fallback else "No summary available"
 
 
 class ReviewSummarizerAgent:
-    """
-    CREWAI REVIEW SUMMARIZER AGENT
-    
-    WELL-DEFINED ROLE:
-    - Primary Role: Review Summary Expert for Hotel Reviews
-    - Specific Responsibility: Generate comprehensive summaries from analyzed review collections
-    - Domain Expertise: Hospitality feedback analysis and insight generation
-    - Communication: Uses CrewAI framework for task execution
-    
-    AGENT CAPABILITIES:
-    - Multi-review summary generation
-    - Sentiment distribution analysis
-    - Key theme extraction
-    - Actionable recommendations
-    """
+    """AI-powered review summarizer using Google Gemini"""
     
     def __init__(self):
-        """
-        Initialize the Review Summarizer Agent
-        """
-        # Agent Identity
         self.name = "ReviewSummarizer"
-        self.role = "Review Summary Specialist"
-        self.goal = "Generate comprehensive summaries and insights from hotel review collections"
-        self.backstory = """You are an expert content analyst specializing in hospitality industry feedback.
-        You excel at identifying patterns in customer reviews and creating actionable summaries
-        that highlight the most important pros and cons. Your summaries help hotel managers
-        quickly understand overall guest satisfaction and identify areas for improvement."""
-        
-        # CrewAI Agent Instance
-        self.agent = None
-        self.tools = []
-        
-        # Initialize the agent
-        self._create_agent()
+        self.role = "AI Review Summary Specialist"
+        self.goal = "Generate intelligent summaries from hotel review collections"
+        self.backstory = "Expert AI analyst specializing in hospitality feedback summarization"
+        self.tools = [GeminiSummarizerTool()]
+        self.agent = self._create_agent()
     
     def _create_agent(self) -> Agent:
-        """
-        CREATE CREWAI AGENT
-        """
-        # Setup tools
-        self.tools = [TextSummarizationTool(), KeywordExtractionTool()]
-        
-        # Create CrewAI Agent
-        self.agent = Agent(
+        return Agent(
             role=self.role,
             goal=self.goal,
             backstory=self.backstory,
             tools=self.tools,
-            verbose=True,
+            verbose=False,
             allow_delegation=False,
-            max_iter=3
+            max_iter=2
         )
-        
-        return self.agent
     
     def generate_summary(self, reviews: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """
-        MAIN SUMMARIZATION FUNCTION
-        
-        Generate comprehensive summary using rule-based analysis
-        """
+        """Generate comprehensive summary using AI analysis"""
         try:
-            # Analyze sentiment distribution
+            # Basic statistics
             sentiment_counts = Counter(review.get('sentiment', 'neutral') for review in reviews)
-            
-            # Calculate scores
             scores = [review.get('score', 3.0) for review in reviews if isinstance(review.get('score'), (int, float))]
             avg_score = sum(scores) / len(scores) if scores else 3.0
             
-            # Extract themes using tools
+            # Generate AI summary
             review_texts = [review.get('text', '') for review in reviews]
             combined_text = ' '.join(review_texts)
             
-            # Use tools for analysis
-            summary_tool = TextSummarizationTool()
-            keyword_tool = KeywordExtractionTool()
+            summary_tool = GeminiSummarizerTool()
+            summary_text = summary_tool._run(combined_text, len(reviews))
             
-            summary_text = summary_tool._run(combined_text)
-            key_themes = keyword_tool._run(review_texts)
-            
-            # Generate insights and recommendations
-            insights = self._extract_insights(reviews, sentiment_counts, avg_score)
-            recommendations = self._generate_recommendations(reviews, sentiment_counts, avg_score)
+            # Generate insights
+            insights = self._extract_insights(sentiment_counts, avg_score, len(reviews))
+            recommendations = self._generate_recommendations(sentiment_counts, avg_score, len(reviews))
             
             return {
                 'summary_text': summary_text,
                 'total_reviews': len(reviews),
                 'sentiment_distribution': dict(sentiment_counts),
                 'average_score': round(avg_score, 1),
-                'score_range': {
-                    'min': min(scores) if scores else 0,
-                    'max': max(scores) if scores else 5
-                },
-                'key_themes': key_themes,
                 'key_insights': insights,
-                'recommendations': recommendations
+                'recommendations': recommendations,
+                'generated_by': self.name
             }
             
         except Exception as e:
@@ -200,58 +138,84 @@ class ReviewSummarizerAgent:
                 'total_reviews': len(reviews),
                 'sentiment_distribution': {'neutral': len(reviews)},
                 'average_score': 3.0,
-                'error': str(e)
+                'error': str(e),
+                'generated_by': self.name
             }
     
-    def _extract_insights(self, reviews: List[Dict], sentiment_counts: Counter, avg_score: float) -> List[str]:
+    def _extract_insights(self, sentiment_counts: Counter, avg_score: float, total: int) -> List[str]:
         """Extract key insights from reviews"""
         insights = []
-        total = len(reviews)
         
         if total > 0:
-            # Sentiment insights
             pos_percent = (sentiment_counts.get('positive', 0) / total) * 100
             neg_percent = (sentiment_counts.get('negative', 0) / total) * 100
             
-            insights.append(f"{pos_percent:.1f}% of reviews are positive")
-            insights.append(f"{neg_percent:.1f}% of reviews are negative")
+            insights.append(f"{pos_percent:.1f}% positive reviews")
+            insights.append(f"{neg_percent:.1f}% negative reviews")
             
-            # Score insights
             if avg_score >= 4.0:
-                insights.append("Overall customer satisfaction is high")
+                insights.append("High customer satisfaction")
             elif avg_score <= 2.0:
-                insights.append("Customer satisfaction needs immediate improvement")
+                insights.append("Low customer satisfaction - needs improvement")
             else:
-                insights.append("Customer satisfaction is moderate with room for improvement")
+                insights.append("Moderate satisfaction with improvement opportunities")
         
         return insights
     
-    def _generate_recommendations(self, reviews: List[Dict], sentiment_counts: Counter, avg_score: float) -> List[str]:
+    def _generate_recommendations(self, sentiment_counts: Counter, avg_score: float, total: int) -> List[str]:
         """Generate actionable recommendations"""
         recommendations = []
-        total = len(reviews)
         
         if total == 0:
             return ["No reviews available for analysis"]
         
         negative_ratio = sentiment_counts.get('negative', 0) / total
         
-        # Score-based recommendations
         if avg_score < 2.5:
-            recommendations.append("URGENT: Implement immediate service improvement plan")
+            recommendations.append("URGENT: Implement immediate service improvements")
         elif avg_score < 3.5:
-            recommendations.append("Focus on addressing common customer complaints")
+            recommendations.append("Address common customer complaints")
         elif avg_score >= 4.5:
             recommendations.append("Maintain excellent service standards")
         
-        # Sentiment-based recommendations
         if negative_ratio > 0.3:
-            recommendations.append("Prioritize negative review response and resolution")
+            recommendations.append("Prioritize negative review response")
         
-        # General recommendations
         recommendations.extend([
-            "Monitor review trends weekly for early issue detection",
-            "Respond to all reviews promptly and professionally"
+            "Monitor review trends regularly",
+            "Respond to reviews promptly"
         ])
         
         return recommendations
+    
+    def summarize_reviews(self, reviews_data: List[Dict], include_insights: bool = True) -> Dict[str, Any]:
+        """Main entry point for Django integration"""
+        try:
+            logger.info(f"Starting AI-powered summarization for {len(reviews_data)} reviews")
+            
+            if not reviews_data:
+                return {
+                    'summary_text': 'No reviews available for analysis.',
+                    'total_reviews': 0,
+                    'sentiment_distribution': {},
+                    'average_score': 0.0,
+                    'key_insights': ['No data available'],
+                    'recommendations': ['Collect more reviews for analysis'],
+                    'generated_by': self.name
+                }
+            
+            result = self.generate_summary(reviews_data)
+            
+            logger.info(f"AI summarization completed successfully for {len(reviews_data)} reviews")
+            return result
+            
+        except Exception as e:
+            logger.error(f"Review summarization failed: {str(e)}")
+            return {
+                'summary_text': f'Summarization failed: {str(e)}',
+                'total_reviews': len(reviews_data) if reviews_data else 0,
+                'sentiment_distribution': {},
+                'average_score': 0.0,
+                'error': str(e),
+                'generated_by': self.name
+            }

@@ -1,3 +1,2 @@
-from django.test import TestCase
-
-# Create your tests here.
+# Tests for API app
+# TODO: Add API endpoint tests
