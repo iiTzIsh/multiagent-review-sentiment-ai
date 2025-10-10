@@ -1437,3 +1437,314 @@ INFO 2025-09-26 21:12:16,775 basehttp 35088 38996 "GET /static/css/dashboard.css
 INFO 2025-09-26 21:12:18,755 basehttp 35088 38996 "GET /dashboard/ HTTP/1.1" 200 42832
 INFO 2025-09-26 21:12:37,372 basehttp 35088 38996 "GET /dashboard/reviews/ HTTP/1.1" 200 163157
 INFO 2025-09-27 10:06:59,457 autoreload 12904 7552 Watching for file changes with StatReloader
+INFO 2025-09-27 22:52:52,602 autoreload 37196 33216 Watching for file changes with StatReloader
+INFO 2025-09-27 22:53:01,523 basehttp 37196 37520 "GET / HTTP/1.1" 302 0
+INFO 2025-09-27 22:53:01,662 basehttp 37196 37520 "GET /dashboard/ HTTP/1.1" 200 42807
+INFO 2025-09-27 22:53:01,846 basehttp 37196 37520 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-27 22:53:09,512 basehttp 37196 37520 "GET /dashboard/ HTTP/1.1" 200 42807
+INFO 2025-09-27 22:53:21,630 basehttp 37196 37520 "GET /dashboard/upload/ HTTP/1.1" 200 60977
+ERROR 2025-09-27 22:53:28,677 log 37196 37520 Internal Server Error: /dashboard/batch/36925553-7287-475f-881e-626be5c6ed40/
+Traceback (most recent call last):
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\apps\dashboard\views.py", line 184, in batch_detail
+    return render(request, 'dashboard/batch_detail.html', context)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/batch_detail.html
+ERROR 2025-09-27 22:53:28,685 basehttp 37196 37520 "GET /dashboard/batch/36925553-7287-475f-881e-626be5c6ed40/ HTTP/1.1" 500 97573
+INFO 2025-09-28 00:22:34,596 basehttp 37196 21580 "GET /dashboard/upload/ HTTP/1.1" 200 60977
+INFO 2025-09-28 00:22:34,633 basehttp 37196 21580 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-28 00:26:05,780 basehttp 37196 21580 "GET /dashboard/upload/ HTTP/1.1" 200 60977
+ERROR 2025-09-28 00:26:12,177 log 37196 21580 Internal Server Error: /dashboard/batch/36925553-7287-475f-881e-626be5c6ed40/
+Traceback (most recent call last):
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\apps\dashboard\views.py", line 184, in batch_detail
+    return render(request, 'dashboard/batch_detail.html', context)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/batch_detail.html
+ERROR 2025-09-28 00:26:12,179 basehttp 37196 21580 "GET /dashboard/batch/36925553-7287-475f-881e-626be5c6ed40/ HTTP/1.1" 500 97573
+ERROR 2025-09-28 00:26:33,365 log 37196 21580 Internal Server Error: /dashboard/batch/36925553-7287-475f-881e-626be5c6ed40/
+Traceback (most recent call last):
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\apps\dashboard\views.py", line 184, in batch_detail
+    return render(request, 'dashboard/batch_detail.html', context)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/batch_detail.html
+ERROR 2025-09-28 00:26:33,367 basehttp 37196 21580 "GET /dashboard/batch/36925553-7287-475f-881e-626be5c6ed40/ HTTP/1.1" 500 96508
+ERROR 2025-09-28 00:27:21,663 log 37196 21580 Internal Server Error: /dashboard/batch/36925553-7287-475f-881e-626be5c6ed40/
+Traceback (most recent call last):
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\apps\dashboard\views.py", line 184, in batch_detail
+    return render(request, 'dashboard/batch_detail.html', context)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/batch_detail.html
+ERROR 2025-09-28 00:27:21,668 basehttp 37196 21580 "GET /dashboard/batch/36925553-7287-475f-881e-626be5c6ed40/ HTTP/1.1" 500 97573
+ERROR 2025-09-28 00:28:00,332 log 37196 21580 Internal Server Error: /dashboard/batch/36925553-7287-475f-881e-626be5c6ed40/
+Traceback (most recent call last):
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\apps\dashboard\views.py", line 184, in batch_detail
+    return render(request, 'dashboard/batch_detail.html', context)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/batch_detail.html
+ERROR 2025-09-28 00:28:00,334 basehttp 37196 21580 "GET /dashboard/batch/36925553-7287-475f-881e-626be5c6ed40/ HTTP/1.1" 500 97573
+ERROR 2025-09-28 01:13:49,367 log 37196 33748 Internal Server Error: /dashboard/batch/36925553-7287-475f-881e-626be5c6ed40/
+Traceback (most recent call last):
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\apps\dashboard\views.py", line 184, in batch_detail
+    return render(request, 'dashboard/batch_detail.html', context)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/batch_detail.html
+ERROR 2025-09-28 01:13:49,370 basehttp 37196 33748 "GET /dashboard/batch/36925553-7287-475f-881e-626be5c6ed40/ HTTP/1.1" 500 97573
+ERROR 2025-09-28 01:14:07,993 log 37196 33748 Internal Server Error: /dashboard/batch/47e7e992-250b-4e96-91f9-f851afa48c76/
+Traceback (most recent call last):
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\apps\dashboard\views.py", line 184, in batch_detail
+    return render(request, 'dashboard/batch_detail.html', context)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/batch_detail.html
+ERROR 2025-09-28 01:14:07,995 basehttp 37196 33748 "GET /dashboard/batch/47e7e992-250b-4e96-91f9-f851afa48c76/ HTTP/1.1" 500 101514
+INFO 2025-09-28 01:15:13,623 basehttp 37196 33748 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+WARNING 2025-09-28 01:15:13,651 log 37196 33748 Not Found: /.well-known/appspecific/com.chrome.devtools.json
+WARNING 2025-09-28 01:15:13,652 basehttp 37196 33748 "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 3433
+INFO 2025-09-28 01:17:12,787 basehttp 37196 33748 "POST /dashboard/upload/ HTTP/1.1" 200 145
+ERROR 2025-09-28 01:17:18,701 log 37196 33748 Internal Server Error: /dashboard/batch/ce9a8182-7536-4cec-b6d4-8c983cf5f76a/
+Traceback (most recent call last):
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\apps\dashboard\views.py", line 184, in batch_detail
+    return render(request, 'dashboard/batch_detail.html', context)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/batch_detail.html
+ERROR 2025-09-28 01:17:18,703 basehttp 37196 33748 "GET /dashboard/batch/ce9a8182-7536-4cec-b6d4-8c983cf5f76a/ HTTP/1.1" 500 97493
+INFO 2025-09-28 01:17:24,205 basehttp 37196 33748 "GET /dashboard/upload/ HTTP/1.1" 200 60965
+INFO 2025-09-28 01:18:03,296 basehttp 37196 33748 "GET /dashboard/upload/ HTTP/1.1" 200 60965
+INFO 2025-09-28 01:18:04,130 basehttp 37196 33748 "GET /dashboard/upload/ HTTP/1.1" 200 60965
+INFO 2025-09-28 01:18:04,653 basehttp 37196 33748 "GET /dashboard/upload/ HTTP/1.1" 200 60965
+INFO 2025-09-28 01:18:05,244 basehttp 37196 33748 "GET /dashboard/upload/ HTTP/1.1" 200 60965
+INFO 2025-09-28 01:18:05,640 basehttp 37196 33748 "GET /dashboard/upload/ HTTP/1.1" 200 60965
+INFO 2025-09-28 01:18:19,388 basehttp 37196 33748 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-28 01:18:22,436 basehttp 37196 33748 "GET /dashboard/reviews/ HTTP/1.1" 200 160131
+INFO 2025-09-28 01:19:09,655 basehttp 37196 33748 "GET /dashboard/reviews/32dd851d-829f-45c1-bd0a-c141418386aa/ HTTP/1.1" 200 20465
+INFO 2025-09-28 01:19:50,437 basehttp 37196 33748 "GET /dashboard/ HTTP/1.1" 200 42779
+INFO 2025-09-28 01:19:53,398 basehttp 37196 33748 "GET /dashboard/reviews/ HTTP/1.1" 200 160131
+INFO 2025-09-28 10:48:25,466 basehttp 37196 5576 "GET /dashboard/reviews/ HTTP/1.1" 200 160131
+INFO 2025-09-28 10:48:25,553 basehttp 37196 5576 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0
+INFO 2025-09-28 10:48:25,554 basehttp 37196 17396 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-09-28 10:49:04,559 autoreload 34760 35612 Watching for file changes with StatReloader
+INFO 2025-09-28 10:49:08,985 basehttp 34760 31768 "GET / HTTP/1.1" 302 0
+INFO 2025-09-28 10:49:09,030 basehttp 34760 31768 "GET /dashboard/ HTTP/1.1" 200 42805
+INFO 2025-09-28 10:49:18,203 basehttp 34760 31768 "GET /dashboard/reviews/ HTTP/1.1" 200 160131
+INFO 2025-09-28 10:49:22,764 basehttp 34760 31768 "GET /dashboard/upload/ HTTP/1.1" 200 60978
+INFO 2025-09-28 10:49:38,821 basehttp 34760 31768 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-09-28 10:49:41,883 basehttp 34760 31768 "GET /dashboard/ HTTP/1.1" 200 42792
+INFO 2025-09-28 10:50:04,906 basehttp 34760 31768 "GET /dashboard/reviews/ HTTP/1.1" 200 158300
+INFO 2025-09-28 10:50:08,031 basehttp 34760 31768 "GET /dashboard/ HTTP/1.1" 200 42792
+INFO 2025-09-28 10:50:12,725 basehttp 34760 31768 "GET /dashboard/reviews/ HTTP/1.1" 200 158300
+INFO 2025-09-28 10:50:15,700 basehttp 34760 31768 "GET /dashboard/ HTTP/1.1" 200 42792
+INFO 2025-09-28 10:50:47,194 orchestrator 34760 31768 [OK] Classifier Agent initialized
+INFO 2025-09-28 10:50:47,198 orchestrator 34760 31768 [OK] Scorer Agent initialized
+ERROR 2025-09-28 10:50:47,201 orchestrator 34760 31768 Agent initialization failed: name 'pipeline' is not defined
+ERROR 2025-09-28 10:50:47,202 views 34760 31768 AI agent processing failed: name 'pipeline' is not defined
+ERROR 2025-09-28 10:50:47,213 log 34760 31768 Internal Server Error: /api/v1/process/
+ERROR 2025-09-28 10:50:47,215 basehttp 34760 31768 "POST /api/v1/process/ HTTP/1.1" 500 148
+INFO 2025-09-28 11:37:31,721 autoreload 25844 22396 Watching for file changes with StatReloader
+INFO 2025-09-28 11:37:35,397 basehttp 25844 36088 "GET / HTTP/1.1" 302 0
+INFO 2025-09-28 11:37:35,462 basehttp 25844 36088 "GET /dashboard/ HTTP/1.1" 200 42795
+INFO 2025-09-28 11:37:41,462 basehttp 25844 36088 "GET /dashboard/analytics/ HTTP/1.1" 200 76740
+WARNING 2025-09-28 11:37:41,552 basehttp 25844 36088 "GET /static/css/analytics.css HTTP/1.1" 404 1978
+INFO 2025-09-28 11:37:43,582 basehttp 25844 33500 "GET /dashboard/reviews/ HTTP/1.1" 200 158300
+INFO 2025-09-28 11:38:09,518 basehttp 25844 33500 "GET /dashboard/upload/ HTTP/1.1" 200 60968
+INFO 2025-09-28 11:38:12,344 basehttp 25844 33500 "GET /dashboard/reviews/ HTTP/1.1" 200 158300
+INFO 2025-09-28 11:38:35,359 basehttp 25844 33500 "GET /dashboard/reviews/b828e9d9-73e9-4e99-981f-da4e46388ec6/ HTTP/1.1" 200 20465
+WARNING 2025-09-28 11:39:35,491 log 25844 33500 Not Found: /api/reviews/b828e9d9-73e9-4e99-981f-da4e46388ec6/reprocess/
+WARNING 2025-09-28 11:39:35,493 basehttp 25844 33500 "POST /api/reviews/b828e9d9-73e9-4e99-981f-da4e46388ec6/reprocess/ HTTP/1.1" 404 6013
+INFO 2025-09-28 11:40:01,053 basehttp 25844 33500 "GET /dashboard/ HTTP/1.1" 200 42795
+INFO 2025-09-28 11:40:21,795 orchestrator 25844 33500 [OK] Classifier Agent initialized
+INFO 2025-09-28 11:40:21,801 orchestrator 25844 33500 [OK] Scorer Agent initialized
+ERROR 2025-09-28 11:40:21,805 orchestrator 25844 33500 Agent initialization failed: name 'pipeline' is not defined
+ERROR 2025-09-28 11:40:21,805 views 25844 33500 AI agent processing failed: name 'pipeline' is not defined
+ERROR 2025-09-28 11:40:21,816 log 25844 33500 Internal Server Error: /api/v1/process/
+ERROR 2025-09-28 11:40:21,817 basehttp 25844 33500 "POST /api/v1/process/ HTTP/1.1" 500 148
+INFO 2025-09-28 11:44:29,385 autoreload 25844 22396 C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\agents\summarizer\agent.py changed, reloading.
+INFO 2025-09-28 11:44:31,451 autoreload 3140 35800 Watching for file changes with StatReloader
+INFO 2025-09-28 11:45:29,462 orchestrator 3140 25252 [OK] Classifier Agent initialized
+INFO 2025-09-28 11:45:29,464 orchestrator 3140 25252 [OK] Scorer Agent initialized
+INFO 2025-09-28 12:06:53,466 autoreload 13244 38204 Watching for file changes with StatReloader
+INFO 2025-09-28 12:07:08,468 basehttp 13244 14476 "GET / HTTP/1.1" 302 0
+INFO 2025-09-28 12:07:08,608 basehttp 13244 14476 "GET /dashboard/ HTTP/1.1" 200 42804
+INFO 2025-09-28 12:07:21,749 orchestrator 13244 14476 [OK] Classifier Agent initialized
+INFO 2025-09-28 12:07:21,751 orchestrator 13244 14476 [OK] Scorer Agent initialized
+INFO 2025-09-28 12:07:21,755 orchestrator 13244 14476 [OK] Summarizer Agent initialized
+INFO 2025-09-28 12:07:21,756 orchestrator 13244 14476 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-28 12:07:21,757 views 13244 14476 Using ReviewProcessingOrchestrator to process 15 reviews
+INFO 2025-09-28 12:07:21,768 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review b828e9d9-73e9-4e99-981f-da4e46388ec6
+INFO 2025-09-28 12:07:22,971 orchestrator 13244 14476 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:07:29,749 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 7.98s
+INFO 2025-09-28 12:07:29,763 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review ba9ba58d-8c91-4c3a-b2f4-062ba13798d4
+INFO 2025-09-28 12:07:30,965 orchestrator 13244 14476 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-28 12:07:32,148 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.38s
+INFO 2025-09-28 12:07:32,166 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review 72f5830a-fff7-4a12-a387-d18386131477
+INFO 2025-09-28 12:07:33,253 orchestrator 13244 14476 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:07:34,401 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.23s
+INFO 2025-09-28 12:07:34,420 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review 37bf43d0-774b-41ac-9327-e0b5fe2a6129
+INFO 2025-09-28 12:07:35,500 orchestrator 13244 14476 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:07:36,653 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.23s
+INFO 2025-09-28 12:07:36,670 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review 6a842858-1a60-466c-9e3c-1511e7123876
+INFO 2025-09-28 12:07:37,736 orchestrator 13244 14476 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:07:38,951 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.28s
+INFO 2025-09-28 12:07:38,969 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review 32dd851d-829f-45c1-bd0a-c141418386aa
+INFO 2025-09-28 12:07:39,994 orchestrator 13244 14476 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:07:41,108 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.14s
+INFO 2025-09-28 12:07:41,128 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review e80dba7c-bdb8-42d4-9c37-0c619d296437
+INFO 2025-09-28 12:07:42,225 orchestrator 13244 14476 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-28 12:07:43,303 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.17s
+INFO 2025-09-28 12:07:43,326 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review cdc9496f-6971-4f4d-b712-33247f7f08b2
+INFO 2025-09-28 12:07:44,332 orchestrator 13244 14476 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:07:45,449 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.12s
+INFO 2025-09-28 12:07:45,468 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review f4f8acc6-8832-4543-b77c-b65a21f8ba00
+INFO 2025-09-28 12:07:46,513 orchestrator 13244 14476 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:07:47,608 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.14s
+INFO 2025-09-28 12:07:47,629 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review a8e75b38-a7e2-473c-b5a5-bb500281654e
+INFO 2025-09-28 12:07:48,660 orchestrator 13244 14476 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:07:49,866 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.24s
+INFO 2025-09-28 12:07:49,884 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review fb8853e7-14c6-4dc3-85d3-5d8e54ce3187
+INFO 2025-09-28 12:07:51,117 orchestrator 13244 14476 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:07:52,260 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.38s
+INFO 2025-09-28 12:07:52,272 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review 6ca25563-65b9-4825-87b9-aca1d2abf0f2
+INFO 2025-09-28 12:07:53,316 orchestrator 13244 14476 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-28 12:07:54,366 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.09s
+INFO 2025-09-28 12:07:54,383 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review e0d99bdd-4ba4-4b9f-bf8c-22510f158bd9
+INFO 2025-09-28 12:07:55,399 orchestrator 13244 14476 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:07:56,397 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.01s
+INFO 2025-09-28 12:07:56,415 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review cdf5cd6f-1191-4548-aaa8-22c5ad8eb45b
+INFO 2025-09-28 12:07:57,511 orchestrator 13244 14476 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:07:58,633 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.22s
+INFO 2025-09-28 12:07:58,650 orchestrator 13244 14476 [STEP 1] Classifying sentiment for review 11608d34-36b4-439e-917d-8af2f99a5254
+INFO 2025-09-28 12:07:59,723 orchestrator 13244 14476 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:08:00,808 orchestrator 13244 14476 [COMPLETED] Single review workflow completed in 2.16s
+INFO 2025-09-28 12:08:00,837 basehttp 13244 14476 "POST /api/v1/process/ HTTP/1.1" 200 394
+INFO 2025-09-28 12:08:02,883 basehttp 13244 14476 "GET /dashboard/ HTTP/1.1" 200 42810
+INFO 2025-09-28 12:08:39,463 basehttp 13244 14476 "GET /dashboard/reviews/ HTTP/1.1" 200 164015
+INFO 2025-09-28 12:11:14,092 basehttp 13244 14476 "GET /dashboard/ HTTP/1.1" 200 42810
+INFO 2025-09-28 12:11:30,721 basehttp 13244 14476 "GET /dashboard/reviews/ HTTP/1.1" 200 164015
+INFO 2025-09-28 12:11:36,118 basehttp 13244 14476 "GET /dashboard/ HTTP/1.1" 200 42810
+INFO 2025-09-28 12:11:43,362 basehttp 13244 14476 "GET /dashboard/reviews/ HTTP/1.1" 200 164015
+INFO 2025-09-28 12:11:45,343 basehttp 13244 14476 "GET /dashboard/ HTTP/1.1" 200 42810
+INFO 2025-09-28 12:11:56,971 basehttp 13244 14476 "GET /dashboard/reviews/ HTTP/1.1" 200 164015
+INFO 2025-09-28 12:12:48,682 basehttp 13244 14476 "GET /dashboard/reviews/b828e9d9-73e9-4e99-981f-da4e46388ec6/ HTTP/1.1" 200 20468
+INFO 2025-09-28 12:21:18,453 basehttp 13244 35652 "GET /dashboard/ HTTP/1.1" 200 42808
+INFO 2025-09-28 12:21:20,217 basehttp 13244 35652 "GET /dashboard/upload/ HTTP/1.1" 200 60975
+INFO 2025-09-28 12:33:48,115 basehttp 13244 21980 "GET /dashboard/upload/ HTTP/1.1" 200 60977
+INFO 2025-09-28 12:33:57,814 basehttp 13244 21980 "POST /dashboard/upload/ HTTP/1.1" 200 145
+ERROR 2025-09-28 12:34:03,692 log 13244 21980 Internal Server Error: /dashboard/batch/abe2fddf-1d3d-4893-bd22-44db433ffa1e/
+Traceback (most recent call last):
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\apps\dashboard\views.py", line 184, in batch_detail
+    return render(request, 'dashboard/batch_detail.html', context)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\SLIIT\2nd Year\2nd semester\projects\Git\multiagent-review-sentiment-ai\venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/batch_detail.html
+ERROR 2025-09-28 12:34:03,696 basehttp 13244 21980 "GET /dashboard/batch/abe2fddf-1d3d-4893-bd22-44db433ffa1e/ HTTP/1.1" 500 99191
+INFO 2025-09-28 12:34:07,714 basehttp 13244 21980 "GET /dashboard/upload/ HTTP/1.1" 200 60964
+INFO 2025-09-28 12:34:11,244 basehttp 13244 21980 "GET /dashboard/ HTTP/1.1" 200 42792
+INFO 2025-09-28 12:34:22,529 orchestrator 13244 21980 [OK] Classifier Agent initialized
+INFO 2025-09-28 12:34:22,534 orchestrator 13244 21980 [OK] Scorer Agent initialized
+INFO 2025-09-28 12:34:22,538 orchestrator 13244 21980 [OK] Summarizer Agent initialized
+INFO 2025-09-28 12:34:22,539 orchestrator 13244 21980 [COMPLETE] All three agents successfully initialized
+INFO 2025-09-28 12:34:22,540 views 13244 21980 Using ReviewProcessingOrchestrator to process 5 reviews
+INFO 2025-09-28 12:34:22,552 orchestrator 13244 21980 [STEP 1] Classifying sentiment for review 73a90f00-fb9a-4aea-b44f-74ffb3f6c956
+INFO 2025-09-28 12:34:27,177 orchestrator 13244 21980 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:34:32,492 orchestrator 13244 21980 [COMPLETED] Single review workflow completed in 9.94s
+INFO 2025-09-28 12:34:32,501 orchestrator 13244 21980 [STEP 1] Classifying sentiment for review 6f5361d5-af20-4201-98e8-85e5c156b9af
+INFO 2025-09-28 12:34:33,692 orchestrator 13244 21980 [STEP 2] Generating score for negative sentiment
+INFO 2025-09-28 12:34:34,925 orchestrator 13244 21980 [COMPLETED] Single review workflow completed in 2.42s
+INFO 2025-09-28 12:34:34,938 orchestrator 13244 21980 [STEP 1] Classifying sentiment for review 082418ca-fcd3-40f3-a90a-e43e03e180b4
+INFO 2025-09-28 12:34:36,000 orchestrator 13244 21980 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:34:37,212 orchestrator 13244 21980 [COMPLETED] Single review workflow completed in 2.27s
+INFO 2025-09-28 12:34:37,502 orchestrator 13244 21980 [STEP 1] Classifying sentiment for review fd066b76-63c3-4fab-a991-89ed889df29a
+INFO 2025-09-28 12:34:38,546 orchestrator 13244 21980 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:34:39,786 orchestrator 13244 21980 [COMPLETED] Single review workflow completed in 2.28s
+INFO 2025-09-28 12:34:39,808 orchestrator 13244 21980 [STEP 1] Classifying sentiment for review cfbc6e1e-0ab3-4d82-90e0-0b7e7043f5ae
+INFO 2025-09-28 12:34:40,938 orchestrator 13244 21980 [STEP 2] Generating score for positive sentiment
+INFO 2025-09-28 12:34:42,068 orchestrator 13244 21980 [COMPLETED] Single review workflow completed in 2.26s
+INFO 2025-09-28 12:34:42,099 basehttp 13244 21980 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-09-28 12:34:44,168 basehttp 13244 21980 "GET /dashboard/ HTTP/1.1" 200 42797
+INFO 2025-09-28 12:34:52,238 basehttp 13244 21980 "GET /dashboard/reviews/ HTTP/1.1" 200 164131
+INFO 2025-09-28 12:35:08,450 basehttp 13244 21980 "GET /dashboard/reviews/73a90f00-fb9a-4aea-b44f-74ffb3f6c956/ HTTP/1.1" 200 20795
+INFO 2025-09-28 12:35:30,160 basehttp 13244 21980 "GET /dashboard/reviews/6f5361d5-af20-4201-98e8-85e5c156b9af/ HTTP/1.1" 200 20803
+INFO 2025-09-28 12:35:38,495 basehttp 13244 21980 "GET /dashboard/reviews/082418ca-fcd3-40f3-a90a-e43e03e180b4/ HTTP/1.1" 200 20813
+WARNING 2025-09-28 12:52:57,957 log 13244 36416 Not Found: /api/reviews/73a90f00-fb9a-4aea-b44f-74ffb3f6c956/
+WARNING 2025-09-28 12:52:57,962 basehttp 13244 36416 "DELETE /api/reviews/73a90f00-fb9a-4aea-b44f-74ffb3f6c956/ HTTP/1.1" 404 5985
+WARNING 2025-09-28 12:57:08,415 log 13244 36416 Not Found: /api/reviews/082418ca-fcd3-40f3-a90a-e43e03e180b4/
+WARNING 2025-09-28 12:57:08,417 basehttp 13244 36416 "DELETE /api/reviews/082418ca-fcd3-40f3-a90a-e43e03e180b4/ HTTP/1.1" 404 5985
+INFO 2025-09-28 14:24:40,394 basehttp 13244 31168 "GET /dashboard/ HTTP/1.1" 200 42806
+INFO 2025-09-28 14:24:40,460 basehttp 13244 31168 "GET /static/css/dashboard.css?v=20250922 HTTP/1.1" 304 0

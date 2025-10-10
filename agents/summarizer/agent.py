@@ -93,33 +93,6 @@ class KeywordExtractionTool(BaseTool):
             return "Key themes: service, room, staff, location"
 
 
-class ModelSummarizationTool(BaseTool):
-    """Tool for text summarization using Hugging Face models"""
-    
-    name: str = "hf_text_summarizer"
-    description: str = "Generate abstractive summaries using Hugging Face transformer models"
-    
-    def __init__(self):
-        super().__init__()
-        # Load Hugging Face summarization pipeline
-        self.summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
-    
-    def _run(self, text: str, max_length: int = 150, min_length: int = 30) -> str:
-        try:
-            if not text.strip():
-                return "Summary: (no content provided)"
-            
-            summary = self.summarizer(
-                text, 
-                max_length=max_length, 
-                min_length=min_length, 
-                do_sample=False
-            )
-            return f"Summary: {summary[0]['summary_text']}"
-        
-        except Exception as e:
-            logger.error(f"Hugging Face summarization failed: {str(e)}")
-            return "Summary: Unable to generate model-based summary"
 
 
 class ReviewSummarizerAgent:
@@ -164,7 +137,7 @@ class ReviewSummarizerAgent:
         CREATE CREWAI AGENT
         """
         # Setup tools
-        self.tools = [TextSummarizationTool(), KeywordExtractionTool(), ModelSummarizationTool()]
+        self.tools = [TextSummarizationTool(), KeywordExtractionTool()]
         
         # Create CrewAI Agent
         self.agent = Agent(
@@ -198,12 +171,10 @@ class ReviewSummarizerAgent:
             combined_text = ' '.join(review_texts)
             
             # Use tools for analysis
-            summary_tool_rule = TextSummarizationTool()
-            summary_tool_model = ModelSummarizationTool()
+            summary_tool = TextSummarizationTool()
             keyword_tool = KeywordExtractionTool()
             
-            rule_based_summary = summary_tool_rule._run(combined_text)
-            model_based_summary = summary_tool_model._run(combined_text)
+            summary_text = summary_tool._run(combined_text)
             key_themes = keyword_tool._run(review_texts)
             
             # Generate insights and recommendations
@@ -211,8 +182,7 @@ class ReviewSummarizerAgent:
             recommendations = self._generate_recommendations(reviews, sentiment_counts, avg_score)
             
             return {
-                'rule_based_summary': rule_based_summary,
-                'model_based_summary': model_based_summary,
+                'summary_text': summary_text,
                 'total_reviews': len(reviews),
                 'sentiment_distribution': dict(sentiment_counts),
                 'average_score': round(avg_score, 1),
@@ -228,8 +198,7 @@ class ReviewSummarizerAgent:
         except Exception as e:
             logger.error(f"Summary generation failed: {str(e)}")
             return {
-                'rule_based_summary': 'Unable to generate rule-based summary',
-                'model_based_summary': 'Unable to generate model-based summary',
+                'summary_text':'Unable to generate summary due to an processing error',
                 'total_reviews': len(reviews),
                 'sentiment_distribution': {'neutral': len(reviews)},
                 'average_score': 3.0,
