@@ -5,6 +5,10 @@ A comprehensive **Django-based multi-agent system** for intelligent hotel review
 ## 🎯 Project Overview
 
 This platform combines **artificial intelligence** with **web application development** to create a production-ready system that helps hotels understand customer feedback at scale. Built with modern architecture principles and real AI integration.
+<img width="1741" height="821" alt="IRWA" src="https://github.com/user-attachments/assets/0bb8cabb-4ed1-44bf-b894-c1bcf5ee9ea0" />
+
+
+
 
 ## 🤖 Multi-Agent Architecture
 
@@ -59,9 +63,9 @@ This platform combines **artificial intelligence** with **web application develo
 ## 🛠️ Technology Stack
 
 ### **Backend Framework**
-- **Django 4.2**: Web framework and ORM
+- **Django 5.2**: Web framework and ORM
 - **Django REST Framework**: API development
-- **SQLite/PostgreSQL**: Database systems
+- **PostgreSQL (Supabase)**: Cloud database system
 
 ### **AI & Machine Learning**
 - **CrewAI**: Multi-agent framework and orchestration

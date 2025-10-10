@@ -4,6 +4,7 @@ Dashboard Views for Hotel Review Insight Platform
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
@@ -15,36 +16,54 @@ import json
 import pandas as pd
 import io
 
-from apps.reviews.models import Review, Hotel, ReviewBatch, ReviewSummary
-from apps.analytics.models import SentimentTrend, AnalyticsReport
+from apps.reviews.models import Review, Hotel, ReviewBatch
 from utils.file_processor import ReviewFileProcessor
-from utils.chart_generator import ChartGenerator
-# from agents.base_agent import AgentOrchestrator  # Commented out until crewai is installed
 
 
+@login_required
 def dashboard_home(request):
     """Main dashboard view"""
-    # Get basic statistics
-    total_reviews = Review.objects.count()
-    total_hotels = Hotel.objects.count()
-    processed_reviews = Review.objects.filter(processed=True).count()
+    # Filter data based on user permissions
+    accessible_hotels = request.user.profile.get_accessible_hotels()
     
-    # Get recent activity
-    recent_reviews = Review.objects.order_by('-created_at')[:5]
-    recent_batches = ReviewBatch.objects.order_by('-upload_date')[:5]
+    # Get basic statistics filtered by accessible hotels
+    if accessible_hotels:
+        total_reviews = Review.objects.filter(hotel__in=accessible_hotels).count()
+        processed_reviews = Review.objects.filter(processed=True, hotel__in=accessible_hotels).count()
+        recent_reviews = Review.objects.filter(hotel__in=accessible_hotels).order_by('-created_at')[:5]
+        # Note: ReviewBatch doesn't have hotel field, showing all for now
+        recent_batches = ReviewBatch.objects.order_by('-upload_date')[:5]
+        sentiment_data = Review.objects.filter(hotel__in=accessible_hotels).values('sentiment').annotate(
+            count=Count('sentiment')
+        )
+    else:
+        # No accessible hotels
+        total_reviews = 0
+        processed_reviews = 0
+        recent_reviews = []
+        recent_batches = []
+        sentiment_data = []
     
-    # Sentiment distribution
-    sentiment_data = Review.objects.values('sentiment').annotate(
-        count=Count('sentiment')
-    )
+    total_hotels = len(accessible_hotels)
     
     # Score distribution - updated for chart compatibility
     score_data = []
     for i in range(1, 6):  # 1 to 5 stars
-        # Try AI score first, then fallback to original rating
-        ai_count = Review.objects.filter(ai_score__gte=i-0.5, ai_score__lt=i+0.5).count()
-        original_count = Review.objects.filter(original_rating=i, ai_score__isnull=True).count()
-        total_count = ai_count + original_count
+        if accessible_hotels:
+            # Try AI score first, then fallback to original rating
+            ai_count = Review.objects.filter(
+                hotel__in=accessible_hotels,
+                ai_score__gte=i-0.5, 
+                ai_score__lt=i+0.5
+            ).count()
+            original_count = Review.objects.filter(
+                hotel__in=accessible_hotels,
+                original_rating=i, 
+                ai_score__isnull=True
+            ).count()
+            total_count = ai_count + original_count
+        else:
+            total_count = 0
         score_data.append(total_count)
     
     context = {
@@ -62,6 +81,7 @@ def dashboard_home(request):
     return render(request, 'dashboard/home.html', context)
 
 
+@login_required
 def upload_reviews(request):
     """Upload and process review files"""
     if request.method == 'POST':
@@ -154,6 +174,7 @@ def upload_reviews(request):
     return render(request, 'dashboard/upload.html', context)
 
 
+@login_required
 def batch_detail(request, batch_id):
     """View details of a specific batch"""
     batch = get_object_or_404(ReviewBatch, id=batch_id)
@@ -184,9 +205,14 @@ def batch_detail(request, batch_id):
     return render(request, 'dashboard/batch_detail.html', context)
 
 
+@login_required
 def reviews_list(request):
     """List and filter reviews"""
-    reviews = Review.objects.all()
+    user_profile = request.user.profile
+    accessible_hotels = user_profile.get_accessible_hotels()
+    
+    # Filter reviews by accessible hotels
+    reviews = Review.objects.filter(hotel__in=accessible_hotels)
     
     # Calculate statistics
     total_reviews = reviews.count()
@@ -224,8 +250,8 @@ def reviews_list(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
-    # Get hotels for filter dropdown
-    hotels = Hotel.objects.all()
+    # Get accessible hotels for filter dropdown
+    hotels = accessible_hotels
     
     context = {
         'page_obj': page_obj,
@@ -257,9 +283,18 @@ def reviews_list(request):
     return render(request, 'dashboard/reviews.html', context)
 
 
+@login_required
 def review_detail(request, review_id):
     """View individual review details"""
     review = get_object_or_404(Review, id=review_id)
+    
+    # Check if user has access to this review's hotel
+    user_profile = request.user.profile
+    accessible_hotels = user_profile.get_accessible_hotels()
+    
+    if review.hotel not in accessible_hotels:
+        messages.error(request, "You don't have permission to view this review.")
+        return redirect('dashboard:reviews_list')
     
     context = {
         'review': review,
@@ -269,31 +304,44 @@ def review_detail(request, review_id):
     return render(request, 'dashboard/review_detail.html', context)
 
 
+@login_required
 def analytics_overview(request):
     """Analytics overview page"""
+    user_profile = request.user.profile
+    accessible_hotels = user_profile.get_accessible_hotels()
+    
+    # Filter reviews and hotels by accessibility
+    reviews_queryset = Review.objects.filter(hotel__in=accessible_hotels)
+    
+    # Ensure we have a proper QuerySet for hotels
+    if isinstance(accessible_hotels, list):
+        hotels_queryset = Hotel.objects.filter(id__in=[h.id for h in accessible_hotels])
+    else:
+        hotels_queryset = accessible_hotels
+    
     # Get basic stats
-    total_reviews = Review.objects.count()
-    total_hotels = Hotel.objects.count()
-    processed_reviews = Review.objects.filter(processed=True).count()
+    total_reviews = reviews_queryset.count()
+    total_hotels = len(accessible_hotels) if isinstance(accessible_hotels, list) else accessible_hotels.count()
+    processed_reviews = reviews_queryset.filter(processed=True).count()
     
     # Calculate averages
-    avg_score = Review.objects.aggregate(avg_score=Avg('ai_score'))['avg_score'] or 0
+    avg_score = reviews_queryset.aggregate(avg_score=Avg('ai_score'))['avg_score'] or 0
     processing_rate = (processed_reviews / total_reviews * 100) if total_reviews > 0 else 0
     
     # Sentiment distribution
-    sentiment_data = list(Review.objects.exclude(sentiment__isnull=True).values('sentiment').annotate(count=Count('sentiment')))
+    sentiment_data = list(reviews_queryset.exclude(sentiment__isnull=True).values('sentiment').annotate(count=Count('sentiment')))
     
     # Calculate sentiment percentages
-    positive_count = Review.objects.filter(sentiment='positive').count()
-    negative_count = Review.objects.filter(sentiment='negative').count()
-    neutral_count = Review.objects.filter(sentiment='neutral').count()
+    positive_count = reviews_queryset.filter(sentiment='positive').count()
+    negative_count = reviews_queryset.filter(sentiment='negative').count()
+    neutral_count = reviews_queryset.filter(sentiment='neutral').count()
     
     positive_percentage = (positive_count / total_reviews * 100) if total_reviews > 0 else 0
     negative_percentage = (negative_count / total_reviews * 100) if total_reviews > 0 else 0
     neutral_percentage = (neutral_count / total_reviews * 100) if total_reviews > 0 else 0
     
-    # Top hotels by review count
-    top_hotels = Hotel.objects.annotate(
+    # Top hotels by review count (filtered by accessible hotels)
+    top_hotels = hotels_queryset.annotate(
         review_count=Count('reviews'),
         avg_score=Avg('reviews__ai_score')
     ).filter(review_count__gt=0).order_by('-review_count')[:5]
@@ -305,8 +353,8 @@ def analytics_overview(request):
     
     for i in range(7):
         date = start_date + timedelta(days=i)
-        # Get reviews created on this date
-        daily_reviews = Review.objects.filter(created_at__date=date)
+        # Get reviews created on this date (filtered by accessible hotels)
+        daily_reviews = reviews_queryset.filter(created_at__date=date)
         sentiment_trends.append({
             'date': date.strftime('%Y-%m-%d'),
             'positive_count': daily_reviews.filter(sentiment='positive').count(),
@@ -314,14 +362,14 @@ def analytics_overview(request):
             'negative_count': daily_reviews.filter(sentiment='negative').count()
         })
     
-    # Score distribution
+    # Score distribution (filtered by accessible hotels)
     score_data = []
     for i in range(1, 6):  # 1 to 5 stars
-        count = Review.objects.filter(ai_score__gte=i-0.5, ai_score__lt=i+0.5).count()
+        count = reviews_queryset.filter(ai_score__gte=i-0.5, ai_score__lt=i+0.5).count()
         score_data.append(count)
     
-    # Recent activity
-    recent_reviews = Review.objects.select_related('hotel').order_by('-created_at')[:10]
+    # Recent activity (filtered by accessible hotels)
+    recent_reviews = reviews_queryset.select_related('hotel').order_by('-created_at')[:10]
     
     # Group statistics for template
     statistics = {
@@ -332,6 +380,9 @@ def analytics_overview(request):
         'positive_count': positive_count,
         'negative_count': negative_count,
         'neutral_count': neutral_count,
+        'positive_percentage': round(positive_percentage, 1),
+        'negative_percentage': round(negative_percentage, 1),
+        'neutral_percentage': round(neutral_percentage, 1),
     }
     
     context = {
@@ -360,44 +411,39 @@ def analytics_overview(request):
 
 @csrf_exempt
 @require_http_methods(["POST"])
+@login_required
 def search_reviews(request):
-    """AJAX endpoint for searching reviews"""
+    """AJAX endpoint for searching reviews (simplified)"""
     try:
+        user_profile = request.user.profile
+        accessible_hotels = user_profile.get_accessible_hotels()
+        
         data = json.loads(request.body)
         query = data.get('query', '')
-        search_type = data.get('type', 'semantic')
+        search_type = data.get('type', 'keyword')
         
-        # Initialize search agent (simplified for now)
-        from agents.search.agent import InformationRetrievalAgent
-        
-        search_agent = InformationRetrievalAgent()
-        
-        # Get all reviews for search
-        reviews = Review.objects.all().values(
-            'id', 'text', 'sentiment', 'ai_score', 'hotel__name'
-        )
-        
-        # Index reviews
-        review_list = [
-            {
-                'id': str(r['id']),
-                'text': r['text'],
-                'sentiment': r['sentiment'],
-                'score': r['ai_score'],
-                'hotel': r['hotel__name']
-            }
-            for r in reviews
-        ]
-        
-        search_agent.index_reviews(review_list)
-        
-        # Perform search
-        if search_type == 'semantic':
-            results = search_agent.semantic_search(query, top_k=20)
-        elif search_type == 'keyword':
-            results = search_agent.keyword_search(query)
+        # Simple keyword search in review text (filtered by accessible hotels)
+        if query:
+            reviews = Review.objects.filter(
+                hotel__in=accessible_hotels
+            ).filter(
+                Q(text__icontains=query) | Q(title__icontains=query)
+            ).values(
+                'id', 'text', 'sentiment', 'ai_score', 'hotel__name'
+            )[:20]
+            
+            results = [
+                {
+                    'id': str(r['id']),
+                    'text': r['text'][:200] + '...' if len(r['text']) > 200 else r['text'],
+                    'sentiment': r['sentiment'],
+                    'score': r['ai_score'],
+                    'hotel': r['hotel__name']
+                }
+                for r in reviews
+            ]
         else:
-            results = search_agent.filter_reviews(query)
+            results = []
         
         return JsonResponse({
             'success': True,
@@ -412,14 +458,22 @@ def search_reviews(request):
         }, status=500)
 
 
+@login_required
 def export_data(request):
     """Export reviews data"""
+    user_profile = request.user.profile
+    accessible_hotels = user_profile.get_accessible_hotels()
+    
     format_type = request.GET.get('format', 'csv')
     hotel_id = request.GET.get('hotel')
     
-    # Get reviews
-    reviews = Review.objects.all()
+    # Get reviews (filtered by accessible hotels)
+    reviews = Review.objects.filter(hotel__in=accessible_hotels)
     if hotel_id:
+        # Ensure the requested hotel is accessible
+        if not accessible_hotels.filter(id=hotel_id).exists():
+            messages.error(request, "You don't have permission to export data for this hotel.")
+            return redirect('dashboard:dashboard_home')
         reviews = reviews.filter(hotel_id=hotel_id)
     
     if format_type == 'csv':
@@ -454,12 +508,16 @@ def export_data(request):
         return redirect('dashboard:reviews_list')
 
 
+@login_required
 def generate_report(request):
-    """Generate analytics report"""
+    """Generate analytics report (simplified for professional database)"""
+    user_profile = request.user.profile
+    accessible_hotels = user_profile.get_accessible_hotels()
+    
     if request.method == 'POST':
         report_type = request.POST.get('report_type', 'weekly')
         hotel_id = request.POST.get('hotel')
-        format_type = request.POST.get('format', 'pdf')
+        format_type = request.POST.get('format', 'csv')
         
         try:
             # Date range based on report type
@@ -473,42 +531,64 @@ def generate_report(request):
             else:
                 start_date = end_date - timedelta(days=7)
             
-            # Create report
-            report = AnalyticsReport.objects.create(
-                title=f'{report_type.title()} Report',
-                report_type=report_type,
-                hotel_id=hotel_id,
-                format=format_type,
-                date_from=start_date,
-                date_to=end_date,
-                generated_by=request.user if request.user.is_authenticated else None
+            # Get filtered reviews (by accessible hotels)
+            reviews = Review.objects.filter(
+                hotel__in=accessible_hotels,
+                created_at__gte=start_date,
+                created_at__lte=end_date
             )
             
-            # Generate report data (simplified)
-            report_data = {
-                'title': report.title,
-                'period': f"{start_date.date()} to {end_date.date()}",
-                'total_reviews': Review.objects.filter(
-                    created_at__gte=start_date,
-                    created_at__lte=end_date
-                ).count(),
-                'avg_score': Review.objects.filter(
-                    created_at__gte=start_date,
-                    created_at__lte=end_date
-                ).aggregate(avg=Avg('ai_score'))['avg'] or 0,
-            }
+            if hotel_id:
+                # Ensure the requested hotel is accessible
+                if not accessible_hotels.filter(id=hotel_id).exists():
+                    messages.error(request, "You don't have permission to generate reports for this hotel.")
+                    return redirect('dashboard:analytics_reports')
+                reviews = reviews.filter(hotel_id=hotel_id)
+                hotel = get_object_or_404(Hotel, id=hotel_id)
+                hotel_name = hotel.name
+            else:
+                hotel_name = "All Hotels"
             
-            report.data = report_data
-            report.save()
+            # Generate report data
+            total_reviews = reviews.count()
+            sentiment_stats = reviews.values('sentiment').annotate(count=Count('sentiment'))
+            avg_score = reviews.aggregate(avg=Avg('ai_score'))['avg'] or 0
             
-            messages.success(request, 'Report generated successfully')
-            return redirect('dashboard:report_detail', report_id=report.id)
+            # Generate downloadable report
+            if format_type == 'csv':
+                response = HttpResponse(content_type='text/csv')
+                response['Content-Disposition'] = f'attachment; filename="{report_type}_report_{timezone.now().date()}.csv"'
+                
+                # Convert to DataFrame and export
+                data = reviews.values(
+                    'hotel__name', 'text', 'sentiment', 'ai_score',
+                    'original_rating', 'date_posted', 'reviewer_name', 'created_at'
+                )
+                
+                df = pd.DataFrame(list(data))
+                df.to_csv(response, index=False)
+                return response
+            
+            else:
+                # Return JSON report
+                report_data = {
+                    'title': f'{report_type.title()} Report - {hotel_name}',
+                    'period': f"{start_date.date()} to {end_date.date()}",
+                    'total_reviews': total_reviews,
+                    'avg_score': round(avg_score, 2),
+                    'sentiment_distribution': list(sentiment_stats),
+                    'generated_at': timezone.now().isoformat()
+                }
+                
+                response = JsonResponse(report_data)
+                response['Content-Disposition'] = f'attachment; filename="{report_type}_report_{timezone.now().date()}.json"'
+                return response
             
         except Exception as e:
             messages.error(request, f'Report generation failed: {str(e)}')
     
-    # Get hotels for dropdown
-    hotels = Hotel.objects.all()
+    # Get accessible hotels for dropdown
+    hotels = accessible_hotels
     
     context = {
         'hotels': hotels,
@@ -518,26 +598,55 @@ def generate_report(request):
     return render(request, 'dashboard/generate_report.html', context)
 
 
-def report_detail(request, report_id):
-    """View generated report details"""
-    report = get_object_or_404(AnalyticsReport, id=report_id)
+@login_required
+def analytics_reports(request):
+    """View for analytics reports (simplified)"""
+    user_profile = request.user.profile
+    accessible_hotels = user_profile.get_accessible_hotels()
     
-    context = {
-        'report': report,
-        'page_title': f'Report: {report.title}',
+    # Get basic statistics for the past periods
+    now = timezone.now()
+    
+    periods = {
+        'Today': (now - timedelta(days=1), now),
+        'This Week': (now - timedelta(days=7), now),
+        'This Month': (now - timedelta(days=30), now),
     }
     
-    return render(request, 'dashboard/report_detail.html', context)
+    report_data = {}
+    for period_name, (start_date, end_date) in periods.items():
+        reviews = Review.objects.filter(
+            hotel__in=accessible_hotels,
+            created_at__gte=start_date, 
+            created_at__lte=end_date
+        )
+        sentiment_stats = reviews.values('sentiment').annotate(count=Count('sentiment'))
+        
+        report_data[period_name] = {
+            'total_reviews': reviews.count(),
+            'avg_score': reviews.aggregate(avg=Avg('ai_score'))['avg'] or 0,
+            'sentiment_distribution': {item['sentiment']: item['count'] for item in sentiment_stats}
+        }
+    
+    context = {
+        'report_data': report_data,
+        'page_title': 'Analytics Reports',
+    }
+    
+    return render(request, 'dashboard/analytics_reports.html', context)
 
 
+@login_required
 @require_http_methods(["POST"])
 def process_reviews_ajax(request):
-    """AJAX endpoint to process unprocessed reviews"""
+    """AJAX endpoint to process unprocessed reviews with AI agents"""
     try:
+        user_profile = request.user.profile
+        accessible_hotels = user_profile.get_accessible_hotels()
+        
         import json
         from django.core.management import call_command
         from io import StringIO
-        import sys
         
         # Parse request data
         data = json.loads(request.body)
@@ -546,8 +655,10 @@ def process_reviews_ajax(request):
         # Capture command output
         out = StringIO()
         
-        # Get count of unprocessed reviews before processing
+        # Get count of unprocessed reviews before processing (filtered by accessible hotels)
         unprocessed_count = Review.objects.filter(
+            hotel__in=accessible_hotels
+        ).filter(
             Q(processed=False) | Q(sentiment__isnull=True) | Q(ai_score__isnull=True)
         ).count()
         
@@ -559,24 +670,28 @@ def process_reviews_ajax(request):
                 'unprocessed_count': 0
             })
         
-        # Run the processing command
+        # Run the classification and scoring processing command
         try:
             call_command('process_with_crewai', batch_size=batch_size, stdout=out)
             
-            # Get count after processing
+            # Get count after processing (filtered by accessible hotels)
             unprocessed_after = Review.objects.filter(
+                hotel__in=accessible_hotels
+            ).filter(
                 Q(processed=False) | Q(sentiment__isnull=True) | Q(ai_score__isnull=True)
             ).count()
             
             processed_count = unprocessed_count - unprocessed_after
             
-            return JsonResponse({
+            response_data = {
                 'success': True,
-                'message': 'Reviews processed successfully',
+                'message': f'Successfully processed {processed_count} reviews',
                 'processed_count': processed_count,
                 'unprocessed_count': unprocessed_after,
-                'total_reviews': Review.objects.count()
-            })
+                'total_reviews': Review.objects.filter(hotel__in=accessible_hotels).count()
+            }
+            
+            return JsonResponse(response_data)
             
         except Exception as cmd_error:
             return JsonResponse({

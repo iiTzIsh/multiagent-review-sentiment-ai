@@ -31,5 +31,5 @@ urlpatterns = [
     
     # Reports
     path('reports/generate/', views.generate_report, name='generate_report'),
-    path('reports/<uuid:report_id>/', views.report_detail, name='report_detail'),
+    path('reports/', views.analytics_reports, name='analytics_reports'),
 ]

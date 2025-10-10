@@ -29,6 +29,9 @@ urlpatterns = [
     path('v1/process/', views.ProcessReviewsAPIView.as_view(), name='process_reviews'),
     path('v1/search/', views.SearchAPIView.as_view(), name='search'),
     path('v1/summary/', views.SummaryAPIView.as_view(), name='summary'),
+    path('v1/tags/', views.TagsAnalysisAPIView.as_view(), name='tags_analysis'),
+    path('v1/ai-analysis/', views.CombinedAIAnalysisAPIView.as_view(), name='combined_ai_analysis'),
+    path('v1/get-ai-analysis/', views.GetAIAnalysisAPIView.as_view(), name='get_ai_analysis'),
     path('v1/export/', views.ExportAPIView.as_view(), name='export'),
     
     # Agent status endpoints

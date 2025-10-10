@@ -7,7 +7,6 @@ import json
 from typing import Dict, List, Any
 from django.db.models import Count, Avg
 from apps.reviews.models import Review
-from apps.analytics.models import SentimentTrend
 import logging
 
 logger = logging.getLogger(__name__)

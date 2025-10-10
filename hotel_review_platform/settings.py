@@ -35,8 +35,8 @@ INSTALLED_APPS = [
     # Local apps
     'apps.dashboard',
     'apps.reviews',
-    'apps.analytics',
     'apps.api',
+    'apps.authentication',
 ]
 
 MIDDLEWARE = [
@@ -75,8 +75,16 @@ WSGI_APPLICATION = 'hotel_review_platform.wsgi.application'
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', 'postgres'),
+        'USER': os.getenv('DB_USER', ''),
+        'PASSWORD': os.getenv('DB_PASSWORD', ''),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
+        'OPTIONS': {
+            'sslmode': 'require',
+        },
+        'CONN_MAX_AGE': 60,
     }
 }
 
@@ -151,6 +159,14 @@ CELERY_TIMEZONE = TIME_ZONE
 FILE_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB
 
+# AI Configuration
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY')
+if not GEMINI_API_KEY:
+    print("WARNING: GEMINI_API_KEY not found in environment variables. AI features may not work properly.")
+
+# HuggingFace Configuration
+HUGGINGFACE_API_KEY = os.getenv('HUGGINGFACE_API_KEY')
+
 # Logging
 import os
 
@@ -208,3 +224,36 @@ LOGGING = {
         },
     },
 }
+
+# Suppress timezone warnings for existing data
+import warnings
+warnings.filterwarnings('ignore', message='DateTimeField.*received a naive datetime.*while time zone support is active')
+
+# Authentication Settings
+LOGIN_URL = '/auth/login/'
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/auth/login/'
+
+# Session Settings
+SESSION_COOKIE_AGE = 86400  # 24 hours
+SESSION_SAVE_EVERY_REQUEST = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+# Password Validation
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8,
+        }
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
