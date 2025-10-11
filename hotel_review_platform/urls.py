@@ -8,7 +8,9 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def redirect_to_dashboard(request):
     """Redirect root URL to dashboard"""
     return redirect('dashboard:home')
@@ -17,12 +19,14 @@ urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
     
+    # Authentication
+    path('auth/', include('apps.authentication.urls')),
+    
     # Main application URLs
     path('', redirect_to_dashboard, name='root'),
     path('dashboard/', include('apps.dashboard.urls')),
     path('api/', include('apps.api.urls')),
     path('reviews/', include('apps.reviews.urls')),
-    path('analytics/', include('apps.analytics.urls')),
 ]
 
 # Serve media files during development
