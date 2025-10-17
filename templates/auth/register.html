@@ -206,12 +206,41 @@
     
     /* Form validation styling for dark theme */
     .form-control.is-invalid {
-        border-color: #F56565;
+        border-color: #F56565 !important;
     }
     
     .form-control.is-invalid:focus {
-        border-color: #F56565;
-        box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.25);
+        border-color: #F56565 !important;
+        box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.25) !important;
+    }
+    
+    .invalid-feedback {
+        color: #F56565 !important;
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+    
+    .alert {
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+    
+    .alert-danger {
+        background-color: #742A2A !important;
+        border-color: #F56565 !important;
+        color: #FED7D7 !important;
+    }
+    
+    .alert-success {
+        background-color: #2F855A !important;
+        border-color: #68D391 !important;
+        color: #C6F6D5 !important;
+    }
+    
+    .alert-warning {
+        background-color: #C05621 !important;
+        border-color: #F6AD55 !important;
+        color: #FEEBC8 !important;
     }
 </style>
 {% endblock %}
@@ -230,6 +259,29 @@
                 </div>
             
             <div class="registration-body">
+                <!-- Display Messages -->
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <i class="fas fa-{{ message.tags|yesno:'check-circle,exclamation-triangle,info-circle' }} me-2"></i>
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <!-- Display Form Errors -->
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        <h6><i class="fas fa-exclamation-triangle me-2"></i>Form Errors:</h6>
+                        <ul class="mb-0">
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
                 <form method="post" novalidate>
                     {% csrf_token %}
                     
@@ -401,7 +453,7 @@
                             Back to User List
                         </a>
                         
-                        <button type="submit" class="btn btn-primary btn-create">
+                        <button type="submit" class="btn btn-primary btn-create" id="submitBtn">
                             <i class="fas fa-user-plus me-2"></i>
                             Create User Account
                         </button>
@@ -420,35 +472,107 @@
         const form = document.querySelector('form');
         const passwordField = document.getElementById('id_password1');
         const confirmField = document.getElementById('id_password2');
+        const usernameField = document.getElementById('id_username');
+        const emailField = document.getElementById('id_email');
         
-        // Real-time password confirmation
-        confirmField.addEventListener('input', function() {
-            if (this.value && passwordField.value !== this.value) {
-                this.classList.add('is-invalid');
-            } else {
-                this.classList.remove('is-invalid');
+        // Mark fields with server-side errors as invalid
+        const invalidFields = document.querySelectorAll('.invalid-feedback');
+        invalidFields.forEach(feedback => {
+            const field = feedback.previousElementSibling;
+            if (field && field.tagName === 'INPUT' || field.tagName === 'SELECT') {
+                field.classList.add('is-invalid');
             }
         });
+        
+        // Real-time password confirmation
+        if (confirmField && passwordField) {
+            confirmField.addEventListener('input', function() {
+                if (this.value && passwordField.value !== this.value) {
+                    this.classList.add('is-invalid');
+                } else {
+                    this.classList.remove('is-invalid');
+                }
+            });
+            
+            passwordField.addEventListener('input', function() {
+                if (confirmField.value && this.value !== confirmField.value) {
+                    confirmField.classList.add('is-invalid');
+                } else {
+                    confirmField.classList.remove('is-invalid');
+                }
+            });
+        }
+        
+        // Username validation
+        if (usernameField) {
+            usernameField.addEventListener('blur', function() {
+                if (this.value.length < 3) {
+                    this.classList.add('is-invalid');
+                } else {
+                    this.classList.remove('is-invalid');
+                }
+            });
+        }
+        
+        // Email validation
+        if (emailField) {
+            emailField.addEventListener('blur', function() {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (this.value && !emailRegex.test(this.value)) {
+                    this.classList.add('is-invalid');
+                } else {
+                    this.classList.remove('is-invalid');
+                }
+            });
+        }
         
         // Form submission
         form.addEventListener('submit', function(e) {
             let isValid = true;
+            let errorMessage = '';
             
             // Check required fields
-            const requiredFields = form.querySelectorAll('[required]');
+            const requiredFields = form.querySelectorAll('input[required], select[required]');
             requiredFields.forEach(field => {
                 if (!field.value.trim()) {
                     field.classList.add('is-invalid');
                     isValid = false;
-                } else {
-                    field.classList.remove('is-invalid');
                 }
             });
             
+            // Password validation
+            if (passwordField.value.length < 8) {
+                passwordField.classList.add('is-invalid');
+                isValid = false;
+                errorMessage += 'Password must be at least 8 characters long.\n';
+            }
+            
+            // Password confirmation
+            if (passwordField.value !== confirmField.value) {
+                confirmField.classList.add('is-invalid');
+                isValid = false;
+                errorMessage += 'Passwords do not match.\n';
+            }
+            
             if (!isValid) {
                 e.preventDefault();
-                alert('Please fill in all required fields.');
+                alert('Please fix the following errors:\n\n' + errorMessage + '\nCheck all required fields marked with *');
+                
+                // Scroll to first error
+                const firstError = form.querySelector('.is-invalid');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstError.focus();
+                }
             }
+        });
+        
+        // Remove invalid class when user starts typing
+        const allInputs = form.querySelectorAll('input, select');
+        allInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                this.classList.remove('is-invalid');
+            });
         });
     });
 </script>

@@ -10,6 +10,7 @@ from .scorer.agent import ReviewScorerAgent
 from .summarizer.agent import ReviewSummarizerAgent
 from .tagger.agent import TagsGeneratorAgent
 from .recommender.agent import ReviewRecommendationsAgent
+from .title_generator.agent import ReviewTitleGeneratorAgent
 
 logger = logging.getLogger('agents.orchestrator')
 
@@ -34,12 +35,13 @@ class ReviewProcessingOrchestrator:
         self.role = "Two-Stage Workflow Coordinator"
         self.goal = "Stage 1: Core processing | Stage 2: Analytics generation"
         
-        # Initialize the five specialized agents
+        # Initialize the specialized agents
         self.classifier_agent = None
         self.scorer_agent = None
         self.summarizer_agent = None
         self.tags_generator_agent = None
         self.recommendations_agent = None
+        self.title_generator_agent = None
         
         # Workflow tracking
         self.workflow_stats = {
@@ -62,6 +64,10 @@ class ReviewProcessingOrchestrator:
             
             self.scorer_agent = ReviewScorerAgent()
             logger.info("[STAGE 1] Scorer Agent initialized")
+            
+            # Title generation (can be Stage 1 for immediate titles)
+            self.title_generator_agent = ReviewTitleGeneratorAgent()
+            logger.info("[STAGE 1] Title Generator Agent initialized")
             
             # Stage 2: Analytics Agents (Lazy Initialization)
             self.summarizer_agent = None
@@ -101,6 +107,11 @@ class ReviewProcessingOrchestrator:
             score = scoring_result.get('score', 3.0)
             scoring_confidence = scoring_result.get('confidence', 0.5)
             
+            # Step 3: Title Generation (uses sentiment context)
+            title_result = self.title_generator_agent.generate_title(review_text, sentiment)
+            title = title_result.get('title', 'Untitled Review')
+            title_confidence = title_result.get('confidence', 0.5)
+            
             # Compile Core Processing Result
             workflow_end = datetime.now()
             processing_time = (workflow_end - workflow_start).total_seconds()
@@ -113,7 +124,9 @@ class ReviewProcessingOrchestrator:
                     'sentiment_confidence': classification_confidence,
                     'score': score,
                     'score_confidence': scoring_confidence,
-                    'overall_confidence': round((classification_confidence + scoring_confidence) / 2, 2)
+                    'title': title,
+                    'title_confidence': title_confidence,
+                    'overall_confidence': round((classification_confidence + scoring_confidence + title_confidence) / 3, 2)
                 },
                 'processing': {
                     'processed_at': workflow_end.isoformat(),
