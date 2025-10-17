@@ -338,19 +338,6 @@ CACHE_TIMEOUT=3600
 - **Open Source Contributors**: For making advanced AI accessible
 - **Hotel Industry**: For inspiration and use case validation
 
----
-
-## 📄 **License**
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🚀 **Get Started Today!**
-
-Transform your hotel's customer feedback into actionable business intelligence with our enterprise-grade AI platform.
-
-**[⭐ Star this repository](https://github.com/iiTzIsh/multiagent-review-sentiment-ai)** | **[🍴 Fork for your project](https://github.com/iiTzIsh/multiagent-review-sentiment-ai/fork)** | **[📝 Report issues](https://github.com/iiTzIsh/multiagent-review-sentiment-ai/issues)**
 
 ---
 

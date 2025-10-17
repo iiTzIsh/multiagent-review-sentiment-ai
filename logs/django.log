@@ -1727,3 +1727,39 @@ INFO 2025-10-17 14:13:33,486 basehttp 28132 12436 "GET /auth/logout/ HTTP/1.1" 3
 INFO 2025-10-17 14:13:33,490 basehttp 28132 12436 "GET /auth/login/ HTTP/1.1" 200 11915
 INFO 2025-10-17 14:13:40,384 basehttp 28132 12436 "POST /auth/login/ HTTP/1.1" 302 0
 INFO 2025-10-17 14:13:43,784 basehttp 28132 12436 "GET /dashboard/ HTTP/1.1" 200 44259
+INFO 2025-10-17 15:11:01,761 autoreload 516 27668 Watching for file changes with StatReloader
+INFO 2025-10-17 15:11:08,840 basehttp 516 27392 "GET / HTTP/1.1" 302 0
+INFO 2025-10-17 15:11:12,497 basehttp 516 27392 "GET /dashboard/ HTTP/1.1" 200 43687
+INFO 2025-10-17 15:11:24,422 basehttp 516 27392 "GET /dashboard/upload/ HTTP/1.1" 200 61782
+INFO 2025-10-17 15:11:35,137 basehttp 516 27392 "POST /dashboard/upload/ HTTP/1.1" 200 145
+INFO 2025-10-17 15:11:42,446 basehttp 516 27392 "GET /dashboard/ HTTP/1.1" 200 43710
+INFO 2025-10-17 15:11:56,417 basehttp 516 27392 "GET /dashboard/reviews/ HTTP/1.1" 200 163951
+INFO 2025-10-17 15:12:04,937 basehttp 516 27392 "GET /dashboard/ HTTP/1.1" 200 43710
+INFO 2025-10-17 15:12:15,284 orchestrator 516 27392 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-17 15:12:15,288 orchestrator 516 27392 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-17 15:12:15,291 orchestrator 516 27392 [STAGE 1] Title Generator Agent initialized
+INFO 2025-10-17 15:12:15,291 orchestrator 516 27392 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-17 15:12:15,291 orchestrator 516 27392 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-17 15:12:15,576 views 516 27392 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 5 reviews
+INFO 2025-10-17 15:12:15,937 orchestrator 516 27392 [STAGE 1] Processing review c273a85b-d963-44e8-9eb1-dacc598be86d
+INFO 2025-10-17 15:12:17,802 orchestrator 516 27392 [COMPLETED] Single review workflow completed in 1.87s
+INFO 2025-10-17 15:12:17,927 orchestrator 516 27392 [STAGE 1] Processing review ec59ddf4-97d6-41a9-82d1-1eb105230f89
+INFO 2025-10-17 15:12:19,890 orchestrator 516 27392 [COMPLETED] Single review workflow completed in 1.96s
+INFO 2025-10-17 15:12:20,011 orchestrator 516 27392 [STAGE 1] Processing review a4fdcab8-34a2-4b6c-ac42-4fddae660c5e
+INFO 2025-10-17 15:12:22,239 orchestrator 516 27392 [COMPLETED] Single review workflow completed in 2.23s
+INFO 2025-10-17 15:12:22,370 orchestrator 516 27392 [STAGE 1] Processing review d46bfed5-cd5f-489b-a9b7-4e47f28901cf
+INFO 2025-10-17 15:12:24,199 orchestrator 516 27392 [COMPLETED] Single review workflow completed in 1.83s
+INFO 2025-10-17 15:12:24,328 orchestrator 516 27392 [STAGE 1] Processing review 1c47646b-2c3c-4f2a-80f6-d8faf0ee6c3d
+INFO 2025-10-17 15:12:26,278 orchestrator 516 27392 [COMPLETED] Single review workflow completed in 1.95s
+INFO 2025-10-17 15:12:27,036 basehttp 516 27392 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-10-17 15:12:32,636 basehttp 516 27392 "GET /dashboard/ HTTP/1.1" 200 43676
+INFO 2025-10-17 15:12:38,651 basehttp 516 27392 "GET /dashboard/reviews/ HTTP/1.1" 200 165877
+INFO 2025-10-17 15:12:54,616 basehttp 516 27392 "GET /dashboard/analytics/ HTTP/1.1" 200 113019
+INFO 2025-10-17 15:12:55,179 views 516 27392 Retrieved persisted AI analysis: cc504c1f-57e6-48a4-95e1-1eed884f10e3
+INFO 2025-10-17 15:12:55,536 basehttp 516 27392 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5504
+INFO 2025-10-17 15:13:04,136 basehttp 516 27392 "GET /dashboard/upload/ HTTP/1.1" 200 61773
+INFO 2025-10-17 15:13:17,176 basehttp 516 27392 "GET /dashboard/reports/generate/ HTTP/1.1" 200 29809
+INFO 2025-10-17 15:14:07,860 basehttp 516 27392 "GET /dashboard/analytics/ HTTP/1.1" 200 113019
+INFO 2025-10-17 15:14:08,266 views 516 27392 Retrieved persisted AI analysis: cc504c1f-57e6-48a4-95e1-1eed884f10e3
+INFO 2025-10-17 15:14:08,620 basehttp 516 27392 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5504
+INFO 2025-10-17 15:14:18,199 basehttp 516 27392 "GET /dashboard/ HTTP/1.1" 200 43677
