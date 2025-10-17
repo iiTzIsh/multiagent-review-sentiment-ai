@@ -356,7 +356,6 @@ class ProcessReviewsAPIView(APIView):
             task.output_data = {
                 'processed_count': processed_count,
                 'success': True,
-                'agent_results': agent_results[:5],  # First 5 results for debugging
                 'orchestrator_stats': orchestrator_status['workflow_statistics'],
                 'method': 'AI Agent Pipeline'
             }

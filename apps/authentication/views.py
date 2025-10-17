@@ -15,9 +15,12 @@ from django.views.decorators.http import require_http_methods
 from django.core.exceptions import ValidationError
 from django.db import transaction
 import json
+import logging
 
 from apps.reviews.models import Hotel
 from apps.authentication.models import UserProfile
+
+logger = logging.getLogger(__name__)
 from apps.authentication.forms import UserRegistrationForm
 
 
@@ -96,11 +99,6 @@ def register_view(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         
-        # Debug: Print form data
-        import logging
-        logger = logging.getLogger(__name__)
-        logger.info(f"Form data received: {request.POST}")
-        
         if form.is_valid():
             try:
                 with transaction.atomic():
@@ -113,7 +111,6 @@ def register_view(request):
                 logger.error(f"Error creating user: {str(e)}")
                 messages.error(request, f'Error creating user: {str(e)}')
         else:
-            # Debug: Print form errors
             logger.error(f"Form validation failed: {form.errors}")
             messages.error(request, 'Please correct the errors below and try again.')
             
