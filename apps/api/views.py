@@ -324,6 +324,12 @@ class ProcessReviewsAPIView(APIView):
                     review.sentiment = analysis['sentiment']
                     review.ai_score = analysis['score']
                     review.confidence_score = analysis['overall_confidence']
+                    
+                    # Update title with AI-generated title if not already set
+                    if 'title' in analysis and analysis['title']:
+                        if not review.title or review.title.strip() == '':
+                            review.title = analysis['title']
+                    
                     review.processed = True
                     review.save()
                     
@@ -331,6 +337,7 @@ class ProcessReviewsAPIView(APIView):
                         'review_id': str(review.id),
                         'sentiment': analysis['sentiment'],
                         'score': analysis['score'],
+                        'title': analysis.get('title', ''),
                         'confidence': analysis['overall_confidence']
                     })
                     

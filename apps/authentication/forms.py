@@ -127,14 +127,34 @@ class UserRegistrationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         
+        # Mark required fields
+        self.fields['username'].required = True
+        self.fields['email'].required = True
+        self.fields['password1'].required = True
+        self.fields['password2'].required = True
+        self.fields['role'].required = True
+        
         # Update password field styling
         self.fields['password1'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Enter password',
+            'required': True,
         })
         self.fields['password2'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Confirm password',
+            'required': True,
+        })
+        
+        # Update other required field attributes
+        self.fields['username'].widget.attrs.update({
+            'required': True,
+        })
+        self.fields['email'].widget.attrs.update({
+            'required': True,
+        })
+        self.fields['role'].widget.attrs.update({
+            'required': True,
         })
         
         # Update help texts
@@ -148,6 +168,37 @@ class UserRegistrationForm(UserCreationForm):
         if email and User.objects.filter(email=email).exists():
             raise ValidationError("A user with this email already exists.")
         return email
+    
+    def clean_username(self):
+        """Validate username"""
+        username = self.cleaned_data.get('username')
+        if not username:
+            raise ValidationError("Username is required.")
+        if len(username) < 3:
+            raise ValidationError("Username must be at least 3 characters long.")
+        if User.objects.filter(username=username).exists():
+            raise ValidationError("A user with this username already exists.")
+        return username
+    
+    def clean_password1(self):
+        """Validate password strength"""
+        password = self.cleaned_data.get('password1')
+        if not password:
+            raise ValidationError("Password is required.")
+        if len(password) < 8:
+            raise ValidationError("Password must be at least 8 characters long.")
+        return password
+    
+    def clean(self):
+        """Validate form data"""
+        cleaned_data = super().clean()
+        password1 = cleaned_data.get('password1')
+        password2 = cleaned_data.get('password2')
+        
+        if password1 and password2 and password1 != password2:
+            raise ValidationError("Passwords do not match.")
+        
+        return cleaned_data
     
     def save(self, commit=True):
         """Save user and create profile"""

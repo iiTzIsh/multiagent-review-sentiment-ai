@@ -95,15 +95,35 @@ def register_view(request):
     
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
+        
+        # Debug: Print form data
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.info(f"Form data received: {request.POST}")
+        
         if form.is_valid():
             try:
                 with transaction.atomic():
                     # Save the user and profile
                     user = form.save()
                     messages.success(request, f'User account created successfully for {user.get_full_name() or user.username}!')
+                    logger.info(f"User created successfully: {user.username}")
                     return redirect('auth:register')
             except Exception as e:
+                logger.error(f"Error creating user: {str(e)}")
                 messages.error(request, f'Error creating user: {str(e)}')
+        else:
+            # Debug: Print form errors
+            logger.error(f"Form validation failed: {form.errors}")
+            messages.error(request, 'Please correct the errors below and try again.')
+            
+            # Add specific error messages for common issues
+            if 'password2' in form.errors:
+                messages.error(request, 'Password confirmation does not match.')
+            if 'username' in form.errors:
+                messages.error(request, 'Username already exists or is invalid.')
+            if 'email' in form.errors:
+                messages.error(request, 'Email address already exists or is invalid.')
     else:
         form = UserRegistrationForm()
     
@@ -229,6 +249,74 @@ def get_client_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
+
+@login_required
+def user_preview_view(request, user_id):
+    """Preview user details (admin only)"""
+    if not (request.user.is_superuser or 
+            (hasattr(request.user, 'profile') and request.user.profile.role == 'admin')):
+        return JsonResponse({'success': False, 'error': 'Permission denied'})
+    
+    user = get_object_or_404(User, id=user_id)
+    profile, _ = UserProfile.objects.get_or_create(user=user)
+    
+    user_data = {
+        'id': user.id,
+        'username': user.username,
+        'first_name': user.first_name,
+        'last_name': user.last_name,
+        'email': user.email,
+        'is_active': user.is_active,
+        'is_superuser': user.is_superuser,
+        'date_joined': user.date_joined.strftime('%B %d, %Y at %I:%M %p') if user.date_joined else 'Unknown',
+        'last_login': user.last_login.strftime('%B %d, %Y at %I:%M %p') if user.last_login else 'Never',
+        'profile': {
+            'role': profile.get_role_display(),
+            'phone_number': profile.phone_number or 'Not provided',
+            'department': profile.department or 'Not specified',
+            'hotel': profile.hotel.name if profile.hotel else 'No hotel assigned',
+            'last_login_ip': profile.last_login_ip or 'Unknown'
+        }
+    }
+    
+    return JsonResponse({'success': True, 'user': user_data})
+
+
+@login_required
+@csrf_exempt
+def delete_user_view(request):
+    """Delete user (admin only)"""
+    if not (request.user.is_superuser or 
+            (hasattr(request.user, 'profile') and request.user.profile.role == 'admin')):
+        return JsonResponse({'success': False, 'error': 'Permission denied'})
+    
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            user_id = data.get('user_id')
+            user = get_object_or_404(User, id=user_id)
+            
+            # Prevent deletion of superusers
+            if user.is_superuser:
+                return JsonResponse({'success': False, 'error': 'Cannot delete superuser accounts'})
+            
+            # Prevent self-deletion
+            if user.id == request.user.id:
+                return JsonResponse({'success': False, 'error': 'Cannot delete your own account'})
+            
+            username = user.get_full_name() or user.username
+            user.delete()
+            
+            return JsonResponse({
+                'success': True,
+                'message': f'User "{username}" has been permanently deleted'
+            })
+            
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 
 def unauthorized_view(request):
