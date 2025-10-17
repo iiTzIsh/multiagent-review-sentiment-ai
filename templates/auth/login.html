@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Hotel Review Platform</title>
+    <title>Login - Rivox AI</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -16,10 +16,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
-        /* Dark blue theme for login page */
+        /* Dark slate theme matching landing page */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1A202C;
+            background-color: #0f172a;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -29,18 +29,18 @@
         }
         
         .login-container {
-            background-color: #2D3748;
+            background-color: #1e293b;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
             overflow: hidden;
             max-width: 900px;
             width: 100%;
             margin: 20px;
-            border: 1px solid #4A5568;
+            border: 1px solid #334155;
         }
         
         .login-left {
-            background-color: #4A5568;
+            background: linear-gradient(135deg, #1e293b 0%, #2563eb 50%, #10b981 100%);
             color: white;
             padding: 60px 40px;
             text-align: center;
@@ -52,8 +52,8 @@
         
         .login-right {
             padding: 60px 40px;
-            background-color: #2D3748;
-            color: #FFFFFF;
+            background-color: #1e293b;
+            color: #f1f5f9;
         }
         
         .brand-logo {
@@ -66,25 +66,25 @@
             font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 10px;
-            color: #FFFFFF !important;
+            color: #f1f5f9 !important;
         }
         
         .brand-subtitle {
             font-size: 1rem;
             opacity: 0.9;
             line-height: 1.6;
-            color: #E2E8F0 !important;
+            color: #e2e8f0 !important;
         }
         
         .form-title {
             font-size: 2rem;
             font-weight: 700;
-            color: #FFFFFF !important;
+            color: #f1f5f9 !important;
             margin-bottom: 10px;
         }
         
         .form-subtitle {
-            color: #A0AEC0 !important;
+            color: #94a3b8 !important;
             margin-bottom: 30px;
         }
         
@@ -114,21 +114,21 @@
             border: 1px solid transparent;
             transform-origin: 0 0;
             transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out;
-            color: #A0AEC0 !important;
+            color: #94a3b8 !important;
         }
         
         .form-floating > .form-control:focus ~ .form-label,
         .form-floating > .form-control:not(:placeholder-shown) ~ .form-label {
             opacity: 0.65;
             transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
-            color: #E2E8F0 !important;
+            color: #e2e8f0 !important;
         }
         
         /* Additional floating label fixes */
         .form-floating > .form-control:focus,
         .form-floating > .form-control:not(:placeholder-shown) {
-            background-color: #1A202C !important;
-            color: #FFFFFF !important;
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
         }
         
         .form-floating > .form-control:focus::placeholder,
@@ -137,9 +137,9 @@
         }
         
         .form-control {
-            background-color: #1A202C !important;
-            color: #FFFFFF !important;
-            border: 2px solid #4A5568 !important;
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+            border: 2px solid #475569 !important;
             border-radius: 10px;
             padding: 15px;
             font-size: 16px;
@@ -147,23 +147,23 @@
         }
         
         .form-control:focus {
-            background-color: #1A202C !important;
-            color: #FFFFFF !important;
-            border-color: #4A5568 !important;
-            box-shadow: 0 0 0 3px rgba(74, 85, 104, 0.3);
+            background-color: #0f172a !important;
+            color: #f1f5f9 !important;
+            border-color: #10b981 !important;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
         }
         
         .form-control::placeholder {
-            color: #A0AEC0 !important;
+            color: #94a3b8 !important;
         }
         
         .form-label {
-            color: #E2E8F0 !important;
+            color: #e2e8f0 !important;
             font-weight: 500;
         }
         
         .btn-login {
-            background-color: #4A5568;
+            background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
             border: none;
             border-radius: 10px;
             padding: 15px;
@@ -175,10 +175,10 @@
         }
         
         .btn-login:hover {
-            background-color: #2D3748;
+            background: linear-gradient(135deg, #1d4ed8 0%, #059669 100%);
             color: #FFFFFF;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(74, 85, 104, 0.3);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
         }
         
         .remember-me {
@@ -186,17 +186,17 @@
         }
         
         .form-check-label {
-            color: #E2E8F0 !important;
+            color: #e2e8f0 !important;
         }
         
         .form-check-input {
-            background-color: #1A202C;
-            border-color: #4A5568;
+            background-color: #0f172a;
+            border-color: #475569;
         }
         
         .form-check-input:checked {
-            background-color: #4A5568;
-            border-color: #4A5568;
+            background-color: #10b981;
+            border-color: #10b981;
         }
         
         .form-check-input:focus {
@@ -211,37 +211,37 @@
         }
         
         .alert-danger {
-            background-color: #742A2A;
-            color: #FED7D7;
-            border: 1px solid #E53E3E;
+            background-color: #7f1d1d;
+            color: #fecaca;
+            border: 1px solid #dc2626;
         }
         
         .alert-success {
-            background-color: #22543D;
-            color: #C6F6D5;
-            border: 1px solid #38A169;
+            background-color: #064e3b;
+            color: #a7f3d0;
+            border: 1px solid #10b981;
         }
         
         .alert-info {
-            background-color: #1A365D;
-            color: #BEE3F8;
-            border: 1px solid #3182CE;
+            background-color: #1e3a8a;
+            color: #bfdbfe;
+            border: 1px solid #2563eb;
         }
         
         .text-danger {
-            color: #F56565 !important;
+            color: #ef4444 !important;
         }
         
         .text-muted {
-            color: #A0AEC0 !important;
+            color: #94a3b8 !important;
         }
         
         .text-center p {
-            color: #A0AEC0 !important;
+            color: #94a3b8 !important;
         }
         
         .text-center small {
-            color: #A0AEC0 !important;
+            color: #94a3b8 !important;
         }
         
         /* Override any remaining light theme colors */
@@ -280,8 +280,8 @@
             <div class="col-lg-6 d-none d-lg-block">
                 <div class="login-left h-100">
                     <div>
-                        <i class="fas fa-chart-line brand-logo"></i>
-                        <h2 class="brand-title">Hotel Review Insight Platform</h2>
+                        <img src="{% static 'img/R.png' %}" alt="Rivox AI" class="brand-logo" style="width: 64px; height: 64px; margin-bottom: 20px;">
+                        <h2 class="brand-title">Rivox AI</h2>
                         <p class="brand-subtitle">
                             Professional analytics platform for hotel review management with AI-powered insights.
                             Transform your guest feedback into actionable business intelligence.

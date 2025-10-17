@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Hotel Review Insight Platform{% endblock %}</title>
+    <title>{% block title %}Rivox AI{% endblock %}</title>
+    
+    <!-- Favicon -->
+    {% load static %}
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/Rfv.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/Rfv.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'img/Rfv.png' %}">
+    <link rel="shortcut icon" href="{% static 'img/Rfv.png' %}">
     
     <!-- Preload critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,8 +42,10 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="{% url 'dashboard:home' %}">
-                <i class="fas fa-chart-line me-2"></i>
-                <span class="d-none d-sm-inline">Hotel Review Insight Platform</span>
+                <div class="me-2">
+                    <img src="{% load static %}{% static 'img/R.png' %}" alt="Rivox AI Logo" class="navbar-logo" style="width: 32px; height: 32px; object-fit: contain;">
+                </div>
+                <span class="d-none d-sm-inline">Rivox AI</span>
                 <span class="d-inline d-sm-none">Hotel Analytics</span>
             </a>
             
@@ -247,8 +256,8 @@
             <div class="row align-items-center py-3">
                 <div class="col-md-6">
                     <div class="d-flex align-items-center">
-                        <i class="fas fa-chart-line me-2 opacity-75"></i>
-                        <p class="mb-0">&copy; 2025 Hotel Review Insight Platform. All rights reserved.</p>
+                        <img src="{% load static %}{% static 'img/R.png' %}" alt="Platform Logo" class="me-2" style="width: 20px; height: 20px; object-fit: contain; opacity: 0.75;">
+                        <p class="mb-0">&copy; 2025 Rivox AI</p>
                     </div>
                 </div>
                 <div class="col-md-6 text-md-end">

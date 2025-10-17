@@ -1763,3 +1763,410 @@ INFO 2025-10-17 15:14:07,860 basehttp 516 27392 "GET /dashboard/analytics/ HTTP/
 INFO 2025-10-17 15:14:08,266 views 516 27392 Retrieved persisted AI analysis: cc504c1f-57e6-48a4-95e1-1eed884f10e3
 INFO 2025-10-17 15:14:08,620 basehttp 516 27392 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5504
 INFO 2025-10-17 15:14:18,199 basehttp 516 27392 "GET /dashboard/ HTTP/1.1" 200 43677
+INFO 2025-10-17 16:40:39,528 autoreload 27816 28960 Watching for file changes with StatReloader
+INFO 2025-10-17 16:41:05,212 autoreload 27816 28960 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 16:41:05,794 autoreload 3208 31248 Watching for file changes with StatReloader
+INFO 2025-10-17 16:44:09,509 autoreload 4420 30564 Watching for file changes with StatReloader
+INFO 2025-10-17 16:44:14,874 basehttp 4420 27960 "GET / HTTP/1.1" 200 51190
+INFO 2025-10-17 16:45:09,462 basehttp 4420 27960 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-17 16:45:09,479 basehttp 4420 27960 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11566
+INFO 2025-10-17 16:45:23,574 basehttp 4420 27960 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-17 16:45:23,586 basehttp 4420 27960 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11566
+INFO 2025-10-17 16:45:59,249 basehttp 4420 27960 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-17 16:45:59,261 basehttp 4420 27960 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11566
+INFO 2025-10-17 16:46:05,664 basehttp 4420 27960 "POST /auth/login/?next=/app/ HTTP/1.1" 200 11888
+INFO 2025-10-17 16:46:14,001 basehttp 4420 27960 "POST /auth/login/?next=/app/ HTTP/1.1" 200 11888
+INFO 2025-10-17 16:46:27,140 basehttp 4420 27960 "POST /auth/login/?next=/app/ HTTP/1.1" 200 11888
+INFO 2025-10-17 16:46:45,860 basehttp 4420 27960 "POST /auth/login/?next=/app/ HTTP/1.1" 200 11888
+INFO 2025-10-17 16:47:02,900 basehttp 4420 27960 "POST /auth/login/?next=/app/ HTTP/1.1" 200 11888
+INFO 2025-10-17 16:47:24,671 autoreload 15420 30484 Watching for file changes with StatReloader
+INFO 2025-10-17 16:47:46,042 basehttp 4420 20876 "GET /?id=52a6bd7a-1222-4cfc-8ce3-906359cd89a7&vscodeBrowserReqId=1760699865732 HTTP/1.1" 200 51190
+INFO 2025-10-17 16:47:57,743 basehttp 4420 20876 "GET /app/?id=52a6bd7a-1222-4cfc-8ce3-906359cd89a7&vscodeBrowserReqId=1760699877738 HTTP/1.1" 302 0
+INFO 2025-10-17 16:47:57,745 basehttp 4420 20876 "GET /auth/login/?next=/app/%3Fid%3D52a6bd7a-1222-4cfc-8ce3-906359cd89a7%26vscodeBrowserReqId%3D1760699877738 HTTP/1.1" 200 11566
+INFO 2025-10-17 16:48:09,932 basehttp 4420 27960 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11566
+INFO 2025-10-17 16:48:16,166 basehttp 4420 20876 "GET /auth/login/?id=52a6bd7a-1222-4cfc-8ce3-906359cd89a7&vscodeBrowserReqId=1760699896166 HTTP/1.1" 200 11566
+INFO 2025-10-17 16:49:04,681 autoreload 4420 30564 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 16:49:05,320 autoreload 31548 26872 Watching for file changes with StatReloader
+INFO 2025-10-17 16:49:14,800 basehttp 31548 25836 "GET /pricing-calculator/?properties=1&reviews=1000 HTTP/1.1" 200 87
+INFO 2025-10-17 16:49:16,174 autoreload 31548 26872 E:\ish\multiagent-review-sentiment-ai\apps\authentication\views.py changed, reloading.
+INFO 2025-10-17 16:49:16,759 autoreload 31364 30780 Watching for file changes with StatReloader
+INFO 2025-10-17 16:49:20,361 basehttp 31364 25800 "GET /pricing-calculator/?properties=4&reviews=1000 HTTP/1.1" 200 93
+INFO 2025-10-17 16:49:23,495 autoreload 31364 30780 E:\ish\multiagent-review-sentiment-ai\apps\authentication\views.py changed, reloading.
+INFO 2025-10-17 16:49:24,059 autoreload 30220 31544 Watching for file changes with StatReloader
+INFO 2025-10-17 16:49:35,878 autoreload 30220 31544 E:\ish\multiagent-review-sentiment-ai\apps\authentication\views.py changed, reloading.
+INFO 2025-10-17 16:49:36,486 autoreload 16824 23196 Watching for file changes with StatReloader
+INFO 2025-10-17 16:49:46,205 autoreload 16824 23196 E:\ish\multiagent-review-sentiment-ai\apps\authentication\views.py changed, reloading.
+INFO 2025-10-17 16:49:46,749 autoreload 3500 21080 Watching for file changes with StatReloader
+INFO 2025-10-17 16:51:12,233 basehttp 3500 28184 "GET / HTTP/1.1" 200 51190
+INFO 2025-10-17 16:51:14,770 basehttp 3500 28184 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-17 16:51:14,787 basehttp 3500 28184 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11566
+INFO 2025-10-17 16:51:20,904 basehttp 3500 28184 "POST /auth/login/?next=/app/ HTTP/1.1" 200 11888
+INFO 2025-10-17 16:52:06,887 autoreload 3500 21080 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 16:52:07,467 autoreload 31472 11752 Watching for file changes with StatReloader
+INFO 2025-10-17 16:57:02,158 autoreload 31472 11752 E:\ish\multiagent-review-sentiment-ai\apps\authentication\views.py changed, reloading.
+INFO 2025-10-17 16:57:02,757 autoreload 17160 18476 Watching for file changes with StatReloader
+INFO 2025-10-17 16:57:21,784 autoreload 17160 18476 E:\ish\multiagent-review-sentiment-ai\apps\authentication\views.py changed, reloading.
+INFO 2025-10-17 16:57:22,305 autoreload 31980 3920 Watching for file changes with StatReloader
+INFO 2025-10-17 16:57:43,467 autoreload 31980 3920 E:\ish\multiagent-review-sentiment-ai\apps\authentication\views.py changed, reloading.
+INFO 2025-10-17 16:57:44,058 autoreload 31216 32200 Watching for file changes with StatReloader
+INFO 2025-10-17 16:57:54,717 autoreload 31216 32200 E:\ish\multiagent-review-sentiment-ai\apps\authentication\views.py changed, reloading.
+INFO 2025-10-17 16:57:55,281 autoreload 22004 5640 Watching for file changes with StatReloader
+INFO 2025-10-17 16:58:30,153 autoreload 22004 5640 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 16:58:30,608 autoreload 28016 16008 Watching for file changes with StatReloader
+INFO 2025-10-17 16:59:01,174 autoreload 18044 20820 Watching for file changes with StatReloader
+INFO 2025-10-17 16:59:04,771 basehttp 28016 30868 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11566
+INFO 2025-10-17 16:59:06,432 basehttp 28016 30868 "GET / HTTP/1.1" 200 51190
+INFO 2025-10-17 16:59:08,312 basehttp 28016 30868 "GET / HTTP/1.1" 200 51190
+INFO 2025-10-17 16:59:09,588 basehttp 28016 30868 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-17 16:59:09,604 basehttp 28016 30868 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11566
+INFO 2025-10-17 16:59:20,869 basehttp 28016 30868 "POST /auth/login/?next=/app/ HTTP/1.1" 302 0
+INFO 2025-10-17 16:59:20,885 basehttp 28016 30868 "GET /app/ HTTP/1.1" 200 32456
+WARNING 2025-10-17 16:59:31,372 log 28016 30868 Forbidden (CSRF token from POST incorrect.): /auth/login/
+WARNING 2025-10-17 16:59:31,381 basehttp 28016 30868 "POST /auth/login/?next=/app/ HTTP/1.1" 403 2518
+INFO 2025-10-17 16:59:34,859 basehttp 28016 30868 "GET /auth/login/?next=/app/ HTTP/1.1" 302 0
+INFO 2025-10-17 16:59:34,881 basehttp 28016 30868 "GET /app/ HTTP/1.1" 200 31848
+INFO 2025-10-17 16:59:38,291 basehttp 28016 30868 "GET /auth/logout/ HTTP/1.1" 302 0
+INFO 2025-10-17 16:59:38,296 basehttp 28016 30868 "GET /auth/login/ HTTP/1.1" 200 11904
+INFO 2025-10-17 16:59:44,020 basehttp 28016 30868 "POST /auth/login/ HTTP/1.1" 200 11888
+INFO 2025-10-17 16:59:57,910 basehttp 28016 30868 "POST /auth/login/ HTTP/1.1" 200 11888
+INFO 2025-10-17 17:00:36,019 autoreload 28016 16008 E:\ish\multiagent-review-sentiment-ai\apps\marketing\views.py changed, reloading.
+INFO 2025-10-17 17:00:36,440 autoreload 18044 20820 E:\ish\multiagent-review-sentiment-ai\apps\marketing\urls.py changed, reloading.
+INFO 2025-10-17 17:00:36,487 autoreload 20704 16736 Watching for file changes with StatReloader
+INFO 2025-10-17 17:00:37,117 autoreload 19032 13244 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:21,128 autoreload 19032 13244 E:\ish\multiagent-review-sentiment-ai\apps\api\views.py changed, reloading.
+INFO 2025-10-17 17:01:21,782 autoreload 32168 30900 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:23,432 autoreload 20704 16736 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 17:01:23,861 autoreload 25272 32132 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:23,903 autoreload 32168 30900 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 17:01:24,584 autoreload 27120 28904 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:26,082 autoreload 25272 32132 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 17:01:26,552 autoreload 23836 3940 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:26,674 autoreload 27120 28904 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 17:01:27,319 autoreload 15160 21736 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:30,914 autoreload 23836 3940 E:\ish\multiagent-review-sentiment-ai\apps\api\views.py changed, reloading.
+INFO 2025-10-17 17:01:31,472 autoreload 3452 32012 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:31,548 autoreload 15160 21736 E:\ish\multiagent-review-sentiment-ai\apps\api\views.py changed, reloading.
+INFO 2025-10-17 17:01:32,227 autoreload 24492 16124 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:34,359 autoreload 24492 16124 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\urls.py changed, reloading.
+INFO 2025-10-17 17:01:34,918 autoreload 3452 32012 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\urls.py changed, reloading.
+INFO 2025-10-17 17:01:35,027 autoreload 30288 27492 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:35,454 autoreload 31044 32480 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:37,102 autoreload 30288 27492 E:\ish\multiagent-review-sentiment-ai\apps\authentication\forms.py changed, reloading.
+INFO 2025-10-17 17:01:37,676 autoreload 31044 32480 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 17:01:37,759 autoreload 16832 24012 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:38,197 autoreload 27936 31092 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:39,896 autoreload 16832 24012 E:\ish\multiagent-review-sentiment-ai\apps\authentication\views.py changed, reloading.
+INFO 2025-10-17 17:01:40,490 autoreload 18020 32388 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:41,413 autoreload 27936 31092 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 17:01:41,843 autoreload 16516 11184 Watching for file changes with StatReloader
+INFO 2025-10-17 17:01:42,578 autoreload 18020 32388 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 17:01:43,179 autoreload 30076 15696 Watching for file changes with StatReloader
+INFO 2025-10-17 17:02:39,754 autoreload 30076 15696 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 17:02:40,462 autoreload 32036 32000 Watching for file changes with StatReloader
+INFO 2025-10-17 17:02:40,721 autoreload 16516 11184 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 17:02:41,256 autoreload 19676 30900 Watching for file changes with StatReloader
+INFO 2025-10-17 17:02:54,349 basehttp 32036 16480 "GET /auth/login/ HTTP/1.1" 200 11566
+INFO 2025-10-17 17:02:57,358 basehttp 32036 16480 "GET / HTTP/1.1" 302 0
+INFO 2025-10-17 17:02:57,361 basehttp 32036 16480 "GET /auth/login/?next=/ HTTP/1.1" 200 11566
+INFO 2025-10-17 17:02:58,429 basehttp 32036 16480 "GET /auth/login/?next=/ HTTP/1.1" 200 11566
+INFO 2025-10-17 17:03:13,160 autoreload 28476 18388 Watching for file changes with StatReloader
+INFO 2025-10-17 17:03:16,794 basehttp 28476 8072 "GET / HTTP/1.1" 302 0
+INFO 2025-10-17 17:03:16,801 basehttp 28476 8072 "GET /auth/login/?next=/ HTTP/1.1" 200 11566
+INFO 2025-10-17 17:03:37,983 autoreload 28476 18388 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 17:03:38,622 autoreload 15948 18768 Watching for file changes with StatReloader
+INFO 2025-10-17 17:03:41,828 autoreload 15948 18768 E:\ish\multiagent-review-sentiment-ai\apps\api\views.py changed, reloading.
+INFO 2025-10-17 17:03:42,479 autoreload 29076 6304 Watching for file changes with StatReloader
+INFO 2025-10-17 17:05:00,901 basehttp 29076 27912 "GET / HTTP/1.1" 302 0
+INFO 2025-10-17 17:05:00,907 basehttp 29076 27912 "GET /auth/login/?next=/ HTTP/1.1" 200 11566
+INFO 2025-10-17 17:05:09,536 basehttp 29076 27912 "POST /auth/login/?next=/ HTTP/1.1" 302 0
+INFO 2025-10-17 17:05:10,272 basehttp 29076 27912 "GET / HTTP/1.1" 302 0
+INFO 2025-10-17 17:05:14,006 basehttp 29076 27912 "GET /dashboard/ HTTP/1.1" 200 44299
+INFO 2025-10-17 17:21:20,518 autoreload 29076 6304 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\settings.py changed, reloading.
+INFO 2025-10-17 17:21:21,169 autoreload 25632 21940 Watching for file changes with StatReloader
+INFO 2025-10-17 17:21:37,313 autoreload 25632 21940 E:\ish\multiagent-review-sentiment-ai\hotel_review_platform\urls.py changed, reloading.
+INFO 2025-10-17 17:21:37,922 autoreload 8608 29588 Watching for file changes with StatReloader
+INFO 2025-10-17 17:21:46,486 autoreload 8608 29588 E:\ish\multiagent-review-sentiment-ai\apps\marketing\views.py changed, reloading.
+INFO 2025-10-17 17:21:47,125 autoreload 424 16300 Watching for file changes with StatReloader
+INFO 2025-10-17 17:21:55,673 autoreload 424 16300 E:\ish\multiagent-review-sentiment-ai\apps\marketing\views.py changed, reloading.
+INFO 2025-10-17 17:21:56,273 autoreload 29088 10204 Watching for file changes with StatReloader
+INFO 2025-10-17 17:22:48,253 autoreload 25292 12716 Watching for file changes with StatReloader
+INFO 2025-10-17 17:23:31,913 autoreload 29828 30464 Watching for file changes with StatReloader
+INFO 2025-10-17 17:23:36,807 basehttp 29088 29220 "GET / HTTP/1.1" 200 51273
+INFO 2025-10-17 17:23:45,107 basehttp 29088 29220 "GET /app/ HTTP/1.1" 200 43607
+INFO 2025-10-17 17:24:00,158 basehttp 29088 28824 "GET / HTTP/1.1" 200 51273
+WARNING 2025-10-17 17:24:01,653 log 29088 28824 Not Found: /favicon.ico
+WARNING 2025-10-17 17:24:01,654 basehttp 29088 28824 "GET /favicon.ico HTTP/1.1" 404 3940
+INFO 2025-10-17 17:24:02,665 basehttp 29088 28824 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-17 17:24:02,669 basehttp 29088 28824 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11566
+INFO 2025-10-17 17:24:11,947 basehttp 29088 28824 "POST /auth/login/?next=/app/ HTTP/1.1" 302 0
+INFO 2025-10-17 17:24:14,662 basehttp 29088 28824 "GET /app/ HTTP/1.1" 200 44216
+INFO 2025-10-17 17:24:14,679 basehttp 29088 27472 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-10-17 17:24:14,710 basehttp 29088 28824 "GET /static/css/dashboard.css HTTP/1.1" 200 37848
+INFO 2025-10-17 17:27:08,381 basehttp 29088 28824 "GET / HTTP/1.1" 200 51273
+INFO 2025-10-17 17:33:37,095 basehttp 29088 14000 "GET /app/ HTTP/1.1" 200 43607
+INFO 2025-10-17 17:33:37,115 basehttp 29088 14000 "GET /static/css/dashboard.css HTTP/1.1" 304 0
+INFO 2025-10-17 17:33:45,967 basehttp 29088 14000 "GET /app/ HTTP/1.1" 200 43607
+INFO 2025-10-17 17:35:39,339 basehttp 17908 15236 "GET / HTTP/1.1" 200 51273
+INFO 2025-10-17 17:36:36,875 basehttp 17908 15236 "GET /app/ HTTP/1.1" 200 43608
+INFO 2025-10-17 17:36:36,897 basehttp 17908 15236 "GET /static/css/dashboard.css HTTP/1.1" 304 0
+INFO 2025-10-17 17:44:47,524 basehttp 17908 29456 "GET / HTTP/1.1" 200 51273
+INFO 2025-10-17 17:44:51,410 basehttp 17908 29456 "GET / HTTP/1.1" 200 51273
+INFO 2025-10-17 17:45:08,468 basehttp 33272 22048 "GET / HTTP/1.1" 200 51650
+INFO 2025-10-17 17:46:30,311 basehttp 33272 22048 "GET / HTTP/1.1" 200 51650
+INFO 2025-10-17 17:46:39,862 autoreload 26500 30620 Watching for file changes with StatReloader
+INFO 2025-10-17 17:46:43,774 basehttp 26500 31728 "GET / HTTP/1.1" 200 50037
+INFO 2025-10-17 17:47:44,301 basehttp 26500 31728 "GET / HTTP/1.1" 200 46491
+INFO 2025-10-17 17:49:19,705 basehttp 26500 31728 "GET /app/ HTTP/1.1" 200 43607
+INFO 2025-10-17 17:49:28,514 basehttp 26500 31728 "GET / HTTP/1.1" 200 46491
+INFO 2025-10-17 17:52:02,268 basehttp 26500 31728 "GET / HTTP/1.1" 200 46488
+INFO 2025-10-17 17:52:46,595 basehttp 26500 31728 "GET / HTTP/1.1" 200 46479
+INFO 2025-10-17 17:56:07,486 basehttp 26500 31728 "GET / HTTP/1.1" 200 46483
+INFO 2025-10-17 17:56:31,405 basehttp 26500 31728 "GET /app/ HTTP/1.1" 200 43595
+INFO 2025-10-17 17:58:05,823 basehttp 26500 31728 "GET /app/ HTTP/1.1" 200 43574
+INFO 2025-10-17 17:58:17,757 autoreload 22268 31828 Watching for file changes with StatReloader
+INFO 2025-10-17 17:58:22,156 basehttp 22268 21732 "GET / HTTP/1.1" 200 46483
+INFO 2025-10-17 17:58:28,165 basehttp 22268 21732 "GET /app/ HTTP/1.1" 200 43574
+INFO 2025-10-17 17:58:58,000 basehttp 22268 21732 "GET /app/ HTTP/1.1" 200 43565
+INFO 2025-10-17 17:59:09,285 basehttp 22268 21732 "GET /app/ HTTP/1.1" 200 43607
+INFO 2025-10-17 17:59:37,994 basehttp 22268 21732 "GET /app/ HTTP/1.1" 200 43620
+INFO 2025-10-17 18:00:05,516 basehttp 22268 21732 "GET /app/ HTTP/1.1" 200 43607
+INFO 2025-10-17 18:00:20,732 basehttp 22268 21732 "GET /app/ HTTP/1.1" 200 43782
+INFO 2025-10-17 18:07:19,649 basehttp 22268 33128 "GET /app/ HTTP/1.1" 200 43841
+INFO 2025-10-17 18:07:19,728 basehttp 22268 33128 "GET /static/img/R.png HTTP/1.1" 200 33205
+INFO 2025-10-17 18:07:52,920 basehttp 22268 33128 "GET /app/ HTTP/1.1" 200 43841
+INFO 2025-10-17 18:07:52,936 basehttp 22268 33128 "GET /static/img/R.png HTTP/1.1" 200 30356
+INFO 2025-10-17 18:20:37,792 basehttp 22268 30632 "GET / HTTP/1.1" 200 46460
+INFO 2025-10-17 18:20:37,802 basehttp 22268 30632 "GET /static/img/R.png HTTP/1.1" 304 0
+INFO 2025-10-17 18:21:12,958 basehttp 22268 30632 "GET /app/ HTTP/1.1" 200 43839
+INFO 2025-10-17 18:21:24,500 autoreload 32940 34768 Watching for file changes with StatReloader
+INFO 2025-10-17 18:21:47,036 basehttp 32940 33824 "GET /app/ HTTP/1.1" 200 43819
+INFO 2025-10-17 18:22:01,678 basehttp 32940 33824 "GET /app/ HTTP/1.1" 200 43819
+INFO 2025-10-17 18:22:01,700 basehttp 32940 33824 "GET /static/img/R.png HTTP/1.1" 304 0
+INFO 2025-10-17 18:22:16,025 autoreload 33052 31084 Watching for file changes with StatReloader
+INFO 2025-10-17 18:22:27,291 basehttp 33052 24384 "GET / HTTP/1.1" 200 46460
+INFO 2025-10-17 18:22:27,344 basehttp 33052 24384 "GET /static/img/R.png HTTP/1.1" 200 30356
+INFO 2025-10-17 18:22:42,420 basehttp 33052 24384 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-17 18:22:42,437 basehttp 33052 24384 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11566
+INFO 2025-10-17 18:23:05,004 basehttp 33052 24384 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-17 18:23:05,009 basehttp 33052 24384 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11566
+INFO 2025-10-17 18:23:14,677 basehttp 33052 24384 "POST /auth/login/?next=/app/ HTTP/1.1" 200 11888
+INFO 2025-10-17 18:23:21,790 basehttp 33052 24384 "POST /auth/login/?next=/app/ HTTP/1.1" 302 0
+INFO 2025-10-17 18:23:25,405 basehttp 33052 24384 "GET /app/ HTTP/1.1" 200 44428
+INFO 2025-10-17 18:23:25,424 basehttp 33052 24384 "GET /static/css/dashboard.css HTTP/1.1" 200 37848
+INFO 2025-10-17 18:23:25,425 basehttp 33052 26508 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 200 12660
+INFO 2025-10-17 19:35:55,457 autoreload 30128 35944 Watching for file changes with StatReloader
+INFO 2025-10-17 19:35:59,624 basehttp 30128 7980 "GET / HTTP/1.1" 200 46460
+INFO 2025-10-17 19:35:59,650 basehttp 30128 7980 "GET /static/img/R.png HTTP/1.1" 304 0
+WARNING 2025-10-17 19:36:00,299 log 30128 7980 Not Found: /favicon.ico
+WARNING 2025-10-17 19:36:00,300 basehttp 30128 7980 "GET /favicon.ico HTTP/1.1" 404 3940
+INFO 2025-10-17 19:37:01,841 basehttp 30128 7980 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-17 19:37:01,848 basehttp 30128 7980 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11566
+INFO 2025-10-17 19:37:15,489 basehttp 30128 7980 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-17 19:37:15,495 basehttp 30128 7980 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11566
+INFO 2025-10-17 19:37:33,185 basehttp 30128 7980 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-17 19:37:33,189 basehttp 30128 7980 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11566
+INFO 2025-10-17 19:45:35,109 basehttp 30128 19112 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11737
+INFO 2025-10-17 19:45:35,119 basehttp 30128 19112 "GET /static/img/R.png HTTP/1.1" 304 0
+INFO 2025-10-17 19:45:46,902 basehttp 30128 19112 "GET / HTTP/1.1" 200 46460
+INFO 2025-10-17 19:45:48,355 basehttp 30128 19112 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-17 19:45:48,358 basehttp 30128 19112 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11737
+INFO 2025-10-17 19:46:00,582 basehttp 30128 19112 "POST /auth/login/?next=/app/ HTTP/1.1" 302 0
+INFO 2025-10-17 19:46:04,824 basehttp 30128 19112 "GET /app/ HTTP/1.1" 200 44429
+INFO 2025-10-17 19:46:19,059 basehttp 30128 19112 "GET / HTTP/1.1" 200 46460
+INFO 2025-10-17 19:46:42,828 basehttp 30128 19112 "GET /app/reviews/ HTTP/1.1" 200 165915
+INFO 2025-10-17 19:47:08,701 basehttp 30128 19112 "GET /app/analytics/ HTTP/1.1" 200 113183
+INFO 2025-10-17 19:47:09,162 views 30128 19112 Retrieved persisted AI analysis: cc504c1f-57e6-48a4-95e1-1eed884f10e3
+INFO 2025-10-17 19:47:09,566 basehttp 30128 19112 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5504
+INFO 2025-10-17 19:47:12,949 basehttp 30128 19112 "GET /auth/users/ HTTP/1.1" 200 31089
+INFO 2025-10-17 19:47:23,123 basehttp 30128 19112 "GET /admin/ HTTP/1.1" 200 10354
+INFO 2025-10-17 19:47:23,284 basehttp 30128 19112 "GET /static/admin/css/base.css HTTP/1.1" 200 22120
+INFO 2025-10-17 19:47:23,289 basehttp 30128 37152 "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 200 2810
+INFO 2025-10-17 19:47:23,290 basehttp 30128 29772 "GET /static/admin/css/dark_mode.css HTTP/1.1" 200 2808
+INFO 2025-10-17 19:47:23,292 basehttp 30128 12356 "GET /static/admin/css/responsive.css HTTP/1.1" 200 16565
+INFO 2025-10-17 19:47:23,293 basehttp 30128 38668 "GET /static/admin/css/dashboard.css HTTP/1.1" 200 441
+INFO 2025-10-17 19:47:23,315 basehttp 30128 38668 "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 200 3063
+INFO 2025-10-17 19:47:23,322 basehttp 30128 19032 "GET /static/admin/js/theme.js HTTP/1.1" 200 1653
+INFO 2025-10-17 19:47:23,337 basehttp 30128 38668 "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+INFO 2025-10-17 19:47:23,337 basehttp 30128 19032 "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+INFO 2025-10-17 19:47:31,085 basehttp 30128 19032 "GET /auth/profile/ HTTP/1.1" 200 33653
+INFO 2025-10-17 19:59:03,908 basehttp 30128 22068 "GET / HTTP/1.1" 200 46460
+INFO 2025-10-17 19:59:03,923 basehttp 30128 22068 "GET /static/img/R.png HTTP/1.1" 304 0
+INFO 2025-10-17 19:59:10,599 basehttp 30128 22068 "GET /app/ HTTP/1.1" 200 43819
+INFO 2025-10-17 19:59:16,658 basehttp 30128 22068 "GET /auth/profile/ HTTP/1.1" 200 33688
+INFO 2025-10-17 20:00:36,895 basehttp 30128 22068 "GET /auth/profile/ HTTP/1.1" 200 17349
+INFO 2025-10-17 20:00:46,167 basehttp 30128 22068 "GET /auth/profile/ HTTP/1.1" 200 33694
+INFO 2025-10-17 20:00:56,698 basehttp 30128 22068 "GET /auth/profile/ HTTP/1.1" 200 33694
+INFO 2025-10-17 20:01:08,605 basehttp 30128 22068 "GET /auth/profile/ HTTP/1.1" 200 33701
+INFO 2025-10-17 20:01:23,277 autoreload 33812 29948 Watching for file changes with StatReloader
+INFO 2025-10-17 20:01:27,339 basehttp 33812 3836 "GET / HTTP/1.1" 200 46460
+INFO 2025-10-17 20:01:32,335 basehttp 33812 3836 "GET /app/ HTTP/1.1" 200 43819
+INFO 2025-10-17 20:01:35,995 basehttp 33812 3836 "GET /auth/profile/ HTTP/1.1" 200 33694
+ERROR 2025-10-17 20:01:50,752 log 33812 3836 Internal Server Error: /auth/profile/
+Traceback (most recent call last):
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 510, in parse
+    compile_func = self.tags[command]
+                   ~~~~~~~~~^^^^^^^^^
+KeyError: 'endblock'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "E:\ish\multiagent-review-sentiment-ai\apps\authentication\views.py", line 156, in profile_view
+    return render(request, 'auth/profile.html', context)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loader.py", line 15, in get_template
+    return engine.get_template(template_name)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\backends\django.py", line 79, in get_template
+    return Template(self.engine.get_template(template_name), self)
+                    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\engine.py", line 177, in get_template
+    template, origin = self.find_template(template_name)
+                       ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\engine.py", line 159, in find_template
+    template = loader.get_template(name, skip=skip)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loaders\cached.py", line 57, in get_template
+    template = super().get_template(template_name, skip)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loaders\base.py", line 28, in get_template
+    return Template(
+        contents,
+    ...<2 lines>...
+        self.engine,
+    )
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 154, in __init__
+    self.nodelist = self.compile_nodelist()
+                    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 196, in compile_nodelist
+    nodelist = parser.parse()
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 518, in parse
+    raise self.error(token, e)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 516, in parse
+    compiled_result = compile_func(self, token)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loader_tags.py", line 299, in do_extends
+    nodelist = parser.parse()
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 512, in parse
+    self.invalid_block_tag(token, command, parse_until)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\base.py", line 577, in invalid_block_tag
+    raise self.error(
+    ...<3 lines>...
+    )
+django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 232: 'endblock'. Did you forget to register or load this tag?
+ERROR 2025-10-17 20:01:50,762 basehttp 33812 3836 "GET /auth/profile/ HTTP/1.1" 500 215858
+INFO 2025-10-17 20:01:57,315 basehttp 33812 3836 "GET /auth/profile/ HTTP/1.1" 200 33694
+INFO 2025-10-17 20:02:13,958 basehttp 33812 3836 "GET /auth/profile/ HTTP/1.1" 200 33694
+INFO 2025-10-17 20:03:39,058 basehttp 33812 3836 "GET /auth/profile/ HTTP/1.1" 200 33766
+INFO 2025-10-17 20:03:54,575 basehttp 33812 3836 "GET /auth/profile/ HTTP/1.1" 200 33766
+INFO 2025-10-17 20:04:43,871 basehttp 33812 3836 "GET /auth/profile/ HTTP/1.1" 200 33766
+INFO 2025-10-17 20:05:33,235 basehttp 33812 3836 "GET /app/ HTTP/1.1" 200 43819
+INFO 2025-10-17 20:06:37,313 basehttp 33812 30384 "GET /auth/profile/ HTTP/1.1" 200 33745
+INFO 2025-10-17 20:07:15,917 basehttp 33812 30384 "GET /auth/profile/ HTTP/1.1" 200 35484
+INFO 2025-10-17 20:07:55,432 basehttp 33812 30384 "GET /auth/profile/ HTTP/1.1" 200 33632
+INFO 2025-10-17 20:08:23,730 basehttp 33812 30384 "GET /auth/profile/ HTTP/1.1" 200 33611
+INFO 2025-10-17 20:08:33,756 basehttp 33812 30384 "GET /auth/profile/ HTTP/1.1" 200 33610
+INFO 2025-10-17 20:08:51,853 basehttp 33812 30384 "GET /app/ HTTP/1.1" 200 43777
+INFO 2025-10-17 20:08:58,098 basehttp 33812 30384 "GET /app/upload/ HTTP/1.1" 200 61880
+INFO 2025-10-17 20:09:12,742 basehttp 33812 30384 "POST /app/upload/ HTTP/1.1" 200 145
+ERROR 2025-10-17 20:09:18,162 log 33812 30384 Internal Server Error: /app/batch/1b787a73-d5b6-433e-8005-048b2b7e45a6/
+Traceback (most recent call last):
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "E:\ish\multiagent-review-sentiment-ai\apps\dashboard\views.py", line 205, in batch_detail
+    return render(request, 'dashboard/batch_detail.html', context)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/batch_detail.html
+ERROR 2025-10-17 20:09:18,165 basehttp 33812 30384 "GET /app/batch/1b787a73-d5b6-433e-8005-048b2b7e45a6/ HTTP/1.1" 500 103207
+INFO 2025-10-17 20:09:21,432 basehttp 33812 30384 "GET /app/upload/ HTTP/1.1" 200 61869
+INFO 2025-10-17 20:09:29,081 basehttp 33812 30384 "GET /app/ HTTP/1.1" 200 43800
+INFO 2025-10-17 20:09:37,348 basehttp 33812 30384 "GET /app/reviews/ HTTP/1.1" 200 163897
+INFO 2025-10-17 20:09:48,951 basehttp 33812 30384 "GET /app/ HTTP/1.1" 200 43800
+INFO 2025-10-17 20:10:00,154 orchestrator 33812 30384 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-17 20:10:00,157 orchestrator 33812 30384 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-17 20:10:00,159 orchestrator 33812 30384 [STAGE 1] Title Generator Agent initialized
+INFO 2025-10-17 20:10:00,159 orchestrator 33812 30384 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-17 20:10:00,159 orchestrator 33812 30384 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-17 20:10:00,371 views 33812 30384 [STAGE 1] Using ReviewProcessingOrchestrator for core processing of 5 reviews
+INFO 2025-10-17 20:10:00,893 orchestrator 33812 30384 [STAGE 1] Processing review 903e2619-0956-4875-a29f-98175b7786cb
+INFO 2025-10-17 20:10:09,936 orchestrator 33812 30384 [COMPLETED] Single review workflow completed in 9.04s
+INFO 2025-10-17 20:10:10,055 orchestrator 33812 30384 [STAGE 1] Processing review 9cf5196b-395c-42f9-9003-938e8db4046d
+INFO 2025-10-17 20:10:12,195 orchestrator 33812 30384 [COMPLETED] Single review workflow completed in 2.14s
+INFO 2025-10-17 20:10:12,689 orchestrator 33812 30384 [STAGE 1] Processing review cd2605f7-af7a-4a27-ad08-7fed6e9ee1b8
+INFO 2025-10-17 20:10:15,795 orchestrator 33812 30384 [COMPLETED] Single review workflow completed in 3.11s
+INFO 2025-10-17 20:10:15,928 orchestrator 33812 30384 [STAGE 1] Processing review 6da31b2d-189f-4e28-ab59-068ff228de8e
+INFO 2025-10-17 20:10:17,934 orchestrator 33812 30384 [COMPLETED] Single review workflow completed in 2.01s
+INFO 2025-10-17 20:10:18,062 orchestrator 33812 30384 [STAGE 1] Processing review 924e7f66-d4dd-4ac6-9d68-1bbc463ee045
+INFO 2025-10-17 20:10:22,172 orchestrator 33812 30384 [COMPLETED] Single review workflow completed in 4.11s
+INFO 2025-10-17 20:10:22,934 basehttp 33812 30384 "POST /api/v1/process/ HTTP/1.1" 200 388
+INFO 2025-10-17 20:10:31,151 basehttp 33812 30384 "GET /app/ HTTP/1.1" 200 43767
+INFO 2025-10-17 20:10:31,169 basehttp 33812 30384 "GET /static/img/R.png HTTP/1.1" 304 0
+INFO 2025-10-17 20:10:38,778 basehttp 33812 30384 "GET /app/reviews/ HTTP/1.1" 200 165821
+INFO 2025-10-17 20:10:55,112 basehttp 33812 30384 "GET /app/analytics/ HTTP/1.1" 200 113141
+INFO 2025-10-17 20:10:55,689 views 33812 30384 Retrieved persisted AI analysis: cc504c1f-57e6-48a4-95e1-1eed884f10e3
+INFO 2025-10-17 20:10:56,077 basehttp 33812 30384 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5504
+INFO 2025-10-17 20:11:17,472 views 33812 30384 [STAGE 2] Generating analytics for 100 reviews
+INFO 2025-10-17 20:11:17,475 orchestrator 33812 30384 [STAGE 1] Classifier Agent initialized
+INFO 2025-10-17 20:11:17,478 orchestrator 33812 30384 [STAGE 1] Scorer Agent initialized
+INFO 2025-10-17 20:11:17,480 orchestrator 33812 30384 [STAGE 1] Title Generator Agent initialized
+INFO 2025-10-17 20:11:17,481 orchestrator 33812 30384 [STAGE 1 COMPLETE] Core processing agents ready
+INFO 2025-10-17 20:11:17,483 orchestrator 33812 30384 [STAGE 2] Analytics agents will be initialized on-demand
+INFO 2025-10-17 20:11:17,484 orchestrator 33812 30384 [STAGE 2] Generating tags analysis for 100 reviews
+INFO 2025-10-17 20:11:17,484 agent 33812 30384 Gemini model initialized successfully for summarization
+INFO 2025-10-17 20:11:17,486 orchestrator 33812 30384 [STAGE 2] Summarizer Agent initialized
+INFO 2025-10-17 20:11:17,486 agent 33812 30384 Gemini model initialized successfully for tags generation
+INFO 2025-10-17 20:11:17,486 agent 33812 30384 [OK] Tags Generator Agent initialized
+INFO 2025-10-17 20:11:17,486 orchestrator 33812 30384 [STAGE 2] Tags Generator Agent initialized
+INFO 2025-10-17 20:11:17,487 agent 33812 30384 Gemini model initialized successfully for recommendations generation
+INFO 2025-10-17 20:11:17,487 agent 33812 30384 [OK] Recommendations Agent initialized
+INFO 2025-10-17 20:11:17,487 orchestrator 33812 30384 [STAGE 2] Recommendations Agent initialized
+INFO 2025-10-17 20:11:17,487 orchestrator 33812 30384 [STAGE 2] All analytics agents ready
+INFO 2025-10-17 20:11:22,329 agent 33812 30384 AI tags generation completed successfully
+INFO 2025-10-17 20:11:22,330 agent 33812 30384 Tags generation completed for 100 reviews
+INFO 2025-10-17 20:11:22,330 orchestrator 33812 30384 [STAGE 2] Tags analysis completed successfully
+INFO 2025-10-17 20:11:22,331 orchestrator 33812 30384 [STAGE 2] Generating business recommendations for 100 reviews
+INFO 2025-10-17 20:11:22,331 orchestrator 33812 30384 [STAGE 2] All analytics agents ready
+INFO 2025-10-17 20:11:22,332 agent 33812 30384 Generating AI recommendations for 100 reviews
+INFO 2025-10-17 20:11:24,334 agent 33812 30384 AI recommendations generated successfully
+INFO 2025-10-17 20:11:24,334 orchestrator 33812 30384 [STAGE 2] Business recommendations generated successfully
+INFO 2025-10-17 20:11:24,335 orchestrator 33812 30384 [STAGE 2] Generating executive summary for 100 reviews
+INFO 2025-10-17 20:11:24,335 orchestrator 33812 30384 [STAGE 2] All analytics agents ready
+INFO 2025-10-17 20:11:24,335 agent 33812 30384 Starting AI-powered summarization for 100 reviews
+INFO 2025-10-17 20:11:24,336 agent 33812 30384 Gemini model initialized successfully for summarization
+INFO 2025-10-17 20:11:28,174 agent 33812 30384 AI summarization completed successfully for 100 reviews
+INFO 2025-10-17 20:11:28,175 orchestrator 33812 30384 [STAGE 2] Executive summary generated successfully
+INFO 2025-10-17 20:11:28,442 views 33812 30384 AI analysis saved to database with ID: 67defd4f-255d-4d00-bae4-bff8b02c34fa
+INFO 2025-10-17 20:11:28,442 views 33812 30384 Complete AI analysis generated successfully
+INFO 2025-10-17 20:11:29,131 basehttp 33812 30384 "POST /api/v1/ai-analysis/ HTTP/1.1" 200 4149
+INFO 2025-10-17 20:11:42,190 basehttp 33812 30384 "GET /app/upload/ HTTP/1.1" 200 61856
+INFO 2025-10-17 20:11:50,031 basehttp 33812 30384 "GET /auth/logout/ HTTP/1.1" 302 0
+INFO 2025-10-17 20:11:50,059 basehttp 33812 30384 "GET /auth/login/ HTTP/1.1" 200 12076
+INFO 2025-10-17 20:12:13,448 basehttp 33812 30384 "POST /auth/login/ HTTP/1.1" 302 0
+INFO 2025-10-17 20:12:17,193 basehttp 33812 30384 "GET /app/ HTTP/1.1" 200 43787
+INFO 2025-10-17 20:12:27,493 basehttp 33812 30384 "GET /app/reviews/ HTTP/1.1" 200 73032
+INFO 2025-10-17 20:12:35,074 basehttp 33812 30384 "GET /auth/profile/ HTTP/1.1" 200 34114
+INFO 2025-10-17 20:12:46,950 basehttp 33812 30384 "GET /app/ HTTP/1.1" 200 43179
+INFO 2025-10-17 20:12:53,415 basehttp 33812 30384 "GET /auth/logout/ HTTP/1.1" 302 0
+INFO 2025-10-17 20:12:53,418 basehttp 33812 30384 "GET /auth/login/ HTTP/1.1" 200 12086
+INFO 2025-10-17 20:13:04,531 basehttp 33812 30384 "POST /auth/login/ HTTP/1.1" 302 0
+INFO 2025-10-17 20:13:08,012 basehttp 33812 30384 "GET /app/ HTTP/1.1" 200 44375
+INFO 2025-10-17 20:15:18,154 basehttp 33812 30384 "GET /auth/profile/ HTTP/1.1" 200 33920
+INFO 2025-10-17 20:15:18,166 basehttp 33812 30384 "GET /static/img/R.png HTTP/1.1" 304 0
+INFO 2025-10-17 20:15:18,193 basehttp 33812 30384 "GET /static/img/Rfv.png HTTP/1.1" 200 35826
+INFO 2025-10-17 20:15:24,592 basehttp 33812 30384 "GET /app/ HTTP/1.1" 200 44077
