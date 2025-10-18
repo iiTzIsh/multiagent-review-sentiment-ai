@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'corsheaders',
     
     # Local apps
+    'apps.marketing',
     'apps.dashboard',
     'apps.reviews',
     'apps.api',
