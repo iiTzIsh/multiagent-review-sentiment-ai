@@ -7,24 +7,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.shortcuts import redirect
-from django.contrib.auth.decorators import login_required
-
-@login_required
-def redirect_to_dashboard(request):
-    """Redirect root URL to dashboard"""
-    return redirect('dashboard:home')
 
 urlpatterns = [
     # Admin
     path('admin/', admin.site.urls),
     
+    # Marketing landing page (root)
+    path('', include('apps.marketing.urls')),
+    
     # Authentication
     path('auth/', include('apps.authentication.urls')),
     
-    # Main application URLs
-    path('', redirect_to_dashboard, name='root'),
-    path('dashboard/', include('apps.dashboard.urls')),
+    # Main application URLs (moved to /app/)
+    path('app/', include('apps.dashboard.urls')),
     path('api/', include('apps.api.urls')),
     path('reviews/', include('apps.reviews.urls')),
 ]
