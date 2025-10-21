@@ -102,7 +102,7 @@ class SentimentScoringTool(BaseTool):
         
         return f"Score: {score:.1f}"
 
-#this takes the above tool and wrapts it in a crew ai agent like thing
+
 class ReviewScorerAgent:
     def __init__(self):
         self.name = "ReviewScorer"
