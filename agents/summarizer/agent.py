@@ -79,6 +79,7 @@ class GeminiSummarizerTool(BaseTool):
         fallback = '. '.join(sentences)
         return f"Summary: {fallback[:200]}..." if fallback else "No summary available"
 
+
 class ReviewSummarizerAgent:
     """AI-powered review summarizer using Google Gemini"""
     
@@ -137,6 +138,84 @@ class ReviewSummarizerAgent:
                 'total_reviews': len(reviews),
                 'sentiment_distribution': {'neutral': len(reviews)},
                 'average_score': 3.0,
+                'error': str(e),
+                'generated_by': self.name
+            }
+    
+    def _extract_insights(self, sentiment_counts: Counter, avg_score: float, total: int) -> List[str]:
+        """Extract key insights from reviews"""
+        insights = []
+        
+        if total > 0:
+            pos_percent = (sentiment_counts.get('positive', 0) / total) * 100
+            neg_percent = (sentiment_counts.get('negative', 0) / total) * 100
+            
+            insights.append(f"{pos_percent:.1f}% positive reviews")
+            insights.append(f"{neg_percent:.1f}% negative reviews")
+            
+            if avg_score >= 4.0:
+                insights.append("High customer satisfaction")
+            elif avg_score <= 2.0:
+                insights.append("Low customer satisfaction - needs improvement")
+            else:
+                insights.append("Moderate satisfaction with improvement opportunities")
+        
+        return insights
+    
+    def _generate_recommendations(self, sentiment_counts: Counter, avg_score: float, total: int) -> List[str]:
+        """Generate actionable recommendations"""
+        recommendations = []
+        
+        if total == 0:
+            return ["No reviews available for analysis"]
+        
+        negative_ratio = sentiment_counts.get('negative', 0) / total
+        
+        if avg_score < 2.5:
+            recommendations.append("URGENT: Implement immediate service improvements")
+        elif avg_score < 3.5:
+            recommendations.append("Address common customer complaints")
+        elif avg_score >= 4.5:
+            recommendations.append("Maintain excellent service standards")
+        
+        if negative_ratio > 0.3:
+            recommendations.append("Prioritize negative review response")
+        
+        recommendations.extend([
+            "Monitor review trends regularly",
+            "Respond to reviews promptly"
+        ])
+        
+        return recommendations
+    
+    def summarize_reviews(self, reviews_data: List[Dict], include_insights: bool = True) -> Dict[str, Any]:
+        """Main entry point for Django integration"""
+        try:
+            logger.info(f"Starting AI-powered summarization for {len(reviews_data)} reviews")
+            
+            if not reviews_data:
+                return {
+                    'summary_text': 'No reviews available for analysis.',
+                    'total_reviews': 0,
+                    'sentiment_distribution': {},
+                    'average_score': 0.0,
+                    'key_insights': ['No data available'],
+                    'recommendations': ['Collect more reviews for analysis'],
+                    'generated_by': self.name
+                }
+            
+            result = self.generate_summary(reviews_data)
+            
+            logger.info(f"AI summarization completed successfully for {len(reviews_data)} reviews")
+            return result
+            
+        except Exception as e:
+            logger.error(f"Review summarization failed: {str(e)}")
+            return {
+                'summary_text': f'Summarization failed: {str(e)}',
+                'total_reviews': len(reviews_data) if reviews_data else 0,
+                'sentiment_distribution': {},
+                'average_score': 0.0,
                 'error': str(e),
                 'generated_by': self.name
             }
