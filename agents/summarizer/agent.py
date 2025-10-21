@@ -79,3 +79,64 @@ class GeminiSummarizerTool(BaseTool):
         fallback = '. '.join(sentences)
         return f"Summary: {fallback[:200]}..." if fallback else "No summary available"
 
+class ReviewSummarizerAgent:
+    """AI-powered review summarizer using Google Gemini"""
+    
+    def __init__(self):
+        self.name = "ReviewSummarizer"
+        self.role = "AI Review Summary Specialist"
+        self.goal = "Generate intelligent summaries from hotel review collections"
+        self.backstory = "Expert AI analyst specializing in hospitality feedback summarization"
+        self.tools = [GeminiSummarizerTool()]
+        self.agent = self._create_agent()
+    
+    def _create_agent(self) -> Agent:
+        return Agent(
+            role=self.role,
+            goal=self.goal,
+            backstory=self.backstory,
+            tools=self.tools,
+            verbose=False,
+            allow_delegation=False,
+            max_iter=2
+        )
+    
+    def generate_summary(self, reviews: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Generate comprehensive summary using AI analysis"""
+        try:
+            # Basic statistics
+            sentiment_counts = Counter(review.get('sentiment', 'neutral') for review in reviews)
+            scores = [review.get('score', 3.0) for review in reviews if isinstance(review.get('score'), (int, float))]
+            avg_score = sum(scores) / len(scores) if scores else 3.0
+            
+            # Generate AI summary
+            review_texts = [review.get('text', '') for review in reviews]
+            combined_text = ' '.join(review_texts)
+            
+            summary_tool = GeminiSummarizerTool()
+            summary_text = summary_tool._run(combined_text, len(reviews))
+            
+            # Generate insights
+            insights = self._extract_insights(sentiment_counts, avg_score, len(reviews))
+            recommendations = self._generate_recommendations(sentiment_counts, avg_score, len(reviews))
+            
+            return {
+                'summary_text': summary_text,
+                'total_reviews': len(reviews),
+                'sentiment_distribution': dict(sentiment_counts),
+                'average_score': round(avg_score, 1),
+                'key_insights': insights,
+                'recommendations': recommendations,
+                'generated_by': self.name
+            }
+            
+        except Exception as e:
+            logger.error(f"Summary generation failed: {str(e)}")
+            return {
+                'summary_text': 'Unable to generate summary due to processing error',
+                'total_reviews': len(reviews),
+                'sentiment_distribution': {'neutral': len(reviews)},
+                'average_score': 3.0,
+                'error': str(e),
+                'generated_by': self.name
+            }
