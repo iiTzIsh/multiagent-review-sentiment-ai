@@ -1,4 +1,6 @@
+/* Hotel Review Insight Platform - Professional Dashboard Styles */
 
+/* Professional Color System */
 :root {
     /* Primary Brand Colors */
     --primary-color: #2563eb;
@@ -1671,4 +1673,36 @@ small.text-muted {
     background: #06b6d4 !important;
     border: none !important;
     outline: none !important;
+}
+
+/* AI Agent Status Custom Colors */
+.text-purple {
+    color: #8b5cf6 !important;
+}
+
+.text-orange {
+    color: #f97316 !important;
+}
+
+/* Agent Status Cards */
+.agent-status {
+    padding: 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.agent-status:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+.agent-status h6 {
+    margin: 0.5rem 0;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.agent-status .badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
 }

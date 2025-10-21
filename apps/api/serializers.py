@@ -4,8 +4,7 @@ DRF serializers for converting Django models to JSON and vice versa
 """
 
 from rest_framework import serializers
-from apps.reviews.models import Review, Hotel, ReviewBatch, AgentTask
-from apps.analytics.models import AnalyticsReport, SentimentTrend
+from apps.reviews.models import Review, Hotel, ReviewBatch, AgentTask, AIAnalysisResult
 
 
 class HotelSerializer(serializers.ModelSerializer):
@@ -157,32 +156,23 @@ class AgentTaskSerializer(serializers.ModelSerializer):
         return None
 
 
-class AnalyticsReportSerializer(serializers.ModelSerializer):
-    """Serializer for AnalyticsReport model"""
+class AIAnalysisResultSerializer(serializers.ModelSerializer):
+    """Serializer for AI Analysis Results"""
+    
+    hotel_name = serializers.CharField(source='hotel.name', read_only=True)
+    analysis_summary = serializers.CharField(read_only=True)
     
     class Meta:
-        model = AnalyticsReport
+        model = AIAnalysisResult
         fields = [
-            'id', 'report_type', 'hotel', 'date_from', 'date_to',
-            'total_reviews', 'average_score', 'sentiment_distribution',
-            'top_keywords', 'insights', 'charts_data',
-            'generated_at', 'generated_by'
+            'id', 'analysis_type', 'hotel', 'hotel_name',
+            'days_analyzed', 'date_range_start', 'date_range_end',
+            'total_reviews_analyzed', 'summary_data', 'sentiment_analysis',
+            'tags_analysis', 'recommendations', 'agents_used',
+            'workflow_info', 'created_at', 'updated_at', 'is_active',
+            'analysis_summary'
         ]
-        read_only_fields = ['id', 'generated_at']
-
-
-class SentimentTrendSerializer(serializers.ModelSerializer):
-    """Serializer for SentimentTrend model"""
-    
-    class Meta:
-        model = SentimentTrend
-        fields = [
-            'id', 'hotel', 'date', 'total_reviews',
-            'positive_count', 'negative_count', 'neutral_count',
-            'average_score', 'positive_percentage',
-            'negative_percentage', 'neutral_percentage'
-        ]
-        read_only_fields = ['id']
+        read_only_fields = ['id', 'created_at', 'updated_at']
 
 
 # Nested serializers for detailed responses

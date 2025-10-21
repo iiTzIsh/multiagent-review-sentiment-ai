@@ -1,0 +1,149 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}Access Denied - Hotel Review Platform{% endblock %}
+
+{% block page_icon %}<i class="fas fa-exclamation-triangle me-2"></i>{% endblock %}
+{% block page_title %}Access Denied{% endblock %}
+{% block page_description %}You don't have permission to access this resource{% endblock %}
+
+{% block extra_css %}
+<style>
+    .error-container {
+        text-align: center;
+        padding: 60px 20px;
+    }
+    
+    .error-icon {
+        font-size: 6rem;
+        color: #e53e3e;
+        margin-bottom: 30px;
+    }
+    
+    .error-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #2d3748;
+        margin-bottom: 20px;
+    }
+    
+    .error-message {
+        font-size: 1.2rem;
+        color: #718096;
+        margin-bottom: 40px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+    }
+    
+    .error-actions {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        border: none;
+        border-radius: 10px;
+        padding: 15px 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .btn-outline-secondary {
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 15px 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-outline-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .permission-info {
+        background: #fff5f5;
+        border: 1px solid #fed7d7;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 40px auto;
+        max-width: 600px;
+        text-align: left;
+    }
+    
+    .permission-info h5 {
+        color: #c53030;
+        margin-bottom: 15px;
+    }
+    
+    .permission-info ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+    
+    .permission-info li {
+        color: #4a5568;
+        margin-bottom: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="error-container">
+    <div class="error-icon">
+        <i class="fas fa-shield-alt"></i>
+    </div>
+    
+    <h1 class="error-title">Access Denied</h1>
+    
+    <p class="error-message">
+        You don't have the required permissions to access this resource. 
+        This action requires specific privileges that your current account doesn't have.
+    </p>
+    
+    <div class="permission-info">
+        <h5><i class="fas fa-info-circle me-2"></i>Permission Requirements</h5>
+        <ul>
+            <li><strong>User Registration:</strong> Administrator role required</li>
+            <li><strong>User Management:</strong> Administrator role required</li>
+            <li><strong>Review Upload:</strong> Administrator or Manager role required</li>
+            <li><strong>Analytics View:</strong> All authenticated users</li>
+        </ul>
+    </div>
+    
+    <div class="error-actions">
+        <a href="{% url 'dashboard:home' %}" class="btn btn-primary">
+            <i class="fas fa-home me-2"></i>
+            Return to Dashboard
+        </a>
+        
+        <a href="{% url 'auth:profile' %}" class="btn btn-outline-secondary">
+            <i class="fas fa-user me-2"></i>
+            View My Profile
+        </a>
+        
+        <button type="button" class="btn btn-outline-secondary" onclick="history.back()">
+            <i class="fas fa-arrow-left me-2"></i>
+            Go Back
+        </button>
+    </div>
+    
+    <div class="mt-5">
+        <p class="text-muted">
+            <small>
+                If you believe this is an error, please contact your system administrator.
+            </small>
+        </p>
+    </div>
+</div>
+{% endblock %}

@@ -48,6 +48,7 @@ django-environ
 python-jose
 sentry-sdk
 drf-spectacular
+google-generativeai
 python-dateutil
 pytz
 six
@@ -58,3 +59,8 @@ djangorestframework
 channels
 channels-redis
 daphne
+
+# Production dependencies
+dj-database-url
+django-redis
+whitenoise[brotli]

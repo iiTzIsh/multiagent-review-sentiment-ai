@@ -299,6 +299,9 @@
                 <a href="{% url 'dashboard:upload_reviews' %}" class="btn btn-primary">
                     <i class="fas fa-upload me-1"></i>Upload Reviews
                 </a>
+                <button class="btn btn-success" onclick="processAllReviews()">
+                    <i class="fas fa-robot me-1"></i>Process All Reviews
+                </button>
                 <button class="btn btn-outline-secondary" onclick="processSelectedReviews()">
                     <i class="fas fa-cogs me-1"></i>Process Selected
                 </button>
@@ -388,6 +391,7 @@
                                        value="{{ review.id }}" id="review-{{ review.id }}">
                                 <label class="form-check-label fw-bold" for="review-{{ review.id }}">
                                     {{ review.title|default:"Untitled Review"|truncatechars:30 }}
+                                   
                                 </label>
                             </div>
                             
@@ -663,6 +667,55 @@ function updateSelectedCount() {
     $('.selected-count').text(selectedCount);
 }
 
+function processAllReviews() {
+    if (!confirm('This will process all unprocessed reviews and generate an AI-powered summary. This may take several minutes. Continue?')) {
+        return;
+    }
+    
+    // Show processing modal
+    showProcessingModal('Processing all reviews with AI agents...');
+    
+    // Send AJAX request to process all reviews
+    $.ajax({
+        url: '{% url "dashboard:process_reviews" %}',
+        method: 'POST',
+        data: JSON.stringify({
+            batch_size: 100,
+            generate_summary: true
+        }),
+        contentType: 'application/json',
+        headers: {
+            'X-CSRFToken': $('[name=csrfmiddlewaretoken]').val()
+        },
+        success: function(response) {
+            hideProcessingModal();
+            if (response.success) {
+                let message = `Successfully processed ${response.processed_count} reviews`;
+                
+                if (response.summary_generated) {
+                    message += ' and generated AI-powered summary';
+                    // Show summary preview if available
+                    if (response.summary_preview) {
+                        showSummaryModal(response.summary_preview, response.ai_insights_count);
+                    }
+                }
+                
+                showToast('success', message);
+                
+                // Refresh the page to show updated data
+                setTimeout(() => location.reload(), 2000);
+            } else {
+                showToast('error', response.error || 'Processing failed');
+            }
+        },
+        error: function(xhr) {
+            hideProcessingModal();
+            const errorMsg = xhr.responseJSON?.error || 'Processing request failed';
+            showToast('error', errorMsg);
+        }
+    });
+}
+
 function processSelectedReviews() {
     const selectedIds = $('.review-checkbox:checked').map(function() {
         return this.value;
@@ -781,6 +834,114 @@ function exportSelected() {
     $('body').append(form);
     form.submit();
     form.remove();
+}
+
+function showProcessingModal(message) {
+    // Create or update processing modal
+    let modal = $('#aiProcessingModal');
+    if (modal.length === 0) {
+        modal = $(`
+            <div class="modal fade" id="aiProcessingModal" tabindex="-1" aria-labelledby="aiProcessingModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bg-primary text-white">
+                            <h5 class="modal-title" id="aiProcessingModalLabel">
+                                <i class="fas fa-robot me-2"></i>AI Processing
+                            </h5>
+                        </div>
+                        <div class="modal-body text-center">
+                            <div class="spinner-border text-primary mb-3" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p id="processingMessage">Processing reviews...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `);
+        $('body').append(modal);
+    }
+    
+    $('#processingMessage').text(message);
+    modal.modal('show');
+}
+
+function hideProcessingModal() {
+    $('#aiProcessingModal').modal('hide');
+}
+
+function showSummaryModal(summaryPreview, insightsCount) {
+    const modal = $(`
+        <div class="modal fade" id="summaryPreviewModal" tabindex="-1" aria-labelledby="summaryPreviewModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title" id="summaryPreviewModalLabel">
+                            <i class="fas fa-magic me-2"></i>AI-Generated Summary
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            AI analysis complete with ${insightsCount} key insights generated
+                        </div>
+                        <h6>Summary Preview:</h6>
+                        <p class="text-muted">${summaryPreview}</p>
+                        <hr>
+                        <p class="small text-muted">
+                            <i class="fas fa-lightbulb me-1"></i>
+                            Full summary and recommendations are available in the analytics dashboard.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="{% url 'dashboard:analytics' %}" class="btn btn-primary">View Full Analytics</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `);
+    
+    $('body').append(modal);
+    modal.modal('show');
+    
+    // Remove modal from DOM after it's hidden
+    modal.on('hidden.bs.modal', function() {
+        modal.remove();
+    });
+}
+
+function showToast(type, message) {
+    // Simple toast implementation
+    const toastHtml = `
+        <div class="toast align-items-center text-white bg-${type === 'success' ? 'success' : 'danger'} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} me-2"></i>
+                    ${message}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    `;
+    
+    let toastContainer = $('#toastContainer');
+    if (toastContainer.length === 0) {
+        toastContainer = $('<div id="toastContainer" class="toast-container position-fixed bottom-0 end-0 p-3"></div>');
+        $('body').append(toastContainer);
+    }
+    
+    const toastElement = $(toastHtml);
+    toastContainer.append(toastElement);
+    
+    const toast = new bootstrap.Toast(toastElement[0]);
+    toast.show();
+    
+    // Remove toast element after it's hidden
+    toastElement.on('hidden.bs.toast', function() {
+        toastElement.remove();
+    });
 }
 </script>
 {% endblock %}
