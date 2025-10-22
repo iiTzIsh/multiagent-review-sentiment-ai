@@ -6,3 +6,42 @@
 {% block page_icon %}<i class="fas fa-user-plus me-2"></i>{% endblock %}
 {% block page_title %}User Registration{% endblock %}
 {% block page_description %}Create new user accounts with role-based permissions{% endblock %}
+
+// Custom CSS for registration page
+
+{% block content %}
+<div class="container-fluid mt-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-xl-8">
+            <div class="registration-card">
+                <div class="registration-header">
+                    <h2 class="mb-0">
+                        <i class="fas fa-user-plus me-3"></i>
+                        Create New User Account
+                    </h2>
+                    <p class="mb-0 mt-2 opacity-75">Add a new team member with appropriate permissions</p>
+                </div>
+            
+            <div class="registration-body">
+                <!-- Display Messages -->
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            <i class="fas fa-{{ message.tags|yesno:'check-circle,exclamation-triangle,info-circle' }} me-2"></i>
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                <!-- Display Form Errors -->
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger" role="alert">
+                        <h6><i class="fas fa-exclamation-triangle me-2"></i>Form Errors:</h6>
+                        <ul class="mb-0">
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
