@@ -1,0 +1,77 @@
+{% block content %}
+<div class="container-fluid mt-4">
+    <!-- User Accounts Section -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-users me-2"></i> User Accounts</h5>
+        </div>
+    <div class="card-body">
+        {% for user in users %}
+        <div class="user-card d-flex align-items-center">
+            <div class="user-avatar">
+                {{ user.get_full_name|default:user.username|first|upper }}
+            </div>
+            <div class="flex-grow-1">
+                <h5>{{ user.get_full_name|default:user.username }}</h5>
+                <p class="mb-1">{{ user.email|default:"No email provided" }}</p>
+                <div class="d-flex gap-2 flex-wrap">
+                    {% if user.profile %}
+                        <span class="badge bg-primary">{{ user.profile.get_role_display|default:"User" }}</span>
+                    {% else %}
+                        <span class="badge bg-primary">User</span>
+                    {% endif %}
+                    {% if user.is_active %}
+                        <span class="badge bg-success">Active</span>
+                    {% else %}
+                        <span class="badge bg-secondary">Inactive</span>
+                    {% endif %}
+                    {% if user.profile and user.profile.hotel %}
+                        <span class="badge bg-info">{{ user.profile.hotel.name }}</span>
+                    {% endif %}
+                </div>
+            </div>
+            <div>
+                <small class="text-muted">
+                    {% if user.last_login %}
+                        Last login: {{ user.last_login|date:"M d, Y" }}
+                    {% else %}
+                        Never logged in
+                    {% endif %}
+                </small>
+                {% if not user.is_superuser %}
+                    <div class="mt-2 d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-info" onclick="previewUser('{{ user.id }}')">
+                            <i class="fas fa-eye me-1"></i> Preview
+                        </button>
+                        {% if user.is_active %}
+                            <button class="btn btn-sm btn-outline-warning" onclick="toggleUser('{{ user.id }}')">
+                                <i class="fas fa-user-times me-1"></i> Deactivate
+                            </button>
+                        {% else %}
+                            <button class="btn btn-sm btn-outline-success" onclick="toggleUser('{{ user.id }}')">
+                                <i class="fas fa-user-check me-1"></i> Activate
+                            </button>
+                        {% endif %}
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser('{{ user.id }}', '{{ user.get_full_name|default:user.username }}')">
+                            <i class="fas fa-trash me-1"></i> Delete
+                        </button>
+                    </div>
+                {% else %}
+                    <span class="badge bg-warning">Superuser</span>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="text-center py-5">
+            <i class="fas fa-users fa-3x text-muted mb-3"></i>
+            <h4>No Users Found</h4>
+            <p class="text-muted">There are no user accounts in the system yet.</p>
+            <a href="{% url 'auth:register' %}" class="btn btn-primary">
+                <i class="fas fa-user-plus me-2"></i>
+                Create First User
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+</div>
