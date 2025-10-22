@@ -248,5 +248,47 @@
             }
         });
 
+        // Real-time password confirmation
+        if (confirmField && passwordField) {
+            confirmField.addEventListener('input', function() {
+                if (this.value && passwordField.value !== this.value) {
+                    this.classList.add('is-invalid');
+                } else {
+                    this.classList.remove('is-invalid');
+                }
+            });
+            
+            passwordField.addEventListener('input', function() {
+                if (confirmField.value && this.value !== confirmField.value) {
+                    confirmField.classList.add('is-invalid');
+                } else {
+                    confirmField.classList.remove('is-invalid');
+                }
+            });
+        }
+
+        // Username validation
+        if (usernameField) {
+            usernameField.addEventListener('blur', function() {
+                if (this.value.length < 3) {
+                    this.classList.add('is-invalid');
+                } else {
+                    this.classList.remove('is-invalid');
+                }
+            });
+        }
+        
+        // Email validation
+        if (emailField) {
+            emailField.addEventListener('blur', function() {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (this.value && !emailRegex.test(this.value)) {
+                    this.classList.add('is-invalid');
+                } else {
+                    this.classList.remove('is-invalid');
+                }
+            });
+        }
+
 
                             
