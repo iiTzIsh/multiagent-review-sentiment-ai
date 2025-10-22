@@ -1,3 +1,154 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}User Management - Hotel Review Platform{% endblock %}
+
+{% block page_icon %}<i class="fas fa-users me-2"></i>{% endblock %}
+{% block page_title %}User Management{% endblock %}
+{% block page_description %}Manage user accounts and permissions{% endblock %}
+
+{% block page_actions %}
+<a href="{% url 'auth:register' %}" class="btn btn-primary">
+    <i class="fas fa-user-plus me-2"></i>
+    Add New User
+</a>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Dark blue theme for users page */
+    .card {
+        background-color: #2D3748;
+        border: 1px solid #4A5568;
+        color: #FFFFFF;
+        
+    }
+    
+    .card-header {
+        background-color: #4A5568;
+        border-bottom: 1px solid #4A5568;
+        color: #FFFFFF;
+    }
+    
+    .card-header h5 {
+        color: #FFFFFF !important;
+        margin: 0;
+    }
+    
+    .card-body {
+        background-color: #2D3748;
+        color: #FFFFFF;
+    }
+
+    
+    .user-card {
+        background-color: #1A202C;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+        border-left: 4px solid #4A5568;
+        color: #FFFFFF;
+    }
+    
+    .user-card h5 {
+        color: #FFFFFF !important;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    
+    .user-card p {
+        color: #E2E8F0 !important;
+        margin-bottom: 8px;
+    }
+    
+    .user-card small {
+        color: #A0AEC0 !important;
+    }
+    
+    .text-muted {
+        color: #A0AEC0 !important;
+    }
+    
+    .badge {
+        color: white !important;
+        font-weight: 600;
+    }
+    
+    .user-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #4A5568;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-right: 15px;
+    }
+    
+    /* Button styling for dark theme */
+    .btn-outline-warning {
+        border-color: #F6AD55;
+        color: #F6AD55;
+        background-color: transparent;
+    }
+    
+    .btn-outline-warning:hover {
+        background-color: #F6AD55;
+        color: #1A202C;
+    }
+    
+    .btn-outline-success {
+        border-color: #68D391;
+        color: #68D391;
+        background-color: transparent;
+    }
+    
+    .btn-outline-success:hover {
+        background-color: #68D391;
+        color: #1A202C;
+    }
+    
+    .btn-outline-info {
+        border-color: #63B3ED;
+        color: #63B3ED;
+        background-color: transparent;
+    }
+    
+    .btn-outline-info:hover {
+        background-color: #63B3ED;
+        color: #1A202C;
+    }
+    
+    .btn-outline-danger {
+        border-color: #FC8181;
+        color: #FC8181;
+        background-color: transparent;
+    }
+    
+    .btn-outline-danger:hover {
+        background-color: #FC8181;
+        color: #1A202C;
+    }
+    
+    /* Empty state styling */
+    .text-center i.fa-3x {
+        color: #4A5568 !important;
+    }
+    
+    .text-center h4 {
+        color: #FFFFFF !important;
+    }
+    
+    .text-center .text-muted {
+        color: #A0AEC0 !important;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid mt-4">
     <!-- User Accounts Section -->
@@ -75,3 +226,56 @@
     </div>
     </div>
 </div>
+
+<!-- User Preview Modal -->
+<div class="modal fade" id="userPreviewModal" tabindex="-1" aria-labelledby="userPreviewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="userPreviewModalLabel">
+                    <i class="fas fa-user me-2"></i>User Details
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="userPreviewContent">
+                <div class="text-center">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}{% block extra_js %}
+<script>
+// Toggle user status
+function toggleUser(userId) {
+    if (confirm('Are you sure you want to change this user\'s status?')) {
+        fetch('{% url "auth:toggle_user_status" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]')?.value || '{{ csrf_token }}'
+            },
+            body: JSON.stringify({user_id: parseInt(userId)})
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('Error: ' + (data.error || 'Unknown error occurred'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred: ' + error.message);
+        });
+    }
+}
