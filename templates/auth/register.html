@@ -229,5 +229,24 @@
 </div>
 {% endblock %}
 
+{% block extra_js %}
+<script>
+    // Form validation feedback
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        const passwordField = document.getElementById('id_password1');
+        const confirmField = document.getElementById('id_password2');
+        const usernameField = document.getElementById('id_username');
+        const emailField = document.getElementById('id_email');
+        
+        // Mark fields with server-side errors as invalid
+        const invalidFields = document.querySelectorAll('.invalid-feedback');
+        invalidFields.forEach(feedback => {
+            const field = feedback.previousElementSibling;
+            if (field && field.tagName === 'INPUT' || field.tagName === 'SELECT') {
+                field.classList.add('is-invalid');
+            }
+        });
+
 
                             
