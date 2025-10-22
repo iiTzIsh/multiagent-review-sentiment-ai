@@ -204,6 +204,46 @@
     p {
         color: #E2E8F0 !important;
     }
+
+    /* Form validation styling for dark theme */
+    .form-control.is-invalid {
+        border-color: #F56565 !important;
+    }
+    
+    .form-control.is-invalid:focus {
+        border-color: #F56565 !important;
+        box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.25) !important;
+    }
+    
+    .invalid-feedback {
+        color: #F56565 !important;
+        font-size: 0.875rem;
+        margin-top: 5px;
+    }
+
+    .alert {
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+    
+    .alert-danger {
+        background-color: #742A2A !important;
+        border-color: #F56565 !important;
+        color: #FED7D7 !important;
+    }
+    
+    .alert-success {
+        background-color: #2F855A !important;
+        border-color: #68D391 !important;
+        color: #C6F6D5 !important;
+    }
+    
+    .alert-warning {
+        background-color: #C05621 !important;
+        border-color: #F6AD55 !important;
+        color: #FEEBC8 !important;
+    }
+    
   </style>  
  {% endblock %}   
 
