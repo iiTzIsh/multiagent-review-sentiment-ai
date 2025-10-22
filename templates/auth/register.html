@@ -210,5 +210,24 @@
                         </div>
                     </div>
 
+                    <!-- Form Actions -->
+                    <div class="d-flex justify-content-between align-items-center mt-4">
+                        <a href="{% url 'auth:user_list' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>
+                            Back to User List
+                        </a>
+                        
+                        <button type="submit" class="btn btn-primary btn-create" id="submitBtn">
+                            <i class="fas fa-user-plus me-2"></i>
+                            Create User Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
 
                             
