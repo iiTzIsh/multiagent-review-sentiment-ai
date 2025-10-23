@@ -279,3 +279,121 @@ function toggleUser(userId) {
         });
     }
 }
+
+// Preview user details
+function previewUser(userId) {
+    const modal = new bootstrap.Modal(document.getElementById('userPreviewModal'));
+    const content = document.getElementById('userPreviewContent');
+    
+    // Show loading spinner
+    content.innerHTML = `
+        <div class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    `;
+    
+    modal.show();
+    
+    fetch(`/auth/user-preview/${userId}/`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const user = data.user;
+                content.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-primary"><i class="fas fa-user me-2"></i>Personal Information</h6>
+                            <table class="table table-dark table-sm">
+                                <tr>
+                                    <td><strong>Username:</strong></td>
+                                    <td>${user.username}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Full Name:</strong></td>
+                                    <td>${user.first_name} ${user.last_name}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Email:</strong></td>
+                                    <td>${user.email || 'Not provided'}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Status:</strong></td>
+                                    <td>
+                                        <span class="badge ${user.is_active ? 'bg-success' : 'bg-secondary'}">
+                                            ${user.is_active ? 'Active' : 'Inactive'}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <h6 class="text-primary mt-4"><i class="fas fa-calendar me-2"></i>Account Information</h6>
+                            <table class="table table-dark table-sm">
+                                <tr>
+                                    <td><strong>Date Joined:</strong></td>
+                                    <td>${user.date_joined}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Last Login:</strong></td>
+                                    <td>${user.last_login}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Account Type:</strong></td>
+                                    <td>
+                                        <span class="badge ${user.is_superuser ? 'bg-warning' : 'bg-info'}">
+                                            ${user.is_superuser ? 'Superuser' : 'Regular User'}
+                                        </span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-primary"><i class="fas fa-briefcase me-2"></i>Profile Information</h6>
+                            <table class="table table-dark table-sm">
+                                <tr>
+                                    <td><strong>Role:</strong></td>
+                                    <td>${user.profile.role}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Department:</strong></td>
+                                    <td>${user.profile.department}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Phone:</strong></td>
+                                    <td>${user.profile.phone_number}</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Hotel:</strong></td>
+                                    <td>${user.profile.hotel}</td>
+                                </tr>
+                            </table>
+                            
+                            <h6 class="text-primary mt-4"><i class="fas fa-shield-alt me-2"></i>Security Information</h6>
+                            <table class="table table-dark table-sm">
+                                <tr>
+                                    <td><strong>Last Login IP:</strong></td>
+                                    <td>${user.profile.last_login_ip}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                `;
+            } else {
+                content.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Error loading user details: ${data.error}
+                    </div>
+                `;
+            }
+        })
+        .catch(error => {
+            content.innerHTML = `
+                <div class="alert alert-danger">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Error loading user details: ${error.message}
+                </div>
+            `;
+        });
+}
