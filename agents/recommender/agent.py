@@ -205,3 +205,7 @@ LOW PRIORITY:
                 'generated_by': f"{self.agent_name} (Fallback)",
                 'status': 'fallback'
             }    
+        
+        avg_score = sum(float(r.get('score', 3.0)) for r in reviews_data) / total
+        sentiment_counts = Counter(r.get('sentiment', 'neutral') for r in reviews_data)
+        negative_ratio = sentiment_counts.get('negative', 0) / total
