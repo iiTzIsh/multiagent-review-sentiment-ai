@@ -221,3 +221,8 @@ LOW PRIORITY:
             recommendations.append({'text': "Implement quality control checks", 'priority': 'medium'})
         else:
             recommendations.append({'text': "Maintain current service standards", 'priority': 'low'})
+
+        # Sentiment-based recommendations
+        if negative_ratio > 0.3:
+            recommendations.append({'text': "Prioritize negative review responses", 'priority': 'high'})
+        
