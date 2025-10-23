@@ -136,3 +136,59 @@ LOW PRIORITY:
 """
         
         return prompt
+    
+    def _parse_response(self, ai_response: str, reviews_data: List[Dict]) -> Dict[str, Any]:
+        """Parse the AI response and structure recommendations"""
+        try:
+            recommendations = []
+            priority_breakdown = {'high': 0, 'medium': 0, 'low': 0}
+            current_priority = None
+            
+            lines = ai_response.strip().split('\n')
+            
+            for line in lines:
+                line = line.strip()
+                
+                # More flexible priority detection
+                if 'HIGH PRIORITY' in line.upper():
+                    current_priority = 'high'
+                elif 'MEDIUM PRIORITY' in line.upper():
+                    current_priority = 'medium' 
+                elif 'LOW PRIORITY' in line.upper():
+                    current_priority = 'low'
+                elif line.startswith('-') and current_priority in ['high', 'medium', 'low']:
+                    rec_text = line[1:].strip()
+                    if rec_text:
+                        recommendations.append({
+                            'text': rec_text,
+                            'priority': current_priority
+                        })
+                        priority_breakdown[current_priority] += 1
+
+            # Fallback if parsing failed
+            if not recommendations:
+                logger.warning("No recommendations found with priority parsing, trying to extract any bullet points")
+                rec_lines = [line.strip() for line in lines if line.strip() and line.strip().startswith('-')]
+                for i, line in enumerate(rec_lines[:5]):
+                    priority = 'high' if i < 2 else ('medium' if i < 4 else 'low')
+                    recommendations.append({
+                        'text': line[1:].strip(),
+                        'priority': priority
+                    })
+                    priority_breakdown[priority] += 1
+            
+            if not recommendations:
+                logger.warning("Still no recommendations found, using fallback")
+                return self._get_fallback_recommendations(reviews_data)
+            
+            return {
+                'recommendations': recommendations,
+                'priority_breakdown': priority_breakdown,
+                'total_recommendations': len(recommendations),
+                'generated_by': self.agent_name,
+                'status': 'success'
+            }  
+
+        except Exception as e:
+            logger.error(f"Failed to parse AI recommendations: {str(e)}")
+            return self._get_fallback_recommendations(reviews_data)        
