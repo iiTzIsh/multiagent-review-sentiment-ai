@@ -241,3 +241,11 @@ LOW PRIORITY:
             'generated_by': f"{self.agent_name} (Fallback)",
             'status': 'fallback'
         }
+    
+    def format_recommendations_for_display(self, recommendations_result: Dict[str, Any]) -> List[str]:
+        """Format recommendations for display in UI"""
+        if not recommendations_result or not recommendations_result.get('recommendations'):
+            return ["No recommendations available"]
+        
+        formatted = []
+        recommendations = recommendations_result['recommendations']
