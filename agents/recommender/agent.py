@@ -96,3 +96,17 @@ class ReviewRecommendationsAgent:
             import traceback
             logger.error(f"Traceback: {traceback.format_exc()}")
             return self._get_fallback_recommendations(reviews_data)
+        
+
+    def _create_prompt(self, reviews_data: List[Dict]) -> str:
+        """Create prompt for AI recommendation generation"""
+        total_reviews = len(reviews_data)
+        avg_score = sum(float(r.get('score', 3.0)) for r in reviews_data) / total_reviews if total_reviews > 0 else 3.0
+        sentiment_counts = Counter(r.get('sentiment', 'neutral') for r in reviews_data)
+        
+        # Sample reviews for context
+        sample_reviews = []
+        for sentiment in ['negative', 'positive']:
+            sentiment_reviews = [r for r in reviews_data if r.get('sentiment') == sentiment]
+            if sentiment_reviews:
+                sample_reviews.extend(sentiment_reviews[:2])
