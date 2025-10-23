@@ -226,3 +226,18 @@ LOW PRIORITY:
         if negative_ratio > 0.3:
             recommendations.append({'text': "Prioritize negative review responses", 'priority': 'high'})
         
+        # General recommendations
+        recommendations.extend([
+            {'text': "Monitor reviews weekly for early issue detection", 'priority': 'medium'},
+            {'text': "Develop professional response templates", 'priority': 'low'}
+        ])
+        
+        priority_breakdown = Counter(r['priority'] for r in recommendations)
+        
+        return {
+            'recommendations': recommendations,
+            'priority_breakdown': dict(priority_breakdown),
+            'total_recommendations': len(recommendations),
+            'generated_by': f"{self.agent_name} (Fallback)",
+            'status': 'fallback'
+        }
