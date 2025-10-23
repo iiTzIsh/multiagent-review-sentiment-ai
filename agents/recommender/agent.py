@@ -258,4 +258,12 @@ LOW PRIORITY:
         medium_priority = [r['text'] for r in recommendations if r.get('priority') == 'medium']
         low_priority = [r['text'] for r in recommendations if r.get('priority') == 'low']
         
+        # Add priority indicators
+        for rec in high_priority:
+            formatted.append(f"🔴 {rec}")
+        for rec in medium_priority:
+            formatted.append(f"🟡 {rec}")
+        for rec in low_priority:
+            formatted.append(f"🔵 {rec}")
         
+        return formatted if formatted else [r.get('text', str(r)) for r in recommendations]
