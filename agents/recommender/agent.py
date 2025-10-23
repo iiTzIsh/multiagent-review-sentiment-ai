@@ -191,4 +191,17 @@ LOW PRIORITY:
 
         except Exception as e:
             logger.error(f"Failed to parse AI recommendations: {str(e)}")
-            return self._get_fallback_recommendations(reviews_data)        
+            return self._get_fallback_recommendations(reviews_data)   
+
+
+    def _get_fallback_recommendations(self, reviews_data: List[Dict]) -> Dict[str, Any]:
+        """Generate fallback recommendations if AI fails"""
+        logger.warning("Using fallback recommendations instead of AI-generated ones")
+        total = len(reviews_data)
+        if total == 0:
+            return {
+                'recommendations': [{'text': "No reviews available for analysis", 'priority': 'low'}],
+                'priority_breakdown': {'high': 0, 'medium': 0, 'low': 1},
+                'generated_by': f"{self.agent_name} (Fallback)",
+                'status': 'fallback'
+            }    
