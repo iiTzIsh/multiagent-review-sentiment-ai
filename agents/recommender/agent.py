@@ -87,7 +87,7 @@ class ReviewRecommendationsAgent:
             # Parse AI response
             result = self._parse_response(response.text, reviews_data)
             
-            logger.info("successfully")
+            logger.info("AI recommendations generated successfully")
             return result
         
         except Exception as e:
