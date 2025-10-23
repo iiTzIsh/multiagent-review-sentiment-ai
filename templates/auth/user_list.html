@@ -397,3 +397,37 @@ function previewUser(userId) {
             `;
         });
 }
+
+// Delete user
+function deleteUser(userId, username) {
+    if (confirm(`Are you sure you want to permanently delete user "${username}"?\n\nThis action cannot be undone!`)) {
+        fetch('{% url "auth:delete_user" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]')?.value || '{{ csrf_token }}'
+            },
+            body: JSON.stringify({user_id: parseInt(userId)})
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                location.reload();
+            } else {
+                alert('Error: ' + (data.error || 'Unknown error occurred'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred: ' + error.message);
+        });
+    }
+}
+</script>
+{% endblock %}
