@@ -252,3 +252,10 @@ LOW PRIORITY:
         
         formatted = []
         recommendations = recommendations_result['recommendations']
+
+        # Group by priority
+        high_priority = [r['text'] for r in recommendations if r.get('priority') == 'high']
+        medium_priority = [r['text'] for r in recommendations if r.get('priority') == 'medium']
+        low_priority = [r['text'] for r in recommendations if r.get('priority') == 'low']
+        
+        
