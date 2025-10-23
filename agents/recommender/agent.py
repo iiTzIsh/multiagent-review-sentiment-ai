@@ -249,3 +249,6 @@ LOW PRIORITY:
         
         formatted = []
         recommendations = recommendations_result['recommendations']
+        
+        formatted = []
+        recommendations = recommendations_result['recommendations']
