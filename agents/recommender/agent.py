@@ -110,3 +110,29 @@ class ReviewRecommendationsAgent:
             sentiment_reviews = [r for r in reviews_data if r.get('sentiment') == sentiment]
             if sentiment_reviews:
                 sample_reviews.extend(sentiment_reviews[:2])
+
+        prompt = f"""
+You are a hotel business consultant. Analyze {total_reviews} hotel reviews and provide exactly 5 actionable business recommendations.
+
+DATA:
+- Average Rating: {avg_score:.1f}/5.0
+- Sentiment: {dict(sentiment_counts)}
+
+SAMPLE REVIEWS:
+{chr(10).join([f"- [{r.get('sentiment', 'neutral').upper()}] {r.get('text', '')[:100]}..." for r in sample_reviews[:4]])}
+
+IMPORTANT: Respond ONLY in this exact format (no other text):
+
+HIGH PRIORITY:
+- Specific actionable recommendation 1
+- Specific actionable recommendation 2
+
+MEDIUM PRIORITY:
+- Specific actionable recommendation 3
+- Specific actionable recommendation 4
+
+LOW PRIORITY:
+- Specific actionable recommendation 5
+"""
+        
+        return prompt
