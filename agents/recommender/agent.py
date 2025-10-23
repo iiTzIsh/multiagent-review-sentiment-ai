@@ -209,3 +209,15 @@ LOW PRIORITY:
         avg_score = sum(float(r.get('score', 3.0)) for r in reviews_data) / total
         sentiment_counts = Counter(r.get('sentiment', 'neutral') for r in reviews_data)
         negative_ratio = sentiment_counts.get('negative', 0) / total
+
+        recommendations = []
+        
+        # Score-based recommendations
+        if avg_score < 2.5:
+            recommendations.append({'text': "Implement immediate service improvement plan", 'priority': 'high'})
+            recommendations.append({'text': "Conduct staff training on customer service", 'priority': 'high'})
+        elif avg_score < 3.5:
+            recommendations.append({'text': "Address common customer complaints", 'priority': 'medium'})
+            recommendations.append({'text': "Implement quality control checks", 'priority': 'medium'})
+        else:
+            recommendations.append({'text': "Maintain current service standards", 'priority': 'low'})
