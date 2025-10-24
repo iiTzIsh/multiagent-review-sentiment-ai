@@ -2173,3 +2173,47 @@ INFO 2025-10-17 20:15:24,592 basehttp 33812 30384 "GET /app/ HTTP/1.1" 200 44077
 INFO 2025-10-23 22:56:41,581 autoreload 14220 27416 Watching for file changes with StatReloader
 INFO 2025-10-23 22:56:46,006 basehttp 14220 13652 "GET / HTTP/1.1" 200 46765
 INFO 2025-10-23 22:56:46,094 basehttp 14220 13652 "GET /static/img/R.png HTTP/1.1" 200 30356
+INFO 2025-10-24 16:58:40,903 autoreload 35236 9748 Watching for file changes with StatReloader
+INFO 2025-10-24 16:58:48,041 basehttp 35236 29816 "GET / HTTP/1.1" 200 46765
+INFO 2025-10-24 16:58:48,075 basehttp 35236 29816 "GET /static/img/R.png HTTP/1.1" 304 0
+INFO 2025-10-24 16:58:48,927 basehttp 35236 29816 "GET /static/img/Rfv.png HTTP/1.1" 200 35826
+INFO 2025-10-24 16:58:49,969 basehttp 35236 29816 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-24 16:58:49,980 basehttp 35236 29816 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11737
+WARNING 2025-10-24 16:58:50,040 log 35236 29816 Not Found: /favicon.ico
+WARNING 2025-10-24 16:58:50,041 basehttp 35236 29816 "GET /favicon.ico HTTP/1.1" 404 3940
+INFO 2025-10-24 16:58:59,713 basehttp 35236 29816 "POST /auth/login/?next=/app/ HTTP/1.1" 302 0
+INFO 2025-10-24 16:59:02,744 basehttp 35236 29816 "GET /app/ HTTP/1.1" 200 44732
+INFO 2025-10-24 16:59:02,770 basehttp 35236 3536 "GET /static/js/enhanced-dashboard.js?v=2.1 HTTP/1.1" 304 0
+INFO 2025-10-24 16:59:02,770 basehttp 35236 29816 "GET /static/css/dashboard.css HTTP/1.1" 200 37848
+INFO 2025-10-24 16:59:10,300 basehttp 35236 29816 "GET /app/reports/generate/ HTTP/1.1" 200 30605
+INFO 2025-10-24 16:59:12,741 basehttp 35236 29816 "GET /app/upload/ HTTP/1.1" 200 62181
+ERROR 2025-10-24 17:00:02,546 log 35236 29816 Internal Server Error: /app/batch/1b72d483-812b-4df0-a648-bcd46f817a44/
+Traceback (most recent call last):
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\contrib\auth\decorators.py", line 59, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "E:\ish\multiagent-review-sentiment-ai\apps\dashboard\views.py", line 205, in batch_detail
+    return render(request, 'dashboard/batch_detail.html', context)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\shortcuts.py", line 25, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "E:\ish\multiagent-review-sentiment-ai\.venv\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: dashboard/batch_detail.html
+ERROR 2025-10-24 17:00:02,554 basehttp 35236 29816 "GET /app/batch/1b72d483-812b-4df0-a648-bcd46f817a44/ HTTP/1.1" 500 104176
+INFO 2025-10-24 17:00:58,629 basehttp 35236 10008 "GET /app/analytics/ HTTP/1.1" 200 113466
+INFO 2025-10-24 17:00:58,985 views 35236 10008 Retrieved persisted AI analysis: dfc79ad5-1fe5-418f-8973-3556a0b5d864
+INFO 2025-10-24 17:00:59,229 basehttp 35236 10008 "GET /api/v1/get-ai-analysis/ HTTP/1.1" 200 5214
+INFO 2025-10-24 17:01:26,818 basehttp 35236 28416 "GET /app/reviews/ HTTP/1.1" 200 170435
+INFO 2025-10-24 17:01:30,821 basehttp 35236 28416 "GET /app/ HTTP/1.1" 200 44109
+INFO 2025-10-24 17:01:37,057 basehttp 35236 28416 "GET /app/reviews/340e155c-a6d1-44ec-a61f-4fd2d121adbd/ HTTP/1.1" 200 21885
+INFO 2025-10-24 17:01:42,338 basehttp 35236 28416 "GET /app/reports/generate/ HTTP/1.1" 200 30605
+INFO 2025-10-24 17:01:45,193 basehttp 35236 28416 "GET /app/upload/ HTTP/1.1" 200 62157
+INFO 2025-10-24 17:04:30,530 autoreload 35236 9748 E:\ish\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
+INFO 2025-10-24 17:04:31,245 autoreload 34868 24072 Watching for file changes with StatReloader
+INFO 2025-10-24 17:04:45,490 autoreload 34868 24072 E:\ish\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
+INFO 2025-10-24 17:04:46,160 autoreload 38428 30948 Watching for file changes with StatReloader
