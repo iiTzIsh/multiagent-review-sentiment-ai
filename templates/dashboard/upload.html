@@ -12,7 +12,7 @@
 
 {% block page_actions %}
 <div class="d-flex gap-2">
-    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#templateModal">
+    <button type="button" class="btn btn-outline-primary" onclick="downloadSampleFile()">
         <i class="fas fa-download me-1"></i>Download Template
     </button>
     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" title="View upload history">
@@ -1111,7 +1111,6 @@ function showToast(title, message, type = 'info') {
     });
 }
 
-// Download sample CSV file
 function downloadSampleFile() {
     const csvContent = `text,title,rating,reviewer_name,reviewer_location,hotel_name,source,date_posted
 "Great hotel with excellent service and clean rooms.","Excellent Stay",5,"John Doe","New York, USA","Grand Plaza Hotel","TripAdvisor","2024-01-15"
