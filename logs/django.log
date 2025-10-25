@@ -2296,3 +2296,13 @@ INFO 2025-10-25 22:18:47,671 basehttp 5156 26028 "GET /app/reviews/?hotel=&senti
 INFO 2025-10-25 22:19:11,429 basehttp 5156 26028 "POST /app/export/ HTTP/1.1" 200 417
 INFO 2025-10-25 22:23:52,005 autoreload 5156 28876 E:\ish\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
 INFO 2025-10-25 22:23:52,637 autoreload 14192 32548 Watching for file changes with StatReloader
+INFO 2025-10-25 22:29:05,610 autoreload 35772 7260 Watching for file changes with StatReloader
+INFO 2025-10-25 22:29:21,191 basehttp 35772 37484 "GET / HTTP/1.1" 200 46765
+INFO 2025-10-25 22:30:50,211 basehttp 35772 37484 "GET / HTTP/1.1" 200 46651
+INFO 2025-10-25 22:31:37,816 basehttp 35772 37484 "GET / HTTP/1.1" 200 46535
+INFO 2025-10-25 22:31:43,262 basehttp 35772 37484 "GET / HTTP/1.1" 200 46535
+INFO 2025-10-25 22:33:51,757 basehttp 35772 37484 "GET /app/ HTTP/1.1" 200 44115
+INFO 2025-10-25 22:34:05,926 basehttp 35772 37484 "GET /app/reviews/5f071991-cbfa-41f8-be58-77df36ae0380/ HTTP/1.1" 200 21878
+INFO 2025-10-25 22:34:21,266 basehttp 35772 37484 "GET /app/reviews/ HTTP/1.1" 200 172096
+INFO 2025-10-25 22:35:38,352 basehttp 35772 37484 "GET /app/ HTTP/1.1" 200 44115
+INFO 2025-10-25 22:35:44,265 basehttp 35772 37484 "GET / HTTP/1.1" 200 46682
