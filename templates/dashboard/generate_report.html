@@ -114,9 +114,8 @@
                         <div class="col-md-6">
                             <label for="reportType" class="form-label">Report Type</label>
                             <select class="form-select" id="reportType" name="report_type" required>
-                                <option value="">Select report type</option>
                                 <option value="daily">Daily Summary</option>
-                                <option value="weekly">Weekly Analysis</option>
+                                <option value="weekly" selected>Weekly Analysis</option>
                                 <option value="monthly">Monthly Overview</option>
                                 <option value="custom">Custom Period</option>
                             </select>
@@ -125,8 +124,7 @@
                         <div class="col-md-6">
                             <label for="format" class="form-label">Output Format</label>
                             <select class="form-select" id="format" name="format" required>
-                                <option value="pdf">PDF Document</option>
-                                <option value="excel">Excel Spreadsheet</option>
+                                <option value="csv" selected>CSV Spreadsheet</option>
                                 <option value="json">JSON Data</option>
                             </select>
                         </div>
@@ -146,7 +144,8 @@
                     
                     <div class="mb-3">
                         <label for="hotels" class="form-label">Hotels (Optional)</label>
-                        <select class="form-select" id="hotels" name="hotels" multiple>
+                        <select class="form-select" id="hotels" name="hotel">
+                            <option value="">All Hotels</option>
                             {% for hotel in hotels %}
                                 <option value="{{ hotel.id }}">{{ hotel.name }} - {{ hotel.location }}</option>
                             {% endfor %}
@@ -266,10 +265,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.getElementById('dateFrom').value = weekAgo.toISOString().split('T')[0];
     document.getElementById('dateTo').value = today.toISOString().split('T')[0];
+    
+    // Initialize form submission
+    initFormSubmission();
 });
 
 function resetForm() {
     document.getElementById('reportForm').reset();
+    // Reset to default values
+    document.getElementById('reportType').value = 'weekly';
+    document.getElementById('format').value = 'csv';
+    
     // Reset default dates
     const today = new Date();
     const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
@@ -279,45 +285,137 @@ function resetForm() {
 }
 
 function loadTemplate(type) {
-    const form = document.getElementById('reportForm');
+    const today = new Date();
     
     if (type === 'weekly') {
-        form.report_type.value = 'weekly';
-        form.format.value = 'pdf';
+        document.getElementById('reportType').value = 'weekly';
+        document.getElementById('format').value = 'csv';
         // Set to last week
-        const today = new Date();
         const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
-        form.date_from.value = weekAgo.toISOString().split('T')[0];
-        form.date_to.value = today.toISOString().split('T')[0];
+        document.getElementById('dateFrom').value = weekAgo.toISOString().split('T')[0];
+        document.getElementById('dateTo').value = today.toISOString().split('T')[0];
     } else if (type === 'monthly') {
-        form.report_type.value = 'monthly';
-        form.format.value = 'excel';
+        document.getElementById('reportType').value = 'monthly';
+        document.getElementById('format').value = 'csv';
         // Set to last month
-        const today = new Date();
         const monthAgo = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
-        form.date_from.value = monthAgo.toISOString().split('T')[0];
-        form.date_to.value = today.toISOString().split('T')[0];
+        document.getElementById('dateFrom').value = monthAgo.toISOString().split('T')[0];
+        document.getElementById('dateTo').value = today.toISOString().split('T')[0];
     } else if (type === 'custom') {
-        form.report_type.value = 'custom';
-        form.format.value = 'json';
+        document.getElementById('reportType').value = 'custom';
+        document.getElementById('format').value = 'json';
     }
 }
 
-// Form submission
-document.getElementById('reportForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+// Form submission handler
+function initFormSubmission() {
+    const form = document.getElementById('reportForm');
+    const submitBtn = form.querySelector('button[type="submit"]');
     
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Generating...';
-    submitBtn.disabled = true;
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validate dates
+        const dateFrom = document.getElementById('dateFrom').value;
+        const dateTo = document.getElementById('dateTo').value;
+        
+        if (new Date(dateFrom) > new Date(dateTo)) {
+            alert('From Date must be before To Date');
+            return;
+        }
+        
+        // Show loading state
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Generating Report...';
+        submitBtn.disabled = true;
+        
+        // Actually submit the form
+        const formData = new FormData(form);
+        
+        fetch(form.action || window.location.href, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Report generation failed');
+            }
+            
+            // Get filename from Content-Disposition header
+            const disposition = response.headers.get('Content-Disposition');
+            let filename = 'report.csv';
+            if (disposition && disposition.includes('filename=')) {
+                filename = disposition.split('filename=')[1].replace(/"/g, '');
+            }
+            
+            return response.blob().then(blob => ({ blob, filename }));
+        })
+        .then(({ blob, filename }) => {
+            // Create download link
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+            
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            
+            // Show success message
+            showToast('Success', 'Report generated and downloaded successfully!', 'success');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            showToast('Error', 'Failed to generate report. Please try again.', 'error');
+        });
+    });
+}
+
+// Toast notification function
+function showToast(title, message, type = 'info') {
+    let toastContainer = document.querySelector('.toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.className = 'toast-container position-fixed top-0 end-0 p-3';
+        toastContainer.style.zIndex = '1055';
+        document.body.appendChild(toastContainer);
+    }
+
+    const toastId = 'toast-' + Date.now();
+    const iconClass = type === 'error' ? 'exclamation-circle text-danger' : 
+                      type === 'success' ? 'check-circle text-success' : 
+                      'info-circle text-primary';
     
-    // Simulate report generation
-    setTimeout(() => {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        alert('Report generation started! You will receive a download link shortly.');
-    }, 3000);
-});
+    const toastHTML = `
+        <div id="${toastId}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <i class="fas fa-${iconClass} me-2"></i>
+                <strong class="me-auto">${title}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                ${message}
+            </div>
+        </div>
+    `;
+
+    toastContainer.insertAdjacentHTML('beforeend', toastHTML);
+    const toastElement = document.getElementById(toastId);
+    const toast = new bootstrap.Toast(toastElement);
+    toast.show();
+
+    toastElement.addEventListener('hidden.bs.toast', function() {
+        this.remove();
+    });
+}
 </script>
 {% endblock %}

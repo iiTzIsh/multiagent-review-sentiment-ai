@@ -2229,3 +2229,8 @@ INFO 2025-10-25 21:29:52,251 basehttp 28412 17768 "GET /app/ HTTP/1.1" 200 44738
 INFO 2025-10-25 21:29:52,288 basehttp 28412 17768 "GET /static/css/dashboard.css HTTP/1.1" 304 0
 INFO 2025-10-25 21:29:58,371 basehttp 28412 17768 "GET /app/upload/ HTTP/1.1" 200 62163
 INFO 2025-10-25 21:30:09,730 basehttp 28412 17768 "GET /app/reports/generate/ HTTP/1.1" 200 30605
+INFO 2025-10-25 21:41:15,670 autoreload 26248 900 Watching for file changes with StatReloader
+INFO 2025-10-25 21:41:25,834 basehttp 26248 7284 "GET / HTTP/1.1" 200 46765
+INFO 2025-10-25 21:41:36,247 basehttp 26248 7284 "GET /app/ HTTP/1.1" 200 44115
+INFO 2025-10-25 21:41:41,006 basehttp 26248 7284 "GET /app/reports/generate/ HTTP/1.1" 200 34370
+INFO 2025-10-25 21:41:59,527 basehttp 26248 7284 "POST /app/reports/generate/ HTTP/1.1" 200 2936
