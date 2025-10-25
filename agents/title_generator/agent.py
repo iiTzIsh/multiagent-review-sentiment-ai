@@ -31,10 +31,6 @@ class TitleGenerationTool(BaseTool):
             title = self._intelligent_title_generation(text, sentiment)
             
             # Skip HuggingFace API for faster, more reliable titles
-            # if self._api_key and len(self._api_key) > 10:
-            #     enhanced_title = self._try_bart_enhancement(text, title)
-            #     if enhanced_title and len(enhanced_title) > len(title):
-            #         title = enhanced_title
             
             return f"Title: {title}"
             
@@ -250,7 +246,7 @@ class TitleGenerationTool(BaseTool):
         words = text.split()
         formatted_words = []
         
-        for word in words[:4]:  # Limit to 4 words max
+        for word in words[:4]:  
             # Skip articles and prepositions for title case
             if word.lower() not in ['a', 'an', 'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with']:
                 formatted_words.append(word.capitalize())

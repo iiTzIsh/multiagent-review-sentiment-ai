@@ -17,7 +17,7 @@ logger = logging.getLogger('agents.orchestrator')
 
 class ReviewProcessingOrchestrator:
     """
-    Two-Stage Workflow Implementation:
+    Two-Stage Workflow:
     
     Stage 1: Core Processing (Fast, Essential)
     - Process individual reviews with sentiment, score, topics
@@ -89,7 +89,7 @@ class ReviewProcessingOrchestrator:
         Process individual review with core analysis:
         - Sentiment classification
         - Score generation
-        - Basic topic extraction (optional)
+        - Basic topic extraction
         
         Returns structured data ready for database storage
         """

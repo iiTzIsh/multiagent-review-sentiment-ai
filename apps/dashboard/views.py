@@ -518,18 +518,28 @@ def generate_report(request):
         report_type = request.POST.get('report_type', 'weekly')
         hotel_id = request.POST.get('hotel')
         format_type = request.POST.get('format', 'csv')
+        date_from_str = request.POST.get('date_from')
+        date_to_str = request.POST.get('date_to')
         
         try:
-            # Date range based on report type
-            end_date = timezone.now()
-            if report_type == 'daily':
-                start_date = end_date - timedelta(days=1)
-            elif report_type == 'weekly':
-                start_date = end_date - timedelta(days=7)
-            elif report_type == 'monthly':
-                start_date = end_date - timedelta(days=30)
+            # Use custom dates if provided, otherwise calculate based on report type
+            if date_from_str and date_to_str:
+                from datetime import datetime
+                start_date = timezone.make_aware(datetime.strptime(date_from_str, '%Y-%m-%d'))
+                end_date = timezone.make_aware(datetime.strptime(date_to_str, '%Y-%m-%d'))
+                # Add 23:59:59 to end_date to include the entire day
+                end_date = end_date.replace(hour=23, minute=59, second=59)
             else:
-                start_date = end_date - timedelta(days=7)
+                # Date range based on report type
+                end_date = timezone.now()
+                if report_type == 'daily':
+                    start_date = end_date - timedelta(days=1)
+                elif report_type == 'weekly':
+                    start_date = end_date - timedelta(days=7)
+                elif report_type == 'monthly':
+                    start_date = end_date - timedelta(days=30)
+                else:
+                    start_date = end_date - timedelta(days=7)
             
             # Get filtered reviews (by accessible hotels)
             reviews = Review.objects.filter(
@@ -557,7 +567,8 @@ def generate_report(request):
             # Generate downloadable report
             if format_type == 'csv':
                 response = HttpResponse(content_type='text/csv')
-                response['Content-Disposition'] = f'attachment; filename="{report_type}_report_{timezone.now().date()}.csv"'
+                filename = f"{report_type}_report_{hotel_name.replace(' ', '_')}_{timezone.now().date()}.csv"
+                response['Content-Disposition'] = f'attachment; filename="{filename}"'
                 
                 # Convert to DataFrame and export
                 data = reviews.values(
@@ -565,8 +576,17 @@ def generate_report(request):
                     'original_rating', 'date_posted', 'reviewer_name', 'created_at'
                 )
                 
-                df = pd.DataFrame(list(data))
-                df.to_csv(response, index=False)
+                if data:
+                    df = pd.DataFrame(list(data))
+                    df.to_csv(response, index=False)
+                else:
+                    # Create empty CSV with headers
+                    import csv
+                    writer = csv.writer(response)
+                    writer.writerow(['hotel__name', 'text', 'sentiment', 'ai_score', 
+                                   'original_rating', 'date_posted', 'reviewer_name', 'created_at'])
+                    writer.writerow(['No reviews found for the selected criteria'])
+                
                 return response
             
             else:
@@ -581,11 +601,13 @@ def generate_report(request):
                 }
                 
                 response = JsonResponse(report_data)
-                response['Content-Disposition'] = f'attachment; filename="{report_type}_report_{timezone.now().date()}.json"'
+                filename = f"{report_type}_report_{hotel_name.replace(' ', '_')}_{timezone.now().date()}.json"
+                response['Content-Disposition'] = f'attachment; filename="{filename}"'
                 return response
             
         except Exception as e:
             messages.error(request, f'Report generation failed: {str(e)}')
+            return redirect('dashboard:generate_report')
     
     # Get accessible hotels for dropdown
     hotels = accessible_hotels
