@@ -97,6 +97,10 @@
     background-color: rgba(255, 255, 255, 0.1);
     border-color: rgba(255, 255, 255, 0.2);
     color: white;
+    height: 38px; /* Match Bootstrap default form-select height */
+    padding: 0.375rem 0.75rem; /* Standard Bootstrap form control padding */
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
 .filter-card .form-select option {
@@ -107,6 +111,8 @@
 .filter-card .form-label {
     color: rgba(255, 255, 255, 0.9);
     font-weight: 500;
+    font-size: 0.875rem; /* Slightly smaller label */
+    margin-bottom: 0.5rem;
 }
 
 .stats-badge {
@@ -335,7 +341,7 @@
                         <div class="col-md-3">
                             <label for="sentiment" class="form-label">Sentiment</label>
                             <select name="sentiment" id="sentiment" class="form-select">
-                                <option value="all">All Sentiments</option>
+                                <option value="">All Sentiments</option>
                                 {% for value, label in sentiment_choices %}
                                 <option value="{{ value }}" {% if value == current_sentiment %}selected{% endif %}>
                                     {{ label }}
@@ -348,7 +354,7 @@
                             <label for="search" class="form-label">Search</label>
                             <input type="text" name="search" id="search" class="form-control" 
                                    placeholder="Search reviews, titles, reviewers..." 
-                                   value="{{ search_query }}">
+                                   value="{{ current_filters.search|default:'' }}">
                         </div>
                         
                         <div class="col-md-2">
@@ -641,30 +647,44 @@ function showToast(type, message) {
 }
 
 // Initialize reviews management
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
     // Select all checkbox functionality
-    $('#selectAll').change(function() {
-        $('.review-checkbox').prop('checked', this.checked);
-        updateSelectedCount();
-    });
+    const selectAllCheckbox = document.getElementById('selectAll');
+    if (selectAllCheckbox) {
+        selectAllCheckbox.addEventListener('change', function() {
+            const reviewCheckboxes = document.querySelectorAll('.review-checkbox');
+            reviewCheckboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+            updateSelectedCount();
+        });
+    }
     
     // Individual checkbox change
-    $('.review-checkbox').change(function() {
-        updateSelectedCount();
-        
-        // Update select all checkbox
-        const totalCheckboxes = $('.review-checkbox').length;
-        const checkedCheckboxes = $('.review-checkbox:checked').length;
-        
-        $('#selectAll').prop('indeterminate', checkedCheckboxes > 0 && checkedCheckboxes < totalCheckboxes);
-        $('#selectAll').prop('checked', checkedCheckboxes === totalCheckboxes);
+    const reviewCheckboxes = document.querySelectorAll('.review-checkbox');
+    reviewCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            updateSelectedCount();
+            
+            // Update select all checkbox
+            const totalCheckboxes = document.querySelectorAll('.review-checkbox').length;
+            const checkedCheckboxes = document.querySelectorAll('.review-checkbox:checked').length;
+            
+            if (selectAllCheckbox) {
+                selectAllCheckbox.indeterminate = checkedCheckboxes > 0 && checkedCheckboxes < totalCheckboxes;
+                selectAllCheckbox.checked = checkedCheckboxes === totalCheckboxes;
+            }
+        });
     });
 });
 
 function updateSelectedCount() {
-    const selectedCount = $('.review-checkbox:checked').length;
+    const selectedCount = document.querySelectorAll('.review-checkbox:checked').length;
     // Update UI elements that show selected count
-    $('.selected-count').text(selectedCount);
+    const selectedCountElements = document.querySelectorAll('.selected-count');
+    selectedCountElements.forEach(el => {
+        el.textContent = selectedCount;
+    });
 }
 
 function processAllReviews() {
@@ -797,43 +817,51 @@ function deleteReview(reviewId) {
 }
 
 function exportSelected() {
-    const selectedIds = $('.review-checkbox:checked').map(function() {
-        return this.value;
-    }).get();
+    const selectedCheckboxes = document.querySelectorAll('.review-checkbox:checked');
+    const selectedIds = Array.from(selectedCheckboxes).map(cb => cb.value);
     
     if (selectedIds.length === 0) {
         alert('Please select at least one review to export.');
         return;
     }
     
+    // Get CSRF token
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value || 
+                      document.querySelector('meta[name="csrf-token"]')?.content || '';
+    
     // Create form and submit for download
-    const form = $('<form>', {
-        method: 'POST',
-        action: '{% url "api:export" %}',
-        target: '_blank'
-    });
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '{% url "dashboard:export_data" %}';
+    form.target = '_blank';
     
-    form.append($('<input>', {
-        type: 'hidden',
-        name: 'csrfmiddlewaretoken',
-        value: $('[name=csrfmiddlewaretoken]').val()
-    }));
+    // Add CSRF token
+    const csrfInput = document.createElement('input');
+    csrfInput.type = 'hidden';
+    csrfInput.name = 'csrfmiddlewaretoken';
+    csrfInput.value = csrfToken;
+    form.appendChild(csrfInput);
     
-    form.append($('<input>', {
-        type: 'hidden',
-        name: 'review_ids',
-        value: selectedIds.join(',')
-    }));
+    // Add review IDs
+    const idsInput = document.createElement('input');
+    idsInput.type = 'hidden';
+    idsInput.name = 'review_ids';
+    idsInput.value = selectedIds.join(',');
+    form.appendChild(idsInput);
     
-    form.append($('<input>', {
-        type: 'hidden',
-        name: 'format',
-        value: 'csv'
-    }));
+    // Add format
+    const formatInput = document.createElement('input');
+    formatInput.type = 'hidden';
+    formatInput.name = 'format';
+    formatInput.value = 'csv';
+    form.appendChild(formatInput);
     
-    $('body').append(form);
+    // Submit and remove form
+    document.body.appendChild(form);
     form.submit();
-    form.remove();
+    setTimeout(() => form.remove(), 100);
+    
+    showToast('Success', 'Export started! Your download should begin shortly.', 'success');
 }
 
 function showProcessingModal(message) {
