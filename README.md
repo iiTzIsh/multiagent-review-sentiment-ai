@@ -3,10 +3,9 @@
 A production-ready **Django 5.2 platform** powered by **6 specialized AI agents** that transforms hotel reviews into actionable business intelligence. Built with **HuggingFace transformers** and **Google Gemini LLM** for enterprise-grade sentiment analysis and strategic insights.
 
 ## 🎯 **Project Overview**
+![my final drawio](https://github.com/user-attachments/assets/6eb07f7e-2e94-4f69-b8b4-5ebb247d039c)
 
 This platform revolutionizes hotel review analysis through a **Two-Stage AI Workflow** that automatically processes customer feedback, generates business insights, and provides strategic recommendations. From CSV upload to executive dashboards - everything is automated and intelligent.
-
-![Dashboard Preview](https://github.com/user-attachments/assets/0bb8cabb-4ed1-44bf-b894-c1bcf5ee9ea0)
 
 ### **🚀 Key Achievements**
 - ✅ **95% Accuracy** in sentiment classification
