@@ -214,7 +214,7 @@ def reviews_list(request):
     # Filter reviews by accessible hotels
     reviews = Review.objects.filter(hotel__in=accessible_hotels)
     
-    # Calculate statistics
+    # Calculate statistics (before filtering)
     total_reviews = reviews.count()
     positive_reviews = reviews.filter(sentiment='positive').count()
     negative_reviews = reviews.filter(sentiment='negative').count()
@@ -228,21 +228,29 @@ def reviews_list(request):
     max_score = request.GET.get('max_score')
     search = request.GET.get('search')
     
-    if hotel_id:
+    if hotel_id and hotel_id != '':
         reviews = reviews.filter(hotel_id=hotel_id)
     
-    if sentiment:
+    if sentiment and sentiment != '' and sentiment != 'all':
         reviews = reviews.filter(sentiment=sentiment)
     
     if min_score:
-        reviews = reviews.filter(ai_score__gte=float(min_score))
+        try:
+            reviews = reviews.filter(ai_score__gte=float(min_score))
+        except ValueError:
+            pass
     
     if max_score:
-        reviews = reviews.filter(ai_score__lte=float(max_score))
+        try:
+            reviews = reviews.filter(ai_score__lte=float(max_score))
+        except ValueError:
+            pass
     
-    if search:
+    if search and search.strip():
         reviews = reviews.filter(
-            Q(text__icontains=search) | Q(title__icontains=search)
+            Q(text__icontains=search) | 
+            Q(title__icontains=search) |
+            Q(reviewer_name__icontains=search)
         )
     
     # Pagination
@@ -464,11 +472,26 @@ def export_data(request):
     user_profile = request.user.profile
     accessible_hotels = user_profile.get_accessible_hotels()
     
-    format_type = request.GET.get('format', 'csv')
-    hotel_id = request.GET.get('hotel')
+    # Handle both GET and POST requests
+    if request.method == 'POST':
+        format_type = request.POST.get('format', 'csv')
+        hotel_id = request.POST.get('hotel')
+        review_ids = request.POST.get('review_ids', '')
+    else:
+        format_type = request.GET.get('format', 'csv')
+        hotel_id = request.GET.get('hotel')
+        review_ids = request.GET.get('review_ids', '')
     
     # Get reviews (filtered by accessible hotels)
     reviews = Review.objects.filter(hotel__in=accessible_hotels)
+    
+    # Filter by specific review IDs if provided
+    if review_ids:
+        review_id_list = [rid.strip() for rid in review_ids.split(',') if rid.strip()]
+        if review_id_list:
+            reviews = reviews.filter(id__in=review_id_list)
+    
+    # Filter by hotel if provided
     if hotel_id:
         # Ensure the requested hotel is accessible
         if not accessible_hotels.filter(id=hotel_id).exists():
@@ -484,11 +507,18 @@ def export_data(request):
         # Convert to DataFrame and export
         data = reviews.values(
             'hotel__name', 'text', 'sentiment', 'ai_score',
-            'original_rating', 'date_posted', 'reviewer_name'
+            'original_rating', 'date_posted', 'reviewer_name', 'title'
         )
         
-        df = pd.DataFrame(list(data))
-        df.to_csv(response, index=False)
+        if data:
+            df = pd.DataFrame(list(data))
+            df.to_csv(response, index=False)
+        else:
+            import csv
+            writer = csv.writer(response)
+            writer.writerow(['hotel__name', 'text', 'sentiment', 'ai_score', 
+                           'original_rating', 'date_posted', 'reviewer_name', 'title'])
+            writer.writerow(['No reviews selected for export'])
         
         return response
     
@@ -496,7 +526,7 @@ def export_data(request):
         # Create JSON export
         data = list(reviews.values(
             'id', 'hotel__name', 'text', 'sentiment', 'ai_score',
-            'original_rating', 'date_posted', 'reviewer_name'
+            'original_rating', 'date_posted', 'reviewer_name', 'title'
         ))
         
         response = JsonResponse({'reviews': data})
