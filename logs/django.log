@@ -2234,3 +2234,10 @@ INFO 2025-10-25 21:41:25,834 basehttp 26248 7284 "GET / HTTP/1.1" 200 46765
 INFO 2025-10-25 21:41:36,247 basehttp 26248 7284 "GET /app/ HTTP/1.1" 200 44115
 INFO 2025-10-25 21:41:41,006 basehttp 26248 7284 "GET /app/reports/generate/ HTTP/1.1" 200 34370
 INFO 2025-10-25 21:41:59,527 basehttp 26248 7284 "POST /app/reports/generate/ HTTP/1.1" 200 2936
+INFO 2025-10-25 21:46:01,653 autoreload 35612 24780 Watching for file changes with StatReloader
+INFO 2025-10-25 21:46:11,217 basehttp 35612 29928 "GET /app/reports/generate/ HTTP/1.1" 200 36516
+INFO 2025-10-25 21:46:11,246 basehttp 35612 29928 "GET /static/img/Rfv.png HTTP/1.1" 304 0
+INFO 2025-10-25 21:46:52,819 basehttp 35612 29928 "POST /app/reports/generate/ HTTP/1.1" 200 21940
+INFO 2025-10-25 21:50:11,490 basehttp 35612 29928 "POST /app/reports/generate/ HTTP/1.1" 200 276
+INFO 2025-10-25 21:50:42,003 basehttp 35612 29928 "GET /app/ HTTP/1.1" 200 44115
+INFO 2025-10-25 21:51:39,290 basehttp 35612 29928 "GET /app/reports/generate/ HTTP/1.1" 200 36628

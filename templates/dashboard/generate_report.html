@@ -26,6 +26,11 @@
 
 {% block extra_css %}
 <style>
+    /* Add proper spacing below page header */
+    .main-content {
+        padding-top: 2rem !important;
+    }
+
     /* Modern Card Header Styles for Report Page */
     .card .card-header {
         background: #1e3a8a !important;
@@ -93,6 +98,94 @@
     .card .card-body {
         background: var(--bg-primary) !important;
         color: var(--text-primary) !important;
+    }
+
+    /* Fix form controls - make text visible with proper colors */
+    .form-label {
+        color: #e5e7eb !important;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    .form-select,
+    .form-control {
+        background-color: #1f2937 !important;
+        border: 1px solid #374151 !important;
+        color: #f3f4f6 !important;
+        padding: 0.625rem 0.875rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .form-select:focus,
+    .form-control:focus {
+        background-color: #111827 !important;
+        border-color: #3b82f6 !important;
+        color: #ffffff !important;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        outline: none;
+    }
+
+    .form-select option {
+        background-color: #1f2937 !important;
+        color: #f3f4f6 !important;
+        padding: 0.5rem;
+    }
+
+    .form-select option:hover,
+    .form-select option:checked {
+        background-color: #3b82f6 !important;
+        color: #ffffff !important;
+    }
+
+    /* Date input specific styling */
+    input[type="date"] {
+        color-scheme: dark;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+        cursor: pointer;
+    }
+
+    /* Checkbox styling */
+    .form-check-input {
+        background-color: #1f2937 !important;
+        border: 2px solid #374151 !important;
+        cursor: pointer;
+    }
+
+    .form-check-input:checked {
+        background-color: #3b82f6 !important;
+        border-color: #3b82f6 !important;
+    }
+
+    .form-check-input:focus {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+        border-color: #3b82f6 !important;
+    }
+
+    .form-check-label {
+        color: #e5e7eb !important;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    /* Small helper text */
+    .text-muted,
+    small.text-muted {
+        color: #9ca3af !important;
+    }
+
+    /* Border styling */
+    .border-bottom {
+        border-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* Dropdown placeholder/empty state */
+    .form-select:invalid,
+    .form-select option[value=""] {
+        color: #9ca3af !important;
     }
 </style>
 {% endblock %}
