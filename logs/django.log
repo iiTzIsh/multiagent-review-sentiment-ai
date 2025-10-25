@@ -2217,3 +2217,15 @@ INFO 2025-10-24 17:04:30,530 autoreload 35236 9748 E:\ish\multiagent-review-sent
 INFO 2025-10-24 17:04:31,245 autoreload 34868 24072 Watching for file changes with StatReloader
 INFO 2025-10-24 17:04:45,490 autoreload 34868 24072 E:\ish\multiagent-review-sentiment-ai\apps\dashboard\views.py changed, reloading.
 INFO 2025-10-24 17:04:46,160 autoreload 38428 30948 Watching for file changes with StatReloader
+INFO 2025-10-25 21:29:24,306 autoreload 28412 33248 Watching for file changes with StatReloader
+INFO 2025-10-25 21:29:34,943 basehttp 28412 17768 "GET / HTTP/1.1" 200 46765
+INFO 2025-10-25 21:29:34,965 basehttp 28412 17768 "GET /static/img/R.png HTTP/1.1" 304 0
+INFO 2025-10-25 21:29:38,830 basehttp 28412 17768 "GET /app/ HTTP/1.1" 302 0
+INFO 2025-10-25 21:29:38,847 basehttp 28412 17768 "GET /auth/login/?next=/app/ HTTP/1.1" 200 11737
+WARNING 2025-10-25 21:29:38,928 log 28412 17768 Not Found: /favicon.ico
+WARNING 2025-10-25 21:29:38,929 basehttp 28412 17768 "GET /favicon.ico HTTP/1.1" 404 3940
+INFO 2025-10-25 21:29:47,771 basehttp 28412 17768 "POST /auth/login/?next=/app/ HTTP/1.1" 302 0
+INFO 2025-10-25 21:29:52,251 basehttp 28412 17768 "GET /app/ HTTP/1.1" 200 44738
+INFO 2025-10-25 21:29:52,288 basehttp 28412 17768 "GET /static/css/dashboard.css HTTP/1.1" 304 0
+INFO 2025-10-25 21:29:58,371 basehttp 28412 17768 "GET /app/upload/ HTTP/1.1" 200 62163
+INFO 2025-10-25 21:30:09,730 basehttp 28412 17768 "GET /app/reports/generate/ HTTP/1.1" 200 30605
