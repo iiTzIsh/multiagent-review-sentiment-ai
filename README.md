@@ -42,9 +42,16 @@ This platform revolutionizes hotel review analysis through a **Two-Stage AI Work
 ##  **Project Showcase**
 <img width="400" height="320" alt="1" src="https://github.com/user-attachments/assets/0d313fd4-373e-492a-9130-2ceee8086156" />
 <img width="400" height="320" alt="2" src="https://github.com/user-attachments/assets/c5886c7e-4513-4761-829f-f87ba1caf28c" />
-<img width="1917" height="1022" alt="3" src="https://github.com/user-attachments/assets/7081a374-92ab-4637-8071-8e3d14cb761d" />
-<img width="1898" height="938" alt="4" src="https://github.com/user-attachments/assets/db1af49b-d264-4fe4-ae81-74fefe784e42" />
-<img width="1920" height="1080" alt="New Project" src="https://github.com/user-attachments/assets/adb701fb-cd5c-44b6-b319-c7a9dee84b8c" />
+<img width="400" height="320" alt="3" src="https://github.com/user-attachments/assets/7081a374-92ab-4637-8071-8e3d14cb761d" />
+<img width="400" height="320" alt="4" src="https://github.com/user-attachments/assets/db1af49b-d264-4fe4-ae81-74fefe784e42" />
+<img width="400" height="320" alt="5" src="https://github.com/user-attachments/assets/5bcef2dd-3e8e-438d-b20d-a52e276f327d" />
+<img width="400" height="320" alt="6" src="https://github.com/user-attachments/assets/590359ed-404f-4491-b6f4-faaa021bbbd5" />
+<img width="400" height="320" alt="7" src="https://github.com/user-attachments/assets/467441df-e668-4775-9f24-556aa53c76ed" />
+<img width="400" height="320" alt="8" src="https://github.com/user-attachments/assets/a2d0b599-37f6-483a-a2c5-a81806389005" />
+<img width="400" height="320" alt="9" src="https://github.com/user-attachments/assets/0e16608d-0b7b-40bb-8936-12b7e325b479" />
+<img width="400" height="320" alt="10" src="https://github.com/user-attachments/assets/15a20948-4525-4b83-b7cf-cbe81101df53" />
+<img width="400" height="320" alt="11" src="https://github.com/user-attachments/assets/29df599e-45e5-4108-ac1c-2377aa982fd9" />
+<img width="400" height="320" alt="12" src="https://github.com/user-attachments/assets/04f3a65d-fab3-4019-8855-b312f6b18dc4" />
 
 ---
 ## ⚡ **Core Features & Capabilities**
