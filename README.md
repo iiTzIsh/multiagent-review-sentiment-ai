@@ -40,8 +40,8 @@ This platform revolutionizes hotel review analysis through a **Two-Stage AI Work
 
 ---
 ##  **Project Showcase**
-<img width="600" height="250" alt="1" src="https://github.com/user-attachments/assets/0d313fd4-373e-492a-9130-2ceee8086156" />
-<img width="600" height="250" alt="2" src="https://github.com/user-attachments/assets/c5886c7e-4513-4761-829f-f87ba1caf28c" />
+<img width="200" height="120" alt="1" src="https://github.com/user-attachments/assets/0d313fd4-373e-492a-9130-2ceee8086156" />
+<img width="200" height="120" alt="2" src="https://github.com/user-attachments/assets/c5886c7e-4513-4761-829f-f87ba1caf28c" />
 <img width="1917" height="1022" alt="3" src="https://github.com/user-attachments/assets/7081a374-92ab-4637-8071-8e3d14cb761d" />
 <img width="1898" height="938" alt="4" src="https://github.com/user-attachments/assets/db1af49b-d264-4fe4-ae81-74fefe784e42" />
 <img width="1920" height="1080" alt="New Project" src="https://github.com/user-attachments/assets/adb701fb-cd5c-44b6-b319-c7a9dee84b8c" />
