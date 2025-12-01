@@ -39,7 +39,13 @@ This platform revolutionizes hotel review analysis through a **Two-Stage AI Work
 | **💡 Recommender** | Google Gemini LLM | Strategic business recommendations | ~4-6 seconds |
 
 ---
+##  **Project Showcase**
+<img width="1903" height="1026" alt="1" src="https://github.com/user-attachments/assets/0d313fd4-373e-492a-9130-2ceee8086156" />
+<img width="1898" height="1025" alt="2" src="https://github.com/user-attachments/assets/c5886c7e-4513-4761-829f-f87ba1caf28c" />
+<img width="1917" height="1022" alt="3" src="https://github.com/user-attachments/assets/7081a374-92ab-4637-8071-8e3d14cb761d" />
+<img width="1898" height="938" alt="4" src="https://github.com/user-attachments/assets/db1af49b-d264-4fe4-ae81-74fefe784e42" />
 
+---
 ## ⚡ **Core Features & Capabilities**
 
 ### **🎯 Intelligent Processing**
